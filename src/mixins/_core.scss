@@ -1,0 +1,40 @@
+@function extend($obj, $ext-obj) {
+  @return map-merge($obj, $ext-obj);
+}
+
+@function is-null($n) {
+  @return type-of($n) == null;
+}
+
+@function is-defined($d) {
+  @return $d and not is-null($d);
+}
+
+@function is-string($s) {
+  @return is-defined($s) and type-of($s) == string;
+}
+
+@function is-boolean($b) {
+  @return is-defined($b) and type-of($b) == bool;
+}
+
+@function is-number($n) {
+  @return is-defined($n) and type-of($n) == number;
+}
+
+@function is-color($c) {
+  @return is-defined($c) and type-of($c) == color;
+}
+
+@function is-array($a) {
+  @return is-defined($a) and type-of($a) == list;
+}
+
+@function is-object($o) {
+  @return is-defined($o) and type-of($o) == map;
+}
+
+@function is-function($f) {
+  @return is-defined($f) and type-of($f) == function;
+}
+

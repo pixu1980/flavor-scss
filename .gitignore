@@ -1,2 +1,10 @@
+.DS_Store
+
 .sass-cache/
 *.css.map
+.tmp
+.idea
+.vscode
+npm-debug.log
+dist/
+node_modules/
