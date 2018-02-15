@@ -25,8 +25,17 @@ $bound-box-sizes: array-append((none), $css-default-modes);
   -moz-box-shadow: $shadows;
   box-shadow: $shadows;
 }
-@mixin box-size($options, $height-fallback: true) {
-  $settings: ( width: null, height: null, min-width: null, min-height: null, max-width: null, max-height: null );
+@mixin box-size($options) {
+  $settings: (
+    width: null,
+    height: null,
+    min-width: null,
+    min-height: null,
+    max-width: null,
+    max-height: null
+    height-fallback: true
+  );
+
   @if is-object($options) {
     $settings:extend($settings, $options);
   }
@@ -71,6 +80,8 @@ $bound-box-sizes: array-append((none), $css-default-modes);
        @warn '`width: #{$width}` is not a valid size';
     }
   }
+
+  $height-fallback: map-get($settings, height-fallback);
 
   $height: map-get($settings, height);
   @if $height-fallback == true and is-defined($width) and not is-defined($height) {
