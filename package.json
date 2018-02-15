@@ -1,7 +1,7 @@
 {
   "name": "flavor-scss",
   "version": "0.1.0",
-  "description": "FlavorJS the definitive JS natives chainable extensions methods (based on lodash & ES6)",
+  "description": "Flavor SCSS, bourbon.io based mixins & helpers",
   "main": "scss/flavor.scss",
   "scripts": {
     "readme": "pkg-2-readme package.json > README.md -t \"./pkg-2-readme.template.md\" && echo 'README.md file built'",

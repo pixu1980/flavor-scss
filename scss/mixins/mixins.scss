@@ -6,6 +6,8 @@
 @import 'border';
 @import 'media';
 @import 'transform';
+
+//outline
 @mixin outline($outline) {
   outline: $outline;
 
@@ -14,8 +16,9 @@
     outline: $outline;
   }
 }
+
+// aspect-ratio
 @mixin aspect-ratio($width, $height, $content-selector: '.content') {
-  // @mixin aspect-ratio($width, $height) {
   display: block;
   position: relative;
 
@@ -26,7 +29,6 @@
     width: 100%;
   }
 
-  > .item,
   > #{$content-selector} {
     @include position(absolute, 0 0 0 0);
   }

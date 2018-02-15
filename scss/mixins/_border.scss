@@ -72,7 +72,7 @@ $border-modes: array-append((none), $css-default-modes);
     @if is-border-style($border-style) {
       $border: append($border, $border-style);
     } @else {
-      @warn '`border-style: #{$border-style}` is not a valid border style value';
+      @warn '`border-style: #{$border-style}` is not a valid border-style value';
     }
 
     $border-color: map-get($settings, color);
