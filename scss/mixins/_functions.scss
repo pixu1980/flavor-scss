@@ -16,7 +16,8 @@
     @each $item in $list1 {
       $list: append($list, $item);
     }
-  } @else {
+  }
+  @else {
     $list: append($list, $list1);
   }
 
@@ -24,7 +25,8 @@
     @each $item in $list2 {
       $list: append($list, $item);
     }
-  } @else {
+  }
+  @else {
     $list: append($list, $list2);
   }
 
@@ -106,4 +108,3 @@ $color-modes: array-append((transparent), $css-default-modes);
 
   @return false;
 }
-

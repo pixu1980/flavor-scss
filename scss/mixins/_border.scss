@@ -21,17 +21,14 @@ $border-modes: array-append((none), $css-default-modes);
 @mixin border($options, $shorthand: false) {
   @if is-border-mode($options) {
     border: $options;
-  } @else {
-    $settings: (
-      size: 0,
-      style: none,
-      color: inherit,
-      radius: 0
-    );
+  }
+  @else {
+    $settings: (size: 0, style: none, color: inherit, radius: 0);
 
     @if is-object($options) {
       $settings: extend($settings, $options);
-    } @else {
+    }
+    @else {
       $size: if(length($options) > 0, nth($options, 1), null);
 
       @if is-defined($size) {
@@ -63,7 +60,8 @@ $border-modes: array-append((none), $css-default-modes);
 
     @if is-css-size($border-width) {
       $border: append($border, $border-width);
-    } @else {
+    }
+    @else {
       @warn '`border-width: #{$border-width}` is not a valid size';
     }
 
@@ -71,14 +69,16 @@ $border-modes: array-append((none), $css-default-modes);
 
     @if is-border-style($border-style) {
       $border: append($border, $border-style);
-    } @else {
+    }
+    @else {
       @warn '`border-style: #{$border-style}` is not a valid border-style value';
     }
 
     $border-color: map-get($settings, color);
     @if is-css-color($border-color) {
       $border: append($border, $border-color);
-    } @else {
+    }
+    @else {
       @warn '`border-color: #{$border-color}` is not a valid css color';
     }
 
@@ -88,9 +88,9 @@ $border-modes: array-append((none), $css-default-modes);
 
     @if is-css-size($border-radius) {
       @include border-radius($border-radius);
-    } @else {
+    }
+    @else {
       @warn '`border-radius: #{$border-radius}` is not a valid size';
     }
   }
 }
-

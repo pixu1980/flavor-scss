@@ -58,21 +58,14 @@ $background-attachment-modes: array-append((scroll, fixed, local), $css-default-
 @mixin background($options, $shorthand: false) {
   @if is-css-default($options) {
     background: $options;
-  } @else {
-    $settings: (
-      color: transparent,
-      image: none,
-      position: 0 0,
-      size: auto,
-      repeat: repeat,
-      origin: padding-box,
-      clip: border-box,
-      attachment: scroll,
-    );
+  }
+  @else {
+    $settings: (color: transparent, image: none, position: 0 0, size: auto, repeat: repeat, origin: padding-box, clip: border-box, attachment: scroll);
 
     @if is-object($options) {
       $settings: extend($settings, $options);
-    } @else {
+    }
+    @else {
       $color: if(length($options) > 0, nth($options, 1), null);
 
       @if is-defined($color) {
@@ -129,10 +122,12 @@ $background-attachment-modes: array-append((scroll, fixed, local), $css-default-
     @if is-css-color($background-color) {
       @if $shorthand == true {
         $background: append($background, $background-color);
-      } @else {
+      }
+      @else {
         background-color: $background-color;
       }
-    } @else {
+    }
+    @else {
       @warn '`background-color: #{$background-color}` is not a valid css color';
     }
 
@@ -143,10 +138,12 @@ $background-attachment-modes: array-append((scroll, fixed, local), $css-default-
 
       @if $shorthand == true {
         $background: append($background, $background-image);
-      } @else {
+      }
+      @else {
         background-image: $background-image;
       }
-    } @else {
+    }
+    @else {
       @warn '`background-image: #{$background-image}` is not a valid background-image value';
     }
 
@@ -156,11 +153,13 @@ $background-attachment-modes: array-append((scroll, fixed, local), $css-default-
     @if is-background-position($background-position) and is-background-size($background-size) {
       @if $shorthand == true {
         $background: append($background, $background-position + '/' + $background-size);
-      } @else {
+      }
+      @else {
         background-position: $background-position;
         background-size: $background-size;
       }
-    } @else {
+    }
+    @else {
       @warn '`background-position: #{$background-position}` is not a valid background-position value';
       @warn '`background-size: #{$background-size}` is not a valid background-size value';
     }
@@ -170,10 +169,12 @@ $background-attachment-modes: array-append((scroll, fixed, local), $css-default-
     @if is-background-repeat($background-repeat) {
       @if $shorthand == true {
         $background: append($background, $background-repeat);
-      } @else {
+      }
+      @else {
         background-repeat: $background-repeat;
       }
-    } @else {
+    }
+    @else {
       @warn '`background-repeat: #{$background-repeat}` is not a valid background-repeat value';
     }
 
@@ -182,10 +183,12 @@ $background-attachment-modes: array-append((scroll, fixed, local), $css-default-
     @if is-background-origin-clip($background-origin) {
       @if $shorthand == true {
         $background: append($background, $background-origin);
-      } @else {
+      }
+      @else {
         background-origin: $background-origin;
       }
-    } @else {
+    }
+    @else {
       @warn '`background-origin: #{$background-origin}` is not a valid background-origin value';
     }
 
@@ -194,10 +197,12 @@ $background-attachment-modes: array-append((scroll, fixed, local), $css-default-
     @if is-background-origin-clip($background-clip) {
       @if $shorthand == true {
         $background: append($background, $background-clip);
-      } @else {
+      }
+      @else {
         background-clip: $background-clip;
       }
-    } @else {
+    }
+    @else {
       @warn '`background-clip: #{$background-clip}` is not a valid background-clip value';
     }
 
@@ -206,10 +211,12 @@ $background-attachment-modes: array-append((scroll, fixed, local), $css-default-
     @if is-background-attachment($background-attachment) {
       @if $shorthand == true {
         $background: append($background, $background-attachment);
-      } @else {
+      }
+      @else {
         background-attachment: $background-attachment;
       }
-    } @else {
+    }
+    @else {
       @warn '`background-attachment: #{$background-attachment}` is not a valid background-attachment value';
     }
 
