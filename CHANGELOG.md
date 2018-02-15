@@ -1,3 +1,12 @@
+## [Version 0.1.2](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.2) (2018-2-15)
+
+### Bug fixes
+
+- updated readme: [`b99c524`](https://github.com/blackmirror1980/flavor-scss/commit/b99c524)
+- box-size fix: [`4feb40e`](https://github.com/blackmirror1980/flavor-scss/commit/4feb40e)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.1.1...v0.1.2)
+
 ## [Version 0.1.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.1) (2018-2-15)
 
 ### Bug fixes
