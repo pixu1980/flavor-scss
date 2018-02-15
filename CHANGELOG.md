@@ -2,9 +2,7 @@
 
 ### Breaking changes
 
-- Initial commit: [`02c73a0`](https://github.com/blackmirror1980/flavor-scss/commit/02c73a0)
-- first commit: [`115d126`](https://github.com/blackmirror1980/flavor-scss/commit/115d126)
-- first commit: [`8b46cfa`](https://github.com/blackmirror1980/flavor-scss/commit/8b46cfa)
+- Initial commit: [`8b46cfa`](https://github.com/blackmirror1980/flavor-scss/commit/8b46cfa)
 
 ---
 
