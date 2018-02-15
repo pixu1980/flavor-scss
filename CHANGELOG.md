@@ -1,3 +1,12 @@
+## [Version 0.1.5](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.5) (2018-2-15)
+
+### New features
+
+- updated readme: [`ddc7087`](https://github.com/blackmirror1980/flavor-scss/commit/ddc7087)
+- animations added: [`67ff848`](https://github.com/blackmirror1980/flavor-scss/commit/67ff848)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.1.4...v0.1.5)
+
 ## [Version 0.1.4](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.4) (2018-2-15)
 
 ### Bug fixes
