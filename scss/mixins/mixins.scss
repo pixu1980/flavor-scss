@@ -1,45 +1,46 @@
-@import "core";
-@import "functions";
-@import "box";
-@import "background";
-@import "text";
-@import "border";
-@import "media";
-@import "transform";
-
+@import 'core';
+@import 'functions';
+@import 'box';
+@import 'background';
+@import 'text';
+@import 'border';
+@import 'media';
+@import 'transform';
 @mixin outline($outline) {
   outline: $outline;
 
-  &:focus, &:active {
+  &:active,
+  &:focus {
     outline: $outline;
   }
 }
-
 @mixin aspect-ratio($width, $height, $content-selector: '.content') {
-// @mixin aspect-ratio($width, $height) {
-  position: relative;
+  // @mixin aspect-ratio($width, $height) {
   display: block;
+  position: relative;
 
   &:before {
+    content: '';
     display: block;
-    content: "";
-    width: 100%;
     padding-top: (strip-units($height) / strip-units($width)) * 100%;
+    width: 100%;
   }
 
-  > #{$content-selector},
-  > .item {
+  > .item,
+  > #{$content-selector} {
     @include position(absolute, 0 0 0 0);
   }
 }
 
 // Overflow Hidden for Animated Elements Wrappers
-@mixin overflow-hidden-animated() {
-  overflow: hidden;
-  -webkit-backface-visibility: hidden;
+@mixin overflow-hidden-animated {
   -moz-backface-visibility: hidden;
-  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+
   -moz-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+
+  overflow: hidden;
 }
 
 //
@@ -62,7 +63,7 @@
 //             * nth($conversion-factors, index($convertable-units, $unit));
 //  }
 //
-//  @warn "Cannot convert `#{unit($value)}` to `#{$unit}`.";
+//  @warn 'Cannot convert `#{unit($value)}` to `#{$unit}`.';
 //}
 //
 ///// Test if `$value` is an angle
@@ -81,7 +82,7 @@
 ///// @require {function} convert-angle
 //@function legacy-direction($value) {
 //  @if is-direction($value) == false {
-//    @warn "Cannot convert `#{$value}` to legacy syntax because it doesn't seem to be an angle or a direction";
+//    @warn 'Cannot convert `#{$value}` to legacy syntax because it doesn't seem to be an angle or a direction';
 //  }
 //
 //  $conversion-map: (

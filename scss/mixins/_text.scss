@@ -70,7 +70,7 @@ $line-height-modes: array-append((normal), $css-default-modes);
   @if is-font-size($font-size) {
     font-size: $font-size;
   } @else {
-    @warn "`font-size: #{$font-size}` is not a valid css size";
+    @warn '`font-size: #{$font-size}` is not a valid css size';
   }
 
   $font-color: map-get($settings, color);
@@ -78,7 +78,7 @@ $line-height-modes: array-append((normal), $css-default-modes);
   @if is-css-color($font-color) {
     color: $font-color;
   } @else {
-    @warn "`color: #{$font-color}` is not a valid css color";
+    @warn '`color: #{$font-color}` is not a valid css color';
   }
 
   $font-weight: map-get($settings, weight);
@@ -86,7 +86,7 @@ $line-height-modes: array-append((normal), $css-default-modes);
   @if is-font-weight($font-weight) {
     font-weight: $font-weight;
   } @else {
-    @warn "`font-weight: #{$font-weight}` is not a valid font-weight";
+    @warn '`font-weight: #{$font-weight}` is not a valid font-weight';
   }
 
   $line-height: map-get($settings, height);
@@ -94,20 +94,21 @@ $line-height-modes: array-append((normal), $css-default-modes);
   @if is-line-height($line-height) {
     line-height: $line-height;
   } @else {
-    @warn "`line-height: #{$line-height}` is not a valid line-height value";
+    @warn '`line-height: #{$line-height}` is not a valid line-height value';
   }
 }
 
 @mixin ellipsis($multiline: false, $width: 100%, $font-size: 16px, $line-height: 1.4, $lines-to-show: 3) {
   @if $multiline {
     display: block;
-    /* Fallback for non-webkit */
+    // Fallback for non-webkit
     display: -webkit-box;
+
     max-width: $width;
     height: $font-size * $line-height * $lines-to-show;
-    /* Fallback for non-webkit */
+    // Fallback for non-webkit
     min-height: $font-size * $line-height * $lines-to-show;
-    /* Fallback for non-webkit */
+    // Fallback for non-webkit
     margin: 0 auto;
     font-size: $font-size;
     line-height: $line-height;
@@ -126,7 +127,7 @@ $line-height-modes: array-append((normal), $css-default-modes);
 }
 
 // Word Wrapping
-@mixin word-wrap() {
+@mixin word-wrap {
   -ms-word-break: break-all;
   word-break: break-all;
   word-break: break-word;
@@ -175,7 +176,7 @@ $vertical-align-modes: array-append((baseline, sub, super, top, text-top, middle
     @if is-text-align($h) {
       text-align: $h;
     } @else {
-      @warn "`text-align: #{$h}` is not a valid text-align value";
+      @warn '`text-align: #{$h}` is not a valid text-align value';
     }
   }
 
@@ -185,7 +186,7 @@ $vertical-align-modes: array-append((baseline, sub, super, top, text-top, middle
     @if is-vertical-align($v) {
       vertical-align: $v;
     } @else {
-      @warn "`vertical-align: #{$v}` is not a valid vertical-align value";
+      @warn '`vertical-align: #{$v}` is not a valid vertical-align value';
     }
   }
 }

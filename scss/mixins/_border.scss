@@ -64,7 +64,7 @@ $border-modes: array-append((none), $css-default-modes);
     @if is-css-size($border-width) {
       $border: append($border, $border-width);
     } @else {
-      @warn "`border-width: #{$border-width}` is not a valid size";
+      @warn '`border-width: #{$border-width}` is not a valid size';
     }
 
     $border-style: map-get($settings, style);
@@ -72,14 +72,14 @@ $border-modes: array-append((none), $css-default-modes);
     @if is-border-style($border-style) {
       $border: append($border, $border-style);
     } @else {
-      @warn "`border-style: #{$border-style}` is not a valid border style value";
+      @warn '`border-style: #{$border-style}` is not a valid border style value';
     }
 
     $border-color: map-get($settings, color);
     @if is-css-color($border-color) {
       $border: append($border, $border-color);
     } @else {
-      @warn "`border-color: #{$border-color}` is not a valid css color";
+      @warn '`border-color: #{$border-color}` is not a valid css color';
     }
 
     border: $border;
@@ -89,7 +89,7 @@ $border-modes: array-append((none), $css-default-modes);
     @if is-css-size($border-radius) {
       @include border-radius($border-radius);
     } @else {
-      @warn "`border-radius: #{$border-radius}` is not a valid size";
+      @warn '`border-radius: #{$border-radius}` is not a valid size';
     }
   }
 }

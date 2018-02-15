@@ -8,7 +8,7 @@ $display-modes: array-append((none, inline, block, inline-block, flex, inline-fl
   @if is-defined($dm) and is-display-mode($dm) {
     display: $dm;
   } @else {
-    @warn "`#{$dm}` is not a valid display mode";
+    @warn '`#{$dm}` is not a valid display mode';
   }
 }
 
@@ -86,7 +86,7 @@ $bound-box-sizes: array-append((none), $css-default-modes);
     @if is-box-size($width) {
       width: $width;
     } @else {
-      @warn "`#{$width}` is not a valid size";
+      @warn '`#{$width}` is not a valid size';
     }
   }
 
@@ -100,7 +100,7 @@ $bound-box-sizes: array-append((none), $css-default-modes);
     @if is-box-size($height) {
       height: $height;
     } @else {
-      @warn "`#{$width}` is not a valid size";
+      @warn '`#{$width}` is not a valid size';
     }
   }
 
@@ -110,7 +110,7 @@ $bound-box-sizes: array-append((none), $css-default-modes);
     @if is-bound-box-size($min-width) {
       min-width: $min-width;
     } @else {
-      @warn "`#{$min-width}` is not a valid size";
+      @warn '`#{$min-width}` is not a valid size';
     }
   }
 
@@ -120,7 +120,7 @@ $bound-box-sizes: array-append((none), $css-default-modes);
     @if is-bound-box-size($min-height) {
       min-height: $min-height;
     } @else {
-      @warn "`#{$min-height}` is not a valid size";
+      @warn '`#{$min-height}` is not a valid size';
     }
   }
 
@@ -130,7 +130,7 @@ $bound-box-sizes: array-append((none), $css-default-modes);
     @if is-bound-box-size($max-width) {
       max-width: $max-width;
     } @else {
-      @warn "`max-width: #{$max-width}` is not a valid size";
+      @warn '`max-width: #{$max-width}` is not a valid size';
     }
   }
 
@@ -140,7 +140,7 @@ $bound-box-sizes: array-append((none), $css-default-modes);
     @if is-bound-box-size($max-height) {
       max-height: $max-height;
     } @else {
-      @warn "`max-height: #{$max-height}` is not a valid size";
+      @warn '`max-height: #{$max-height}` is not a valid size';
     }
   }
 }
@@ -172,7 +172,7 @@ $bound-box-sizes: array-append((none), $css-default-modes);
   @if is-css-color($color) {
     color: $color;
   } @else {
-    @warn "`color: #{$color}` is not a valid css color";
+    @warn '`color: #{$color}` is not a valid css color';
   }
 
   $bgcolor: map-get($settings, bgcolor);
@@ -180,7 +180,7 @@ $bound-box-sizes: array-append((none), $css-default-modes);
   @if is-css-color($bgcolor) {
     background-color: $bgcolor;
   } @else {
-    @warn "`bgcolor: #{$bgcolor}` is not a valid css color";
+    @warn '`bgcolor: #{$bgcolor}` is not a valid css color';
   }
 }
 

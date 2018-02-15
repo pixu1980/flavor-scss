@@ -5,7 +5,7 @@
     @return is-defined($index-of) and $index-of > 0;
   }
 
-  @warn "`array: #{$list}` and `item: #{$item}` are not valid data for array contains";
+  @warn '`array: #{$list}` and `item: #{$item}` are not valid data for array contains';
   @return false;
 }
 
@@ -52,7 +52,7 @@ $color-modes: array-append((transparent), $css-default-modes);
     @return str-slice($h, 1, str-length($n)) == $n;
   }
 
-  @warn "`haystack: #{$h}` and `needle: #{$n}` are not valid strings";
+  @warn '`haystack: #{$h}` and `needle: #{$n}` are not valid strings';
   @return false;
 }
 
@@ -61,7 +61,7 @@ $color-modes: array-append((transparent), $css-default-modes);
     @return str-index($h, $n) > 0;
   }
 
-  @warn "`haystack: #{$h}` and `needle: #{$n}` are not valid strings";
+  @warn '`haystack: #{$h}` and `needle: #{$n}` are not valid strings';
   @return false;
 }
 
@@ -73,7 +73,7 @@ $color-modes: array-append((transparent), $css-default-modes);
     @return str-slice($h, $h-length - $n-length, $n-length) == $n;
   }
 
-  @warn "`haystack: #{$h}` and `needle: #{$n}` are not valid strings";
+  @warn '`haystack: #{$h}` and `needle: #{$n}` are not valid strings';
   @return false;
 }
 
