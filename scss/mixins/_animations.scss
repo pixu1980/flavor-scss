@@ -1,0 +1,265 @@
+$animation-name-modes: array-append((none), $css-default-modes);
+
+@function is-animation-name($an) {
+  @return is-string($an) or contains($animation-name-modes, $an);
+}
+
+@function is-animation-time($at) {
+  @return is-time($at) or is-css-default($at);
+}
+
+$animation-direction-modes: array-append((normal, reverse, alternate, alternate-reverse), $css-default-modes);
+
+@function is-animation-direction($ad) {
+  @return contains($animation-direction-modes, $ad);
+}
+
+$animation-iteration-count-modes: array-append((infinite), $css-default-modes);
+
+@function is-animation-iteration-count($aic) {
+  @return is-integer($aic) or contains($animation-iteration-count-modes, $aic);
+}
+
+$animation-fill-modes: array-append((none, forwards, backwards, both), $css-default-modes);
+
+@function is-animation-fill-mode($afm) {
+  @return contains($animation-fill-modes, $afm);
+}
+
+$animation-timing-function-modes: array-append((linear, ease, ease-in, ease-out, ease-in-out, step-start, step-end), $css-default-modes);
+
+@function is-animation-timing-function($atf) {
+  @return string-starts-with($atf, 'steps') or string-starts-with($atf, 'cubic-bezier') or contains($animation-timing-function-modes, $atf);
+}
+
+$animation-play-state-modes: array-append((paused-running), $css-default-modes);
+
+@function is-animation-play-state-modes($aps) {
+  @return contains($animation-play-state-modess, $aps);
+}
+
+// keyframe mixin e.g. usage
+// @include keyframe(fadeout) {
+//   0% {
+//     opacity: 1;
+//   }
+//   100% {
+//     opacity: 0;
+//   }
+// }
+// @include keyframe(changecolour) {
+//   0% {
+//     color: #000;
+//   }
+//   100% {
+//     color: #FFF;
+//   }
+// }
+@mixin keyframe ($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @-ms-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @-o-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+// animation mixin e.g. usage
+// @include animation(10s, 5s, changecolour)
+@mixin animation ($options) {
+  @if is-css-default($options) {
+    -webkit-animation: $options;
+    -moz-animation: $options;
+    -ms-animation: $options;
+    -o-animation: $options;
+    animation: $options;
+  }
+  @else {
+    $settings: (name: none, duration: 0, delay: 0, direction: normal, iteration-count: 0, timing-function: ease, fill-mode: forwards, play-state: running);
+
+    @if is-object($options) {
+      $settings: extend($settings, $options);
+    }
+    @else {
+      $name: if(length($options) > 0, nth($options, 1), null);
+
+      @if is-defined($name) {
+        $settings: map-merge($settings, (name: $name));
+      }
+
+      $duration: if(length($options) > 1, nth($options, 2), null);
+
+      @if is-defined($duration) {
+        $settings: map-merge($settings, (duration: $duration));
+      }
+
+      $delay: if(length($options) > 2, nth($options, 3), null);
+
+      @if is-defined($delay) {
+        $settings: map-merge($settings, (delay: $delay));
+      }
+
+      $direction: if(length($options) > 3, nth($options, 4), null);
+
+      @if is-defined($direction) {
+        $settings: map-merge($settings, (direction: $direction));
+      }
+
+      $iteration-count: if(length($options) > 4, nth($options, 5), null);
+
+      @if is-defined($iteration-count) {
+        $settings: map-merge($settings, (iteration-count: $iteration-count));
+      }
+
+      $timing-function: if(length($options) > 5, nth($options, 6), null);
+
+      @if is-defined($timing-function) {
+        $settings: map-merge($settings, (timing-function: $timing-function));
+      }
+
+      $fill-mode: if(length($options) > 6, nth($options, 7), null);
+
+      @if is-defined($fill-mode) {
+        $settings: map-merge($settings, (fill-mode: $fill-mode));
+      }
+
+      $play-state: if(length($options) > 7, nth($options, 8), null);
+
+      @if is-defined($play-state) {
+        $settings: map-merge($settings, (play-state: $play-state));
+      }
+    }
+
+    $animation: ();
+
+    $animation-name: map-get($settings, name);
+
+    @if is-animation-name($animation-name) {
+      -webkit-animation-name: $animation-name;
+      -moz-animation-name: $animation-name;
+      -ms-animation-name: $animation-name;
+      -o-animation-name: $animation-name;
+      animation-name: $animation-name;
+    }
+    @else {
+      @error '`animation-name: #{$animation-name}` is mandatory parameter';
+    }
+
+    $animation-duration: map-get($settings, duration);
+
+    @if is-animation-time($animation-duration) {
+      -webkit-animation-duration: $animation-duration;
+      -moz-animation-duration: $animation-duration;
+      -ms-animation-duration: $animation-duration;
+      -o-animation-duration: $animation-duration;
+      animation-duration: $animation-duration;
+    }
+    @else {
+      @warn '`animation-duration: #{$animation-duration}` is not a valid animation time value (only time & css defaults are allowed)';
+    }
+
+    $animation-delay: map-get($settings, delay);
+
+    @if is-animation-time($animation-delay) {
+      -webkit-animation-delay: $animation-delay;
+      -moz-animation-delay: $animation-delay;
+      -ms-animation-delay: $animation-delay;
+      -o-animation-delay: $animation-delay;
+      animation-delay: $animation-delay;
+    }
+    @else {
+      @warn '`animation-delay: #{$animation-delay}` is not a valid animation time value (only time & css defaults are allowed)';
+    }
+
+    $animation-direction: map-get($settings, direction);
+
+    @if is-animation-direction($animation-direction) {
+      -webkit-animation-direction: $animation-direction;
+      -moz-animation-direction: $animation-direction;
+      -ms-animation-direction: $animation-direction;
+      -o-animation-direction: $animation-direction;
+      animation-direction: $animation-direction;
+    }
+    @else {
+      @warn '`animation-direction: #{$animation-direction}` is not a valid animation direction value';
+    }
+
+    $animation-iteration-count: map-get($settings, iteration-count);
+
+    @if is-animation-iteration-count($animation-iteration-count) {
+      -webkit-animation-iteration-count: $animation-iteration-count;
+      -moz-animation-iteration-count: $animation-iteration-count;
+      -ms-animation-iteration-count: $animation-iteration-count;
+      -o-animation-iteration-count: $animation-iteration-count;
+      animation-iteration-count: $animation-iteration-count;
+    }
+    @else {
+      @warn '`animation-iteration-count: #{$animation-iteration-count}` is not a valid animation iteration count value';
+    }
+
+    $animation-direction: map-get($settings, direction);
+
+    @if is-animation-direction($animation-direction) {
+      -webkit-animation-direction: $animation-direction;
+      -moz-animation-direction: $animation-direction;
+      -ms-animation-direction: $animation-direction;
+      -o-animation-direction: $animation-direction;
+      animation-direction: $animation-direction;
+    }
+    @else {
+      @warn '`animation-direction: #{$animation-direction}` is not a valid animation direction value';
+    }
+
+    $animation-fill-mode: map-get($settings, fill-mode);
+
+    @if is-animation-fill-mode($animation-fill-mode) {
+      -webkit-animation-fill-mode: $animation-fill-mode;
+      -moz-animation-fill-mode: $animation-fill-mode;
+      -ms-animation-fill-mode: $animation-fill-mode;
+      -o-animation-fill-mode: $animation-fill-mode;
+      animation-fill-mode: $animation-fill-mode;
+    }
+    @else {
+      @warn '`animation-fill-mode: #{$animation-fill-mode}` is not a valid animation fill mode value';
+    }
+
+    $animation-timing-function: map-get($settings, timing-function);
+
+    @if is-animation-timing-function($animation-timing-function) {
+      -webkit-animation-timing-function: $animation-timing-function;
+      -moz-animation-timing-function: $animation-timing-function;
+      -ms-animation-timing-function: $animation-timing-function;
+      -o-animation-timing-function: $animation-timing-function;
+      animation-timing-function: $animation-timing-function;
+    }
+    @else {
+      @warn '`animation-timing-function: #{$animation-timing-function}` is not a valid animation timing function value';
+    }
+
+    $animation-play-state: map-get($settings, play-state);
+
+    @if is-animation-direction($animation-play-state) {
+      -webkit-animation-play-state: $animation-play-state;
+      -moz-animation-play-state: $animation-play-state;
+      -ms-animation-play-state: $animation-play-state;
+      -o-animation-play-state: $animation-play-state;
+      animation-play-state: $animation-play-state;
+    }
+    @else {
+      @warn '`animation-play-state: #{$animation-play-state}` is not a valid animation play state value';
+    }
+  }
+}
