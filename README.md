@@ -4,7 +4,7 @@
 Black Mirror
 
 ## Version
-v0.1.0
+v0.1.1
 
 ## Badges
 
@@ -16,7 +16,7 @@ v0.1.0
 Check out the [Latest Documentation](https://blackmirror1980.github.io/flavor-scss/docs/index.html) here
 
 ## Description
-FlavorJS the definitive JS natives chainable extensions methods (based on lodash &amp; ES6)
+Flavor SCSS, bourbon.io based mixins &amp; helpers
 
 ## Example
 Check out this [Codepen]() example
