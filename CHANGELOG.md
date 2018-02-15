@@ -1,3 +1,11 @@
+## [Version 0.1.4](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.4) (2018-2-15)
+
+### Bug fixes
+
+- various fixed: [`f50cf36`](https://github.com/blackmirror1980/flavor-scss/commit/f50cf36)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.1.3...v0.1.4)
+
 ## [Version 0.1.3](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.3) (2018-2-15)
 
 ### Bug fixes
