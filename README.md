@@ -4,7 +4,7 @@
 Black Mirror
 
 ## Version
-v0.0.1
+v0.1.0
 
 ## Badges
 
@@ -40,7 +40,8 @@ None
 
 ## Dev Dependencies
 
-None
+- [bourbon](https://ghub.io/bourbon): A lightweight Sass tool set.
+- [sass-lint](https://ghub.io/sass-lint): All Node Sass linter!
 
 ## Tests
 
