@@ -1,3 +1,11 @@
+## [Version 0.1.11](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.11) (2018-2-16)
+
+### Bug fixes
+
+- fix background image issue: [`ffeedf6`](https://github.com/blackmirror1980/flavor-scss/commit/ffeedf6)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.1.10...v0.1.11)
+
 ## [Version 0.1.10](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.10) (2018-2-16)
 
 ### Bug fixes
