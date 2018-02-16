@@ -6,6 +6,7 @@
 @import 'border';
 @import 'media';
 @import 'transform';
+@import 'animations';
 
 //outline
 @mixin outline($outline) {
@@ -43,6 +44,12 @@
   -webkit-transform: translate3d(0, 0, 0);
 
   overflow: hidden;
+}
+
+@mixin appearance ($value) {
+  -webkit-appearance: $value;
+  -moz-appearance: $value;
+  appearance: $value;
 }
 
 //
