@@ -1,3 +1,11 @@
+## [Version 0.1.10](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.10) (2018-2-16)
+
+### Bug fixes
+
+- removed bourbon@4.3.4 deprecation warnings: [`cf519af`](https://github.com/blackmirror1980/flavor-scss/commit/cf519af)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.1.9...v0.1.10)
+
 ## [Version 0.1.9](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.9) (2018-2-16)
 
 ### Bug fixes
