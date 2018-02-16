@@ -1,3 +1,11 @@
+## [Version 0.1.8](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.8) (2018-2-16)
+
+### Bug fixes
+
+- downgraded bourbon dependency to @4.3.4: [`bc6fa3a`](https://github.com/blackmirror1980/flavor-scss/commit/bc6fa3a)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.1.7...v0.1.8)
+
 ## [Version 0.1.7](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.7) (2018-2-16)
 
 ### Bug fixes
