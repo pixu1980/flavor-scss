@@ -1,3 +1,12 @@
+## [Version 0.1.6](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.6) (2018-2-16)
+
+### Bug fixes
+
+- animations added: [`477930b`](https://github.com/blackmirror1980/flavor-scss/commit/477930b)
+- added appearance: [`c5ee06d`](https://github.com/blackmirror1980/flavor-scss/commit/c5ee06d)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.1.5...v0.1.6)
+
 ## [Version 0.1.5](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.5) (2018-2-15)
 
 ### New features
