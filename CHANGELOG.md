@@ -1,3 +1,11 @@
+## [Version 0.1.7](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.7) (2018-2-16)
+
+### Bug fixes
+
+- added transition: [`6c119fc`](https://github.com/blackmirror1980/flavor-scss/commit/6c119fc)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.1.6...v0.1.7)
+
 ## [Version 0.1.6](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.6) (2018-2-16)
 
 ### Bug fixes
