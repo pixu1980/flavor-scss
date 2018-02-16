@@ -84,10 +84,10 @@ $color-modes: array-append((transparent), $css-default-modes);
     $url: $u;
 
     @if string-starts-with($u, 'url(') and string-ends-with($u, ')') {
-      $url: str-slice($u, 5, str-length($u) - 1);
-    }
+    //   $url: str-slice($u, 5, str-length($u) - 1);
+    // }
 
-    @if string-starts-with($url, '../') or string-starts-with($url, '/') or string-starts-with($url, 'http') {
+    // @if string-starts-with($url, '../') or string-starts-with($url, '/') or string-starts-with($url, 'http') {
       @return true;
     }
   }
