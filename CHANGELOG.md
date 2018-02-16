@@ -1,3 +1,11 @@
+## [Version 0.1.9](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.9) (2018-2-16)
+
+### Bug fixes
+
+- bugfix calling bourbon version: [`6871421`](https://github.com/blackmirror1980/flavor-scss/commit/6871421)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.1.8...v0.1.9)
+
 ## [Version 0.1.8](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.8) (2018-2-16)
 
 ### Bug fixes
