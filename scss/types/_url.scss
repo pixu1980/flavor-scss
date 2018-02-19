@@ -1,0 +1,44 @@
+@function has-url-function($u) {
+  @if is-string($u) {
+    $url: $u;
+
+    $urlFunctionStartsWith: string-starts-with($url, 'url("') or string-starts-with($url, 'url(\'');
+    $urlFunctionEndsWith: string-ends-with($url, '")') or string-ends-with($url, '\')');
+
+    @return $urlFunctionStartsWith and $urlFunctionEndsWith;
+  }
+
+  @warn '`url: #{$u}` is not a valid string';
+  @return false;
+}
+
+@function is-url($u) {
+  @if is-string($u) {
+    $url: $u;
+
+    @if has-url-function($url) {
+      $url: str-slice($u, 6, str-length($u) - 2);
+    }
+
+    @if string-starts-with($url, '../') or string-starts-with($url, '/') or string-starts-with($url, 'http') {
+      @return true;
+    }
+  }
+
+  @warn '`url: #{$u}` is not a valid string';
+  @return false;
+}
+
+@function inspect-url($u) {
+  @if is-url($u) {
+    $url: $u;
+
+    @if not has-url-function($url) {
+      $url: url('#{$url}');
+    }
+
+    @return $url;
+  }
+
+  @return false;
+}

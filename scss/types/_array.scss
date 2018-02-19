@@ -1,0 +1,38 @@
+@function is-array($a) {
+  @return is-defined($a) and type-of($a)==list;
+}
+
+@function contains($list, $item) {
+  @if is-array($list) and is-defined($item) {
+    $index-of: index($list, $item);
+
+    @return is-defined($index-of) and $index-of > 0;
+  }
+
+  @warn '`array: #{$list}` and `item: #{$item}` are not valid data for array contains';
+  @return false;
+}
+
+@function concat($list1, $list2) {
+  $list: ();
+
+  @if is-array($list1) {
+    @each $item in $list1 {
+      $list: append($list, $item);
+    }
+  }
+  @else {
+    $list: append($list, $list1);
+  }
+
+  @if is-array($list2) {
+    @each $item in $list2 {
+      $list: append($list, $item);
+    }
+  }
+  @else {
+    $list: append($list, $list2);
+  }
+
+  @return $list;
+}

@@ -1,4 +1,4 @@
-$display-modes: array-append((none, inline, block, inline-block, flex, inline-flex, table, inline-table, table-caption, table-header-group, table-row-group, table-column-group, table-footer-group, table-row, table-column, table-cell, list-item, run-in), $css-default-modes);
+$display-modes: concat((none, inline, block, inline-block, flex, inline-flex, table, inline-table, table-caption, table-header-group, table-row-group, table-column-group, table-footer-group, table-row, table-column, table-cell, list-item, run-in), $css-default-modes);
 
 @function is-display-mode($dm) {
   @return contains($display-modes, $dm);
@@ -13,13 +13,13 @@ $display-modes: array-append((none, inline, block, inline-block, flex, inline-fl
   }
 }
 
-$box-sizes: array-append((auto), $css-default-modes);
+$box-sizes: concat((auto), $css-default-modes);
 
 @function is-box-size($s) {
   @return is-size($s) or contains($box-sizes, $s);
 }
 
-$bound-box-sizes: array-append((none), $css-default-modes);
+$bound-box-sizes: concat((none), $css-default-modes);
 
 @function is-bound-box-size($s) {
   @return is-size($s) or contains($bound-box-sizes, $s);
@@ -89,7 +89,7 @@ $bound-box-sizes: array-append((none), $css-default-modes);
   $height-fallback: map-get($settings, height-fallback);
   $height: map-get($settings, height);
 
-  @if $height-fallback == true and is-defined($width) and not is-defined($height) {
+  @if $height-fallback==true and is-defined($width) and not is-defined($height) {
     $height: $width;
   }
 
@@ -183,5 +183,21 @@ $bound-box-sizes: array-append((none), $css-default-modes);
   }
   @else {
     @warn '`background-color: #{$bgcolor}` is not a valid css color';
+  }
+}
+
+@mixin aspect-ratio($width, $height, $content-selector: '.content') {
+  display: block;
+  position: relative;
+
+  &:before {
+    content: '';
+    display: block;
+    padding-top: (strip-units($height) / strip-units($width)) * 100%;
+    width: 100%;
+  }
+
+  > #{$content-selector} {
+    @include position(absolute, 0 0 0 0);
   }
 }

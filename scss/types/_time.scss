@@ -1,0 +1,5 @@
+$time-units: (s, ms);
+
+@function is-time($t) {
+  @return is-number($t) and contains($time-units, unit($t));
+}

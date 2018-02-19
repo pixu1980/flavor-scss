@@ -1,0 +1,33 @@
+@function is-string($s) {
+  @return is-defined($s) and type-of($s)==string;
+}
+
+@function string-starts-with($h, $n) {
+  @if is-string($h) and is-string($n) {
+    @return str-slice($h, 1, str-length($n))==$n;
+  }
+
+  @warn '`haystack: #{$h}` and `needle: #{$n}` are not valid strings';
+  @return false;
+}
+
+@function string-contains($h, $n) {
+  @if is-string($h) and is-string($n) {
+    @return str-index($h, $n) > 0;
+  }
+
+  @warn '`haystack: #{$h}` and `needle: #{$n}` are not valid strings';
+  @return false;
+}
+
+@function string-ends-with($h, $n) {
+  @if is-string($h) and is-string($n) {
+    $h-length: str-length($h);
+    $n-length: str-length($n);
+
+    @return str-slice($h, $h-length - $n-length + 1)==$n;
+  }
+
+  @warn '`haystack: #{$h}` and `needle: #{$n}` are not valid strings';
+  @return false;
+}

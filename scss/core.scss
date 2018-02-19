@@ -1,0 +1,10 @@
+@function is-null($n) {
+  @return type-of($n)==null;
+}
+
+@function is-defined($d) {
+  @return $d and not is-null($d);
+}
+
+@import 'types/types';
+@import 'mixins/mixins';

@@ -1,4 +1,4 @@
-$border-styles: array-append((none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset), $css-default-modes);
+$border-styles: concat((none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset), $css-default-modes);
 
 @function is-border-style($bs) {
   @return contains($border-styles, $bs);
@@ -12,7 +12,7 @@ $border-styles: array-append((none, hidden, dotted, dashed, solid, double, groov
   border-radius: $radius;
 }
 
-$border-modes: array-append((none), $css-default-modes);
+$border-modes: concat((none), $css-default-modes);
 
 @function is-border-mode($b) {
   @return contains($border-modes, $b);

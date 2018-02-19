@@ -1,0 +1,3 @@
+@function is-function($f) {
+  @return is-defined($f) and type-of($f)==function;
+}

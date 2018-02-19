@@ -1,0 +1,11 @@
+@function is-number($n) {
+  @return is-defined($n) and type-of($n)==number;
+}
+
+@function is-integer($i) {
+  @return is-number($i) and round($i)==$i;
+}
+
+@function is-percentage($p) {
+  @return is-number($p) and unit($p)=='%';
+}

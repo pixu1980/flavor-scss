@@ -1,0 +1,9 @@
+@function is-color($c) {
+  @return is-defined($c) and type-of($c)==color;
+}
+
+$color-modes: concat((transparent), $css-default-modes);
+
+@function is-css-color($c) {
+  @return is-color($c) or contains($color-modes, $c);
+}

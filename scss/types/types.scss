@@ -1,0 +1,22 @@
+@import 'object';
+@import 'array';
+
+$css-default-modes: (initial, inherit);
+
+@function is-css-default($cd) {
+  @return contains($css-default-modes, $cd);
+}
+
+@function is-css-size($cs) {
+  @return is-defined($cs) and (is-size($cs) or contains($css-default-modes, $cs));
+}
+
+@import 'function';
+@import 'boolean';
+@import 'number';
+@import 'string';
+@import 'url';
+@import 'color';
+@import 'angle';
+@import 'time';
+@import 'frequency';

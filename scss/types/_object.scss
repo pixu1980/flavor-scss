@@ -1,0 +1,7 @@
+@function extend($obj, $ext-obj) {
+  @return map-merge($obj, $ext-obj);
+}
+
+@function is-object($o) {
+  @return is-defined($o) and type-of($o)==map;
+}

@@ -1,0 +1,3 @@
+@function is-boolean($b) {
+  @return is-defined($b) and type-of($b)==bool;
+}

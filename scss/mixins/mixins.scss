@@ -1,5 +1,3 @@
-@import 'core';
-@import 'functions';
 @import 'box';
 @import 'background';
 @import 'text';
@@ -7,51 +5,8 @@
 @import 'media';
 @import 'transform';
 @import 'transition';
-@import 'animations';
-
-//outline
-@mixin outline($outline) {
-  outline: $outline;
-
-  &:active,
-  &:focus {
-    outline: $outline;
-  }
-}
-
-// aspect-ratio
-@mixin aspect-ratio($width, $height, $content-selector: '.content') {
-  display: block;
-  position: relative;
-
-  &:before {
-    content: '';
-    display: block;
-    padding-top: (strip-units($height) / strip-units($width)) * 100%;
-    width: 100%;
-  }
-
-  > #{$content-selector} {
-    @include position(absolute, 0 0 0 0);
-  }
-}
-
-// Overflow Hidden for Animated Elements Wrappers
-@mixin overflow-hidden-animated {
-  -moz-backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-
-  -moz-transform: translate3d(0, 0, 0);
-  -webkit-transform: translate3d(0, 0, 0);
-
-  overflow: hidden;
-}
-
-@mixin appearance ($value) {
-  -webkit-appearance: $value;
-  -moz-appearance: $value;
-  appearance: $value;
-}
+@import 'animation';
+@import 'appearance';
 
 //
 //// ----

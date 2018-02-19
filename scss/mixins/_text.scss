@@ -1,16 +1,16 @@
-$font-weight-modes: array-append((normal, bold, bolder, lighter, 100, 200, 300, 400, 500, 600, 700, 800, 900), $css-default-modes);
+$font-weight-modes: concat((normal, bold, bolder, lighter, 100, 200, 300, 400, 500, 600, 700, 800, 900), $css-default-modes);
 
 @function is-font-weight($fw) {
   @return contains($font-weight-modes, $fw);
 }
 
-$font-modes: array-append((medium, xx-small, x-small, small, large, x-large, xx-large, smaller, larger), $css-default-modes);
+$font-modes: concat((medium, xx-small, x-small, small, large, x-large, xx-large, smaller, larger), $css-default-modes);
 
 @function is-font-size($s) {
   @return is-css-size($s) or contains($font-modes, $s);
 }
 
-$line-height-modes: array-append((normal), $css-default-modes);
+$line-height-modes: concat((normal), $css-default-modes);
 
 @function is-line-height($s) {
   @return is-css-size($s) or contains($line-height-modes, $s);
@@ -132,13 +132,13 @@ $line-height-modes: array-append((normal), $css-default-modes);
   hyphens: auto;
 }
 
-$text-align-modes: array-append((left, center, right, justify), $css-default-modes);
+$text-align-modes: concat((left, center, right, justify), $css-default-modes);
 
 @function is-text-align($ta) {
   @return contains($text-align-modes, $ta);
 }
 
-$vertical-align-modes: array-append((baseline, sub, super, top, text-top, middle, bottom, text-bottom), $css-default-modes);
+$vertical-align-modes: concat((baseline, sub, super, top, text-top, middle, bottom, text-bottom), $css-default-modes);
 
 @function is-vertical-align($va) {
   @return is-css-size($va) or contains($vertical-align-modes, $va);
