@@ -1,3 +1,11 @@
+////
+/// Flavor SCSS Animations Module
+/// @group mixins
+/// @author Black mirror
+////
+
+/// @name animation-name-modes
+/// @access private
 $animation-name-modes: concat((none), $css-default-modes);
 
 @function is-animation-name($an) {
