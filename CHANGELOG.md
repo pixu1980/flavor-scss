@@ -1,3 +1,11 @@
+## [Version 0.1.14](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.14) (2018-2-19)
+
+### Bug fixes
+
+- fixed animation: [`114ee7f`](https://github.com/blackmirror1980/flavor-scss/commit/114ee7f)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.1.13...v0.1.14)
+
 ## [Version 0.1.13](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.13) (2018-2-19)
 
 ### Bug fixes
