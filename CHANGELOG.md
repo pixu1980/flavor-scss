@@ -1,3 +1,11 @@
+## [Version 0.1.16](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.16) (2018-2-19)
+
+### New features
+
+- folders/files refactoring: [`35061ff`](https://github.com/blackmirror1980/flavor-scss/commit/35061ff)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.1.15...v0.1.16)
+
 ## [Version 0.1.15](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.15) (2018-2-19)
 
 ### Bug fixes
