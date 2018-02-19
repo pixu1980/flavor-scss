@@ -1,7 +1,7 @@
 $background-image-modes: array-append((none), $css-default-modes);
 
 @function is-background-image($bi) {
-  @return contains($background-image-modes, $bi) or is-url($bi);
+  @return is-url($bi) or contains($background-image-modes, $bi);
 }
 
 $background-position-horizontal-modes: (left, center, right);
