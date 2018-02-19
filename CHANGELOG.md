@@ -1,3 +1,11 @@
+## [Version 0.1.15](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.15) (2018-2-19)
+
+### Bug fixes
+
+- animation mixin fix: [`9711ff5`](https://github.com/blackmirror1980/flavor-scss/commit/9711ff5)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.1.14...v0.1.15)
+
 ## [Version 0.1.14](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.14) (2018-2-19)
 
 ### Bug fixes
