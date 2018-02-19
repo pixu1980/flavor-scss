@@ -1,3 +1,11 @@
+## [Version 0.1.13](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.13) (2018-2-19)
+
+### Bug fixes
+
+- fixed is-url & is-background-image issue: [`c2b5bde`](https://github.com/blackmirror1980/flavor-scss/commit/c2b5bde)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.1.12...v0.1.13)
+
 ## [Version 0.1.12](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.12) (2018-2-16)
 
 ### Bug fixes
