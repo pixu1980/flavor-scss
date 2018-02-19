@@ -32,7 +32,7 @@ $animation-timing-function-modes: array-append((linear, ease, ease-in, ease-out,
   @return string-starts-with($atf, 'steps') or string-starts-with($atf, 'cubic-bezier') or contains($animation-timing-function-modes, $atf);
 }
 
-$animation-play-state-modes: array-append((paused-running), $css-default-modes);
+$animation-play-state-modes: array-append((paused, running), $css-default-modes);
 
 @function is-animation-play-state-modes($aps) {
   @return contains($animation-play-state-modess, $aps);
@@ -88,7 +88,7 @@ $animation-play-state-modes: array-append((paused-running), $css-default-modes);
     animation: $options;
   }
   @else {
-    $settings: (name: none, duration: 0, delay: 0, direction: normal, iteration-count: 0, timing-function: ease, fill-mode: forwards, play-state: running);
+    $settings: (name: none, duration: 0s, delay: 0s, direction: normal, iteration-count: 0, timing-function: ease, fill-mode: forwards, play-state: running);
 
     @if is-object($options) {
       $settings: extend($settings, $options);
