@@ -5,7 +5,7 @@
   "main": "scss/flavor.scss",
   "scripts": {
     "git-prepare": "changelog && echo 'CHANGELOD.md file built' && npm run readme && npm run docs",
-    "docs": "sassdoc scss && echo 'docs built'",
+    "docs": "sassdoc scss -d docs && echo 'docs built'",
     "readme": "pkg-2-readme package.json > README.md -t \"./pkg-2-readme.template.md\" && echo 'README.md file built'",
     "test": "sass-lint -c scss-lint.yml -v -q"
   },
