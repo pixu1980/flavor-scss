@@ -20,7 +20,7 @@ $box-sizing-modes: concat((content-box, border-box), $css-default-modes);
 }
 
 @mixin box-sizing($bs) {
-  @if is-defined($bs) and is-box-sizing-mode($width) {
+  @if is-defined($bs) and is-box-sizing-mode($bs) {
     box-sizing: $bs;
   }
   @else {
