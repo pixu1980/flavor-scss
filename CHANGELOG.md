@@ -1,3 +1,11 @@
+## [Version 0.2.4](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.2.4) (2018-2-20)
+
+### Bug fixes
+
+- box-sizing type checking fix: [`2437c36`](https://github.com/blackmirror1980/flavor-scss/commit/2437c36)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.2.3...v0.2.4)
+
 ## [Version 0.2.3](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.2.3) (2018-2-20)
 
 ### Bug fixes
