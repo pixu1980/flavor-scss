@@ -13,6 +13,21 @@ $display-modes: concat((none, inline, block, inline-block, flex, inline-flex, ta
   }
 }
 
+$box-sizing-modes: concat((content-box, border-box), $css-default-modes);
+
+@function is-box-sizing-mode($bs) {
+  @return contains($box-sizing-modes, $bs);
+}
+
+@mixin box-sizing($bs) {
+  @if is-defined($dm) and is-box-sizing-mode($width) {
+    box-sizing: $bs;
+  }
+  @else {
+    @warn '`box-sizing: #{$bs}` is not a valid box-sizing mode';
+  }
+}
+
 $box-sizes: concat((auto), $css-default-modes);
 
 @function is-box-size($s) {
@@ -23,12 +38,6 @@ $bound-box-sizes: concat((none), $css-default-modes);
 
 @function is-bound-box-size($s) {
   @return is-size($s) or contains($bound-box-sizes, $s);
-}
-
-@mixin box-shadow($shadows...) {
-  -webkit-box-shadow: $shadows;
-  -moz-box-shadow: $shadows;
-  box-shadow: $shadows;
 }
 
 @mixin box-size($options) {
@@ -184,6 +193,12 @@ $bound-box-sizes: concat((none), $css-default-modes);
   @else {
     @warn '`background-color: #{$bgcolor}` is not a valid css color';
   }
+}
+
+@mixin box-shadow($shadows...) {
+  -webkit-box-shadow: $shadows;
+  -moz-box-shadow: $shadows;
+  box-shadow: $shadows;
 }
 
 @mixin aspect-ratio($width, $height, $content-selector: '.content') {

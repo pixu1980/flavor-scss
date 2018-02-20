@@ -3,11 +3,14 @@
 /// @group mixins
 /// @author Black mirror
 ////
-
 /// @name animation-name-modes
-/// @access private
+/// @access public
 $animation-name-modes: concat((none), $css-default-modes);
 
+/// Checks if animation name is string or css default (inherit, initial)
+/// @name is-animation-name
+/// @access public
+/// @return {Bool}
 @function is-animation-name($an) {
   @return is-string($an) or contains($animation-name-modes, $an);
 }

@@ -4,7 +4,8 @@
   "description": "Flavor SCSS, bourbon.io based mixins & helpers",
   "main": "scss/flavor.scss",
   "scripts": {
-    "git-prepare": "changelog && npm run readme",
+    "git-prepare": "changelog && echo 'CHANGELOD.md file built' && npm run readme && npm run docs",
+    "docs": "sassdoc scss && echo 'docs built'",
     "readme": "pkg-2-readme package.json > README.md -t \"./pkg-2-readme.template.md\" && echo 'README.md file built'",
     "test": "sass-lint -c scss-lint.yml -v -q"
   },
@@ -26,7 +27,7 @@
     "url": "https://github.com/blackmirror1980/flavor-scss/issues"
   },
   "homepage": "https://blackmirror1980.github.io/flavor-scss",
-  "documentation": "https://blackmirror1980.github.io/flavor-scss/docs/index.html",
+  "documentation": "https://blackmirror1980.github.io/flavor-scss/sassdoc/index.html",
   "devDependencies": {
     "sass-lint": "^1.12.1",
     "sassdoc": "^2.5.0"
