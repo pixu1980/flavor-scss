@@ -1,3 +1,16 @@
+## [Version 0.2.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.2.0) (2018-2-20)
+
+### Breaking changes
+
+- sassdoc added: [`0d7ef0d`](https://github.com/blackmirror1980/flavor-scss/commit/0d7ef0d)
+- added sassdoc: [`f39f5a6`](https://github.com/blackmirror1980/flavor-scss/commit/f39f5a6)
+
+### Bug fixes
+
+- added sass doc added box-sizing mixin: [`3653e36`](https://github.com/blackmirror1980/flavor-scss/commit/3653e36)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.1.16...v0.2.0)
+
 ## [Version 0.1.16](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.1.16) (2018-2-19)
 
 ### New features
