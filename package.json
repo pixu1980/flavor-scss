@@ -27,7 +27,7 @@
     "url": "https://github.com/blackmirror1980/flavor-scss/issues"
   },
   "homepage": "https://blackmirror1980.github.io/flavor-scss",
-  "documentation": "https://blackmirror1980.github.io/flavor-scss/sassdoc/index.html",
+  "documentation": "https://blackmirror1980.github.io/flavor-scss/index.html",
   "devDependencies": {
     "sass-lint": "^1.12.1",
     "sassdoc": "^2.5.0"
