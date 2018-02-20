@@ -1,3 +1,11 @@
+## [Version 0.2.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.2.1) (2018-2-20)
+
+### Bug fixes
+
+- changed docs destination folder: [`f6e2fb8`](https://github.com/blackmirror1980/flavor-scss/commit/f6e2fb8)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.2.0...v0.2.1)
+
 ## [Version 0.2.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.2.0) (2018-2-20)
 
 ### Breaking changes
