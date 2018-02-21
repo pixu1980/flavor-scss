@@ -1,3 +1,11 @@
+## [Version 0.2.5](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.2.5) (2018-2-21)
+
+### Bug fixes
+
+- fixed height-fallback in box-size mixin: [`b53bfe4`](https://github.com/blackmirror1980/flavor-scss/commit/b53bfe4)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.2.4...v0.2.5)
+
 ## [Version 0.2.4](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.2.4) (2018-2-20)
 
 ### Bug fixes
