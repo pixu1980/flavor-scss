@@ -1,3 +1,11 @@
+## [Version 0.2.6](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.2.6) (2018-2-21)
+
+### Bug fixes
+
+- hot fixes: [`c64a6f8`](https://github.com/blackmirror1980/flavor-scss/commit/c64a6f8)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.2.5...v0.2.6)
+
 ## [Version 0.2.5](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.2.5) (2018-2-21)
 
 ### Bug fixes
