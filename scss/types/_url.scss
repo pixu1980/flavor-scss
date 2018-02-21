@@ -2,10 +2,10 @@
   @if is-string($u) {
     $url: $u;
 
-    $urlFunctionStartsWith: string-starts-with($url, 'url("') or string-starts-with($url, 'url(\'');
-    $urlFunctionEndsWith: string-ends-with($url, '")') or string-ends-with($url, '\')');
+    $url-function-starts-with: string-starts-with($url, 'url("') or string-starts-with($url, 'url(\'');
+    $url-function-ends-with: string-ends-with($url, '")') or string-ends-with($url, '\')');
 
-    @return $urlFunctionStartsWith and $urlFunctionEndsWith;
+    @return $url-function-starts-with and $url-function-ends-with;
   }
 
   @warn '`url: #{$u}` is not a valid string';
