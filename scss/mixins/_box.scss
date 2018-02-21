@@ -40,8 +40,8 @@ $bound-box-sizes: concat((none), $css-default-modes);
   @return is-size($s) or contains($bound-box-sizes, $s);
 }
 
-@mixin box-size($options) {
-  $settings: (width: null, height: null, min-width: null, min-height: null, max-width: null, max-height: null, height-fallback: true);
+@mixin box-size($options, $height-fallback: true) {
+  $settings: (width: null, height: null, min-width: null, min-height: null, max-width: null, max-height: null);
 
   @if is-object($options) {
     $settings: extend($settings, $options);
@@ -95,7 +95,6 @@ $bound-box-sizes: concat((none), $css-default-modes);
     }
   }
 
-  $height-fallback: map-get($settings, height-fallback);
   $height: map-get($settings, height);
 
   @if $height-fallback==true and is-defined($width) and not is-defined($height) {
