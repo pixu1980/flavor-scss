@@ -5,7 +5,7 @@ $border-styles: concat((none, hidden, dotted, dashed, solid, double, groove, rid
 }
 
 @mixin border-radius($br...) {
-  @include prefixed(border-radius, $br);
+  @include prefixer(border-radius, $br);
 }
 
 $border-modes: concat((none), $css-default-modes);
