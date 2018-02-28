@@ -1,3 +1,11 @@
+## [Version 0.2.8](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.2.8) (2018-2-28)
+
+### Bug fixes
+
+- @mixin prefixer($property, $values..., $prefixes: webkit moz ms o spec) {       Optional parameters may not be combined with variable-length parameters: [`0da34d4`](https://github.com/blackmirror1980/flavor-scss/commit/0da34d4)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.2.7...v0.2.8)
+
 ## [Version 0.2.7](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.2.7) (2018-2-28)
 
 ### Bug fixes
