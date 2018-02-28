@@ -1,3 +1,11 @@
+## [Version 0.2.9](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.2.9) (2018-2-28)
+
+### Bug fixes
+
+- bugfix prefixed -> prefixer: [`fbcbf69`](https://github.com/blackmirror1980/flavor-scss/commit/fbcbf69)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.2.8...v0.2.9)
+
 ## [Version 0.2.8](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.2.8) (2018-2-28)
 
 ### Bug fixes
