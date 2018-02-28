@@ -195,9 +195,7 @@ $bound-box-sizes: concat((none), $css-default-modes);
 }
 
 @mixin box-shadow($shadows...) {
-  -webkit-box-shadow: $shadows;
-  -moz-box-shadow: $shadows;
-  box-shadow: $shadows;
+  @include prefixer(box-shadow, $shadows);
 }
 
 @mixin aspect-ratio($width, $height, $content-selector: '.content') {

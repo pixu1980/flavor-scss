@@ -4,12 +4,8 @@ $border-styles: concat((none, hidden, dotted, dashed, solid, double, groove, rid
   @return contains($border-styles, $bs);
 }
 
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-  -moz-border-radius: $radius;
-  -ms-border-radius: $radius;
-  -o-border-radius: $radius;
-  border-radius: $radius;
+@mixin border-radius($br...) {
+  @include prefixed(border-radius, $br);
 }
 
 $border-modes: concat((none), $css-default-modes);

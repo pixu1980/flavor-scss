@@ -1,7 +1,5 @@
-@mixin appearance ($value) {
-  -webkit-appearance: $value;
-  -moz-appearance: $value;
-  appearance: $value;
+@mixin appearance ($a) {
+  @include prefixer(appearance, $a);
 }
 
 @mixin outline($outline) {
@@ -14,11 +12,8 @@
 }
 
 @mixin overflow-hidden-animated {
-  -moz-backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-
-  -moz-transform: translate3d(0, 0, 0);
-  -webkit-transform: translate3d(0, 0, 0);
+  @include prefixer(backface-visibility, hidden);
+  @include transform(translate3d(0, 0, 0), webkit moz);
 
   overflow: hidden;
 }

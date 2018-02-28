@@ -1,10 +1,6 @@
 // generic transform
 @mixin transform($transforms) {
-  -webkit-transform: $transforms;
-  -moz-transform: $transforms;
-  -ms-transform: $transforms;
-  -o-transform: $transforms;
-  transform: $transforms;
+  @include prefixer(transform, $transforms);
 }
 
 // rotate
@@ -28,10 +24,21 @@
 }
 
 //transform origin
-@mixin transform-origin($origin) {
-  -webkit-transform-origin: $origin;
-  -moz-transform-origin: $origin;
-  -ms-transform-origin: $origin;
-  -o-transform-origin: $origin;
-  transform-origin: $origin;
+@mixin transform-origin($to) {
+  @include prefixer(transform-origin, $to);
+}
+
+$transform-style-modes: concat((flat, preserve-3d), $css-default-modes);
+
+@function is-transform-style-mode($ts) {
+  @return contains($transform-style-modes, $ts);
+}
+
+@mixin transform-style($ts) {
+  @if is-defined($ts) and is-transform-style-mode($ts) {
+    @include prefixer(transform-style, $ts);
+  }
+  @else {
+    @warn '`transform-style: #{$ts}` is not a valid transform-style mode';
+  }
 }

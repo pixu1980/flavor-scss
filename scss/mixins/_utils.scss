@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+/// A mixin for generating vendor prefixes on non-standardized properties.
+///
+/// @param {String} $property
+///   Property to prefix
+///
+/// @param {*} $value
+///   Value to use
+///
+/// @param {List} $prefixes
+///   Prefixes to define
+///
+/// @example scss - Usage
+///   .element {
+///     @include prefixer(border-radius, 10px, webkit ms spec);
+///   }
+///
+/// @example css - CSS Output
+///   .element {
+///     -webkit-border-radius: 10px;
+///     -moz-border-radius: 10px;
+///     border-radius: 10px;
+///   }
+///
+/// @require {variable} $prefix-for-webkit
+/// @require {variable} $prefix-for-mozilla
+/// @require {variable} $prefix-for-microsoft
+/// @require {variable} $prefix-for-opera
+/// @require {variable} $prefix-for-spec
+@mixin prefixer($property, $values..., $prefixes: webkit moz ms o spec) {
+  @each $prefix in $prefixes {
+    @if $prefix==webkit {
+      -webkit-#{$property}: $values;
+    }
+    @else if $prefix==moz {
+      -moz-#{$property}: $values;
+    }
+    @else if $prefix==ms {
+      -ms-#{$property}: $values;
+    }
+    @else if $prefix==o {
+      -o-#{$property}: $values;
+    }
+    @else if $prefix==spec {
+      #{$property}: $values;
+    }
+    @else {
+      @warn "Unrecognized prefix: #{$prefix}";
+    }
+  }
+}
