@@ -23,11 +23,6 @@
 ///     border-radius: 10px;
 ///   }
 ///
-/// @require {variable} $prefix-for-webkit
-/// @require {variable} $prefix-for-mozilla
-/// @require {variable} $prefix-for-microsoft
-/// @require {variable} $prefix-for-opera
-/// @require {variable} $prefix-for-spec
 @mixin prefixer($property, $values..., $prefixes: webkit moz ms o spec) {
   @each $prefix in $prefixes {
     @if $prefix==webkit {
@@ -46,7 +41,7 @@
       #{$property}: $values;
     }
     @else {
-      @warn "Unrecognized prefix: #{$prefix}";
+      @warn 'Unrecognized prefix: #{$prefix}';
     }
   }
 }
