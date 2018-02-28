@@ -1,3 +1,11 @@
+## [Version 0.2.10](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.2.10) (2018-2-28)
+
+### Bug fixes
+
+- border mixin fix: [`77db63c`](https://github.com/blackmirror1980/flavor-scss/commit/77db63c)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.2.9...v0.2.10)
+
 ## [Version 0.2.9](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.2.9) (2018-2-28)
 
 ### Bug fixes
