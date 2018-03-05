@@ -13,7 +13,7 @@ $transform-modes: array-concat((none), $css-default-modes);
 @function is-transform-function($tf) {
   $transform-function-name: get-transform-function-name($tf);
 
-  @return is-defined($transform-function-name) and array-contains($transform-function-names, $transform-function-name);
+  @return is-defined($transform-function-name) and array-contains($transform-functions-names, $transform-function-name);
 }
 
 @function is-transform-mode-or-function($transform) {
