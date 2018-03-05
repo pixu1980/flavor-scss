@@ -1,3 +1,11 @@
+## [Version 0.3.2](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.3.2) (2018-3-5)
+
+### Bug fixes
+
+- is-transform-mode-or-function bugfix: [`7a97929`](https://github.com/blackmirror1980/flavor-scss/commit/7a97929)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.3.1...v0.3.2)
+
 ## [Version 0.3.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.3.1) (2018-3-5)
 
 ### Bug fixes
