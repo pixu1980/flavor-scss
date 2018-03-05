@@ -1,3 +1,11 @@
+## [Version 0.3.7](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.3.7) (2018-3-5)
+
+### Bug fixes
+
+- is-calc-length enforce string fix: [`208618c`](https://github.com/blackmirror1980/flavor-scss/commit/208618c)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.3.6...v0.3.7)
+
 ## [Version 0.3.6](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.3.6) (2018-3-5)
 
 ### Bug fixes
