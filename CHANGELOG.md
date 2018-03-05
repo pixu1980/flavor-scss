@@ -1,3 +1,11 @@
+## [Version 0.3.9](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.3.9) (2018-3-5)
+
+### Bug fixes
+
+- is-length with zero value bugfix: [`7341f36`](https://github.com/blackmirror1980/flavor-scss/commit/7341f36)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.3.8...v0.3.9)
+
 ## [Version 0.3.8](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.3.8) (2018-3-5)
 
 ### Bug fixes
