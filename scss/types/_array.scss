@@ -2,18 +2,18 @@
   @return is-defined($a) and type-of($a)==list;
 }
 
-@function contains($list, $item) {
+@function array-contains($list, $item) {
   @if is-array($list) and is-defined($item) {
     $index-of: index($list, $item);
 
     @return is-defined($index-of) and $index-of > 0;
   }
 
-  @warn '`array: #{$list}` and `item: #{$item}` are not valid data for array contains';
+  @warn '`array: #{$list}` and `item: #{$item}` are not valid data for array-contains';
   @return false;
 }
 
-@function concat($list1, $list2) {
+@function array-concat($list1, $list2) {
   $list: ();
 
   @if is-array($list1) {

@@ -1,37 +1,281 @@
 // generic transform
-@mixin transform($transforms) {
-  @include prefixer(transform, $transforms);
+$transform-functions-names: (matrix, matrix3d, translate, translate3d, translateX, translateY, translateZ, scale, scale3d, scaleX, scaleY, scaleZ, rotate, rotate3d, rotateX, rotateY, rotateZ, skew, skewX, skewY, perspective);
+$transform-modes: array-concat((none), $css-default-modes);
+
+@function get-transform-function-name($t) {
+  @if(string-contains($t, '(') and string-contains($t, ')')) {
+    @return str-slice($t, 1, str-index($t, '(') - 1);
+  }
+
+  @return null;
+}
+
+@function is-transform-function($tf) {
+  $transform-function-name: get-transform-function-name($tf);
+
+  @return is-defined($transform-function-name) and array-contains($transform-function-names, $transform-function-name);
+}
+
+@function is-transform-mode-or-function($tm) {
+  @return array-contains($transform-modes, $transform) or is-transform-function($transform);
+}
+
+@mixin transform($transform) {
+  @if is-transform-mode-or-function($transform) {
+    @include prefixer(transform, $transform);
+  }
+  @else {
+    @warn '`transform: #{$transform}` is not a valid transform value';
+  }
+}
+
+@mixin matrix($a, $b, $c, $d, $tx, $ty) {
+  @if (is-number($a) and is-number($b) and is-number($c) and is-number($d) and is-number($tx) and is-number($ty)) {
+    @include transform(matrix($a, $b, $c, $d, $tx, $ty));
+  }
+  @else {
+    @warn '`transform: matrix(#{$a}, #{$b}, #{$c}, #{$d}, #{$tx}, #{$ty})` are not valid transform:matrix parameters values';
+  }
+}
+
+@mixin matrix3d($a1, $b1, $c1, $d1, $a2, $b2, $c2, $d2, $a3, $b3, $c3, $d3, $a4, $b4, $c4, $d4) {
+  @if (is-number($a1) and is-number($b1) and is-number($c1) and is-number($d1) and is-number($a2) and is-number($b2) and is-number($c2) and is-number($d2) and is-number($a3) and is-number($b3) and is-number($c3) and is-number($d3) and is-number($a4) and is-number($b4) and is-number($c4) and is-number($d4)) {
+    @include transform(matrix3d($a1, $b1, $c1, $d1, $a2, $b2, $c2, $d2, $a3, $b3, $c3, $d3, $a4, $b4, $c4, $d4));
+  }
+  @else {
+    @warn '`transform: matrix3d(#{$a1}, #{$b1}, #{$c1}, #{$d1}, #{$a2}, #{$b2}, #{$c2}, #{$d2}, #{$a3}, #{$b3}, #{$c3}, #{$d3}, #{$a4}, #{$b4}, #{$c4}, #{$d4})` are not valid transform:matrix3d parameters values';
+  }
+}
+
+@mixin perspective($p) {
+  @if (is-css-size($p)) {
+    @include transform(perspective($p));
+  }
+  @else {
+    @warn '`transform: perspective(#{$p})` is not valid transform:perspective value';
+  }
 }
 
 // rotate
-@mixin rotate($deg) {
-  @include transform(rotate(#{$deg}deg));
+@mixin rotate($a) {
+  @if (is-angle($a)) {
+    @include transform(rotate($a));
+  }
+  @else {
+    @warn '`transform: rotate(#{$a})` is not valid transform:rotate angle value';
+  }
+}
+
+@mixin rotate3d($x, $y, $z, $a) {
+  @if (is-percentage-number($x) and is-percentage-number($y) and is-percentage-number($z) and is-angle($a)) {
+    @include transform(rotate3d($x, $y, $z, $a));
+  }
+  @else {
+    @warn '`transform: rotate3d(#{$x}, #{$y}, #{$z}, #{$a})` are not valid transform:rotate3d values';
+  }
+}
+
+@mixin rotateX($x) {
+  @if (is-angle($x)) {
+    @include transform(rotateX($x));
+  }
+  @else {
+    @warn '`transform: rotateX(#{$x})` is not valid transform:rotateX angle value';
+  }
+}
+
+@mixin rotateY($y) {
+  @if (is-angle($y)) {
+    @include transform(rotateY($y));
+  }
+  @else {
+    @warn '`transform: rotateY(#{$y})` is not valid transform:rotateY angle value';
+  }
+}
+
+@mixin rotateZ($z) {
+  @if (is-angle($z)) {
+    @include transform(rotateZ($z));
+  }
+  @else {
+    @warn '`transform: rotateZ(#{$z})` is not valid transform:rotateZ angle value';
+  }
 }
 
 // scale
-@mixin scale($scale) {
-  @include transform(scale($scale));
+@mixin scale($s) {
+  @if (is-number($s) and ($s >=0)) {
+    @include transform(scale($s, $s));
+  }
+  @else {
+    @warn '`transform: scale(#{$s})` is not valid transform:scale factor value';
+  }
 }
 
-// translate
-@mixin translate($x, $y) {
-  @include transform(translate($x, $y));
+@mixin scale3d($sx, $sy, $sz) {
+  @if (is-number($sx) and is-number($sy) and is-number($sz)) {
+    @include transform(scale3d($sx, $sy, $sz));
+  }
+  @else {
+    @warn '`transform: scale3d(#{$sx}, #{$sy}, #{$sz})` are not valid transform:scale3d factor values';
+  }
+}
+
+@mixin scaleX($sx) {
+  @if (is-number($sx) and ($sx>=0)) {
+    @include transform(scaleX($sx));
+  }
+  @else {
+    @warn '`transform: scaleX(#{$sx})` is not valid transform:scaleX factor value';
+  }
+}
+
+@mixin scaleY($sy) {
+  @if (is-number($sy) and ($sy >=0)) {
+    @include transform(scaleY($sy));
+  }
+  @else {
+    @warn '`transform: scaleY(#{$sy})` is not valid transform:scaleY factor value';
+  }
+}
+
+@mixin scaleZ($sz) {
+  @if (is-number($sz) and ($sz >=0)) {
+    @include transform(scaleZ($sz));
+  }
+  @else {
+    @warn '`transform: scaleZ(#{$sz})` is not valid transform:scaleZ factor value';
+  }
 }
 
 // skew
-@mixin skew($x, $y) {
-  @include transform(skew(#{$x}deg, #{$y}deg));
+@mixin skew($ax, $ay) {
+  @if(is-angle($ax) and is-angle($ay)) {
+    @include transform(skew($ax, $ay));
+  }
+  @else {
+    @warn '`transform: skew(#{$ax}, #{$ay})` are not valid transform:skew angle values';
+  }
+}
+
+@mixin skewX($ax) {
+  @if(is-angle($ax)) {
+    @include transform(skewX($ax));
+  }
+  @else {
+    @warn '`transform: skewX(#{$ax})` is not valid transform:skewX angle value';
+  }
+}
+
+@mixin skewY($ay) {
+  @if(is-angle($ay)) {
+    @include transform(skewY($ay));
+  }
+  @else {
+    @warn '`transform: skewY(#{$ay})` is not valid transform:skewY angle value';
+  }
+}
+
+// translate
+@mixin translate($tx, $ty) {
+  @if (is-css-size($tx) and is-css-size($ty)) {
+    @include transform(translate($tx, $ty));
+  }
+  @else {
+    @warn '`transform: translate(#{$tx}, #{$ty})` are not valid transform:translate size value';
+  }
+}
+
+@mixin translate3d($tx, $ty, $tz) {
+  @if (is-css-size($tx) and is-css-size($ty) and is-css-size($tz)) {
+    @include transform(translate3d($tx, $ty, $tz));
+  }
+  @else {
+    @warn '`transform: translate3d(#{$tx}, #{$ty}, #{$tz})` are not valid transform:translate3d factor values';
+  }
+}
+
+@mixin translateX($tx) {
+  @if (is-css-size($tx)) {
+    @include transform(translateX($tx));
+  }
+  @else {
+    @warn '`transform: translateX(#{$tx})` is not valid transform:translateX factor value';
+  }
+}
+
+@mixin translateY($ty) {
+  @if (is-css-size($ty)) {
+    @include transform(translateY($ty));
+  }
+  @else {
+    @warn '`transform: translateY(#{$ty})` is not valid transform:translateY factor value';
+  }
+}
+
+@mixin translateZ($tz) {
+  @if (is-css-size($tz)) {
+    @include transform(translateZ($tz));
+  }
+  @else {
+    @warn '`transform: translateZ(#{$tz})` is not valid transform:translateZ factor value';
+  }
+}
+
+
+$transform-origin-x-axis-modes: (left, right, center);
+$transform-origin-y-axis-modes: (top, center, bottom);
+
+@function is-transform-origin-axis-value($to-axis, $to-axis-modes: ()) {
+  @return is-defined($to-axis) and (is-size($to-axis) or is-percentage($to-axis) or if(length($to-axis-modes) > 0, array-contains($to-axis-modes, $to)));
 }
 
 //transform origin
 @mixin transform-origin($to) {
-  @include prefixer(transform-origin, $to);
+  @if is-css-default($to) {
+    @include prefixer(transform-origin, $to);
+  }
+  @else if(length($to) > 1) {
+    $y-axis: if(length($to) > 1, nth($to, 2), 50%);
+    $z-axis: if(length($to) > 2, nth($to, 3), 0);
+
+    $transform-origin: ();
+
+    $x-axis: if(length($to) > 0, nth($to, 1), 50%);
+
+    @if is-transform-origin-axis-value($x-axis, $transform-origin-x-axis-modes) {
+      $transform-origin: append($transform-origin, $x-axis);
+    }
+    @else {
+      @warn '`transform-origin x-axis: #{$x-axis}` is not a valid x axis transform origin value';
+    }
+
+    $y-axis: if(length($to) > 1, nth($to, 2), 50%);
+
+    @if is-transform-origin-axis-value($y-axis, $transform-origin-y-axis-modes) {
+      $transform-origin: append($transform-origin, $y-axis);
+    }
+    @else {
+      @warn '`transform-origin y-axis: #{$y-axis}` is not a valid y axis transform origin value';
+    }
+
+    $z-axis: if(length($to) > 2, nth($to, 3), 0);
+
+    @if is-transform-origin-axis-value($x-axis) {
+      $transform-origin: append($transform-origin, $x-axis);
+    }
+    @else {
+      @warn '`transform-origin z-axis: #{$z-axis}` is not a valid z axis transform origin value';
+    }
+
+    @include prefixer(transform-origin, $transform-origin);
+  }
 }
 
-$transform-style-modes: concat((flat, preserve-3d), $css-default-modes);
+$transform-style-modes: array-concat((flat, preserve-3d), $css-default-modes);
 
 @function is-transform-style-mode($ts) {
-  @return contains($transform-style-modes, $ts);
+  @return is-defined($ts) and array-contains($transform-style-modes, $ts);
 }
 
 @mixin transform-style($ts) {

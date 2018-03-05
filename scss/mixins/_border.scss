@@ -1,17 +1,17 @@
-$border-styles: concat((none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset), $css-default-modes);
+$border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset), $css-default-modes);
 
 @function is-border-style($bs) {
-  @return contains($border-styles, $bs);
+  @return array-contains($border-styles, $bs);
 }
 
 @mixin border-radius($br...) {
   @include prefixer(border-radius, $br);
 }
 
-$border-modes: concat((none), $css-default-modes);
+$border-modes: array-concat((none), $css-default-modes);
 
 @function is-border-mode($b) {
-  @return contains($border-modes, $b);
+  @return array-contains($border-modes, $b);
 }
 
 @mixin border($options, $shorthand: false) {

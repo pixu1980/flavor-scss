@@ -6,6 +6,21 @@
   @return is-number($i) and round($i)==$i;
 }
 
+@function is-number-between($n, $from, $to, $include-bounds: true) {
+  @if (is-number($n) and is-number($from) and is-number($to)) {
+    @if ($include-bounds==true) {
+      @return if($include-bounds, ($n >= $from) and ($n <= $to), ($n > $from) and ($n < $to));
+    }
+  }
+
+  @warn '`#{$n}, #{$from} and #{$to}` are not valid numbers';
+  @return false;
+}
+
 @function is-percentage($p) {
   @return is-number($p) and unit($p)=='%';
+}
+
+@function is-percentage-number($pn) {
+  @return is-number($pn) and unitless($pn)==$pn and is-number-between($pn, 0, 1);
 }

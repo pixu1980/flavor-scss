@@ -5,48 +5,48 @@
 ////
 /// @name animation-name-modes
 /// @access public
-$animation-name-modes: concat((none), $css-default-modes);
+$animation-name-modes: array-concat((none), $css-default-modes);
 
 /// Checks if animation name is string or css default (inherit, initial)
 /// @name is-animation-name
 /// @access public
 /// @return {Bool}
 @function is-animation-name($an) {
-  @return is-string($an) or contains($animation-name-modes, $an);
+  @return is-string($an) or array-contains($animation-name-modes, $an);
 }
 
 @function is-animation-time($at) {
   @return is-time($at) or is-css-default($at);
 }
 
-$animation-direction-modes: concat((normal, reverse, alternate, alternate-reverse), $css-default-modes);
+$animation-direction-modes: array-concat((normal, reverse, alternate, alternate-reverse), $css-default-modes);
 
 @function is-animation-direction($ad) {
-  @return contains($animation-direction-modes, $ad);
+  @return array-contains($animation-direction-modes, $ad);
 }
 
-$animation-iteration-count-modes: concat((infinite), $css-default-modes);
+$animation-iteration-count-modes: array-concat((infinite), $css-default-modes);
 
 @function is-animation-iteration-count($aic) {
-  @return is-integer($aic) or contains($animation-iteration-count-modes, $aic);
+  @return is-integer($aic) or array-contains($animation-iteration-count-modes, $aic);
 }
 
-$animation-fill-modes: concat((none, forwards, backwards, both), $css-default-modes);
+$animation-fill-modes: array-concat((none, forwards, backwards, both), $css-default-modes);
 
 @function is-animation-fill-mode($afm) {
-  @return contains($animation-fill-modes, $afm);
+  @return array-contains($animation-fill-modes, $afm);
 }
 
-$animation-timing-function-modes: concat((linear, ease, ease-in, ease-out, ease-in-out, step-start, step-end), $css-default-modes);
+$animation-timing-function-modes: array-concat((linear, ease, ease-in, ease-out, ease-in-out, step-start, step-end), $css-default-modes);
 
 @function is-animation-timing-function($atf) {
-  @return string-starts-with($atf, 'steps') or string-starts-with($atf, 'cubic-bezier') or contains($animation-timing-function-modes, $atf);
+  @return string-starts-with($atf, 'steps') or string-starts-with($atf, 'cubic-bezier') or array-contains($animation-timing-function-modes, $atf);
 }
 
-$animation-play-state-modes: concat((paused, running), $css-default-modes);
+$animation-play-state-modes: array-concat((paused, running), $css-default-modes);
 
 @function is-animation-play-state-modes($aps) {
-  @return contains($animation-play-state-modess, $aps);
+  @return array-contains($animation-play-state-modess, $aps);
 }
 
 // keyframe mixin e.g. usage

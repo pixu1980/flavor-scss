@@ -2,8 +2,8 @@
   @return is-defined($c) and type-of($c)==color;
 }
 
-$color-modes: concat((transparent), $css-default-modes);
+$color-modes: array-concat((transparent), $css-default-modes);
 
 @function is-css-color($c) {
-  @return is-color($c) or contains($color-modes, $c);
+  @return is-color($c) or array-contains($color-modes, $c);
 }

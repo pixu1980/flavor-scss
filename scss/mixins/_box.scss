@@ -1,7 +1,7 @@
-$display-modes: concat((none, inline, block, inline-block, flex, inline-flex, table, inline-table, table-caption, table-header-group, table-row-group, table-column-group, table-footer-group, table-row, table-column, table-cell, list-item, run-in), $css-default-modes);
+$display-modes: array-concat((none, inline, block, inline-block, flex, inline-flex, table, inline-table, table-caption, table-header-group, table-row-group, table-column-group, table-footer-group, table-row, table-column, table-cell, list-item, run-in), $css-default-modes);
 
 @function is-display-mode($dm) {
-  @return contains($display-modes, $dm);
+  @return array-contains($display-modes, $dm);
 }
 
 @mixin display($dm) {
@@ -13,10 +13,10 @@ $display-modes: concat((none, inline, block, inline-block, flex, inline-flex, ta
   }
 }
 
-$box-sizing-modes: concat((content-box, border-box), $css-default-modes);
+$box-sizing-modes: array-concat((content-box, border-box), $css-default-modes);
 
 @function is-box-sizing-mode($bs) {
-  @return contains($box-sizing-modes, $bs);
+  @return array-contains($box-sizing-modes, $bs);
 }
 
 @mixin box-sizing($bs) {
@@ -28,16 +28,16 @@ $box-sizing-modes: concat((content-box, border-box), $css-default-modes);
   }
 }
 
-$box-sizes: concat((auto), $css-default-modes);
+$box-sizes: array-concat((auto), $css-default-modes);
 
 @function is-box-size($s) {
-  @return is-size($s) or contains($box-sizes, $s);
+  @return is-size($s) or array-contains($box-sizes, $s);
 }
 
-$bound-box-sizes: concat((none), $css-default-modes);
+$bound-box-sizes: array-concat((none), $css-default-modes);
 
 @function is-bound-box-size($s) {
-  @return is-size($s) or contains($bound-box-sizes, $s);
+  @return is-size($s) or array-contains($bound-box-sizes, $s);
 }
 
 @mixin box-size($options, $height-fallback: true) {

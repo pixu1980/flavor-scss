@@ -1,5 +1,5 @@
 $frequency-units: (Hz, kHz);
 
 @function is-frequency($f) {
-  @return is-number($f) and contains($frequency-units, unit($f));
+  @return is-number($f) and array-contains($frequency-units, unit($f));
 }

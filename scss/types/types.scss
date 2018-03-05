@@ -4,11 +4,11 @@
 $css-default-modes: (initial, inherit);
 
 @function is-css-default($cd) {
-  @return contains($css-default-modes, $cd);
+  @return is-defined($cd) and array-contains($css-default-modes, $cd);
 }
 
 @function is-css-size($cs) {
-  @return is-defined($cs) and (is-size($cs) or contains($css-default-modes, $cs));
+  @return is-defined($cs) and (is-size($cs) or array-contains($css-default-modes, $cs));
 }
 
 @import 'function';

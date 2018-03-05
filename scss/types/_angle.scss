@@ -1,7 +1,7 @@
 $angle-units: (deg, rad, grad, turn);
 
 @function is-angle($a) {
-  @return is-number($a) and contains($angle-units, unit($a));
+  @return is-number($a) and array-contains($angle-units, unit($a));
 }
 
 ///// Convert angle

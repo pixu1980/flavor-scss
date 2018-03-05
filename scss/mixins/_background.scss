@@ -1,28 +1,28 @@
-$background-image-modes: concat((none), $css-default-modes);
+$background-image-modes: array-concat((none), $css-default-modes);
 
 @function is-background-image($bi) {
-  @return is-url($bi) or contains($background-image-modes, $bi);
+  @return is-url($bi) or array-contains($background-image-modes, $bi);
 }
 
 $background-position-horizontal-modes: (left, center, right);
 $background-position-vertical-modes: (top, center, bottom);
-$background-position-modes: concat((left, center, right, top, bottom), $css-default-modes);
+$background-position-modes: array-concat((left, center, right, top, bottom), $css-default-modes);
 
 @function is-background-position($bp) {
   @if is-array($bp) {
     $h: if(length($bp) > 0, nth($bp, 1), null);
-    $h-valid: is-css-size($h) or contains($background-position-horizontal-modes, $h);
+    $h-valid: is-css-size($h) or array-contains($background-position-horizontal-modes, $h);
 
     $v: if(length($bp) > 1, nth($bp, 2), null);
-    $v-valid: is-css-size($v) or contains($background-position-vertical-modes, $v);
+    $v-valid: is-css-size($v) or array-contains($background-position-vertical-modes, $v);
 
     @return $h-valid and $v-valid;
   }
 
-  @return is-css-size($bp) or contains($background-position-modes, $bp);
+  @return is-css-size($bp) or array-contains($background-position-modes, $bp);
 }
 
-$background-size-modes: concat((auto, cover, contain), $css-default-modes);
+$background-size-modes: array-concat((auto, cover, contain), $css-default-modes);
 
 @function is-background-size($bs) {
   @if is-array($bs) {
@@ -34,25 +34,25 @@ $background-size-modes: concat((auto, cover, contain), $css-default-modes);
     }
   }
 
-  @return is-css-size($bs) or contains($background-size-modes, $bs);
+  @return is-css-size($bs) or array-contains($background-size-modes, $bs);
 }
 
-$background-repeat-modes: concat((repeat, repeat-x, repeat-y, no-repeat), $css-default-modes);
+$background-repeat-modes: array-concat((repeat, repeat-x, repeat-y, no-repeat), $css-default-modes);
 
 @function is-background-repeat($br) {
-  @return contains($background-repeat-modes, $br);
+  @return array-contains($background-repeat-modes, $br);
 }
 
-$background-origin-clip-modes: concat((border-box, padding-box, content-box), $css-default-modes);
+$background-origin-clip-modes: array-concat((border-box, padding-box, content-box), $css-default-modes);
 
 @function is-background-origin-clip($bc) {
-  @return contains($background-origin-clip-modes, $bc);
+  @return array-contains($background-origin-clip-modes, $bc);
 }
 
-$background-attachment-modes: concat((scroll, fixed, local), $css-default-modes);
+$background-attachment-modes: array-concat((scroll, fixed, local), $css-default-modes);
 
 @function is-background-attachment($ba) {
-  @return contains($background-attachment-modes, $ba);
+  @return array-contains($background-attachment-modes, $ba);
 }
 
 @mixin background($options, $shorthand: false) {

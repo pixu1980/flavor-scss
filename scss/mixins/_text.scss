@@ -1,19 +1,19 @@
-$font-weight-modes: concat((normal, bold, bolder, lighter, 100, 200, 300, 400, 500, 600, 700, 800, 900), $css-default-modes);
+$font-weight-modes: array-concat((normal, bold, bolder, lighter, 100, 200, 300, 400, 500, 600, 700, 800, 900), $css-default-modes);
 
 @function is-font-weight($fw) {
-  @return contains($font-weight-modes, $fw);
+  @return array-contains($font-weight-modes, $fw);
 }
 
-$font-modes: concat((medium, xx-small, x-small, small, large, x-large, xx-large, smaller, larger), $css-default-modes);
+$font-modes: array-concat((medium, xx-small, x-small, small, large, x-large, xx-large, smaller, larger), $css-default-modes);
 
 @function is-font-size($s) {
-  @return is-css-size($s) or contains($font-modes, $s);
+  @return is-css-size($s) or array-contains($font-modes, $s);
 }
 
-$line-height-modes: concat((normal), $css-default-modes);
+$line-height-modes: array-concat((normal), $css-default-modes);
 
 @function is-line-height($s) {
-  @return is-css-size($s) or contains($line-height-modes, $s);
+  @return is-css-size($s) or array-contains($line-height-modes, $s);
 }
 
 @mixin font($options) {
@@ -132,16 +132,16 @@ $line-height-modes: concat((normal), $css-default-modes);
   hyphens: auto;
 }
 
-$text-align-modes: concat((left, center, right, justify), $css-default-modes);
+$text-align-modes: array-concat((left, center, right, justify), $css-default-modes);
 
 @function is-text-align($ta) {
-  @return contains($text-align-modes, $ta);
+  @return array-contains($text-align-modes, $ta);
 }
 
-$vertical-align-modes: concat((baseline, sub, super, top, text-top, middle, bottom, text-bottom), $css-default-modes);
+$vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle, bottom, text-bottom), $css-default-modes);
 
 @function is-vertical-align($va) {
-  @return is-css-size($va) or contains($vertical-align-modes, $va);
+  @return is-css-size($va) or array-contains($vertical-align-modes, $va);
 }
 
 @mixin content-align($options) {
