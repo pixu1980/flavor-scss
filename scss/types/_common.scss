@@ -9,7 +9,7 @@ $css-default-modes: (initial, inherit);
 }
 
 @function is-calc-length($cl) {
-  @return is-defined($cl) and string-starts-with($cl, 'calc(') and string-ends-with($cl, ')');
+  @return is-defined($cl) and string-starts-with($cl + '', 'calc(') and string-ends-with($cl + '', ')');
 }
 
 $length-modes: array-concat((auto), $css-default-modes);
