@@ -8,6 +8,10 @@ $css-default-modes: (initial, inherit);
   @return is-defined($cd) and array-contains($css-default-modes, $cd);
 }
 
+@function is-not-unitless-or-zero($v) {
+  @return not(unitless($v)) or (unitless($v) and $v==0);
+}
+
 @function is-calc-length($cl) {
   @return is-defined($cl) and string-starts-with($cl + '', 'calc(') and string-ends-with($cl + '', ')');
 }
@@ -21,13 +25,13 @@ $length-modes: array-concat((auto), $css-default-modes);
 $relative-length-units: (em, ex, ch, rem, vw, vh, vmin, vmax);
 
 @function is-relative-length($l) {
-  @return is-number($l) and not(unitless($l)) and (array-contains($relative-length-units, unit($l)) or is-percentage($l));
+  @return is-number($l) and is-not-unitless-or-zero($l) and (array-contains($relative-length-units, unit($l)) or is-percentage($l));
 }
 
 $absolute-length-units: (cm, mm, in, px, pt, pc);
 
 @function is-absolute-length($l) {
-  @return is-number($l) and not(unitless($l)) and array-contains($absolute-length-units, unit($l));
+  @return is-number($l) and is-not-unitless-or-zero($l) and array-contains($absolute-length-units, unit($l));
 }
 
 /// Checks is a value is a valid CSS length
