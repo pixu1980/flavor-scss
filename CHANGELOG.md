@@ -2,7 +2,7 @@
 
 ### Breaking changes
 
-- finally added all mixing for transform: [`cd9a721`](https://github.com/blackmirror1980/flavor-scss/commit/cd9a721)
+- finally added all mixins for transform: [`cd9a721`](https://github.com/blackmirror1980/flavor-scss/commit/cd9a721)
 
 [...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.2.10...v0.3.0)
 
