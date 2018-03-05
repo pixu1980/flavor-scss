@@ -1,3 +1,11 @@
+## [Version 0.3.4](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.3.4) (2018-3-5)
+
+### Bug fixes
+
+- string-split added is-length & is-size checks added transition mixing refactoring wip: [`90db0e6`](https://github.com/blackmirror1980/flavor-scss/commit/90db0e6)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.3.3...v0.3.4)
+
 ## [Version 0.3.3](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.3.3) (2018-3-5)
 
 ### Bug fixes
