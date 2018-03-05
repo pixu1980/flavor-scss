@@ -1,20 +1,78 @@
 // TODO: refactorize
-@mixin transition($transitions...) {
+@mixin transition($transitions) {
   @include prefixer(transition, $transitions);
 }
 
-@mixin transition-property($tp...) {
-  @include prefixer(transition-protperty, $tp);
+/// *** transiion time check ***
+@function is-transition-time($td) {
+  @return is-defined($td) and (is-time($td) or is-css-default($td));
 }
 
-@mixin transition-duration($td...) {
-  @include prefixer(transition-duration, $td);
+/// *** transition delay ***
+@mixin transition-delay($td) {
+  @if is-transition-time($td) {
+    @include prefixer(transition-delay, $td);
+  }
+  @else {
+    @warn '`transition-delay: #{$td}` is not a valid transition-delay value';
+  }
 }
 
-@mixin transition-timing-function($tf...) {
-  @include prefixer(transition-timing-function, $tf);
+/// *** transition duration ***
+@mixin transition-duration($td) {
+  @if is-transition-time($td) {
+    @include prefixer(transition-duration, $td);
+  }
+  @else {
+    @warn '`transition-duration: #{$td}` is not a valid transition-duration value';
+  }
 }
 
-@mixin transition-delay($td...) {
-  @include prefixer(transition-delay, $td);
+/// *** transition property ***
+$transitionable-properties: (background, background-color, background-position, background-size, border, border-bottom, border-bottom-color, border-bottom-left-radius, border-bottom-right-radius, border-bottom-width, border-color, border-left, border-left-color, border-left-width, border-right, border-right-color, border-right-width, border-spacing, border-top, border-top-color, border-top-left-radius, border-top-right-radius, border-top-width, bottom, box-shadow, clip, color, column-count, column-gap, column-rule, column-rule-color, column-rule-width, column-width, columns, filter, flex, flex-basis, flex-grow, flex-shrink, font, font-size, font-size-adjust font-stretch font-weight, height, left, letter-spacing, line-height, margin, margin-bottom, margin-left, margin-right, margin-top, max-height, max-width, min-height, min-width, opacity, order, outline, outline-color, outline-offset, outline-width, padding, padding-bottom, padding-left, padding-right, padding-top, perspective, perspective-origin, right, text-decoration-color, text-indent, text-shadow, top, transform, transform-origin, vertical-align, visibility width, word-spacing, z-index);
+$transition-property-modes: array-concat((none, all), $transitionable-properties, $css-default-modes);
+
+@function is-transition-property($tp) {
+  @return is-defined($tp) and array-contains($transition-property-modes, $tp);
+}
+
+@mixin transition-property($tp) {
+  @if is-transition-property($tp) {
+    @include prefixer(transition-property, $tp);
+  }
+  @else {
+    @warn '`transition-property: #{$tp}` is not a valid transition-property value';
+  }
+}
+
+/// *** transition timing ***
+$transition-timing-functions-names: (steps, cubic-bezier);
+
+@function get-transition-timing-function-name($t) {
+  @if(string-contains($t, '(') and string-contains($t, ')')) {
+    @return str-slice($t, 1, str-index($t, '(') - 1);
+  }
+
+  @return null;
+}
+
+@function is-transition-timing-function($tf) {
+  $transition-timing-function-name: get-transition-timing-function-name($tf);
+
+  @return is-defined($transition-timing-function-name) and array-contains($transition-timing-functions-names, $transition-timing-function-name);
+}
+
+$transition-timing-modes: array-concat((linear, ease, ease-in, ease-out, ease-in-out, step-start, step-end), $css-default-modes);
+
+@function is-transition-timing-mode-or-function($ttf) {
+  @return is-defined($ttf) and (array-contains($transition-timing-modes, $ttf) or is-transition-timing-function($ttf));
+}
+
+@mixin transition-timing-function($ttf) {
+  @if is-transition-timing-mode-or-function($ttf) {
+    @include prefixer(transition-timing-function, $ttf);
+  }
+  @else {
+    @warn '`transition-timing-function: #{$ttf}` is not a valid transition-timing-function value';
+  }
 }

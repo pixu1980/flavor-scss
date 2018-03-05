@@ -1,20 +1,11 @@
+@charset "UTF-8";
 @import 'object';
 @import 'array';
-
-$css-default-modes: (initial, inherit);
-
-@function is-css-default($cd) {
-  @return is-defined($cd) and array-contains($css-default-modes, $cd);
-}
-
-@function is-css-size($cs) {
-  @return is-defined($cs) and (is-size($cs) or array-contains($css-default-modes, $cs));
-}
-
-@import 'function';
-@import 'boolean';
 @import 'number';
 @import 'string';
+@import 'common';
+@import 'function';
+@import 'boolean';
 @import 'url';
 @import 'color';
 @import 'angle';

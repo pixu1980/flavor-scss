@@ -54,7 +54,7 @@ $border-modes: array-concat((none), $css-default-modes);
 
     $border-width: map-get($settings, size);
 
-    @if is-css-size($border-width) {
+    @if is-size($border-width) {
       $border: append($border, $border-width);
     }
     @else {
@@ -82,7 +82,7 @@ $border-modes: array-concat((none), $css-default-modes);
 
     $border-radius: map-get($settings, radius);
 
-    @if is-css-size($border-radius) {
+    @if is-size($border-radius) {
       @include border-radius($border-radius);
     }
     @else {

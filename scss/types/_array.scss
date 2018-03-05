@@ -13,26 +13,19 @@
   @return false;
 }
 
-@function array-concat($list1, $list2) {
-  $list: ();
+@function array-concat($lists...) {
+  $concat-list: ();
 
-  @if is-array($list1) {
-    @each $item in $list1 {
-      $list: append($list, $item);
+  @each $list in $lists {
+    @if is-array($list) {
+      @each $item in $list {
+        $concat-list: append($concat-list, $item);
+      }
+    }
+    @else {
+      $concat-list: append($concat-list, $list);
     }
   }
-  @else {
-    $list: append($list, $list1);
-  }
 
-  @if is-array($list2) {
-    @each $item in $list2 {
-      $list: append($list, $item);
-    }
-  }
-  @else {
-    $list: append($list, $list2);
-  }
-
-  @return $list;
+  @return $concat-list;
 }

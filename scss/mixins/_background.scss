@@ -11,15 +11,15 @@ $background-position-modes: array-concat((left, center, right, top, bottom), $cs
 @function is-background-position($bp) {
   @if is-array($bp) {
     $h: if(length($bp) > 0, nth($bp, 1), null);
-    $h-valid: is-css-size($h) or array-contains($background-position-horizontal-modes, $h);
+    $h-valid: is-size($h) or array-contains($background-position-horizontal-modes, $h);
 
     $v: if(length($bp) > 1, nth($bp, 2), null);
-    $v-valid: is-css-size($v) or array-contains($background-position-vertical-modes, $v);
+    $v-valid: is-size($v) or array-contains($background-position-vertical-modes, $v);
 
     @return $h-valid and $v-valid;
   }
 
-  @return is-css-size($bp) or array-contains($background-position-modes, $bp);
+  @return is-size($bp) or array-contains($background-position-modes, $bp);
 }
 
 $background-size-modes: array-concat((auto, cover, contain), $css-default-modes);
@@ -29,12 +29,12 @@ $background-size-modes: array-concat((auto, cover, contain), $css-default-modes)
     $w: if(length($bs) > 0, nth($bs, 1), null);
     $h: if(length($bs) > 1, nth($bs, 2), null);
 
-    @if is-css-size($w) and is-css-size($h) {
+    @if is-size($w) and is-size($h) {
       @return true;
     }
   }
 
-  @return is-css-size($bs) or array-contains($background-size-modes, $bs);
+  @return is-size($bs) or array-contains($background-size-modes, $bs);
 }
 
 $background-repeat-modes: array-concat((repeat, repeat-x, repeat-y, no-repeat), $css-default-modes);

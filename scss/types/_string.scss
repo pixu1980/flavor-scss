@@ -31,3 +31,20 @@
   @warn '`haystack: #{$h}` and `needle: #{$n}` are not valid strings';
   @return false;
 }
+
+@function string-split($s, $sep) {
+  $split: ();
+
+  $i: str-index($s, $sep);
+
+  @while $i !=null {
+    $item: str-slice($s, 1, $i - 1);
+    $split: append($split, $item);
+    $s: str-slice($s, $i + 1);
+    $i: str-index($s, $sep);
+  }
+
+  $split: append($split, $s);
+
+  @return $split;
+}

@@ -1,6 +1,5 @@
 // generic transform
 $transform-functions-names: (matrix, matrix3d, translate, translate3d, translateX, translateY, translateZ, scale, scale3d, scaleX, scaleY, scaleZ, rotate, rotate3d, rotateX, rotateY, rotateZ, skew, skewX, skewY, perspective);
-$transform-modes: array-concat((none), $css-default-modes);
 
 @function get-transform-function-name($t) {
   @if(string-contains($t, '(') and string-contains($t, ')')) {
@@ -16,8 +15,10 @@ $transform-modes: array-concat((none), $css-default-modes);
   @return is-defined($transform-function-name) and array-contains($transform-functions-names, $transform-function-name);
 }
 
+$transform-modes: array-concat((none), $css-default-modes);
+
 @function is-transform-mode-or-function($transform) {
-  @return array-contains($transform-modes, $transform) or is-transform-function($transform);
+  @return is-defined($transform) and (array-contains($transform-modes, $transform) or is-transform-function($transform));
 }
 
 @mixin transform($transform) {
@@ -48,7 +49,7 @@ $transform-modes: array-concat((none), $css-default-modes);
 }
 
 @mixin perspective($p) {
-  @if (is-css-size($p)) {
+  @if (is-size($p)) {
     @include transform(perspective($p));
   }
   @else {
@@ -178,7 +179,7 @@ $transform-modes: array-concat((none), $css-default-modes);
 
 // translate
 @mixin translate($tx, $ty) {
-  @if (is-css-size($tx) and is-css-size($ty)) {
+  @if (is-size($tx) and is-size($ty)) {
     @include transform(translate($tx, $ty));
   }
   @else {
@@ -187,7 +188,7 @@ $transform-modes: array-concat((none), $css-default-modes);
 }
 
 @mixin translate3d($tx, $ty, $tz) {
-  @if (is-css-size($tx) and is-css-size($ty) and is-css-size($tz)) {
+  @if (is-size($tx) and is-size($ty) and is-size($tz)) {
     @include transform(translate3d($tx, $ty, $tz));
   }
   @else {
@@ -196,7 +197,7 @@ $transform-modes: array-concat((none), $css-default-modes);
 }
 
 @mixin translateX($tx) {
-  @if (is-css-size($tx)) {
+  @if (is-size($tx)) {
     @include transform(translateX($tx));
   }
   @else {
@@ -205,7 +206,7 @@ $transform-modes: array-concat((none), $css-default-modes);
 }
 
 @mixin translateY($ty) {
-  @if (is-css-size($ty)) {
+  @if (is-size($ty)) {
     @include transform(translateY($ty));
   }
   @else {
@@ -214,7 +215,7 @@ $transform-modes: array-concat((none), $css-default-modes);
 }
 
 @mixin translateZ($tz) {
-  @if (is-css-size($tz)) {
+  @if (is-size($tz)) {
     @include transform(translateZ($tz));
   }
   @else {

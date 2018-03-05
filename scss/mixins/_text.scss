@@ -7,13 +7,13 @@ $font-weight-modes: array-concat((normal, bold, bolder, lighter, 100, 200, 300, 
 $font-modes: array-concat((medium, xx-small, x-small, small, large, x-large, xx-large, smaller, larger), $css-default-modes);
 
 @function is-font-size($s) {
-  @return is-css-size($s) or array-contains($font-modes, $s);
+  @return is-size($s) or array-contains($font-modes, $s);
 }
 
 $line-height-modes: array-concat((normal), $css-default-modes);
 
 @function is-line-height($s) {
-  @return is-css-size($s) or array-contains($line-height-modes, $s);
+  @return is-size($s) or array-contains($line-height-modes, $s);
 }
 
 @mixin font($options) {
@@ -135,13 +135,31 @@ $line-height-modes: array-concat((normal), $css-default-modes);
 $text-align-modes: array-concat((left, center, right, justify), $css-default-modes);
 
 @function is-text-align($ta) {
-  @return array-contains($text-align-modes, $ta);
+  @return is-defined($ta) and array-contains($text-align-modes, $ta);
+}
+
+@mixin text-align($ta) {
+  @if(is-text-align($ta)) {
+    text-align: $ta;
+  }
+  @else {
+    @warn '`text-align: #{$ta}` is not a valid text-align value';
+  }
 }
 
 $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle, bottom, text-bottom), $css-default-modes);
 
 @function is-vertical-align($va) {
-  @return is-css-size($va) or array-contains($vertical-align-modes, $va);
+  @return is-defined($va) and (is-size($va) or array-contains($vertical-align-modes, $va));
+}
+
+@mixin vertical-align($va) {
+  @if(is-vertical-align($va)) {
+    vertical-align: $va;
+  }
+  @else {
+    @warn '`vertical-align: #{$va}` is not a valid vertical-align value';
+  }
 }
 
 @mixin content-align($options) {
@@ -184,5 +202,20 @@ $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle
     @else {
       @warn '`vertical-align: #{$v}` is not a valid vertical-align value';
     }
+  }
+}
+
+$user-select-modes: (auto, none, text, all);
+
+@function is-user-select-mode($us) {
+  @return is-defined($us) and (array-contains($user-select-modes, $us));
+}
+
+@mixin user-select($us) {
+  @if(is-user-select($us)) {
+    @include prefixer(user-select, $us);
+  }
+  @else {
+    @warn '`user-select: #{$us}` is not a valid user-select value';
   }
 }

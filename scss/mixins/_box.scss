@@ -1,11 +1,11 @@
 $display-modes: array-concat((none, inline, block, inline-block, flex, inline-flex, table, inline-table, table-caption, table-header-group, table-row-group, table-column-group, table-footer-group, table-row, table-column, table-cell, list-item, run-in), $css-default-modes);
 
 @function is-display-mode($dm) {
-  @return array-contains($display-modes, $dm);
+  @return is-defined($dm) and array-contains($display-modes, $dm);
 }
 
 @mixin display($dm) {
-  @if is-defined($dm) and is-display-mode($dm) {
+  @if is-display-mode($dm) {
     display: $dm;
   }
   @else {
@@ -16,11 +16,11 @@ $display-modes: array-concat((none, inline, block, inline-block, flex, inline-fl
 $box-sizing-modes: array-concat((content-box, border-box), $css-default-modes);
 
 @function is-box-sizing-mode($bs) {
-  @return array-contains($box-sizing-modes, $bs);
+  @return is-defined($bs) and array-contains($box-sizing-modes, $bs);
 }
 
 @mixin box-sizing($bs) {
-  @if is-defined($bs) and is-box-sizing-mode($bs) {
+  @if is-box-sizing-mode($bs) {
     box-sizing: $bs;
   }
   @else {
@@ -198,18 +198,50 @@ $bound-box-sizes: array-concat((none), $css-default-modes);
   @include prefixer(box-shadow, $shadows);
 }
 
+$z-index-modes: array-concat((auto), $css-default-modes);
+
+@function is-z-index-mode($zi) {
+  @return is-defined($zi) and (is-integer($zi) or array-contains($z-index-modes, $zi));
+}
+
+@mixin z-index($zi) {
+  @if(is-z-index-mode($zi)) {
+    z-index: $zi;
+  }
+  @else {
+    @warn '`z-index: #{$zi}` is not a valid z-index value';
+  }
+}
+
+$visibility-modes: array-concat((visible, hidden, collapse), $css-default-modes);
+
+@function is-visibility-mode($vm) {
+  @return is-defined($vm) and array-contains($visibility-modes, $vm);
+}
+
+@mixin visibility($v) {
+  @if(is-visibility-mode($v)) {
+    visibility: $v;
+  }
+  @else {
+    @warn '`z-index: #{$zi}` is not a valid visibility value';
+  }
+}
+
 @mixin aspect-ratio($width, $height, $content-selector: '.content') {
-  display: block;
-  position: relative;
+  @include display(block);
+  @include position(relative);
 
   &:before {
+    @include display(block);
+
     content: '';
-    display: block;
-    padding-top: (strip-units($height) / strip-units($width)) * 100%;
+    padding-top: (strip-unit($height) / strip-unit($width)) * 100%;
     width: 100%;
   }
 
   > #{$content-selector} {
     @include position(absolute, 0 0 0 0);
+    @include box-size(100%);
   }
 }
