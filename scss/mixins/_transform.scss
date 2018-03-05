@@ -16,8 +16,8 @@ $transform-modes: array-concat((none), $css-default-modes);
   @return is-defined($transform-function-name) and array-contains($transform-function-names, $transform-function-name);
 }
 
-@function is-transform-mode-or-function($tm) {
-  @return array-contains($transform-modes, $transform) or is-transform-function($transform);
+@function is-transform-mode-or-function($transform) {
+  @return array-contains($transform-modes, $transformtm) or is-transform-function($transformtm);
 }
 
 @mixin transform($transform) {
