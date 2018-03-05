@@ -1,3 +1,11 @@
+## [Version 0.3.6](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.3.6) (2018-3-5)
+
+### Bug fixes
+
+- unitless bugfix: [`41468a4`](https://github.com/blackmirror1980/flavor-scss/commit/41468a4)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.3.5...v0.3.6)
+
 ## [Version 0.3.5](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.3.5) (2018-3-5)
 
 ### Bug fixes
