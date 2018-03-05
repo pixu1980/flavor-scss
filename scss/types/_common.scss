@@ -33,8 +33,6 @@ $absolute-length-units: (cm, mm, in, px, pt, pc);
 /// Checks is a value is a valid CSS length
 ///
 /// @param {String} $l
-///
-/// @require {function} is-defined
 /// @return {Boolean}
 @function is-length($l) {
   @return is-defined($l) and (is-relative-length($l) or is-absolute-length($l) or is-calc-length($l) or is-length-mode($l));
@@ -45,10 +43,6 @@ $css-size-modes: array-concat((auto, fill, fill-available, available, fit-conten
 /// Checks for a valid CSS size.
 ///
 /// @param {String} $s
-///
-/// @require {function} is-length
-/// @require {function} array-contains
-///
 /// @return {Boolean}
 @function is-size($s) {
   @return is-defined($s) and (is-length($s) or array-contains($css-size-modes, $s));
@@ -57,9 +51,7 @@ $css-size-modes: array-concat((auto, fill, fill-available, available, fit-conten
 /// Strips the unit from a value.
 ///
 /// @argument {Number} $n
-///
 /// @return {Number (unitless)}
-///
 /// @example scss
 ///   $dimension: strip-unit(10em);
 ///
