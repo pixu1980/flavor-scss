@@ -19,7 +19,7 @@ $border-modes: array-concat((none), $css-default-modes);
     border: $options;
   }
   @else {
-    $settings: (size: 0, style: solid, color: inherit, radius: 0);
+    $settings: (size: 0, style: solid, color: transparent, radius: 0);
 
     @if is-object($options) {
       $settings: extend($settings, $options);
