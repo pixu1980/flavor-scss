@@ -1,3 +1,11 @@
+## [Version 0.3.10](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.3.10) (2018-3-6)
+
+### Bug fixes
+
+- border default color changed to transparent: [`e7a6d59`](https://github.com/blackmirror1980/flavor-scss/commit/e7a6d59)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.3.9...v0.3.10)
+
 ## [Version 0.3.9](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.3.9) (2018-3-5)
 
 ### Bug fixes
