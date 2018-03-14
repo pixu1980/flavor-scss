@@ -1,3 +1,11 @@
+## [Version 0.4.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.4.0) (2018-3-14)
+
+### Breaking changes
+
+- added cursor refactored border-radius mixin added warn to text mixin: [`8bcc6f2`](https://github.com/blackmirror1980/flavor-scss/commit/8bcc6f2)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.3.10...v0.4.0)
+
 ## [Version 0.3.10](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.3.10) (2018-3-6)
 
 ### Bug fixes
