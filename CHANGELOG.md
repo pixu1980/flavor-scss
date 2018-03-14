@@ -1,3 +1,11 @@
+## [Version 0.4.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.4.1) (2018-3-14)
+
+### Bug fixes
+
+- border-radius fix: [`dbb8f36`](https://github.com/blackmirror1980/flavor-scss/commit/dbb8f36)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.4.0...v0.4.1)
+
 ## [Version 0.4.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.4.0) (2018-3-14)
 
 ### Breaking changes
