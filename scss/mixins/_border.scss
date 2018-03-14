@@ -128,11 +128,8 @@ $border-modes: array-concat((none), $css-default-modes);
 
     $border-radius: map-get($settings, radius);
 
-    @if is-size($border-radius) {
+    @if is-defined($border-radius) {
       @include border-radius($border-radius);
-    }
-    @else {
-      @warn '`border-radius: #{$border-radius}` is not a valid size';
     }
   }
 }
