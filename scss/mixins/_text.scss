@@ -59,6 +59,9 @@ $line-height-modes: array-concat((normal), $css-default-modes);
   @if is-string($font-family) {
     font-family: #{$font-family}, Arial, sans-serif;
   }
+  @else {
+    @warn '`font-family: #{$font-family}` is not a valid font-family value';
+  }
 
   $font-size: map-get($settings, size);
 
@@ -208,11 +211,11 @@ $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle
 $user-select-modes: (auto, none, text, all);
 
 @function is-user-select-mode($us) {
-  @return is-defined($us) and (array-contains($user-select-modes, $us));
+  @return is-defined($us) and array-contains($user-select-modes, $us);
 }
 
 @mixin user-select($us) {
-  @if(is-user-select($us)) {
+  @if is-user-select($us) {
     @include prefixer(user-select, $us);
   }
   @else {

@@ -4,14 +4,60 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
   @return array-contains($border-styles, $bs);
 }
 
-@mixin border-radius($br...) {
-  @include prefixer(border-radius, $br);
+@function is-border-radius-value($brv) {
+  @return is-defined($brv) and (is-size($brv) or is-percentage($brv) or array-contains($css-default-modes, $brv));
+}
+
+// TODO: manage fractions (e.g. 2em 1em 4em / 0.5em 0.2em)
+@mixin border-radius($br: 0) {
+  $border-top-left-radius: if(length($br) > 0, nth($br, 1), 0);
+
+  @if is-defined($border-top-left-radius) {
+    @if is-border-radius-value($border-top-left-radius) {
+      @include prefixer(border-top-left-radius, $border-top-left-radius);
+    }
+    @else {
+      @warn '`border-top-left-radius: #{$border-top-left-radius}` is not a valid radius value';
+    }
+  }
+
+  $border-top-right-radius: if(length($br) > 1, nth($br, 2), $border-top-left-radius);
+
+  @if is-defined($border-top-right-radius) {
+    @if is-border-radius-value($border-top-right-radius) {
+      @include prefixer(border-top-right-radius, $border-top-right-radius);
+    }
+    @else {
+      @warn '`border-top-right-radius: #{$border-top-right-radius}` is not a valid radius value';
+    }
+  }
+
+  $border-bottom-right-radius: if(length($br) > 2, nth($br, 3), $border-top-left-radius);
+
+  @if is-defined($border-bottom-right-radius) {
+    @if is-border-radius-value($border-bottom-right-radius) {
+      @include prefixer(border-bottom-right-radius, $border-bottom-right-radius);
+    }
+    @else {
+      @warn '`border-bottom-right-radius: #{$border-bottom-right-radius}` is not a valid radius value';
+    }
+  }
+  $border-bottom-left-radius: if(length($br) > 3, nth($br, 4), $border-top-right-radius);
+
+  @if is-defined($border-bottom-left-radius) {
+    @if is-border-radius-value($border-bottom-left-radius) {
+      @include prefixer(border-bottom-left-radius, $border-bottom-left-radius);
+    }
+    @else {
+      @warn '`border-bottom-left-radius: #{$border-bottom-left-radius}` is not a valid radius value';
+    }
+  }
 }
 
 $border-modes: array-concat((none), $css-default-modes);
 
 @function is-border-mode($b) {
-  @return array-contains($border-modes, $b);
+  @return is-defined($b) and array-contains($border-modes, $b);
 }
 
 @mixin border($options, $shorthand: false) {
@@ -19,7 +65,7 @@ $border-modes: array-concat((none), $css-default-modes);
     border: $options;
   }
   @else {
-    $settings: (size: 0, style: solid, color: transparent, radius: 0);
+    $settings: (size: 0, style: solid, color: transparent, radius: null);
 
     @if is-object($options) {
       $settings: extend($settings, $options);
