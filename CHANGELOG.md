@@ -1,3 +1,11 @@
+## [Version 0.4.3](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.4.3) (2018-3-15)
+
+### Bug fixes
+
+- fix font mixin color default value to null: [`334fcb8`](https://github.com/blackmirror1980/flavor-scss/commit/334fcb8)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.4.2...v0.4.3)
+
 ## [Version 0.4.2](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.4.2) (2018-3-15)
 
 ### Bug fixes
