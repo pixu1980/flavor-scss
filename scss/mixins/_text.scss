@@ -17,7 +17,7 @@ $line-height-modes: array-concat((normal), $css-default-modes);
 }
 
 @mixin font($options) {
-  $settings: (size: 1rem, height: 1rem, family: null, weight: normal, color: inherit);
+  $settings: (size: 1rem, height: 1rem, family: null, weight: normal, color: null);
 
   @if is-object($options) {
     $settings: extend($settings, $options);
