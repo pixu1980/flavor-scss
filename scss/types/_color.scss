@@ -5,5 +5,5 @@
 $color-modes: array-concat((transparent), $css-default-modes);
 
 @function is-css-color($c) {
-  @return is-color($c) or array-contains($color-modes, $c);
+  @return is-defined($c) and (is-color($c) or array-contains($color-modes, $c));
 }
