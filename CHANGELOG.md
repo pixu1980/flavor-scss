@@ -1,3 +1,11 @@
+## [Version 0.4.4](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.4.4) (2018-3-15)
+
+### Bug fixes
+
+- is-css-color check fix: [`c1992e4`](https://github.com/blackmirror1980/flavor-scss/commit/c1992e4)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.4.3...v0.4.4)
+
 ## [Version 0.4.3](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.4.3) (2018-3-15)
 
 ### Bug fixes
