@@ -74,12 +74,15 @@ $line-height-modes: array-concat((normal), $css-default-modes);
 
   $font-family: map-get($settings, family);
 
-  @if is-string($font-family) {
-    font-family: #{$font-family}, Arial, sans-serif;
+  @if is-defined($font-family) {
+    @if is-string($font-family) {
+      font-family: #{$font-family}, Arial, sans-serif;
+    }
+    @else {
+      @warn '`font-family: #{$font-family}` is not a valid font-family value';
+    }
   }
-  @else {
-    @warn '`font-family: #{$font-family}` is not a valid font-family value';
-  }
+
   $font-weight: map-get($settings, weight);
 
   @if is-font-weight($font-weight) {
@@ -91,11 +94,13 @@ $line-height-modes: array-concat((normal), $css-default-modes);
 
   $font-color: map-get($settings, color);
 
-  @if is-css-color($font-color) {
-    color: $font-color;
-  }
-  @else {
-    @warn '`color: #{$font-color}` is not a valid css color';
+  @if is-defined($font-color) {
+    @if is-css-color($font-color) {
+      color: $font-color;
+    }
+    @else {
+      @warn '`color: #{$font-color}` is not a valid css color';
+    }
   }
 }
 
