@@ -1,3 +1,11 @@
+## [Version 0.4.2](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.4.2) (2018-3-15)
+
+### Bug fixes
+
+- changed font mixins parameter order: [`56bd777`](https://github.com/blackmirror1980/flavor-scss/commit/56bd777)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.4.1...v0.4.2)
+
 ## [Version 0.4.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.4.1) (2018-3-14)
 
 ### Bug fixes
