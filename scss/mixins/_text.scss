@@ -17,7 +17,7 @@ $line-height-modes: array-concat((normal), $css-default-modes);
 }
 
 @mixin font($options) {
-  $settings: (size: 1rem, height: 1rem, color: inherit, weight: normal, family: null);
+  $settings: (size: 1rem, height: 1rem, family: null, weight: normal, color: inherit);
 
   @if is-object($options) {
     $settings: extend($settings, $options);
@@ -35,10 +35,10 @@ $line-height-modes: array-concat((normal), $css-default-modes);
       $settings: map-merge($settings, (height: $height));
     }
 
-    $color: if(length($options) > 2, nth($options, 3), null);
+    $family: if(length($options) > 2, nth($options, 3), null);
 
-    @if is-defined($color) {
-      $settings: map-merge($settings, (color: $color));
+    @if is-defined($family) {
+      $settings: map-merge($settings, (family: $family));
     }
 
     $weight: if(length($options) > 3, nth($options, 4), null);
@@ -47,20 +47,11 @@ $line-height-modes: array-concat((normal), $css-default-modes);
       $settings: map-merge($settings, (weight: $weight));
     }
 
-    $family: if(length($options) > 4, nth($options, 5), null);
+    $color: if(length($options) > 4, nth($options, 5), null);
 
-    @if is-defined($family) {
-      $settings: map-merge($settings, (family: $family));
+    @if is-defined($color) {
+      $settings: map-merge($settings, (color: $color));
     }
-  }
-
-  $font-family: map-get($settings, family);
-
-  @if is-string($font-family) {
-    font-family: #{$font-family}, Arial, sans-serif;
-  }
-  @else {
-    @warn '`font-family: #{$font-family}` is not a valid font-family value';
   }
 
   $font-size: map-get($settings, size);
@@ -72,15 +63,23 @@ $line-height-modes: array-concat((normal), $css-default-modes);
     @warn '`font-size: #{$font-size}` is not a valid css size';
   }
 
-  $font-color: map-get($settings, color);
+  $line-height: map-get($settings, height);
 
-  @if is-css-color($font-color) {
-    color: $font-color;
+  @if is-line-height($line-height) {
+    line-height: $line-height;
   }
   @else {
-    @warn '`color: #{$font-color}` is not a valid css color';
+    @warn '`line-height: #{$line-height}` is not a valid line-height value';
   }
 
+  $font-family: map-get($settings, family);
+
+  @if is-string($font-family) {
+    font-family: #{$font-family}, Arial, sans-serif;
+  }
+  @else {
+    @warn '`font-family: #{$font-family}` is not a valid font-family value';
+  }
   $font-weight: map-get($settings, weight);
 
   @if is-font-weight($font-weight) {
@@ -90,13 +89,13 @@ $line-height-modes: array-concat((normal), $css-default-modes);
     @warn '`font-weight: #{$font-weight}` is not a valid font-weight';
   }
 
-  $line-height: map-get($settings, height);
+  $font-color: map-get($settings, color);
 
-  @if is-line-height($line-height) {
-    line-height: $line-height;
+  @if is-css-color($font-color) {
+    color: $font-color;
   }
   @else {
-    @warn '`line-height: #{$line-height}` is not a valid line-height value';
+    @warn '`color: #{$font-color}` is not a valid css color';
   }
 }
 
