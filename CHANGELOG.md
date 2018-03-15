@@ -1,3 +1,11 @@
+## [Version 0.4.5](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.4.5) (2018-3-15)
+
+### Bug fixes
+
+- font mixing bugfix: [`843d694`](https://github.com/blackmirror1980/flavor-scss/commit/843d694)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.4.4...v0.4.5)
+
 ## [Version 0.4.4](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.4.4) (2018-3-15)
 
 ### Bug fixes
