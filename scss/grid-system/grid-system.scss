@@ -1,0 +1,124 @@
+@mixin container-breakpoints($breakpoints: $common-breakpoints, $gutter: $gutter-default) {
+  @each $key, $breakpoint in $breakpoints {
+    @include media($breakpoint) {
+      .container {
+        @include box-size(($breakpoint - $gutter) auto);
+      }
+    }
+  }
+}
+
+@mixin columns-sizes($columns: $columns-default, $gutter: $gutter-default, $key: '') {
+  @for $i from 0 through $columns {
+    @if ($i==0) {
+      .col-#{$key}-push-0 {
+        left: auto;
+      }
+
+      .col-#{$key}-pull-0 {
+        right: auto;
+      }
+    }
+    @else {
+      $col-percentage: percentage($i / $columns);
+
+      .col-#{$key}-#{$i} {
+        width: $col-percentage;
+      }
+
+      .col-#{$key}-push-#{$i} {
+        left: $col-percentage;
+      }
+
+      .col-#{$key}-pull-#{$i} {
+        right: $col-percentage;
+      }
+
+      .col-#{$key}-offset-#{$i} {
+        margin-left: $col-percentage;
+      }
+    }
+  }
+}
+
+@mixin columns-breakpoints($breakpoints: $columns-breakpoints, $columns: $columns-default, $gutter: $gutter-default) {
+  @each $key, $breakpoint in $breakpoints {
+    @if ($breakpoint==$first-breakpoint) {
+      @include columns-sizes($columns, $gutter, $key);
+    }
+    @else {
+      @include media($breakpoint) {
+        @include columns-sizes($columns, $gutter, $key);
+      }
+    }
+  }
+}
+
+@mixin columns($columns: $columns-default, $gutter: $gutter-default) {
+  // Columns
+  //
+  // Common styles for small and large grid columns
+  $columns-selectors: ();
+
+  @for $i from 1 through $columns {
+    $columns-selectors: array-concat($columns-selectors, '[class*=\'col-\'][class*=\'-#{$i}\']');
+  }
+
+  #{array-join($columns-selectors)} {
+    @include position(relative);
+    @include display(inline-block);
+    @include padding(null $column-padding-right null $column-padding-right);
+    @include reset-inline-block;
+
+    min-height: 1px; // Prevent columns from collapsing when empty
+  }
+
+  @include columns-breakpoints($columns-breakpoints, $columns, $gutter)
+}
+
+@mixin grid-system($columns: $columns-default, $gutter: $gutter-default) {
+  // Grid system
+  // --------------------------------------------------
+  $row-margin-left: ceil(($gutter / -2));
+  $row-margin-right: floor(($gutter / -2));
+
+  $column-padding-left: ceil(($gutter / 2));
+  $column-padding-right: floor(($gutter / 2));
+
+  %container-base {
+    // container-base
+    @include display(block);
+    @include box-size(100% auto);
+    @include padding(0 $column-padding-right 0 $column-padding-left);
+    @include margin(0 auto);
+  }
+
+  [class*='container'] {
+    // Container widths
+    //
+    // Set the container width, and override it for fixed navbars in media queries.
+    @extend %container-base;
+
+    + [class*='container'] {
+      @include margin($gutter null null null);
+    }
+
+    &:not([class*='-fluid']) {
+      @include container-breakpoints($common-breakpoints, $gutter);
+    }
+  }
+
+  .row {
+    // Row
+    //
+    // Rows contain and clear the floats of your columns.
+    @include display(block);
+    @include margin(0 $row-margin-right 0 $row-margin-left);
+
+    + .row {
+      @include margin($gutter null null null);
+    }
+  }
+
+  @include columns($columns, $gutter);
+}

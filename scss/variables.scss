@@ -1,1 +1,24 @@
 $output-bourbon-deprecation-warnings: false !default;
+
+$columns-default: 12 !default; // grid-system columns default number
+
+$gutter-default: 1.5rem !default; // grid-system grid gutter default number
+
+$common-breakpoints: (
+  sm: 768px, // small devices
+  md: 992px, // medium devices
+  lg: 1200px, // large devices
+  xl: 1600px, // extra large devices
+  fhd: 1920px, // full HD devices
+  qhd: 2560px, // quad HD (2k) devices
+  uhd: 3840px // ultra HD (4k) devices
+) !default; // common-breakpoints used as default for container breakpoints
+
+$first-column-breakpoint: 320px !default; //first column breakpoint used as default without media queries
+
+$columns-breakpoints: array-concat((
+  sp: $first-column-breakpoint, // common smartphones
+  ip: 375px, // iphone (since iphone5)
+  ipp: 414px, // iphone plus (since iphone5)
+  xs: 576px // extra small devices
+), $common-breakpoints) !default; // columns-breakpoints used for media queries and column classes sizes & positions

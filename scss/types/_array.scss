@@ -29,3 +29,15 @@
 
   @return $concat-list;
 }
+
+@function array-join($list, $sep: ', ') {
+  $join-string: '';
+
+  @each $item in $list {
+    $join-string: $join-string + $sep + $item;
+  }
+
+  $join-string: str-slice($join-string, str-length($sep) + 1);
+
+  @return $join-string
+}

@@ -260,3 +260,9 @@ $backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
     @warn '`backface-visibility: #{$bv}` is not a valid backface-visibility value';
   }
 }
+
+@mixin reset-inline-block {
+  letter-spacing: -.3em;
+  line-height: 0;
+  text-rendering: optimizespeed;
+}
