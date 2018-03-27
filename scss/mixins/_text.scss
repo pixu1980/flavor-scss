@@ -312,20 +312,34 @@ $word-wrap-modes: array-concat((normal, break-word), $css-default-modes);
   }
 }
 
+$text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
+
+@function is-text-size-adjust($tsa) {
+  @return is-defined($tsa) and (is-percentage($tsa) or array-contains($text-size-adjust-modes, $tsa));
+}
+
+@mixin text-size-adjust($tsa) {
+  @if(is-text-size-adjust($tsa)) {
+    @include prefixer(text-size-adjust, $tsa);
+  }
+  @else {
+    @warn '`text-size-adjust: #{$tsa}` is not a valid text-size-adjust value';
+  }
+}
+
 @mixin ellipsis($multiline: false, $width: 100%, $font-size: 16px, $line-height: 1.4, $lines-to-show: 3) {
   @include overflow(hidden);
   @include text-overflow(ellipsis);
 
   @if $multiline {
+    @include display(block); // Fallback for non-webkit
     @include margin(0 auto);
+    @include font($font-size $line-height);
 
-    display: block; // Fallback for non-webkit
     display: -webkit-box;
     max-width: $width;
     height: $font-size * $line-height * $lines-to-show; // Fallback for non-webkit
     min-height: $font-size * $line-height * $lines-to-show; // Fallback for non-webkit
-    font-size: $font-size;
-    line-height: $line-height;
     -webkit-line-clamp: $lines-to-show;
     -webkit-box-orient: vertical;
   }
@@ -338,7 +352,7 @@ $word-wrap-modes: array-concat((normal, break-word), $css-default-modes);
   }
 }
 
-// Word Wrapping
+// Word Wrapping Force
 @mixin word-wrap-force {
   @include hyphens(auto);
   @include word-break(break-all);
