@@ -1,3 +1,11 @@
+## [Version 0.5.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.5.0) (2018-3-27)
+
+### Breaking changes
+
+- added a lot of mixins - border-* - backface-visibility - filter - overflow - text-overflow - hyphens - letter-spacing - word-spacing - direction - white-space - word-break word-wrap: [`ba2ad28`](https://github.com/blackmirror1980/flavor-scss/commit/ba2ad28)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.4.5...v0.5.0)
+
 ## [Version 0.4.5](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.4.5) (2018-3-15)
 
 ### Bug fixes
