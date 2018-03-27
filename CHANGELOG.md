@@ -1,3 +1,11 @@
+## [Version 0.5.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.5.1) (2018-3-27)
+
+### Bug fixes
+
+- added text-size-adjust mixin: [`6965408`](https://github.com/blackmirror1980/flavor-scss/commit/6965408)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.5.0...v0.5.1)
+
 ## [Version 0.5.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.5.0) (2018-3-27)
 
 ### Breaking changes
