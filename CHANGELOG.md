@@ -1,3 +1,11 @@
+## [Version 0.6.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.0) (2018-3-27)
+
+### Breaking changes
+
+- simple grid system added: [`9275b3b`](https://github.com/blackmirror1980/flavor-scss/commit/9275b3b)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.5.1...v0.6.0)
+
 ## [Version 0.5.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.5.1) (2018-3-27)
 
 ### Bug fixes
