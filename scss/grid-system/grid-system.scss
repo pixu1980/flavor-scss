@@ -69,7 +69,7 @@
   #{array-join($columns-selectors)} {
     @include position(relative);
     @include display(inline-block);
-    @include padding(null $column-padding-right null $column-padding-right);
+    @include padding(null $padding-right null $padding-right);
     @include reset-inline-block;
 
     min-height: 1px; // Prevent columns from collapsing when empty
@@ -81,17 +81,11 @@
 @mixin grid-system($columns: $columns-default, $gutter: $gutter-default) {
   // Grid system
   // --------------------------------------------------
-  $row-margin-left: ceil(($gutter / -2));
-  $row-margin-right: floor(($gutter / -2));
-
-  $column-padding-left: ceil(($gutter / 2));
-  $column-padding-right: floor(($gutter / 2));
-
   %container-base {
     // container-base
     @include display(block);
     @include box-size(100% auto);
-    @include padding(0 $column-padding-right 0 $column-padding-left);
+    @include padding(0 $padding-right 0 $padding-left);
     @include margin(0 auto);
   }
 
@@ -115,12 +109,12 @@
     //
     // Rows contain and clear the floats of your columns.
     @include display(block);
-    @include margin(0 $row-margin-right 0 $row-margin-left);
+    @include margin(0 $margin-right 0 $margin-left);
 
     + .row {
       @include margin($gutter null null null);
     }
   }
 
-  @include columns($columns, $gutter);
+  @include columns($columns, $gutter, $padding-right, $padding-left);
 }
