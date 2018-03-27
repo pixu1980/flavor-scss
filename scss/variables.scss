@@ -4,7 +4,7 @@
 $output-bourbon-deprecation-warnings: false !default;
 
 $columns-default: 12 !default; // grid-system columns default number
-$gutter-default: 1.5rem !default; // grid-system grid gutter default number
+$gutter-default: 15px !default; // grid-system grid gutter default number
 
 $common-breakpoints: (
   sm: 768px, // small devices
