@@ -122,5 +122,5 @@
     }
   }
 
-  @include columns($columns, $gutter, $padding-right, $padding-left);
+  @include columns($columns, $gutter);
 }
