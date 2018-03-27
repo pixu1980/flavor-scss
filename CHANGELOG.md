@@ -1,3 +1,11 @@
+## [Version 0.6.2](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.2) (2018-3-27)
+
+### Bug fixes
+
+- fix gutter in px: [`9d5ad41`](https://github.com/blackmirror1980/flavor-scss/commit/9d5ad41)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.6.1...v0.6.2)
+
 ## [Version 0.6.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.1) (2018-3-27)
 
 ### Bug fixes
