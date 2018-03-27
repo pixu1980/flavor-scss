@@ -1,3 +1,5 @@
+@charset 'UTF-8';
+
 @mixin appearance ($a) {
   @include prefixer(appearance, $a);
 }

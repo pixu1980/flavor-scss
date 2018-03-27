@@ -1,3 +1,5 @@
+@charset 'UTF-8';
+
 $background-image-modes: array-concat((none), $css-default-modes);
 
 @function is-background-image($bi) {

@@ -1,3 +1,5 @@
+@charset 'UTF-8';
+
 $filter-functions-names: (blur, brightness, contrast, drop-shadow, grayscale, hue-rotate, invert, opacity, saturate, sepia, url);
 
 @function get-filter-function-name($t) {
@@ -9,7 +11,7 @@ $filter-functions-names: (blur, brightness, contrast, drop-shadow, grayscale, hu
 }
 
 @function is-filter-function($tf) {
-  $filter-function-name: get-filter-function-name,04($tf);
+  $filter-function-name: get-filter-function-name($tf);
 
   @return is-defined($filter-function-name) and array-contains($filter-functions-names, $filter-function-name);
 }

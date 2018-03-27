@@ -1,4 +1,6 @@
-  $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset), $css-default-modes);
+@charset 'UTF-8';
+
+$border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset), $css-default-modes);
 
 @function is-border-style($bs) {
   @return array-contains($border-styles, $bs);

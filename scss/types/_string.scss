@@ -1,3 +1,5 @@
+@charset 'UTF-8';
+
 @function is-string($s) {
   @return is-defined($s) and type-of($s)==string;
 }

@@ -1,3 +1,5 @@
+@charset 'UTF-8';
+
 @mixin container-breakpoints($breakpoints: $common-breakpoints, $gutter: $gutter-default) {
   @each $key, $breakpoint in $breakpoints {
     @include media($breakpoint) {

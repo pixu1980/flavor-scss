@@ -1,3 +1,5 @@
+@charset 'UTF-8';
+
 // TODO: refactorize
 @mixin transition($transitions) {
   @include prefixer(transition, $transitions);

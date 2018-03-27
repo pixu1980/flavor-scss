@@ -54,7 +54,7 @@ rules:
   class-name-format: 1
   function-name-format: 0
   id-name-format: 0
-  mixin-name-format: 1
+  mixin-name-format: 0
   placeholder-name-format: 1
   variable-name-format: 1
 

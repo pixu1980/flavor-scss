@@ -1,3 +1,5 @@
+@charset 'UTF-8';
+
 $angle-units: (deg, rad, grad, turn);
 
 @function is-angle($a) {

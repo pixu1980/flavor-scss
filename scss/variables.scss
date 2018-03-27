@@ -1,7 +1,9 @@
+@charset 'UTF-8';
+
+// sass-lint:disable indentation
 $output-bourbon-deprecation-warnings: false !default;
 
 $columns-default: 12 !default; // grid-system columns default number
-
 $gutter-default: 1.5rem !default; // grid-system grid gutter default number
 
 $common-breakpoints: (

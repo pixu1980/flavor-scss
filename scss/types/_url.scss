@@ -1,3 +1,5 @@
+@charset 'UTF-8';
+
 @function has-url-function($u) {
   @if is-string($u) {
     $url: $u;

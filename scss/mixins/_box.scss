@@ -1,3 +1,5 @@
+@charset 'UTF-8';
+
 $display-modes: array-concat((none, inline, block, inline-block, flex, inline-flex, table, inline-table, table-caption, table-header-group, table-row-group, table-column-group, table-footer-group, table-row, table-column, table-cell, list-item, run-in), $css-default-modes);
 
 @function is-display-mode($dm) {

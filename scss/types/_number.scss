@@ -1,3 +1,5 @@
+@charset 'UTF-8';
+
 @function is-number($n) {
   @return is-defined($n) and type-of($n)==number;
 }
@@ -9,7 +11,7 @@
 @function is-number-between($n, $from, $to, $include-bounds: true) {
   @if (is-number($n) and is-number($from) and is-number($to)) {
     @if ($include-bounds==true) {
-      @return if($include-bounds, ($n >= $from) and ($n <= $to), ($n > $from) and ($n < $to));
+      @return if($include-bounds, ($n >=$from) and ($n <=$to), ($n > $from) and ($n < $to));
     }
   }
 
