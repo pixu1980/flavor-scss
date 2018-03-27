@@ -1,4 +1,4 @@
-$border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset), $css-default-modes);
+  $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset), $css-default-modes);
 
 @function is-border-style($bs) {
   @return array-contains($border-styles, $bs);
@@ -60,9 +60,9 @@ $border-modes: array-concat((none), $css-default-modes);
   @return is-defined($b) and array-contains($border-modes, $b);
 }
 
-@mixin border($options, $shorthand: false) {
+@mixin border($options, $border-selector: border) {
   @if is-border-mode($options) {
-    border: $options;
+    #{$border-selector}: $options;
   }
   @else {
     $settings: (size: 0, style: solid, color: transparent, radius: null);
@@ -124,7 +124,7 @@ $border-modes: array-concat((none), $css-default-modes);
       @warn '`border-color: #{$border-color}` is not a valid css color';
     }
 
-    border: $border;
+    #{$border-selector}: $border;
 
     $border-radius: map-get($settings, radius);
 
@@ -132,4 +132,20 @@ $border-modes: array-concat((none), $css-default-modes);
       @include border-radius($border-radius);
     }
   }
+}
+
+@mixin border-top($options) {
+  @include border($options, border-top);
+}
+
+@mixin border-right($options) {
+  @include border($options, border-right);
+}
+
+@mixin border-bottom($options) {
+  @include border($options, border-bottom);
+}
+
+@mixin border-left($options) {
+  @include border($options, border-left);
 }

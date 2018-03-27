@@ -1,0 +1,31 @@
+$filter-functions-names: (blur, brightness, contrast, drop-shadow, grayscale, hue-rotate, invert, opacity, saturate, sepia, url);
+
+@function get-filter-function-name($t) {
+  @if(string-contains($t, '(') and string-contains($t, ')')) {
+    @return str-slice($t, 1, str-index($t, '(') - 1);
+  }
+
+  @return null;
+}
+
+@function is-filter-function($tf) {
+  $filter-function-name: get-filter-function-name,04($tf);
+
+  @return is-defined($filter-function-name) and array-contains($filter-functions-names, $filter-function-name);
+}
+
+$filter-modes: array-concat((none), $css-default-modes);
+
+@function is-filter-mode-or-function($filter) {
+  @return is-defined($filter) and (array-contains($filter-modes, $filter) or is-filter-function($filter));
+}
+
+// TODO: manage multiple filters
+@mixin filter($filter) {
+  @if is-filter-mode-or-function($filter) {
+    @include prefixer(filter, $filter);
+  }
+  @else {
+    @warn '`filter: #{$filter}` is not a valid filter value';
+  }
+}

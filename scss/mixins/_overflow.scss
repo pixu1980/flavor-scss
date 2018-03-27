@@ -1,0 +1,25 @@
+$overflow-modes: array-concat((visible, hidden, scroll, auto), $css-default-modes);
+
+@function is-overflow-mode($o) {
+  @return is-defined($o) and array-contains($overflow-modes, $o);
+}
+
+@mixin overflow($o) {
+  $overflow-x: if(length($o) > 0, nth($o, 1), null);
+
+  @if is-overflow-mode($overflow-x) {
+    overflow-x: $overflow-x;
+  }
+  @else {
+    @warn '`overflow-x: #{$o}` is not a valid overflow value';
+  }
+
+  $overflow-y: if(length($o) > 1, nth($o, 2), $overflow-x);
+
+  @if is-overflow-mode($overflow-y) {
+    overflow-y: $overflow-y;
+  }
+  @else {
+    @warn '`overflow-y: #{$o}` is not a valid overflow value';
+  }
+}

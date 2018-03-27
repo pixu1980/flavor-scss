@@ -12,8 +12,7 @@
 }
 
 @mixin overflow-hidden-animated {
-  @include prefixer(backface-visibility, hidden);
+  @include backface-visibility(hidden);
   @include transform(translate3d(0, 0, 0), webkit moz);
-
-  overflow: hidden;
+  @include overflow(hidden);
 }

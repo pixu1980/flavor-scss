@@ -104,41 +104,6 @@ $line-height-modes: array-concat((normal), $css-default-modes);
   }
 }
 
-@mixin ellipsis($multiline: false, $width: 100%, $font-size: 16px, $line-height: 1.4, $lines-to-show: 3) {
-  @if $multiline {
-    display: block; // Fallback for non-webkit
-    display: -webkit-box;
-    max-width: $width;
-    height: $font-size * $line-height * $lines-to-show; // Fallback for non-webkit
-    min-height: $font-size * $line-height * $lines-to-show; // Fallback for non-webkit
-    margin: 0 auto;
-    font-size: $font-size;
-    line-height: $line-height;
-    -webkit-line-clamp: $lines-to-show;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  @else {
-    display: inline-block;
-    max-width: $width;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-wrap: normal;
-  }
-}
-
-// Word Wrapping
-@mixin word-wrap {
-  -ms-word-break: break-all;
-  word-break: break-all;
-  word-break: break-word;
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  hyphens: auto;
-}
-
 $text-align-modes: array-concat((left, center, right, justify), $css-default-modes);
 
 @function is-text-align($ta) {
@@ -212,6 +177,66 @@ $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle
   }
 }
 
+$text-overflow-modes: array-concat((clip, ellipsis), $css-default-modes);
+
+@function is-text-overflow-mode($to) {
+  @return is-defined($to) and (array-contains($text-overflow-modes, $to) or is-string($to));
+}
+
+@mixin text-overflow($to) {
+  @if is-text-overflow($to) {
+    @include prefixer(text-overflow, $to, o spec);
+  }
+  @else {
+    @warn '`text-overflow: #{$to}` is not a valid text-overflow value';
+  }
+}
+
+$hyphens-modes: array-concat((none, manual, auto, unset), $css-default-modes);
+
+@function is-hyphens-mode($h) {
+  @return is-defined($h) and array-contains($hyphens-modes, $h);
+}
+
+@mixin hyphens($h) {
+  @if is-hyphens($h) {
+    @include prefixer(hyphens, $h);
+  }
+  @else {
+    @warn '`hyphens: #{$h}` is not a valid hyphens value';
+  }
+}
+
+$letter-spacing-modes: array-concat((normal), $css-default-modes);
+
+@function is-letter-spacing-mode($ls) {
+  @return is-defined($ls) and (array-contains($letter-spacing-modes, $ls) or is-size($ls));
+}
+
+@mixin letter-spacing($ls) {
+  @if is-letter-spacing($ls) {
+    letter-spacing: $ls;
+  }
+  @else {
+    @warn '`letter-spacing: #{$ls}` is not a valid letter-spacing value';
+  }
+}
+
+$word-spacing-modes: array-concat((normal), $css-default-modes);
+
+@function is-word-spacing-mode($ws) {
+  @return is-defined($ws) and (array-contains($word-spacing-modes, $ws) or is-size($ws));
+}
+
+@mixin word-spacing($ws) {
+  @if is-word-spacing($ws) {
+    word-spacing: $ws;
+  }
+  @else {
+    @warn '`word-spacing: #{$ws}` is not a valid word-spacing value';
+  }
+}
+
 $user-select-modes: (auto, none, text, all);
 
 @function is-user-select-mode($us) {
@@ -225,4 +250,98 @@ $user-select-modes: (auto, none, text, all);
   @else {
     @warn '`user-select: #{$us}` is not a valid user-select value';
   }
+}
+
+$direction-modes: array-concat((ltr, rtl), $css-default-modes);
+
+@function is-direction-mode($d) {
+  @return is-defined($d) and array-contains($direction-modes, $d);
+}
+
+@mixin direction($d) {
+  @if is-direction($d) {
+    direction: $d;
+  }
+  @else {
+    @warn '`direction: #{$d}` is not a valid direction value';
+  }
+}
+
+$white-space-modes: array-concat((normal, nowrap, pre, pre-line, pre-wrap), $css-default-modes);
+
+@function is-white-space-mode($ws) {
+  @return is-defined($ws) and array-contains($white-space-modes, $ws);
+}
+
+@mixin white-space($ws) {
+  @if is-white-space($ws) {
+    white-space: $ws;
+  }
+  @else {
+    @warn '`white-space: #{$ws}` is not a valid white-space value';
+  }
+}
+
+$word-break-modes: array-concat((normal, break-all, keep-all), $css-default-modes);
+
+@function is-word-break-mode($wb) {
+  @return is-defined($wb) and array-contains($word-break-modes, $wb);
+}
+
+@mixin word-break($wb) {
+  @if is-word-break($wb) {
+    word-break: $wb;
+  }
+  @else {
+    @warn '`word-break: #{$wb}` is not a valid word-break value';
+  }
+}
+
+$word-wrap-modes: array-concat((normal, break-word), $css-default-modes);
+
+@function is-word-wrap-mode($ww) {
+  @return is-defined($ww) and array-contains($word-wrap-modes, $ww);
+}
+
+@mixin word-wrap($ww) {
+  @if is-word-wrap($ww) {
+    word-wrap: $ww;
+  }
+  @else {
+    @warn '`word-wrap: #{$ww}` is not a valid word-wrap value';
+  }
+}
+
+@mixin ellipsis($multiline: false, $width: 100%, $font-size: 16px, $line-height: 1.4, $lines-to-show: 3) {
+  @include overflow(hidden);
+  @include text-overflow(ellipsis);
+
+  @if $multiline {
+    @include margin(0 auto);
+
+    display: block; // Fallback for non-webkit
+    display: -webkit-box;
+    max-width: $width;
+    height: $font-size * $line-height * $lines-to-show; // Fallback for non-webkit
+    min-height: $font-size * $line-height * $lines-to-show; // Fallback for non-webkit
+    font-size: $font-size;
+    line-height: $line-height;
+    -webkit-line-clamp: $lines-to-show;
+    -webkit-box-orient: vertical;
+  }
+  @else {
+    @include display(inline-block);
+    @include white-space(nowrap);
+    @include word-wrap(normal);
+
+    max-width: $width;
+  }
+}
+
+// Word Wrapping
+@mixin word-wrap-force {
+  @include hyphens(auto);
+  @include word-break(break-all);
+
+  word-break: break-word;
 }

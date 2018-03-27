@@ -234,14 +234,29 @@ $visibility-modes: array-concat((visible, hidden, collapse), $css-default-modes)
 
   &:before {
     @include display(block);
+    @include box-size(100%, false);
+    @include padding(((strip-unit($height) / strip-unit($width)) * 100%) null null null);
 
     content: '';
-    padding-top: (strip-unit($height) / strip-unit($width)) * 100%;
-    width: 100%;
   }
 
   > #{$content-selector} {
     @include position(absolute, 0 0 0 0);
     @include box-size(100%);
+  }
+}
+
+$backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
+
+@function is-backface-visibility-mode($bv) {
+  @return is-defined($bv) and array-contains($backface-visibility-modes, $bv);
+}
+
+@mixin backface-visibility($bv) {
+  @if is-backface-visibility($bv) {
+    @include prefixer(backface-visibility, $bv);
+  }
+  @else {
+    @warn '`backface-visibility: #{$bv}` is not a valid backface-visibility value';
   }
 }
