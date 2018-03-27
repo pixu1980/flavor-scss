@@ -1,3 +1,11 @@
+## [Version 0.6.4](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.4) (2018-3-27)
+
+### Bug fixes
+
+- bugfix: [`fe1e978`](https://github.com/blackmirror1980/flavor-scss/commit/fe1e978)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.6.3...v0.6.4)
+
 ## [Version 0.6.3](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.3) (2018-3-27)
 
 ### Bug fixes
