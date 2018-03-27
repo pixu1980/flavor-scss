@@ -16,10 +16,10 @@ $common-breakpoints: (
   uhd: 3840px // ultra HD (4k) devices
 ) !default; // common-breakpoints used as default for container breakpoints
 
-$first-column-breakpoint: 320px !default; //first column breakpoint used as default without media queries
+$first-column-breakpoint-default: 320px !default; //first column breakpoint used as default without media queries
 
 $columns-breakpoints: array-concat((
-  sp: $first-column-breakpoint, // common smartphones
+  sp: $first-column-breakpoint-default, // common smartphones
   ip: 375px, // iphone (since iphone5)
   ipp: 414px, // iphone plus (since iphone5)
   xs: 576px // extra small devices
