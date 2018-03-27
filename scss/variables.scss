@@ -25,8 +25,10 @@ $columns-breakpoints: array-concat((
   xs: 576px // extra small devices
 ), $common-breakpoints) !default; // columns-breakpoints used for media queries and column classes sizes & positions
 
-$margin-left: ceil($gutter / -2);
-$margin-right: floor($gutter / -2);
+$gutter: $gutter-default;
 
-$padding-left: ceil($gutter / 2);
-$padding-right: floor($gutter / 2);
+$margin-left: ceil($gutter / -2) !default;
+$margin-right: floor($gutter / -2) !default;
+
+$padding-left: ceil($gutter / 2) !default;
+$padding-right: floor($gutter / 2) !default;

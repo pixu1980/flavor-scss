@@ -79,6 +79,12 @@
 }
 
 @mixin grid-system($columns: $columns-default, $gutter: $gutter-default) {
+  $margin-left: ceil($gutter / -2);
+  $margin-right: floor($gutter / -2);
+
+  $padding-left: ceil($gutter / 2);
+  $padding-right: floor($gutter / 2);
+
   // Grid system
   // --------------------------------------------------
   %container-base {
