@@ -1,3 +1,11 @@
+## [Version 0.6.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.1) (2018-3-27)
+
+### Bug fixes
+
+- fixed linting issues: [`5c6ac94`](https://github.com/blackmirror1980/flavor-scss/commit/5c6ac94)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.6.0...v0.6.1)
+
 ## [Version 0.6.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.0) (2018-3-27)
 
 ### Breaking changes
