@@ -1,3 +1,11 @@
+## [Version 0.6.3](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.3) (2018-3-27)
+
+### Bug fixes
+
+- fix margin & padding for grid system: [`20a7a2d`](https://github.com/blackmirror1980/flavor-scss/commit/20a7a2d)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.6.2...v0.6.3)
+
 ## [Version 0.6.2](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.2) (2018-3-27)
 
 ### Bug fixes
