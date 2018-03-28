@@ -1,15 +1,5 @@
 @charset 'UTF-8';
 
-@mixin container-breakpoints($breakpoints: $common-breakpoints, $gutter: $gutter-default) {
-  @each $key, $breakpoint in $breakpoints {
-    @include media($breakpoint) {
-      .container {
-        @include box-size(($breakpoint - $gutter) auto);
-      }
-    }
-  }
-}
-
 @mixin columns-sizes($columns: $columns-default, $gutter: $gutter-default, $key: '') {
   @for $i from 0 through $columns {
     @if ($i==0) {
@@ -75,7 +65,15 @@
     min-height: 1px; // Prevent columns from collapsing when empty
   }
 
-  @include columns-breakpoints($columns-breakpoints, $columns, $gutter)
+  @include columns-breakpoints($columns-breakpoints, $columns, $gutter, $first-column-breakpoint-default);
+}
+
+@mixin container-breakpoints($breakpoints: $common-breakpoints, $gutter: $gutter-default) {
+  @each $key, $breakpoint in $breakpoints {
+    @include media($breakpoint) {
+      @include box-size(($breakpoint - $gutter) auto);
+    }
+  }
 }
 
 @mixin grid-system($columns: $columns-default, $gutter: $gutter-default) {
