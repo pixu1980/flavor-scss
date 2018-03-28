@@ -267,4 +267,9 @@ $backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
   letter-spacing: -.3em;
   line-height: 0;
   text-rendering: optimizespeed;
+
+  * {
+    letter-spacing: initial;
+    line-height: initial;
+  }
 }

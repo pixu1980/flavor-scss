@@ -58,6 +58,7 @@
     @include position(relative);
     @include display(inline-block);
     @include padding(null $padding-right null $padding-right);
+    @include content-align(left top);
 
     min-height: 1px; // Prevent columns from collapsing when empty
   }
