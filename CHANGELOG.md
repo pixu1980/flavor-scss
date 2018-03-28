@@ -1,3 +1,11 @@
+## [Version 0.6.9](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.9) (2018-3-28)
+
+### Bug fixes
+
+- all grid system units converted to rem: [`84e4c6a`](https://github.com/blackmirror1980/flavor-scss/commit/84e4c6a)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.6.8...v0.6.9)
+
 ## [Version 0.6.8](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.8) (2018-3-28)
 
 ### Bug fixes
