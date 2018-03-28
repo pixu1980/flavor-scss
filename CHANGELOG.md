@@ -1,3 +1,11 @@
+## [Version 0.6.10](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.10) (2018-3-28)
+
+### Bug fixes
+
+- grid system columns bugfix: [`967fa67`](https://github.com/blackmirror1980/flavor-scss/commit/967fa67)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.6.9...v0.6.10)
+
 ## [Version 0.6.9](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.9) (2018-3-28)
 
 ### Bug fixes
