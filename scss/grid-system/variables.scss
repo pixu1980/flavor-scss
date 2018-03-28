@@ -1,0 +1,33 @@
+@charset 'UTF-8';
+
+// sass-lint:disable indentation
+
+$columns-default: 12 !default; // grid-system columns default number
+$gutter-default: 1.5rem !default; // grid-system grid gutter default number
+
+$common-breakpoints: (
+  sm: 76.8rem, // small devices
+  md: 99.2rem, // medium devices
+  lg: 120rem, // large devices
+  xl: 160rem, // extra large devices
+  fhd: 192rem, // full HD devices
+  qhd: 256rem, // quad HD (2k) devices
+  uhd: 384rem // ultra HD (4k) devices
+) !default; // common-breakpoints used as default for container breakpoints
+
+$first-column-breakpoint-default: 32rem !default; //first column breakpoint used as default without media queries
+
+$columns-breakpoints: map-merge((
+  sp: $first-column-breakpoint-default, // common smartphones
+  ip: 37.5rem, // iphone (since iphone5)
+  ipp: 41.4rem, // iphone plus (since iphone5)
+  xs: 57.6rem // extra small devices
+), $common-breakpoints) !default; // columns-breakpoints used for media queries and column classes sizes & positions
+
+$gutter: $gutter-default;
+
+$margin-left: ($gutter / -2) !default;
+$margin-right: ($gutter / -2) !default;
+
+$padding-left: ($gutter / 2) !default;
+$padding-right: ($gutter / 2) !default;
