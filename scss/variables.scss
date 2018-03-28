@@ -18,7 +18,7 @@ $common-breakpoints: (
 
 $first-column-breakpoint-default: 320px !default; //first column breakpoint used as default without media queries
 
-$columns-breakpoints: array-concat((
+$columns-breakpoints: map-merge((
   sp: $first-column-breakpoint-default, // common smartphones
   ip: 375px, // iphone (since iphone5)
   ipp: 414px, // iphone plus (since iphone5)
