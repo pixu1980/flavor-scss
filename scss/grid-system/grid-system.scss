@@ -1,6 +1,8 @@
 @charset 'UTF-8';
 
 @mixin columns-sizes($columns: $columns-default, $gutter: $gutter-default, $key: '') {
+  // Columns Sizes
+  // --------------------------------------------------
   @for $i from 0 through $columns {
     @if ($i==0) {
       .col-#{$key}-push-0 {
@@ -34,6 +36,8 @@
 }
 
 @mixin columns-breakpoints($breakpoints: $columns-breakpoints, $columns: $columns-default, $gutter: $gutter-default, $first-breakpoint: $first-column-breakpoint-default) {
+  // Columns Breakpoints
+  // --------------------------------------------------
   @each $key, $breakpoint in $breakpoints {
     @if ($breakpoint==$first-breakpoint) {
       @include columns-sizes($columns, $gutter, $key);
@@ -48,19 +52,12 @@
 
 @mixin columns($columns: $columns-default, $gutter: $gutter-default) {
   // Columns
-  //
+  // --------------------------------------------------
   // Common styles for small and large grid columns
-  $columns-selectors: ();
-
-  @for $i from 1 through $columns {
-    $columns-selectors: array-concat($columns-selectors, '.col-#{$i}');
-  }
-
-  #{array-join($columns-selectors)} {
+  [class*='col-'] {
     @include position(relative);
     @include display(inline-block);
     @include padding(null $padding-right null $padding-right);
-    @include reset-inline-block;
 
     min-height: 1px; // Prevent columns from collapsing when empty
   }
@@ -68,7 +65,29 @@
   @include columns-breakpoints($columns-breakpoints, $columns, $gutter, $first-column-breakpoint-default);
 }
 
+@mixin rows($gutter: $gutter-default) {
+  // Rows
+  // --------------------------------------------------
+  $margin-left: ($gutter / -2);
+  $margin-right: ($gutter / -2);
+
+  .row {
+    // Row
+    //
+    // Rows contain and clear the floats of your columns.
+    @include display(block);
+    @include margin(0 $margin-right 0 $margin-left);
+    @include reset-inline-block;
+
+    + .row {
+      @include margin($gutter null null null);
+    }
+  }
+}
+
 @mixin container-breakpoints($breakpoints: $common-breakpoints, $gutter: $gutter-default) {
+  // Containers Breakpoints
+  // --------------------------------------------------
   @each $key, $breakpoint in $breakpoints {
     @include media($breakpoint) {
       @include box-size(($breakpoint - $gutter) auto);
@@ -76,12 +95,9 @@
   }
 }
 
-@mixin grid-system($columns: $columns-default, $gutter: $gutter-default) {
-  // Grid system
+@mixin containers($gutter: $gutter-default) {
+  // Containers
   // --------------------------------------------------
-  $margin-left: ($gutter / -2);
-  $margin-right: ($gutter / -2);
-
   $padding-left: ($gutter / 2);
   $padding-right: ($gutter / 2);
 
@@ -107,18 +123,12 @@
       @include container-breakpoints($common-breakpoints, $gutter);
     }
   }
+}
 
-  .row {
-    // Row
-    //
-    // Rows contain and clear the floats of your columns.
-    @include display(block);
-    @include margin(0 $margin-right 0 $margin-left);
-
-    + .row {
-      @include margin($gutter null null null);
-    }
-  }
-
+@mixin grid-system($columns: $columns-default, $gutter: $gutter-default) {
+  // Grid system
+  // --------------------------------------------------
+  @include containers($gutter);
+  @include rows($gutter);
   @include columns($columns, $gutter);
 }
