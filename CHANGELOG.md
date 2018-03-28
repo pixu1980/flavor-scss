@@ -1,3 +1,11 @@
+## [Version 0.6.11](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.11) (2018-3-28)
+
+### Bug fixes
+
+- grid system css fixed (vertical align on columns): [`03c286f`](https://github.com/blackmirror1980/flavor-scss/commit/03c286f)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.6.10...v0.6.11)
+
 ## [Version 0.6.10](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.10) (2018-3-28)
 
 ### Bug fixes
