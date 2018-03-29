@@ -19,19 +19,19 @@
       $col-percentage: percentage($i / $columns);
 
       .col-#{$key}-#{$i} {
-        width: calc($col-percentage - $gutter-threshold);
+        width: calc(#{$col-percentage} - #{$gutter-threshold});
       }
 
       .col-#{$key}-push-#{$i} {
-        left: calc($col-percentage - $gutter-threshold);
+        left: calc(#{$col-percentage} - #{$gutter-threshold});
       }
 
       .col-#{$key}-pull-#{$i} {
-        right: calc($col-percentage - $gutter-threshold);
+        right: calc(#{$col-percentage} - #{$gutter-threshold});
       }
 
       .col-#{$key}-offset-#{$i} {
-        margin-left: calc($col-percentage - $gutter-threshold);
+        margin-left: calc(#{$col-percentage} - #{$gutter-threshold});
       }
     }
   }
