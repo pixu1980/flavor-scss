@@ -3,6 +3,8 @@
 @mixin columns-sizes($columns: $columns-default, $gutter: $gutter-default, $key: '') {
   // Columns Sizes
   // --------------------------------------------------
+  $gutter-threshold: $gutter / 100 * 11.46666666666667;
+
   @for $i from 0 through $columns {
     @if ($i==0) {
       .col-#{$key}-push-0 {
@@ -17,19 +19,19 @@
       $col-percentage: percentage($i / $columns);
 
       .col-#{$key}-#{$i} {
-        width: $col-percentage;
+        width: calc($col-percentage - $gutter-threshold);
       }
 
       .col-#{$key}-push-#{$i} {
-        left: $col-percentage;
+        left: calc($col-percentage - $gutter-threshold);
       }
 
       .col-#{$key}-pull-#{$i} {
-        right: $col-percentage;
+        right: calc($col-percentage - $gutter-threshold);
       }
 
       .col-#{$key}-offset-#{$i} {
-        margin-left: $col-percentage;
+        margin-left: calc($col-percentage - $gutter-threshold);
       }
     }
   }
@@ -54,10 +56,12 @@
   // Columns
   // --------------------------------------------------
   // Common styles for small and large grid columns
+  $padding: ($gutter / 2);
+
   [class*='col-'] {
     @include position(relative);
     @include display(inline-block);
-    @include padding(null $padding-right null $padding-right);
+    @include padding(null $padding);
     @include content-align(left top);
 
     min-height: 1px; // Prevent columns from collapsing when empty
@@ -69,15 +73,14 @@
 @mixin rows($gutter: $gutter-default) {
   // Rows
   // --------------------------------------------------
-  $margin-left: ($gutter / -2);
-  $margin-right: ($gutter / -2);
+  $margin: ($gutter / -2);
 
   .row {
     // Row
     //
     // Rows contain and clear the floats of your columns.
     @include display(block);
-    @include margin(0 $margin-right 0 $margin-left);
+    @include margin(0 $margin 0 $margin);
     @include reset-inline-block;
 
     + .row {
@@ -99,14 +102,12 @@
 @mixin containers($gutter: $gutter-default) {
   // Containers
   // --------------------------------------------------
-  $padding-left: ($gutter / 2);
-  $padding-right: ($gutter / 2);
 
   %container-base {
     // container-base
     @include display(block);
     @include box-size(100% auto);
-    @include padding(0 $padding-right 0 $padding-left);
+    @include padding(0 $gutter);
     @include margin(0 auto);
   }
 
