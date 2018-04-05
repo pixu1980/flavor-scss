@@ -62,38 +62,46 @@ $line-height-modes: array-concat((normal), $css-default-modes);
 
   $font-size: map-get($settings, size);
 
-  @if is-font-size($font-size) {
-    font-size: $font-size;
-  }
-  @else {
-    @warn '`font-size: #{$font-size}` is not a valid css size';
+  @if is-defined($font-size) {
+    @if is-font-size($font-size) {
+      font-size: $font-size;
+    }
+    @else {
+      @warn '`font-size: #{$font-size}` is not a valid css size';
+    }
   }
 
   $line-height: map-get($settings, height);
 
-  @if is-line-height($line-height) {
-    line-height: $line-height;
-  }
-  @else {
-    @warn '`line-height: #{$line-height}` is not a valid line-height value';
+  @if is-defined($line-height) {
+    @if is-line-height($line-height) {
+      line-height: $line-height;
+    }
+    @else {
+      @warn '`line-height: #{$line-height}` is not a valid line-height value';
+    }
   }
 
   $font-family: map-get($settings, family);
 
-  @if is-font-family($font-family) {
-    font-family: #{$font-family};
-  }
-  @else {
-    @warn '`font-family: #{$font-family}` is not a valid font-family value';
+  @if is-defined($font-family) {
+    @if is-font-family($font-family) {
+      font-family: #{$font-family};
+    }
+    @else {
+      @warn '`font-family: #{$font-family}` is not a valid font-family value';
+    }
   }
 
   $font-weight: map-get($settings, weight);
 
-  @if is-font-weight($font-weight) {
-    font-weight: $font-weight;
-  }
-  @else {
-    @warn '`font-weight: #{$font-weight}` is not a valid font-weight';
+  @if is-defined($font-weight) {
+    @if is-font-weight($font-weight) {
+      font-weight: $font-weight;
+    }
+    @else {
+      @warn '`font-weight: #{$font-weight}` is not a valid font-weight';
+    }
   }
 
   $font-color: map-get($settings, color);
