@@ -34,7 +34,7 @@
   @return false;
 }
 
-@function string-split($s, $sep) {
+@function string-split($s, $sep: '.') {
   $split: ();
 
   $i: str-index($s, $sep);
