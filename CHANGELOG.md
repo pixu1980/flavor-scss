@@ -1,3 +1,11 @@
+## [Version 0.6.18](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.18) (2018-4-5)
+
+### Bug fixes
+
+- fixed string split separator default to '.': [`d6af3ac`](https://github.com/blackmirror1980/flavor-scss/commit/d6af3ac)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.6.17...v0.6.18)
+
 ## [Version 0.6.17](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.17) (2018-4-5)
 
 ### New features
