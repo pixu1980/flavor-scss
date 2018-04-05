@@ -1,9 +1,111 @@
 @charset 'UTF-8';
 
-@function extend($obj, $ext-obj) {
-  @return map-merge($obj, $ext-obj);
-}
-
 @function is-object($o) {
   @return is-defined($o) and type-of($o)==map;
 }
+
+@function get($map, $path) {
+  $keys: $path;
+
+  @if is-string($path) {
+    $keys: string-split($path);
+  }
+
+  $length: length($keys);
+
+  @if $length==1 {
+    $keys: nth($keys, 1);
+  }
+
+  $get: map-get($map, nth($keys, 1));
+
+  @if $length > 1 {
+    @for $i from 2 through $length {
+      @if is-object($get) {
+        $get: map-get($get, nth($keys, $i));
+      }
+    }
+  }
+
+  @return $get;
+}
+
+@function get-keys($keys, $counter) {
+  $return: ();
+  @for $i from 1 to $counter {
+    $return: append($return, nth($keys, $i));
+  }
+  @return $return;
+}
+
+@function set($obj, $path, $value) {
+  $keys: $path;
+
+  @if is-string($path) {
+    $keys: string-split($path);
+  }
+
+  $length: length($keys);
+  $get-keys: ();
+  $map-level: ();
+
+
+  @if $length > 1 {
+    $map-level: get($obj, $keys);
+  }
+
+  $merge: (nth($keys, $length): $value);
+
+  @if $map-level {
+    $get-keys: get-keys($keys, $length);
+    $merge: map-merge($map-level, $merge);
+  }
+
+  @for $i from ($length * -1 + 1) through -1 {
+    $j: abs($i);
+    $key: nth($keys, $j);
+
+    @if $j > 1 {
+      $get-keys: get-keys($keys, $j);
+      $map-level: get($obj, $get-keys);
+
+      @if $map-level {
+        $merge: map-merge($map-level, ($key: $merge));
+      }
+      @else {
+        $merge: ($key: $merge);
+      }
+    }
+    @else {
+      $merge: ($key: $merge);
+    }
+  }
+
+  $obj: map-merge($obj, $merge);
+
+  @return $obj;
+}
+
+@function extend($object, $objects...) {
+  $max: length($objects); // Loop through all maps in $objects...
+
+  @for $i from 1 through $max {
+    // Store current map
+    $current: nth($objects, $i); // Loop through all tuples in current map
+
+    @each $key, $value in $current {
+      // If value is a nested map and same key from object is a nested map as well
+      @if is-object($value) and is-object(map-get($object, $key)) {
+        // Recursive extend
+        $value: extend(get($object, $key), $value);
+      } // Merge current tuple with object
+
+      $object: map-merge($object, ($key: $value));
+    }
+  }
+
+  @return $object;
+}
+
+
+
