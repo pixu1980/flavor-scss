@@ -1,3 +1,11 @@
+## [Version 0.6.15](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.15) (2018-4-5)
+
+### Bug fixes
+
+- bugfix: [`e429867`](https://github.com/blackmirror1980/flavor-scss/commit/e429867)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.6.14...v0.6.15)
+
 ## [Version 0.6.14](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.14) (2018-4-5)
 
 ### Bug fixes
