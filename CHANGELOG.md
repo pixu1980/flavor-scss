@@ -1,3 +1,11 @@
+## [Version 0.6.16](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.16) (2018-4-5)
+
+### Bug fixes
+
+- fixed font mixing null values checking: [`a0c939a`](https://github.com/blackmirror1980/flavor-scss/commit/a0c939a)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.6.15...v0.6.16)
+
 ## [Version 0.6.15](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.15) (2018-4-5)
 
 ### Bug fixes
