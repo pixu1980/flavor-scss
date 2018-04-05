@@ -1,3 +1,11 @@
+## [Version 0.6.17](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.17) (2018-4-5)
+
+### New features
+
+- added deep extend, get & set on objects: [`33c52a4`](https://github.com/blackmirror1980/flavor-scss/commit/33c52a4)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.6.16...v0.6.17)
+
 ## [Version 0.6.16](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.16) (2018-4-5)
 
 ### Bug fixes
