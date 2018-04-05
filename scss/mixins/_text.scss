@@ -1,5 +1,9 @@
 @charset 'UTF-8';
 
+@function is-font-family($ff) {
+  @return is-defined($ff) and (is-string($font-family) or is-array($font-family));
+}
+
 $font-weight-modes: array-concat((normal, bold, bolder, lighter, 100, 200, 300, 400, 500, 600, 700, 800, 900), $css-default-modes);
 
 @function is-font-weight($fw) {
@@ -8,8 +12,8 @@ $font-weight-modes: array-concat((normal, bold, bolder, lighter, 100, 200, 300, 
 
 $font-modes: array-concat((medium, xx-small, x-small, small, large, x-large, xx-large, smaller, larger), $css-default-modes);
 
-@function is-font-size($s) {
-  @return is-size($s) or array-contains($font-modes, $s);
+@function is-font-size($fs) {
+  @return is-size($fs) or array-contains($font-modes, $fs);
 }
 
 $line-height-modes: array-concat((normal), $css-default-modes);
@@ -76,13 +80,11 @@ $line-height-modes: array-concat((normal), $css-default-modes);
 
   $font-family: map-get($settings, family);
 
-  @if is-defined($font-family) {
-    @if is-string($font-family) {
-      font-family: #{$font-family}, Arial, sans-serif;
-    }
-    @else {
-      @warn '`font-family: #{$font-family}` is not a valid font-family value';
-    }
+  @if is-font-family($font-family) {
+    font-family: #{$font-family};
+  }
+  @else {
+    @warn '`font-family: #{$font-family}` is not a valid font-family value';
   }
 
   $font-weight: map-get($settings, weight);
