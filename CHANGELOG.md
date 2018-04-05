@@ -1,3 +1,11 @@
+## [Version 0.6.14](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.14) (2018-4-5)
+
+### Bug fixes
+
+- fixed font family value checking: [`9769008`](https://github.com/blackmirror1980/flavor-scss/commit/9769008)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.6.13...v0.6.14)
+
 ## [Version 0.6.13](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.13) (2018-3-29)
 
 ### Bug fixes
