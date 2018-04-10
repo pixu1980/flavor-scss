@@ -73,13 +73,13 @@ $bound-box-sizes: array-concat((none), $css-default-modes);
       $settings: map-merge($settings, (max-width: $max-width));
     }
 
-    $min-height: if(length($options) > 3, nth($options, 4), null);
+    $min-height: if(length($options) > 4, nth($options, 5), null);
 
     @if is-defined($min-height) {
       $settings: map-merge($settings, (min-height: $min-height));
     }
 
-    $max-height: if(length($options) > 4, nth($options, 5), null);
+    $max-height: if(length($options) > 5, nth($options, 6), null);
 
     @if is-defined($max-height) {
       $settings: map-merge($settings, (max-height: $max-height));
