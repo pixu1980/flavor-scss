@@ -1,3 +1,11 @@
+## [Version 0.6.19](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.19) (2018-4-10)
+
+### Bug fixes
+
+- fixed min-height max-height issue: [`c7c4acc`](https://github.com/blackmirror1980/flavor-scss/commit/c7c4acc)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.6.18...v0.6.19)
+
 ## [Version 0.6.18](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.18) (2018-4-5)
 
 ### Bug fixes
