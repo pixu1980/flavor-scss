@@ -1,3 +1,11 @@
+## [Version 0.6.20](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.20) (2018-4-13)
+
+### Bug fixes
+
+- added grid system helpers added overlay & unset to overflow supported modes: [`1539c00`](https://github.com/blackmirror1980/flavor-scss/commit/1539c00)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.6.19...v0.6.20)
+
 ## [Version 0.6.19](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.19) (2018-4-10)
 
 ### Bug fixes
