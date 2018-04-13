@@ -1,6 +1,6 @@
 @charset 'UTF-8';
 
-$overflow-modes: array-concat((visible, hidden, scroll, auto), $css-default-modes);
+$overflow-modes: array-concat((visible, hidden, scroll, overlay, unset, auto), $css-default-modes);
 
 @function is-overflow-mode($o) {
   @return is-defined($o) and array-contains($overflow-modes, $o);
