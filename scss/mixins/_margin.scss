@@ -1,0 +1,46 @@
+$margin-modes: array-concat((auto), $css-default-modes);
+
+@function is-margin($m) {
+  @return is-defined($m) and (array-contains($margin-modes, $m) or is-size($m) or is-percentage($m));
+}
+
+@mixin margin-direction($m, $margin-direction-selector: margin) {
+  @if is-defined($m) {
+    @if is-margin($m) {
+      #{$margin-direction-selector}: $m;
+    }
+    @else {
+      @warn '`#{$margin-direction-selector}: #{$m}` is not a valid margin value';
+    }
+  }
+}
+
+@mixin margin-top($m) {
+  @include margin-direction($m, margin-top);
+}
+
+@mixin margin-right($m) {
+  @include margin-direction($m, margin-right);
+}
+
+@mixin margin-bottom($m) {
+  @include margin-direction($m, margin-bottom);
+}
+
+@mixin margin-left($m) {
+  @include margin-direction($m, margin-left);
+}
+
+@mixin margin($m) {
+  $margin-top: if(length($m) > 0, nth($m, 1), 0);
+  @include margin-top($margin-top);
+
+  $margin-right: if(length($m) > 1, nth($m, 2), $margin-top);
+  @include margin-right($margin-right);
+
+  $margin-bottom: if(length($m) > 2, nth($m, 3), $margin-top);
+  @include margin-bottom($margin-bottom);
+
+  $margin-left: if(length($m) > 3, nth($m, 4), $margin-right);
+  @include margin-left($margin-left);
+}

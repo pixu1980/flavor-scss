@@ -42,6 +42,83 @@ $bound-box-sizes: array-concat((none), $css-default-modes);
   @return is-size($s) or array-contains($bound-box-sizes, $s);
 }
 
+@mixin box-bounds($options) {
+  $settings: (min-width: null, min-height: null, max-width: null, max-height: null);
+
+  @if is-object($options) {
+    $settings: extend($settings, $options);
+  }
+  @else {
+    $min-width: if(length($options) > 0, nth($options, 1), null);
+
+    @if is-defined($min-width) {
+      $settings: map-merge($settings, (min-width: $min-width));
+    }
+
+    $max-width: if(length($options) > 1, nth($options, 2), null);
+
+    @if is-defined($max-width) {
+      $settings: map-merge($settings, (max-width: $max-width));
+    }
+
+    $min-height: if(length($options) > 2, nth($options, 3), null);
+
+    @if is-defined($min-height) {
+      $settings: map-merge($settings, (min-height: $min-height));
+    }
+
+    $max-height: if(length($options) > 3, nth($options, 4), null);
+
+    @if is-defined($max-height) {
+      $settings: map-merge($settings, (max-height: $max-height));
+    }
+  }
+
+  $min-width: map-get($settings, min-width);
+
+  @if is-defined($min-width) {
+    @if is-bound-box-size($min-width) {
+      min-width: $min-width;
+    }
+    @else {
+      @warn '`min-width: #{$min-width}` is not a valid size';
+    }
+  }
+
+  $min-height: map-get($settings, min-height);
+
+  @if is-defined($min-height) {
+    @if is-bound-box-size($min-height) {
+      min-height: $min-height;
+    }
+    @else {
+      @warn '`min-height: #{$min-height}` is not a valid size';
+    }
+  }
+
+  $max-width: map-get($settings, max-width);
+
+  @if is-defined($max-width) {
+    @if is-bound-box-size($max-width) {
+      max-width: $max-width;
+    }
+    @else {
+      @warn '`max-width: #{$max-width}` is not a valid size';
+    }
+  }
+
+  $max-height: map-get($settings, max-height);
+
+  @if is-defined($max-height) {
+    @if is-bound-box-size($max-height) {
+      max-height: $max-height;
+    }
+    @else {
+      @warn '`max-height: #{$max-height}` is not a valid size';
+    }
+  }
+}
+
 @mixin box-size($options, $height-fallback: true) {
   $settings: (width: null, height: null, min-width: null, min-height: null, max-width: null, max-height: null);
 
@@ -113,48 +190,11 @@ $bound-box-sizes: array-concat((none), $css-default-modes);
   }
 
   $min-width: map-get($settings, min-width);
-
-  @if is-defined($min-width) {
-    @if is-bound-box-size($min-width) {
-      min-width: $min-width;
-    }
-    @else {
-      @warn '`min-width: #{$min-width}` is not a valid size';
-    }
-  }
-
   $min-height: map-get($settings, min-height);
-
-  @if is-defined($min-height) {
-    @if is-bound-box-size($min-height) {
-      min-height: $min-height;
-    }
-    @else {
-      @warn '`min-height: #{$min-height}` is not a valid size';
-    }
-  }
-
   $max-width: map-get($settings, max-width);
-
-  @if is-defined($max-width) {
-    @if is-bound-box-size($max-width) {
-      max-width: $max-width;
-    }
-    @else {
-      @warn '`max-width: #{$max-width}` is not a valid size';
-    }
-  }
-
   $max-height: map-get($settings, max-height);
 
-  @if is-defined($max-height) {
-    @if is-bound-box-size($max-height) {
-      max-height: $max-height;
-    }
-    @else {
-      @warn '`max-height: #{$max-height}` is not a valid size';
-    }
-  }
+  @include box-bounds($min-width $min-height $max-width $max-height);
 }
 
 @mixin box-color($options) {

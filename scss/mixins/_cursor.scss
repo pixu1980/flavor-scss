@@ -14,3 +14,18 @@ $cursor-modes: array-concat((alias, all-scroll, auto, cell, context-menu, col-re
     @warn '`cursor: #{$c}` is not a valid cursor value';
   }
 }
+
+$pointer-events-modes: array-concat((all, auto, bounding-box, fill, painted, stroke, unset, visible, visiblefill, visiblepainted, visiblestroke), $css-default-modes);
+
+@function is-pointer-events-mode($pe) {
+  @return is-defined($pe) and array-contains($pointer-events-modes, $pe);
+}
+
+@mixin pointer-events($pe) {
+  @if is-pointer-events-mode($pe) {
+    pointer-events: $pe;
+  }
+  @else {
+    @warn '`pointer-events: #{$pe}` is not a valid pointer-events value';
+  }
+}
