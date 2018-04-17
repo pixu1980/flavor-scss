@@ -5,9 +5,9 @@
 @import 'box';
 @import 'background';
 @import 'text';
-@import 'padding';
+// @import 'padding'; TODO: fix this type checking
 @import 'border';
-@import 'margin';
+// @import 'margin'; TODO: fix this type checking
 @import 'media';
 @import 'overflow';
 @import 'transform';
