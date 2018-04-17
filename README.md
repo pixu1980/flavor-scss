@@ -4,7 +4,7 @@
 Black Mirror
 
 ## Version
-v0.6.20
+v0.6.21
 
 ## Badges
 
