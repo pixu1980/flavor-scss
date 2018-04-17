@@ -1,3 +1,11 @@
+## [Version 0.6.22](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.22) (2018-4-17)
+
+### Bug fixes
+
+- removed margin & padding mixins due to wrong type checking---- need to be fixed asap: [`fbd0be4`](https://github.com/blackmirror1980/flavor-scss/commit/fbd0be4)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.6.21...v0.6.22)
+
 ## [Version 0.6.21](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.21) (2018-4-17)
 
 ### Bug fixes
