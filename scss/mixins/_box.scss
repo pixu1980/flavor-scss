@@ -55,16 +55,16 @@ $bound-box-sizes: array-concat((none), $css-default-modes);
       $settings: map-merge($settings, (min-width: $min-width));
     }
 
-    $max-width: if(length($options) > 1, nth($options, 2), null);
-
-    @if is-defined($max-width) {
-      $settings: map-merge($settings, (max-width: $max-width));
-    }
-
-    $min-height: if(length($options) > 2, nth($options, 3), null);
+    $min-height: if(length($options) > 1, nth($options, 2), null);
 
     @if is-defined($min-height) {
       $settings: map-merge($settings, (min-height: $min-height));
+    }
+
+    $max-width: if(length($options) > 2, nth($options, 3), null);
+
+    @if is-defined($max-width) {
+      $settings: map-merge($settings, (max-width: $max-width));
     }
 
     $max-height: if(length($options) > 3, nth($options, 4), null);
@@ -144,16 +144,16 @@ $bound-box-sizes: array-concat((none), $css-default-modes);
       $settings: map-merge($settings, (min-width: $min-width));
     }
 
-    $max-width: if(length($options) > 3, nth($options, 4), null);
-
-    @if is-defined($max-width) {
-      $settings: map-merge($settings, (max-width: $max-width));
-    }
-
-    $min-height: if(length($options) > 4, nth($options, 5), null);
+    $min-height: if(length($options) > 3, nth($options, 4), null);
 
     @if is-defined($min-height) {
       $settings: map-merge($settings, (min-height: $min-height));
+    }
+
+    $max-width: if(length($options) > 4, nth($options, 5), null);
+
+    @if is-defined($max-width) {
+      $settings: map-merge($settings, (max-width: $max-width));
     }
 
     $max-height: if(length($options) > 5, nth($options, 6), null);
