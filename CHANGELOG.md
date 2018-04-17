@@ -1,3 +1,11 @@
+## [Version 0.6.24](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.24) (2018-4-17)
+
+### Bug fixes
+
+- box-bounds mixins fix: [`ba0b732`](https://github.com/blackmirror1980/flavor-scss/commit/ba0b732)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.6.23...v0.6.24)
+
 ## [Version 0.6.23](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.23) (2018-4-17)
 
 ### Bug fixes
