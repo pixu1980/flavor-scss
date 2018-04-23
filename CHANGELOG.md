@@ -1,3 +1,11 @@
+## [Version 0.6.25](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.25) (2018-4-23)
+
+### Bug fixes
+
+- compatibility fix for grid system containers: [`37edfb0`](https://github.com/blackmirror1980/flavor-scss/commit/37edfb0)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.6.24...v0.6.25)
+
 ## [Version 0.6.24](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.6.24) (2018-4-17)
 
 ### Bug fixes
