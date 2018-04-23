@@ -102,7 +102,6 @@
 @mixin containers($gutter: $gutter-default) {
   // Containers
   // --------------------------------------------------
-
   %container-base {
     // container-base
     @include display(block);
@@ -111,19 +110,21 @@
     @include margin(0 auto);
   }
 
-  [class*='container'] {
+  .container,
+  .container-fluid {
     // Container widths
     //
     // Set the container width, and override it for fixed navbars in media queries.
     @extend %container-base;
 
-    + [class*='container'] {
+    + .container,
+    + .container-fluid {
       @include margin($gutter null null null);
     }
+  }
 
-    &:not([class*='-fluid']) {
-      @include container-breakpoints($common-breakpoints, $gutter);
-    }
+  .container {
+    @include container-breakpoints($common-breakpoints, $gutter);
   }
 }
 
