@@ -20,7 +20,9 @@
     }
   }
 
-  @include helpers; // Grid system
+  @include helpers;
+
+  // Grid system
   // --------------------------------------------------
   @include containers($gutter);
   @include rows($gutter);
