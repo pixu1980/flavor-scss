@@ -1,0 +1,39 @@
+@mixin container-breakpoints($breakpoints: $common-breakpoints, $gutter: $gutter-default) {
+  // Containers Breakpoints
+  // --------------------------------------------------
+  @each $key, $breakpoint in $breakpoints {
+    @include media($breakpoint) {
+      @include box-size(($breakpoint - $gutter) auto);
+    }
+  }
+}
+
+@mixin containers($gutter: $gutter-default) {
+  // Containers
+  // --------------------------------------------------
+  %container-base {
+    // container-base
+    @include display(block);
+    @include box-size(100% auto);
+    @include padding(0 $gutter);
+    @include margin(0 auto);
+  }
+
+  .container,
+  .container-fluid {
+    // Container widths
+    //
+    // Set the container width, and override it for fixed navbars in media queries.
+    @extend %container-base;
+
+    + .container,
+    + .container-fluid {
+      @include margin($gutter null null null);
+    }
+  }
+
+  .container {
+    @include container-breakpoints($common-breakpoints, $gutter);
+  }
+}
+

@@ -1,161 +1,28 @@
 @charset 'UTF-8';
 
-@mixin columns-sizes($columns: $columns-default, $gutter: $gutter-default, $key: '') {
-  // Columns Sizes
-  // --------------------------------------------------
-  $gutter-threshold: $gutter / 100 * 11.46666666666667;
+@import 'reboot';
+@import 'helpers';
+@import 'containers';
+@import 'rows';
+@import 'colums';
 
-  @for $i from 0 through $columns {
-    @if ($i==0) {
-      .col-#{$key}-push-0 {
-        left: auto;
-      }
-
-      .col-#{$key}-pull-0 {
-        right: auto;
-      }
-    }
-    @else {
-      $col-percentage: percentage($i / $columns);
-
-      .col-#{$key}-#{$i} {
-        width: calc(#{$col-percentage} - #{$gutter-threshold});
-      }
-
-      .col-#{$key}-push-#{$i} {
-        left: calc(#{$col-percentage} - #{$gutter-threshold});
-      }
-
-      .col-#{$key}-pull-#{$i} {
-        right: calc(#{$col-percentage} - #{$gutter-threshold});
-      }
-
-      .col-#{$key}-offset-#{$i} {
-        margin-left: calc(#{$col-percentage} - #{$gutter-threshold});
-      }
-    }
+@mixin grid-system($columns: $columns-default, $gutter: $gutter-default, $reboot: true, $font-family: $font-family-base, $font-size: $font-size-base, $line-height: $line-height-base, $font-weight: $font-weight-base) {
+  @if $reboot {
+    @include reboot;
   }
-}
-
-@mixin columns-breakpoints($breakpoints: $columns-breakpoints, $columns: $columns-default, $gutter: $gutter-default, $first-breakpoint: $first-column-breakpoint-default) {
-  // Columns Breakpoints
-  // --------------------------------------------------
-  @each $key, $breakpoint in $breakpoints {
-    @if ($breakpoint==$first-breakpoint) {
-      @include columns-sizes($columns, $gutter, $key);
-    }
-    @else {
-      @include media($breakpoint) {
-        @include columns-sizes($columns, $gutter, $key);
-      }
-    }
-  }
-}
-
-@mixin columns($columns: $columns-default, $gutter: $gutter-default) {
-  // Columns
-  // --------------------------------------------------
-  // Common styles for small and large grid columns
-  $padding: ($gutter / 2);
-
-  [class*='col-'] {
-    @include position(relative);
-    @include display(inline-block);
-    @include padding(null $padding);
-    @include content-align(left top);
-
-    min-height: 1px; // Prevent columns from collapsing when empty
-  }
-
-  @include columns-breakpoints($columns-breakpoints, $columns, $gutter, $first-column-breakpoint-default);
-}
-
-@mixin rows($gutter: $gutter-default) {
-  // Rows
-  // --------------------------------------------------
-  $margin: ($gutter / -2);
-
-  .row {
-    // Row
-    //
-    // Rows contain and clear the floats of your columns.
-    @include display(block);
-    @include margin(0 $margin 0 $margin);
-    @include reset-inline-block;
-
-    + .row {
-      @include margin($gutter null null null);
-    }
-  }
-}
-
-@mixin container-breakpoints($breakpoints: $common-breakpoints, $gutter: $gutter-default) {
-  // Containers Breakpoints
-  // --------------------------------------------------
-  @each $key, $breakpoint in $breakpoints {
-    @include media($breakpoint) {
-      @include box-size(($breakpoint - $gutter) auto);
-    }
-  }
-}
-
-@mixin containers($gutter: $gutter-default) {
-  // Containers
-  // --------------------------------------------------
-  %container-base {
-    // container-base
-    @include display(block);
-    @include box-size(100% auto);
-    @include padding(0 $gutter);
-    @include margin(0 auto);
-  }
-
-  .container,
-  .container-fluid {
-    // Container widths
-    //
-    // Set the container width, and override it for fixed navbars in media queries.
-    @extend %container-base;
-
-    + .container,
-    + .container-fluid {
-      @include margin($gutter null null null);
+  @else {
+    html,
+    body {
+      font-family: $font-family;
+      font-size: $font-size;
+      line-height: $line-height;
+      font-weight: $font-weight;
     }
   }
 
-  .container {
-    @include container-breakpoints($common-breakpoints, $gutter);
-  }
-}
-
-@mixin helpers {
-  [class*='content-'] {
-    &[class*='-left'] {
-      @include content-align(left null);
-    }
-    &[class*='-center'] {
-      @include content-align(center null);
-    }
-    &[class*='-right'] {
-      @include content-align(right null);
-    }
-    &[class*='-top'] {
-      @include content-align(null top);
-    }
-    &[class*='-middle'] {
-      @include content-align(null middle);
-    }
-    &[class*='-bottom'] {
-      @include content-align(null bottom);
-    }
-  }
-}
-
-@mixin grid-system($columns: $columns-default, $gutter: $gutter-default) {
-  // Grid system
+  @include helpers; // Grid system
   // --------------------------------------------------
   @include containers($gutter);
   @include rows($gutter);
   @include columns($columns, $gutter);
-  @include helpers;
 }

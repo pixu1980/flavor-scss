@@ -1,0 +1,23 @@
+@mixin helpers {
+  [class*='content-'] {
+    &[class*='-left'] {
+      @include content-align(left null);
+    }
+    &[class*='-center'] {
+      @include content-align(center null);
+    }
+    &[class*='-right'] {
+      @include content-align(right null);
+    }
+    &[class*='-top'] {
+      @include content-align(null top);
+    }
+    &[class*='-middle'] {
+      @include content-align(null middle);
+    }
+    &[class*='-bottom'] {
+      @include content-align(null bottom);
+    }
+  }
+}
+

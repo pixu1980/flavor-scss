@@ -1,0 +1,70 @@
+@mixin columns-sizes($columns: $columns-default, $gutter: $gutter-default, $key: '') {
+  // Columns Sizes
+  // --------------------------------------------------
+  $gutter-threshold: $gutter / 100 * 11.46666666666667;
+
+  @for $i from 0 through $columns {
+    @if ($i==0) {
+      .col-#{$key}-push-0 {
+        left: auto;
+      }
+
+      .col-#{$key}-pull-0 {
+        right: auto;
+      }
+    }
+    @else {
+      $col-percentage: percentage($i / $columns);
+
+      .col-#{$key}-#{$i} {
+        width: calc(#{$col-percentage} - #{$gutter-threshold});
+      }
+
+      .col-#{$key}-push-#{$i} {
+        left: calc(#{$col-percentage} - #{$gutter-threshold});
+      }
+
+      .col-#{$key}-pull-#{$i} {
+        right: calc(#{$col-percentage} - #{$gutter-threshold});
+      }
+
+      .col-#{$key}-offset-#{$i} {
+        margin-left: calc(#{$col-percentage} - #{$gutter-threshold});
+      }
+    }
+  }
+}
+
+@mixin columns-breakpoints($breakpoints: $columns-breakpoints, $columns: $columns-default, $gutter: $gutter-default, $first-breakpoint: $first-column-breakpoint-default) {
+  // Columns Breakpoints
+  // --------------------------------------------------
+  @each $key, $breakpoint in $breakpoints {
+    @if ($breakpoint==$first-breakpoint) {
+      @include columns-sizes($columns, $gutter, $key);
+    }
+    @else {
+      @include media($breakpoint) {
+        @include columns-sizes($columns, $gutter, $key);
+      }
+    }
+  }
+}
+
+@mixin columns($columns: $columns-default, $gutter: $gutter-default) {
+  // Columns
+  // --------------------------------------------------
+  // Common styles for small and large grid columns
+  $padding: ($gutter / 2);
+
+  [class*='col-'] {
+    @include position(relative);
+    @include display(inline-block);
+    @include padding(null $padding);
+    @include content-align(left top);
+
+    min-height: 1px; // Prevent columns from collapsing when empty
+  }
+
+  @include columns-breakpoints($columns-breakpoints, $columns, $gutter, $first-column-breakpoint-default);
+}
+
