@@ -1,3 +1,11 @@
+## [Version 0.7.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.1) (2018-4-25)
+
+### Bug fixes
+
+- grid system update bugfix: [`40be335`](https://github.com/blackmirror1980/flavor-scss/commit/40be335)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.7.0...v0.7.1)
+
 ## [Version 0.7.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.0) (2018-4-25)
 
 ### Breaking changes
