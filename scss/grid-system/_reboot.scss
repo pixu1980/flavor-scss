@@ -88,11 +88,7 @@
   body {
     @include margin(0);
     @include content-align(left middle);
-
-    font-family: $font-family-base;
-    font-size: $font-size-base;
-    font-weight: $font-weight-base;
-    line-height: $line-height-base;
+    @include font($font-size-base $line-height-base $font-family-base $font-weight-base);
   }
 
   // Suppress the focus outline on elements that cannot be accessed via keyboard.

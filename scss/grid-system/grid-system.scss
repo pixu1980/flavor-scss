@@ -6,14 +6,14 @@
 @import 'rows';
 @import 'columns';
 
-@mixin grid-system($columns: $columns-default, $gutter: $gutter-default, $reboot: true, $font-family: $font-family-base, $font-size: $font-size-base, $line-height: $line-height-base, $font-weight: $font-weight-base) {
+@mixin grid-system($columns: $columns-default, $gutter: $gutter-default, $reboot: true) {
   @if $reboot {
     @include reboot;
   }
   @else {
     html,
     body {
-      @include font($font-size $line-height $font-family $font-weight);
+      @include font($font-size-base $line-height-base $font-family-base $font-weight-base);
     }
   }
 

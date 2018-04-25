@@ -12,10 +12,10 @@ $font-size-base: 10px !default; // Assumes the browser default, typically `16px`
 $font-weight-base: 400 !default;
 $line-height-base: 1.5 !default;
 
-$font-weight-extra-light: 200;
-$font-weight-light: 300;
-$font-weight-normal: $font-weight-base;
-$font-weight-semi-bold: 500;
-$font-weight-medium: $font-weight-semi-bold;
-$font-weight-bold: 700;
-$font-weight-black: 900;
+$font-weight-extra-light: 200 !default;
+$font-weight-light: 300 !default;
+$font-weight-normal: $font-weight-base !default;
+$font-weight-semi-bold: 500 !default;
+$font-weight-medium: $font-weight-semi-bold !default;
+$font-weight-bold: 700 !default;
+$font-weight-black: 900 !default;
