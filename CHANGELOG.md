@@ -1,3 +1,11 @@
+## [Version 0.7.2](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.2) (2018-4-25)
+
+### Bug fixes
+
+- fixed grid system font bug: [`1c811db`](https://github.com/blackmirror1980/flavor-scss/commit/1c811db)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.7.1...v0.7.2)
+
 ## [Version 0.7.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.1) (2018-4-25)
 
 ### Bug fixes
