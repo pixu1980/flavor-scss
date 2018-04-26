@@ -1,3 +1,11 @@
+## [Version 0.7.3](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.3) (2018-4-26)
+
+### New features
+
+- - added .sassdocrc - added documentation for types group: [`86fa8ae`](https://github.com/blackmirror1980/flavor-scss/commit/86fa8ae)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.7.2...v0.7.3)
+
 ## [Version 0.7.2](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.2) (2018-4-25)
 
 ### Bug fixes
