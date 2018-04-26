@@ -1,10 +1,11 @@
 @charset 'UTF-8';
 
 ////
-/// Flavor SCSS Animations Module
+/// Flavor SCSS Mixins Animations Module
 /// @group mixins
-/// @author Black mirror
+/// @author blackmirror1980
 ////
+
 /// @name animation-name-modes
 /// @access public
 $animation-name-modes: array-concat((none), $css-default-modes);
@@ -12,7 +13,7 @@ $animation-name-modes: array-concat((none), $css-default-modes);
 /// Checks if animation name is string or css default (inherit, initial)
 /// @name is-animation-name
 /// @access public
-/// @return {Bool}
+/// @return {boolean}
 @function is-animation-name($an) {
   @return is-string($an) or array-contains($animation-name-modes, $an);
 }

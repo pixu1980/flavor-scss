@@ -1,11 +1,31 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Types Color Module
+/// @group types-color
+/// @author blackmirror1980
+////
+
+/// Checks if a value is a color value
+///
+/// @access public
+/// @param {color} $c - the value to check
+/// @return {boolean}
 @function is-color($c) {
   @return is-defined($c) and type-of($c)==color;
 }
 
+/// Color modes supported
+///
+/// @type list
+/// @access private
 $color-modes: array-concat((transparent), $css-default-modes);
 
+/// Checks if a value is a css color value (including transparent, initial, inherit)
+///
+/// @access public
+/// @param {color} $c - the value to check
+/// @return {boolean}
 @function is-css-color($c) {
   @return is-defined($c) and (is-color($c) or array-contains($color-modes, $c));
 }

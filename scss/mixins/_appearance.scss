@@ -1,5 +1,11 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Mixins Appearance Module
+/// @group mixins
+/// @author blackmirror1980
+////
+
 @mixin appearance ($a) {
   @include prefixer(appearance, $a);
 }

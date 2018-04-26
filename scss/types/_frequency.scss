@@ -1,7 +1,22 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Types Frequency Module
+/// @group types-frequency
+/// @author blackmirror1980
+////
+
+/// Frequency units supported
+///
+/// @type list
+/// @access private
 $frequency-units: (Hz, kHz);
 
+/// Checks if a value has a supported frequency unit
+///
+/// @access public
+/// @param {any} $f - the value to check
+/// @return {boolean}
 @function is-frequency($f) {
   @return is-number($f) and array-contains($frequency-units, unit($f));
 }

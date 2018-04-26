@@ -1,5 +1,16 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Types Function Module
+/// @group types-function
+/// @author blackmirror1980
+////
+
+/// Checks if something is a function
+///
+/// @access public
+/// @param {any} $f - the value to check
+/// @return {boolean}
 @function is-function($f) {
   @return is-defined($f) and type-of($f)==function;
 }

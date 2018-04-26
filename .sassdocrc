@@ -1,0 +1,53 @@
+dest: docs
+theme: flippant
+description: |
+  ## Flavor SCSS - Advanced and strongly type checked mixins with a Grid System
+  ---
+  #### Greetings to
+    * [Hugo Giraudel](https://hugogiraudel.com)
+    * [Bootstrap](https://getbootstrap.com)
+    * [normalize.css](https://github.com/necolas/normalize.css)
+sort:
+  - group
+  - file
+  - access
+groups:
+  undefined: Core
+  core: Core
+  grid-system-columns: Grid System - Columns Module
+  grid-system-containers: Grid System - Containers Module
+  grid-system-helpers: Grid System - Helpers Module
+  grid-system-reboot: Grid System - Reboot Module
+  grid-system-rows: Grid System - Rows Module
+  grid-system-options: Grid System - Options
+  grid-system: Grid System
+  mixins-animation: Mixins - Animation Module
+  mixins-appearance: Mixins - Appearance Module
+  mixins-background: Mixins - Background Module
+  mixins-border: Mixins - Border Module
+  mixins-box: Mixins - Box Module
+  mixins-cursor: Mixins - Cursor Module
+  mixins-filter: Mixins - Filter Module
+  mixins-margin: Mixins - Margin Module
+  mixins-media: Mixins - Media Module
+  mixins-overflow: Mixins - Overflow Module
+  mixins-padding: Mixins - Padding Module
+  mixins-text: Mixins - Text Module
+  mixins-transform: Mixins - Transform Module
+  mixins-transition: Mixins - Transition Module
+  mixins-utils: Mixins - Utils Module
+  mixins: Mixins
+  types-angle: Types - Angle Module
+  types-array: Types - Array Module
+  types-boolean: Types - Boolean Module
+  types-color: Types - Color Module
+  types-common: Types - Common Module
+  types-frequency: Types - Frequency Module
+  types-function: Types - Function Module
+  types-number: Types - Number Module
+  types-object: Types - Object Module
+  types-string: Types - String Module
+  types-time: Types - Time Module
+  types-url: Types - URL Module
+  types: Types
+  options: Options

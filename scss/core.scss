@@ -1,9 +1,25 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Core Module
+/// @group core
+/// @author blackmirror1980
+////
+
+/// Checks if a value is null
+///
+/// @access public
+/// @param {any} $n - the value to check
+/// @return {boolean}
 @function is-null($n) {
   @return type-of($n)==null;
 }
 
+/// Checks if a value is defined
+///
+/// @access public
+/// @param {any} $d - the value to check
+/// @return {boolean}
 @function is-defined($d) {
   @return $d and not is-null($d);
 }

@@ -1,28 +1,69 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Types Number Module
+/// @group types-number
+/// @author blackmirror1980
+////
+
+/// Checks if something is a number
+///
+/// @access public
+/// @param {any} $n - the value to check
+/// @return {boolean}
 @function is-number($n) {
   @return is-defined($n) and type-of($n)==number;
 }
 
+/// Checks if something is an integer number
+///
+/// @access public
+/// @param {any} $i - the value to check
+/// @return {boolean}
 @function is-integer($i) {
   @return is-number($i) and round($i)==$i;
 }
 
+/// Checks if something is a floating number
+///
+/// @access public
+/// @param {any} $f - the value to check
+/// @return {boolean}
+@function is-float($f) {
+  @return is-number($f) and floor($f)!=$f;
+}
+
+/// Checks if a number is between two numbers, with an include bounds options defaulted to true
+///
+/// @access public
+/// @param {number} $n - the value to check
+/// @param {number} $f - the from value
+/// @param {number} $t - the to value
+/// @param {boolean} $include-bounds [true] - specifies to execute either >= & =< or > & <
+/// @return {boolean}
 @function is-number-between($n, $from, $to, $include-bounds: true) {
   @if (is-number($n) and is-number($from) and is-number($to)) {
-    @if ($include-bounds==true) {
-      @return if($include-bounds, ($n >=$from) and ($n <=$to), ($n > $from) and ($n < $to));
-    }
+    @return if($include-bounds, ($n >=$from) and ($n <=$to), ($n > $from) and ($n < $to));
   }
 
   @warn '`#{$n}, #{$from} and #{$to}` are not valid numbers';
   @return false;
 }
 
+/// Checks if something is a percentage
+///
+/// @access public
+/// @param {any} $p - the value to check
+/// @return {boolean}
 @function is-percentage($p) {
   @return is-number($p) and unit($p)=='%';
 }
 
+/// Checks if something is a percentage floating number (between 0 and 1)
+///
+/// @access public
+/// @param {any} $pn - the value to check
+/// @return {boolean}
 @function is-percentage-number($pn) {
-  @return is-number($pn) and unitless($pn)==$pn and is-number-between($pn, 0, 1);
+  @return is-float($pn) and unitless($pn)==$pn and is-number-between($pn, 0, 1);
 }

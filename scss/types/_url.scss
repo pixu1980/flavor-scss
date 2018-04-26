@@ -1,5 +1,19 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Types URL Module
+/// @group types-url
+/// @author blackmirror1980
+////
+
+/// Checks if a string is an url function string
+///
+/// @access public
+/// @param {any} $u - the value to check
+/// @return {boolean}
+/// @requires {function} is-string
+/// @requires {function} string-starts-with
+/// @requires {function} string-ends-with
 @function has-url-function($u) {
   @if is-string($u) {
     $url: $u;
@@ -14,12 +28,22 @@
   @return false;
 }
 
+/// Checks if a string is an url
+///
+/// @access public
+/// @param {any} $u - the value to check
+/// @return {boolean}
+/// @requires {function} is-string
+/// @requires {function} has-url-function
+/// @requires {function} string-slice
+/// @requires {function} string-length
+/// @requires {function} string-starts-with
 @function is-url($u) {
   @if is-string($u) {
     $url: $u;
 
     @if has-url-function($url) {
-      $url: str-slice($u, 6, str-length($u) - 2);
+      $url: string-slice($u, 6, string-length($u) - 2);
     }
 
     @if string-starts-with($url, '../') or string-starts-with($url, '/') or string-starts-with($url, 'http') {
@@ -31,6 +55,11 @@
   @return false;
 }
 
+/// Adds the url function to an url string if is missing
+///
+/// @access public
+/// @param {any} $u - the value to check
+/// @return {boolean}
 @function inspect-url($u) {
   @if is-url($u) {
     $url: $u;

@@ -1,20 +1,42 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Types Array Module
+/// @group types-array
+/// @author blackmirror1980
+////
+
+/// Checks if a value is an array/list
+///
+/// @access public
+/// @param {list | array} $a - the value to check
+/// @return {boolean}
 @function is-array($a) {
   @return is-defined($a) and type-of($a)==list;
 }
 
-@function array-contains($list, $item) {
-  @if is-array($list) and is-defined($item) {
-    $index-of: index($list, $item);
+/// Checks if an array/list contains specified item
+///
+/// @access public
+/// @param {list | array} $a - the array/list
+/// @param {any} $i - the item
+/// @return {boolean}
+@function array-contains($a, $i) {
+  @if is-array($a) and is-defined($i) {
+    $index-of: index($a, $i);
 
     @return is-defined($index-of) and $index-of > 0;
   }
 
-  @warn '`array: #{$list}` and `item: #{$item}` are not valid data for array-contains';
+  @warn '`array: #{$a}` and `item: #{$i}` are not valid data for array-contains';
   @return false;
 }
 
+/// Concats two or more arrays/lists
+///
+/// @access public
+/// @param {list | array} $lists... - the arrays/lists
+/// @return {list | array}
 @function array-concat($lists...) {
   $concat-list: ();
 
@@ -32,10 +54,16 @@
   @return $concat-list;
 }
 
-@function array-join($list, $sep: ', ') {
+/// Joins an array/list in a string with the specified separator
+///
+/// @access public
+/// @param {list | array} $a - the array/list
+/// @param {string} $sep [','] - the sparator
+/// @return {string}
+@function array-join($a, $sep: ', ') {
   $join-string: '';
 
-  @each $item in $list {
+  @each $item in $a {
     $join-string: $join-string + $sep + $item;
   }
 

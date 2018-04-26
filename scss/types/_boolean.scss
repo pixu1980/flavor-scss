@@ -1,5 +1,16 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Types Boolean Module
+/// @group types-boolean
+/// @author blackmirror1980
+////
+
+/// Checks if a value is a boolean value
+///
+/// @access public
+/// @param {boolean} $b - the value to check
+/// @return {boolean}
 @function is-boolean($b) {
   @return is-defined($b) and type-of($b)==bool;
 }

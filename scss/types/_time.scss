@@ -1,7 +1,22 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Types Time Module
+/// @group types-time
+/// @author blackmirror1980
+////
+
+/// Time units supported
+///
+/// @type list
+/// @access private
 $time-units: (s, ms);
 
+/// Checks if a value has a supported time unit
+///
+/// @access public
+/// @param {any} $t - the value to check
+/// @return {boolean}
 @function is-time($t) {
   @return is-number($t) and array-contains($time-units, unit($t));
 }

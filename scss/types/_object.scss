@@ -1,14 +1,44 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Types Object Module
+/// @group types-object
+/// @author blackmirror1980
+////
+
+/// Checks if something is an object/map
+///
+/// @access public
+/// @param {any} $o - the value to check
+/// @return {boolean}
 @function is-object($o) {
   @return is-defined($o) and type-of($o)==map;
 }
 
-@function get($map, $path) {
-  $keys: $path;
+/// Deep get function for objects
+///
+/// @access public
+/// @param {object | map} $o - the object to look in
+/// @param {string} $p - the path to check for
+/// @example
+/// $o: (
+///   prop1: (
+///     subprop1: #333,
+///     subprop2: #444
+///   ),
+///   prop2: (
+///     subprop1: solid
+///   ),
+///   prop3: (),
+/// )
+///
+/// $p: get($o, 'prop1.subprop2'); // #444
+/// @return {any}
+@function get($o, $p) {
+  $keys: $p;
 
-  @if is-string($path) {
-    $keys: string-split($path);
+  @if is-string($p) {
+    $keys: string-split($p);
   }
 
   $length: length($keys);
@@ -17,7 +47,7 @@
     $keys: nth($keys, 1);
   }
 
-  $get: map-get($map, nth($keys, 1));
+  $get: map-get($o, nth($keys, 1));
 
   @if $length > 1 {
     @for $i from 2 through $length {
@@ -38,11 +68,46 @@
   @return $return;
 }
 
-@function set($obj, $path, $value) {
-  $keys: $path;
+/// Deep set function for objects
+///
+/// @access public
+/// @param {object | map} $o - the object to modify in
+/// @param {string} $p - the path to use
+/// @param {any} $v - the value to use
+/// @example
+/// $o: (
+///   prop1: (
+///     subprop1: #333,
+///     subprop2: #444
+///   ),
+///   prop2: (
+///     subprop1: solid
+///   ),
+///   prop3: (),
+/// )
+///
+/// $p: set($o, 'prop2.subprop2', #555);
+///
+/// =>
+///
+/// $o: (
+///   prop1: (
+///     subprop1: #333,
+///     subprop2: #444
+///   ),
+///   prop2: (
+///     subprop1: solid
+///     subprop2: #555
+///   ),
+///   prop3: (),
+/// )
+///
+/// @return {any}
+@function set($o, $p, $v) {
+  $keys: $p;
 
-  @if is-string($path) {
-    $keys: string-split($path);
+  @if is-string($p) {
+    $keys: string-split($p);
   }
 
   $length: length($keys);
@@ -51,10 +116,10 @@
 
 
   @if $length > 1 {
-    $map-level: get($obj, $keys);
+    $map-level: get($o, $keys);
   }
 
-  $merge: (nth($keys, $length): $value);
+  $merge: (nth($keys, $length): $v);
 
   @if $map-level {
     $get-keys: get-keys($keys, $length);
@@ -67,7 +132,7 @@
 
     @if $j > 1 {
       $get-keys: get-keys($keys, $j);
-      $map-level: get($obj, $get-keys);
+      $map-level: get($o, $get-keys);
 
       @if $map-level {
         $merge: map-merge($map-level, ($key: $merge));
@@ -81,12 +146,62 @@
     }
   }
 
-  $obj: map-merge($obj, $merge);
+  $o: map-merge($o, $merge);
 
-  @return $obj;
+  @return $o;
 }
 
-@function extend($object, $objects...) {
+/// Deep extend/merge function for objects
+///
+/// @access public
+/// @param {object | map} $o - the object to modify in
+/// @param {object | map} $objects - the objects to merge in
+/// @example
+/// $o1: (
+///   prop1: (
+///     subprop1: #333,
+///     subprop2: #444
+///   ),
+///   prop2: (
+///     subprop1: solid
+///     subprop2: #555
+///   )
+/// )
+///
+/// $o2: (
+///   prop1: (
+///     subprop3: #555,
+///   ),
+///   prop2: (
+///     subprop2: Verdana
+///   ),
+/// )
+///
+/// $o3: (
+///   prop3: (
+///     subprop1: 1px
+///   ),
+/// )
+///
+/// =>
+///
+/// $o: (
+///   prop1: (
+///     subprop1: #333,
+///     subprop2: #444,
+///     subprop3: #555,
+///   ),
+///   prop2: (
+///     subprop1: solid
+///     subprop2: Verdana
+///   ),
+///   prop3: (
+///     subprop1: 1px
+///   ),
+/// )
+///
+/// @return {any}
+@function extend($o, $objects...) {
   $max: length($objects); // Loop through all maps in $objects...
 
   @for $i from 1 through $max {
@@ -104,7 +219,7 @@
     }
   }
 
-  @return $object;
+  @return $o;
 }
 
 

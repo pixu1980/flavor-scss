@@ -1,64 +1,126 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Types Common Module
+/// @group types-common
+/// @author blackmirror1980
+////
+
+/// CSS default modes supported (shared between all modes arrays/lists)
+///
+/// @type list
+/// @access private
 $css-default-modes: (initial, inherit);
 
-/// Checks is a value is a default css mode (initial, inherit)
+/// Checks if a value is a css default mode (initial, inherit)
 ///
-/// @param {String} $cd
-/// @return {Boolean}
+/// @access public
+/// @param {any} $cd - the value to check
+/// @return {boolean}
 @function is-css-default($cd) {
   @return is-defined($cd) and array-contains($css-default-modes, $cd);
 }
 
+/// Checks if a value is a css calc length value
+///
+/// @access public
+/// @param {any} $cl - the value to check
+/// @return {boolean}
 @function is-calc-length($cl) {
   @return is-defined($cl) and string-starts-with($cl + '', 'calc(') and string-ends-with($cl + '', ')');
 }
 
+/// Returns the css expression included in a css calc length value
+///
+/// @access public
+/// @param {any} $cl - the value to check
+/// @return {css-expression}
+@function get-calc-length-expression($cl) {
+  @if is-calc-length($cl) {
+    @return string-replace(string-replace($cl, 'calc(', ''), ')', '');
+  }
+}
+
+/// Length modes supported (auto and $css-default-modes)
+///
+/// @type list
+/// @access private
+/// @see {variable} css-default-modes
 $length-modes: array-concat((auto), $css-default-modes);
 
+/// Checks if a value is a css length mode supported
+///
+/// @access public
+/// @param {any} $lm - the value to check
+/// @return {boolean}
 @function is-length-mode($lm) {
   @return is-defined($lm) and array-contains($length-modes, $lm);
 }
 
+/// Relative length units supported
+///
+/// @type list
+/// @access private
 $relative-length-units: (em, ex, ch, rem, vw, vh, vmin, vmax);
 
+/// Checks if a length value has a relative length unit
+///
+/// @access public
+/// @param {any} $l - the value to check
+/// @return {boolean}
 @function is-relative-length($l) {
   @return is-number($l) and ($l==0 or (not(unitless($l) and (array-contains($relative-length-units, unit($l)) or is-percentage($l)))));
 }
 
+/// Absolute length units supported
+///
+/// @type list
+/// @access private
 $absolute-length-units: (cm, mm, in, px, pt, pc);
 
+/// Checks if a length value has an absolute length unit
+///
+/// @access public
+/// @param {any} $l - the value to check
+/// @return {boolean}
 @function is-absolute-length($l) {
   @return is-number($l) and ($l==0 or (not(unitless($l) and (array-contains($absolute-length-units, unit($l))))));
 }
 
-/// Checks is a value is a valid CSS length
+/// Checks if a value is a valid CSS length
+/// <br>Relative, Absolute, Calc or Length Mode
 ///
-/// @param {String} $l
-/// @return {Boolean}
+/// @access public
+/// @param {any} $l
+/// @return {boolean}
 @function is-length($l) {
   @return is-defined($l) and (is-relative-length($l) or is-absolute-length($l) or is-calc-length($l) or is-length-mode($l));
 }
 
+/// CSS size/length modes supported
+///
+/// @type list
+/// @access private
+/// @see {variable} css-default-modes
 $css-size-modes: array-concat((auto, fill, fill-available, available, fit-content, min-content, max-content), $css-default-modes);
 
-/// Checks for a valid CSS size.
+/// Checks if a value is a CSS size.
 ///
-/// @param {String} $s
-/// @return {Boolean}
+/// @param {any} $s
+/// @return {boolean}
 @function is-size($s) {
   @return is-defined($s) and (is-length($s) or array-contains($css-size-modes, $s));
 }
 
 /// Strips the unit from a value.
 ///
-/// @argument {Number} $n
-/// @return {Number (unitless)}
+/// @argument {number} $v
+/// @return {number (unitless)}
 /// @example scss
 ///   $dimension: strip-unit(10em);
 ///
 ///   // Output
 ///   $dimension: 10;
-@function strip-unit($value) {
-  @return ($value / ($value * 0 + 1));
+@function strip-unit($v) {
+  @return ($v / ($v * 0 + 1));
 }

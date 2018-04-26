@@ -1,52 +1,154 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Types String Module
+/// @group types-string
+/// @author blackmirror1980
+////
+
+/// Checks if a value is a string value.
+///
+/// @access public
+/// @param {string} $s - the value to check
+/// @return {boolean}
 @function is-string($s) {
   @return is-defined($s) and type-of($s)==string;
 }
 
+/// Returns the number of characters in a string.
+/// <br><br><u>Note: aliases the native str-length method</u>
+///
+/// @alias str-length
+/// @access public
+/// @param {string} $s - the string to count
+/// @return {number}
+@function string-length($s) {
+  @return str-length($s);
+}
+
+/// Returns the position index of the first occurrence of string needle in string haystack
+/// <br><br><u>Note: aliases the native str-index method</u>
+///
+/// @alias str-index
+/// @access public
+/// @param {string} $h - the haystack
+/// @param {string} $n - the needle
+/// @return {number}
+@function string-index($h, $n) {
+  @return str-index($n, $n);
+}
+
+/// Inserts string $i in string $s at $p position
+/// <br><br><u>Note: aliases the native str-insert method</u>
+///
+/// @alias str-insert
+/// @access public
+/// @param {string} $s - the string to modify
+/// @param {string} $i - the string to insert into
+/// @param {number} $p - the position index to use for insertion
+/// @return {string}
+@function string-insert($s, $i, $p) {
+  @return str-insert($s, $i, $p);
+}
+
+/// Extracts a sub string from a string between from & to position indexes,
+/// <br>if to position index is not specified (null), will be between from & the end of the string
+/// <br><br><u>Note: aliases the native str-slice method</u>
+///
+/// @alias str-slice
+/// @access public
+/// @param {string} $s - the string
+/// @param {string} $from [1] - the needle
+/// @param {string} $to [null] - the needle
+/// @return {number}
+@function string-slice($s, $from: 1, $to: null) {
+  @return str-slice($s, $from, $to);
+}
+
+/// Checks if a string starts with another string.
+///
+/// @access public
+/// @param {string} $h - the haystack
+/// @param {string} $n - the needle
+/// @return {boolean}
 @function string-starts-with($h, $n) {
   @if is-string($h) and is-string($n) {
-    @return str-slice($h, 1, str-length($n))==$n;
+    @return string-slice($h, 1, string-length($n))==$n;
   }
 
   @warn '`haystack: #{$h}` and `needle: #{$n}` are not valid strings';
   @return false;
 }
 
+/// Checks if a string contains another string.
+///
+/// @access public
+/// @param {string} $h - the haystack
+/// @param {string} $n - the needle
+/// @return {boolean}
 @function string-contains($h, $n) {
   @if is-string($h) and is-string($n) {
-    @return str-index($h, $n) > 0;
+    @return string-index($h, $n) > 0;
   }
 
   @warn '`haystack: #{$h}` and `needle: #{$n}` are not valid strings';
   @return false;
 }
 
+/// Checks if a string ends with another string.
+///
+/// @access public
+/// @param {string} $h - the haystack
+/// @param {string} $n - the needle
+/// @return {boolean}
 @function string-ends-with($h, $n) {
   @if is-string($h) and is-string($n) {
-    $h-length: str-length($h);
-    $n-length: str-length($n);
+    $h-length: string-length($h);
+    $n-length: string-length($n);
 
-    @return str-slice($h, $h-length - $n-length + 1)==$n;
+    @return string-slice($h, $h-length - $n-length + 1)==$n;
   }
 
   @warn '`haystack: #{$h}` and `needle: #{$n}` are not valid strings';
   @return false;
 }
 
+/// Splits a string in an array/list using the specified separator
+///
+/// @access public
+/// @param {string} $s - the string to split
+/// @param {string} $sep ['.'] - the separator
+/// @return {list | array}
 @function string-split($s, $sep: '.') {
   $split: ();
 
-  $i: str-index($s, $sep);
+  $i: string-index($s, $sep);
 
-  @while $i !=null {
-    $item: str-slice($s, 1, $i - 1);
-    $split: append($split, $item);
-    $s: str-slice($s, $i + 1);
-    $i: str-index($s, $sep);
+  @while $i!=null {
+    $item: string-slice($s, 1, $i - 1);
+    $split: array-concat($split, $item);
+    $s: string-slice($s, $i + 1);
+    $i: string-index($s, $sep);
   }
 
-  $split: append($split, $s);
+  $split: array-concat($split, $s);
 
   @return $split;
+}
+
+/// Replaces all the occurrencies of a string inside another string with the specified value
+///
+/// @access public
+/// @param {string} $h - the haystack
+/// @param {string} $n - the needle
+/// @param {string} $r [''] - the string to use for replacement
+/// @return {string} - the updated string
+@function string-replace($h, $n, $r: '') {
+  $i: string-index($h, $n);
+
+  @if $i {
+    @return string-slice($h, 1, $i - 1) + $r + string-replace(string-slice($h, $i + string-length($n)), $n, $r);
+  }
+
+  @return $h;
 }
