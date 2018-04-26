@@ -4,7 +4,7 @@
 Black Mirror
 
 ## Version
-v0.7.2
+v0.7.3
 
 ## Badges
 
@@ -43,6 +43,7 @@ npm install flavor-scss --save
 
 - [sass-lint](https://ghub.io/sass-lint): All Node Sass linter!
 - [sassdoc](https://ghub.io/sassdoc): Release the docs!
+- [sassdoc-theme-flippant](https://ghub.io/sassdoc-theme-flippant): A modified version of Sassdoc&#39;s default theme
 
 ## Tests
 
