@@ -17,7 +17,7 @@ $display-modes: array-concat((none, inline, block, inline-block, flex, inline-fl
   @return is-defined($dm) and array-contains($display-modes, $dm);
 }
 
-@mixin display($dm, $auto-reset-inline-block: true) {
+@mixin display($dm, $auto-reset-inline-block: false) {
   @if is-display-mode($dm) {
     display: $dm;
 
