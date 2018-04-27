@@ -1,3 +1,11 @@
+## [Version 0.7.5](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.5) (2018-4-27)
+
+### Bug fixes
+
+- string-slice bugfix: [`fca61cd`](https://github.com/blackmirror1980/flavor-scss/commit/fca61cd)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.7.4...v0.7.5)
+
 ## [Version 0.7.4](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.4) (2018-4-27)
 
 ### Bug fixes
