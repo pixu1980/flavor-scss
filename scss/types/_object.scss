@@ -210,12 +210,12 @@
 
     @each $key, $value in $current {
       // If value is a nested map and same key from object is a nested map as well
-      @if is-object($value) and is-object(map-get($object, $key)) {
+      @if is-object($value) and is-object(map-get($o, $key)) {
         // Recursive extend
-        $value: extend(get($object, $key), $value);
+        $value: extend(get($o, $key), $value);
       } // Merge current tuple with object
 
-      $object: map-merge($object, ($key: $value));
+      $o: map-merge($o, ($key: $value));
     }
   }
 
