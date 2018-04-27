@@ -1,3 +1,11 @@
+## [Version 0.7.9](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.9) (2018-4-27)
+
+### Bug fixes
+
+- fixed display inline-block auto reset: [`e8c4eaf`](https://github.com/blackmirror1980/flavor-scss/commit/e8c4eaf)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.7.8...v0.7.9)
+
 ## [Version 0.7.8](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.8) (2018-4-27)
 
 ### Bug fixes
