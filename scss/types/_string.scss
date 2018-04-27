@@ -35,7 +35,7 @@
 /// @param {string} $n - the needle
 /// @return {number}
 @function string-index($h, $n) {
-  @return str-index($n, $n);
+  @return str-index($h, $n);
 }
 
 /// Inserts string $i in string $s at $p position
