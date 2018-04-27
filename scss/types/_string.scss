@@ -59,9 +59,9 @@
 /// @access public
 /// @param {string} $s - the string
 /// @param {string} $from [1] - the needle
-/// @param {string} $to [null] - the needle
+/// @param {string} $to [-1] - the needle
 /// @return {number}
-@function string-slice($s, $from: 1, $to: null) {
+@function string-slice($s, $from: 1, $to: -1) {
   @return str-slice($s, $from, $to);
 }
 
