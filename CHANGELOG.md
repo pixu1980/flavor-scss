@@ -1,3 +1,11 @@
+## [Version 0.7.8](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.8) (2018-4-27)
+
+### Bug fixes
+
+- improving mixin documentation: [`1d5c110`](https://github.com/blackmirror1980/flavor-scss/commit/1d5c110)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.7.7...v0.7.8)
+
 ## [Version 0.7.7](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.7) (2018-4-27)
 
 ### Bug fixes
