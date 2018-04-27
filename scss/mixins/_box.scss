@@ -1,14 +1,29 @@
 @charset 'UTF-8';
 
+@mixin reset-inline-block {
+  letter-spacing: -.3em;
+  line-height: 0;
+  text-rendering: optimizespeed;
+
+  * {
+    letter-spacing: initial;
+    line-height: initial;
+  }
+}
+
 $display-modes: array-concat((none, inline, block, inline-block, flex, inline-flex, table, inline-table, table-caption, table-header-group, table-row-group, table-column-group, table-footer-group, table-row, table-column, table-cell, list-item, run-in), $css-default-modes);
 
 @function is-display-mode($dm) {
   @return is-defined($dm) and array-contains($display-modes, $dm);
 }
 
-@mixin display($dm) {
+@mixin display($dm, $auto-reset-inline-block: true) {
   @if is-display-mode($dm) {
     display: $dm;
+
+    @if $dm==inline-block and $auto-reset-inline-block==true {
+      @include reset-inline-block;
+    }
   }
   @else {
     @warn '`display: #{$dm}` is not a valid display mode';
@@ -300,16 +315,5 @@ $backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
   }
   @else {
     @warn '`backface-visibility: #{$bv}` is not a valid backface-visibility value';
-  }
-}
-
-@mixin reset-inline-block {
-  letter-spacing: -.3em;
-  line-height: 0;
-  text-rendering: optimizespeed;
-
-  * {
-    letter-spacing: initial;
-    line-height: initial;
   }
 }

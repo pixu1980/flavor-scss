@@ -1,7 +1,7 @@
 @charset 'UTF-8';
 
 ////
-/// Flavor SCSS Types Array Module
+/// Flavor SCSS Types Array
 /// @group types-array
 /// @author blackmirror1980
 ////
@@ -20,6 +20,8 @@
 /// @access public
 /// @param {list | array} $a - the array/list
 /// @param {any} $i - the item
+/// @requires {function} is-array
+/// @requires {function} is-defined
 /// @return {boolean}
 @function array-contains($a, $i) {
   @if is-array($a) and is-defined($i) {

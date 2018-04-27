@@ -1,8 +1,8 @@
 @charset 'UTF-8';
 
 ////
-/// Flavor SCSS Mixins Animations Module
-/// @group mixins
+/// Flavor SCSS Mixins Animation
+/// @group mixins-animation
 /// @author blackmirror1980
 ////
 
@@ -26,6 +26,7 @@ $animation-name-modes: array-concat((none), $css-default-modes);
 ///
 /// @access public
 /// @param {string} $at - the animation time
+/// @link https://www.w3schools.com/cssref/css3_pr_animation-duration.asp W3Schools animation-duration docs
 /// @return {boolean}
 @function is-animation-time($at) {
   @return is-time($at) or is-css-default($at);
@@ -37,52 +38,196 @@ $animation-name-modes: array-concat((none), $css-default-modes);
 /// @access private
 $animation-direction-modes: array-concat((normal, reverse, alternate, alternate-reverse), $css-default-modes);
 
+/// Checks if animation direction is a correct direction value
+///
+/// @access public
+/// @param {string} $ad - the animation direction
+/// @link https://www.w3schools.com/cssref/css3_pr_animation-direction.asp W3Schools animation-direction docs
+/// @return {boolean}
 @function is-animation-direction($ad) {
-  @return array-contains($animation-direction-modes, $ad);
+  @return is-defined($ad) and array-contains($animation-direction-modes, $ad);
 }
 
+/// Animation iteration count modes supported
+///
+/// @type list
+/// @access private
 $animation-iteration-count-modes: array-concat((infinite), $css-default-modes);
 
+/// Checks if animation iteration count is a correct iteration count value (integer or infinite, initial, inherit)
+///
+/// @access public
+/// @param {string} $aic - the animation iteration count
+/// @link https://www.w3schools.com/cssref/css3_pr_animation-iteration-count.asp W3Schools animation-iteration-count docs
+/// @return {boolean}
 @function is-animation-iteration-count($aic) {
   @return is-integer($aic) or array-contains($animation-iteration-count-modes, $aic);
 }
 
+/// Animation fill modes supported
+///
+/// @type list
+/// @access private
 $animation-fill-modes: array-concat((none, forwards, backwards, both), $css-default-modes);
 
+/// Checks if animation fill mode is a correct fill mode value (integer or none, forwards, backwards, both, initial, inherit)
+///
+/// @access public
+/// @param {string} $afm - the animation fill mode
+/// @link https://www.w3schools.com/cssref/css3_pr_animation-fill-mode.asp W3Schools animation-fill-mode docs
+/// @return {boolean}
 @function is-animation-fill-mode($afm) {
-  @return array-contains($animation-fill-modes, $afm);
+  @return is-defined($afm) and array-contains($animation-fill-modes, $afm);
 }
 
+/// Animation timing function modes supported
+///
+/// @type list
+/// @access private
 $animation-timing-function-modes: array-concat((linear, ease, ease-in, ease-out, ease-in-out, step-start, step-end), $css-default-modes);
 
+/// Checks if animation timing function mode is a correct timing function (steps(), cubid-bezier(), linear, ease, ease-in, ease-out, ease-in-out, step-start, step-end, initial, inherit)
+///
+/// @access public
+/// @param {string} $atf - the animation timing function
+/// @link https://www.w3schools.com/cssref/css3_pr_animation-timing-function.asp W3Schools animation-timing-function docs
+/// @return {boolean}
 @function is-animation-timing-function($atf) {
-  @return string-starts-with($atf, 'steps') or string-starts-with($atf, 'cubic-bezier') or array-contains($animation-timing-function-modes, $atf);
+  @return is-defined($atf) and (string-starts-with($atf, 'steps') or string-starts-with($atf, 'cubic-bezier') or array-contains($animation-timing-function-modes, $atf));
 }
 
+/// Animation play state supported
+///
+/// @type list
+/// @access private
 $animation-play-state-modes: array-concat((paused, running), $css-default-modes);
 
+/// Checks if animation play state is a correct play state value (paused, running, initial, inherit)
+///
+/// @access public
+/// @param {string} $aps - the animation play state
+/// @link https://www.w3schools.com/cssref/css3_pr_animation-play-state.asp W3Schools animation-play-state docs
+/// @return {boolean}
 @function is-animation-play-state-modes($aps) {
-  @return array-contains($animation-play-state-modess, $aps);
+  @return is-defined($aps) and array-contains($animation-play-state-modess, $aps);
 }
 
-// keyframe mixin e.g. usage
-// @include keyframe(fadeout) {
-//   0% {
-//     opacity: 1;
-//   }
-//   100% {
-//     opacity: 0;
-//   }
-// }
-// @include keyframe(changecolour) {
-//   0% {
-//     color: #000;
-//   }
-//   100% {
-//     color: #FFF;
-//   }
-// }
-@mixin keyframe ($animation-name) {
+/// Keyframe Mixin
+///
+/// @access public
+/// @param {string} $animation-name - the animation name
+/// @example scss - Usage - Fade Out
+///   @include keyframe(fade-out) {
+///     0% {
+///       opacity: 1;
+///     }
+///     100% {
+///       opacity: 0;
+///     }
+///   }
+///
+/// @example css - Output - Fade Out
+///   @-webkit-keyframes fade-out {
+///     0% {
+///       opacity: 1;
+///     }
+///     100% {
+///       opacity: 0;
+///     }
+///   }
+///
+///   @-moz-keyframes fade-out {
+///     0% {
+///       opacity: 1;
+///     }
+///     100% {
+///       opacity: 0;
+///     }
+///   }
+///
+///   @-ms-keyframes fade-out {
+///     0% {
+///       opacity: 1;
+///     }
+///     100% {
+///       opacity: 0;
+///     }
+///   }
+///
+///   @-o-keyframes fade-out {
+///     0% {
+///       opacity: 1;
+///     }
+///     100% {
+///       opacity: 0;
+///     }
+///   }
+///
+///   @keyframes fade-out {
+///     0% {
+///       opacity: 1;
+///     }
+///     100% {
+///       opacity: 0;
+///     }
+///   }
+///
+/// @example scss - Usage - Change Color
+///   @include keyframe(change-color) {
+///     0% {
+///       color: #000;
+///     }
+///     100% {
+///       color: #FFF;
+///     }
+///   }
+///
+/// @example css - Output - Change Color
+///   @-webkit-keyframes change-color {
+///     0% {
+///       color: #000;
+///     }
+///     100% {
+///       color: #FFF;
+///     }
+///   }
+///
+///   @-moz-keyframes change-color {
+///     0% {
+///       color: #000;
+///     }
+///     100% {
+///       color: #FFF;
+///     }
+///   }
+///
+///   @-ms-keyframes change-color {
+///     0% {
+///       color: #000;
+///     }
+///     100% {
+///       color: #FFF;
+///     }
+///   }
+///
+///   @-o-keyframes change-color {
+///     0% {
+///       color: #000;
+///     }
+///     100% {
+///       color: #FFF;
+///     }
+///   }
+///
+///   @keyframes change-color {
+///     0% {
+///       color: #000;
+///     }
+///     100% {
+///       color: #FFF;
+///     }
+///   }
+@mixin keyframe($animation-name) {
   @-webkit-keyframes #{$animation-name} {
     @content;
   }
@@ -104,8 +249,76 @@ $animation-play-state-modes: array-concat((paused, running), $css-default-modes)
   }
 }
 
-// animation mixin e.g. usage
-// @include animation(10s, 5s, changecolour)
+/// Animation Mixin
+///
+/// @access public
+/// @param {object | map} $options - animation options
+/// @param {string | animation-name-mode} $options.name [none] - animation name
+/// @param {time} $options.duration [0s] - animation duration
+/// @param {time} $options.delay [0s] - animation delay
+/// @param {string} $options.direction [normal] - animation direction
+/// @param {integer} $options.iteration-count [0] - animation iteration count
+/// @param {string} $options.timing-function [ease] - animation timing function (easing)
+/// @param {string} $options.fill-mode [forwards] - animation fill mode
+/// @param {string} $options.play-state [initial] - animation play state
+/// @requires {function} is-defined
+/// @requires {function} is-animation-time
+/// @requires {mixin} prefixer
+/// @example scss - Usage
+///   .animated-element {
+///     @include animation(change-color 10s 5s);
+///   }
+///
+/// @example css - Output
+///   .animated-element {
+///     -webkit-animation-name: change-color;
+///     -moz-animation-name: change-color;
+///     -ms-animation-name: change-color;
+///     -o-animation-name: change-color;
+///     animation-name: change-color;
+///
+///     -webkit-animation-duration: 10s;
+///     -moz-animation-duration: 10s;
+///     -ms-animation-duration: 10s;
+///     -o-animation-duration: 10s;
+///     animation-duration: 10s;
+///
+///     -webkit-animation-delay: 5s;
+///     -moz-animation-delay: 5s;
+///     -ms-animation-delay: 5s;
+///     -o-animation-delay: 5s;
+///     animation-delay: 5s;
+///
+///     -webkit-animation-direction: normal;
+///     -moz-animation-direction: normal;
+///     -ms-animation-direction: normal;
+///     -o-animation-direction: normal;
+///     animation-direction: normal;
+///
+///     -webkit-animation-iteration-count: 0;
+///     -moz-animation-iteration-count: 0;
+///     -ms-animation-iteration-count: 0;
+///     -o-animation-iteration-count: 0;
+///     animation-iteration-count: 0;
+///
+///     -webkit-animation-timing-function: ease;
+///     -moz-animation-timing-function: ease;
+///     -ms-animation-timing-function: ease;
+///     -o-animation-timing-function: ease;
+///     animation-timing-function: ease;
+///
+///     -webkit-animation-fill-mode: forwards;
+///     -moz-animation-fill-mode: forwards;
+///     -ms-animation-fill-mode: forwards;
+///     -o-animation-fill-mode: forwards;
+///     animation-fill-mode: forwards;
+///
+///     -webkit-animation-play-state: initial;
+///     -moz-animation-play-state: initial;
+///     -ms-animation-play-state: initial;
+///     -o-animation-play-state: initial;
+///     animation-play-state: initial;
+///   }
 @mixin animation($options) {
   @if is-css-default($options) {
     @include prefixer(animation, $options);

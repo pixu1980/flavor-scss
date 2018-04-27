@@ -1,7 +1,7 @@
 @charset 'UTF-8';
 
 ////
-/// Flavor SCSS Types Angle Module
+/// Flavor SCSS Types Angle
 /// @group types-angle
 /// @author blackmirror1980
 ////
@@ -17,20 +17,19 @@ $angle-units: (deg, rad, grad, turn);
 /// @access public
 /// @param {number (with unit)} $a - the value to check
 /// @return {boolean}
-/// @example scss
-/// // scss source
-/// .element {
-///   $a: 30deg;
+/// @example scss - Usage
+///   .element {
+///     $a: 30deg;
 ///
-///   @if is-angle($a) {
-///     transform: rotate($a);
+///     @if is-angle($a) {
+///       transform: rotate($a);
+///     }
 ///   }
-/// }
 ///
-/// // css output
-/// .element {
-///   transform: rotate(30deg);
-/// }
+/// @example css - Output
+///   .element {
+///     transform: rotate(30deg);
+///   }
 @function is-angle($a) {
   @return is-number($a) and array-contains($angle-units, unit($a));
 }

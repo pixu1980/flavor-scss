@@ -1,7 +1,7 @@
 @charset 'UTF-8';
 
 ////
-/// Flavor SCSS Types Object Module
+/// Flavor SCSS Types Object
 /// @group types-object
 /// @author blackmirror1980
 ////
@@ -20,19 +20,20 @@
 /// @access public
 /// @param {object | map} $o - the object to look in
 /// @param {string} $p - the path to check for
-/// @example
-/// $o: (
-///   prop1: (
-///     subprop1: #333,
-///     subprop2: #444
-///   ),
-///   prop2: (
-///     subprop1: solid
-///   ),
-///   prop3: (),
-/// )
+/// @example scss - Usage
+///   $o: (
+///     prop1: (
+///       subprop1: #333,
+///       subprop2: #444
+///     ),
+///     prop2: (
+///       subprop1: solid
+///     ),
+///     prop3: (),
+///   )
 ///
-/// $p: get($o, 'prop1.subprop2'); // #444
+/// @example scss - Result
+///   $p: get($o, 'prop1.subprop2'); // #444
 /// @return {any}
 @function get($o, $p) {
   $keys: $p;
@@ -74,33 +75,33 @@
 /// @param {object | map} $o - the object to modify in
 /// @param {string} $p - the path to use
 /// @param {any} $v - the value to use
-/// @example
-/// $o: (
-///   prop1: (
-///     subprop1: #333,
-///     subprop2: #444
-///   ),
-///   prop2: (
-///     subprop1: solid
-///   ),
-///   prop3: (),
-/// )
+/// @example scss - Usage
+///   $o: (
+///     prop1: (
+///       subprop1: #333,
+///       subprop2: #444
+///     ),
+///     prop2: (
+///       subprop1: solid
+///     ),
+///     prop3: (),
+///   )
 ///
-/// $p: set($o, 'prop2.subprop2', #555);
+///   $p: set($o, 'prop2.subprop2', #555);
 ///
-/// =>
+/// @example scss - Result
 ///
-/// $o: (
-///   prop1: (
-///     subprop1: #333,
-///     subprop2: #444
-///   ),
-///   prop2: (
-///     subprop1: solid
-///     subprop2: #555
-///   ),
-///   prop3: (),
-/// )
+///   $o: (
+///     prop1: (
+///       subprop1: #333,
+///       subprop2: #444
+///     ),
+///     prop2: (
+///       subprop1: solid
+///       subprop2: #555
+///     ),
+///     prop3: (),
+///   )
 ///
 /// @return {any}
 @function set($o, $p, $v) {
@@ -156,49 +157,49 @@
 /// @access public
 /// @param {object | map} $o - the object to modify in
 /// @param {object | map} $objects - the objects to merge in
-/// @example
-/// $o1: (
-///   prop1: (
-///     subprop1: #333,
-///     subprop2: #444
-///   ),
-///   prop2: (
-///     subprop1: solid
-///     subprop2: #555
+/// @example scss - Usage
+///   $o1: (
+///     prop1: (
+///       subprop1: #333,
+///       subprop2: #444
+///     ),
+///     prop2: (
+///       subprop1: solid
+///       subprop2: #555
+///     )
 ///   )
-/// )
 ///
-/// $o2: (
-///   prop1: (
-///     subprop3: #555,
-///   ),
-///   prop2: (
-///     subprop2: Verdana
-///   ),
-/// )
+///   $o2: (
+///     prop1: (
+///       subprop3: #555,
+///     ),
+///     prop2: (
+///       subprop2: Verdana
+///     ),
+///   )
 ///
-/// $o3: (
-///   prop3: (
-///     subprop1: 1px
-///   ),
-/// )
+///   $o3: (
+///     prop3: (
+///       subprop1: 1px
+///     ),
+///   )
 ///
-/// =>
+/// @example scss - Result
 ///
-/// $o: (
-///   prop1: (
-///     subprop1: #333,
-///     subprop2: #444,
-///     subprop3: #555,
-///   ),
-///   prop2: (
-///     subprop1: solid
-///     subprop2: Verdana
-///   ),
-///   prop3: (
-///     subprop1: 1px
-///   ),
-/// )
+///   $o: (
+///     prop1: (
+///       subprop1: #333,
+///       subprop2: #444,
+///       subprop3: #555,
+///     ),
+///     prop2: (
+///       subprop1: solid
+///       subprop2: Verdana
+///     ),
+///     prop3: (
+///       subprop1: 1px
+///     ),
+///   )
 ///
 /// @return {any}
 @function extend($o, $objects...) {

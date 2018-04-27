@@ -33,7 +33,7 @@
 ///     @include prefixer(border-radius, 10px, webkit ms spec);
 ///   }
 ///
-/// @example css - CSS Output
+/// @example css - Output
 ///   .element {
 ///     -webkit-border-radius: 10px;
 ///     -moz-border-radius: 10px;
@@ -59,6 +59,63 @@
     }
     @else {
       @warn 'Unrecognized prefix: #{$prefix}';
+    }
+  }
+}
+
+@mixin outline($outline) {
+  outline: $outline;
+
+  &:active,
+  &:focus {
+    outline: $outline;
+  }
+}
+
+@mixin overflow-hidden-animated {
+  @include backface-visibility(hidden);
+  @include transform(translate3d(0, 0, 0), webkit moz);
+  @include overflow(hidden);
+}
+
+@mixin disable {
+  @include cursor(default);
+  @include pointer-events(none);
+
+  * {
+    @include cursor(default);
+    @include pointer-events(none);
+  }
+}
+
+@mixin hidden {
+  @include position(absolute);
+  @include box-size(1px);
+  @include padding(0);
+  @include border(0);
+  @include overflow(hidden);
+  @include white-space(nowrap);
+
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(100%);
+}
+
+@mixin opacity($o) {
+  // fallbacks for ie old browsers
+  filter: alpha(opacity=(#{$o * 100}));
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$o * 100})";
+
+  @include prefixer(opacity, $o);
+}
+
+@mixin force-cursor($c) {
+  @include cursor($c);
+
+  * {
+    @include cursor($c);
+
+    &:before {
+      @include cursor($c);
     }
   }
 }

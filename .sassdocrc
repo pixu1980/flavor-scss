@@ -14,40 +14,40 @@ sort:
 groups:
   undefined: Core
   core: Core
-  grid-system-columns: Grid System - Columns Module
-  grid-system-containers: Grid System - Containers Module
-  grid-system-helpers: Grid System - Helpers Module
-  grid-system-reboot: Grid System - Reboot Module
-  grid-system-rows: Grid System - Rows Module
+  grid-system-columns: Grid System - Columns
+  grid-system-containers: Grid System - Containers
+  grid-system-helpers: Grid System - Helpers
+  grid-system-reboot: Grid System - Reboot
+  grid-system-rows: Grid System - Rows
   grid-system-options: Grid System - Options
   grid-system: Grid System
-  mixins-animation: Mixins - Animation Module
-  mixins-appearance: Mixins - Appearance Module
-  mixins-background: Mixins - Background Module
-  mixins-border: Mixins - Border Module
-  mixins-box: Mixins - Box Module
-  mixins-cursor: Mixins - Cursor Module
-  mixins-filter: Mixins - Filter Module
-  mixins-margin: Mixins - Margin Module
-  mixins-media: Mixins - Media Module
-  mixins-overflow: Mixins - Overflow Module
-  mixins-padding: Mixins - Padding Module
-  mixins-text: Mixins - Text Module
-  mixins-transform: Mixins - Transform Module
-  mixins-transition: Mixins - Transition Module
-  mixins-utils: Mixins - Utils Module
+  mixins-animation: Mixins - Animation
+  mixins-appearance: Mixins - Appearance
+  mixins-background: Mixins - Background
+  mixins-border: Mixins - Border
+  mixins-box: Mixins - Box
+  mixins-cursor: Mixins - Cursor
+  mixins-filter: Mixins - Filter
+  mixins-margin: Mixins - Margin
+  mixins-media: Mixins - Media
+  mixins-overflow: Mixins - Overflow
+  mixins-padding: Mixins - Padding
+  mixins-text: Mixins - Text
+  mixins-transform: Mixins - Transform
+  mixins-transition: Mixins - Transition
+  mixins-utils: Mixins - Utils
   mixins: Mixins
-  types-angle: Types - Angle Module
-  types-array: Types - Array Module
-  types-boolean: Types - Boolean Module
-  types-color: Types - Color Module
-  types-common: Types - Common Module
-  types-frequency: Types - Frequency Module
-  types-function: Types - Function Module
-  types-number: Types - Number Module
-  types-object: Types - Object Module
-  types-string: Types - String Module
-  types-time: Types - Time Module
-  types-url: Types - URL Module
+  types-angle: Types - Angle
+  types-array: Types - Array
+  types-boolean: Types - Boolean
+  types-color: Types - Color
+  types-common: Types - Common
+  types-frequency: Types - Frequency
+  types-function: Types - Function
+  types-number: Types - Number
+  types-object: Types - Object
+  types-string: Types - String
+  types-time: Types - Time
+  types-url: Types - URL
   types: Types
   options: Options
