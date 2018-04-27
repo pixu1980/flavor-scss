@@ -1,3 +1,11 @@
+## [Version 0.7.4](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.4) (2018-4-27)
+
+### Bug fixes
+
+- extend bugfix: [`bec016b`](https://github.com/blackmirror1980/flavor-scss/commit/bec016b)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.7.3...v0.7.4)
+
 ## [Version 0.7.3](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.3) (2018-4-26)
 
 ### New features
