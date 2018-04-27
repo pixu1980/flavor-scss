@@ -1,3 +1,11 @@
+## [Version 0.7.7](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.7) (2018-4-27)
+
+### Bug fixes
+
+- object & string functions bugfix: [`054b728`](https://github.com/blackmirror1980/flavor-scss/commit/054b728)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.7.6...v0.7.7)
+
 ## [Version 0.7.6](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.6) (2018-4-27)
 
 ### Bug fixes
