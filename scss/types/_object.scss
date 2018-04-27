@@ -34,11 +34,11 @@
 ///
 /// $p: get($o, 'prop1.subprop2'); // #444
 /// @return {any}
-@function get($o, $p) {
-  $keys: $p;
+@function get($map, $path) {
+  $keys: $path;
 
-  @if is-string($p) {
-    $keys: string-split($p);
+  @if is-string($path) {
+    $keys: string-split($path);
   }
 
   $length: length($keys);
@@ -47,7 +47,7 @@
     $keys: nth($keys, 1);
   }
 
-  $get: map-get($o, nth($keys, 1));
+  $get: map-get($map, nth($keys, 1));
 
   @if $length > 1 {
     @for $i from 2 through $length {
@@ -103,11 +103,11 @@
 /// )
 ///
 /// @return {any}
-@function set($o, $p, $v) {
-  $keys: $p;
+@function set($obj, $path, $value) {
+  $keys: $path;
 
-  @if is-string($p) {
-    $keys: string-split($p);
+  @if is-string($path) {
+    $keys: string-split($path);
   }
 
   $length: length($keys);
@@ -116,10 +116,10 @@
 
 
   @if $length > 1 {
-    $map-level: get($o, $keys);
+    $map-level: get($obj, $keys);
   }
 
-  $merge: (nth($keys, $length): $v);
+  $merge: (nth($keys, $length): $value);
 
   @if $map-level {
     $get-keys: get-keys($keys, $length);
@@ -132,7 +132,7 @@
 
     @if $j > 1 {
       $get-keys: get-keys($keys, $j);
-      $map-level: get($o, $get-keys);
+      $map-level: get($obj, $get-keys);
 
       @if $map-level {
         $merge: map-merge($map-level, ($key: $merge));
@@ -146,9 +146,9 @@
     }
   }
 
-  $o: map-merge($o, $merge);
+  $obj: map-merge($obj, $merge);
 
-  @return $o;
+  @return $obj;
 }
 
 /// Deep extend/merge function for objects
@@ -201,7 +201,7 @@
 /// )
 ///
 /// @return {any}
-@function extend($o, $objects...) {
+@function extend($object, $objects...) {
   $max: length($objects); // Loop through all maps in $objects...
 
   @for $i from 1 through $max {
@@ -210,17 +210,14 @@
 
     @each $key, $value in $current {
       // If value is a nested map and same key from object is a nested map as well
-      @if is-object($value) and is-object(map-get($o, $key)) {
+      @if is-object($value) and is-object(map-get($object, $key)) {
         // Recursive extend
-        $value: extend(get($o, $key), $value);
+        $value: extend(get($object, $key), $value);
       } // Merge current tuple with object
 
-      $o: map-merge($o, ($key: $value));
+      $object: map-merge($object, ($key: $value));
     }
   }
 
-  @return $o;
+  @return $object;
 }
-
-
-

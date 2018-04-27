@@ -6,22 +6,35 @@
 /// @author blackmirror1980
 ////
 
-/// @name animation-name-modes
-/// @access public
+/// Animation name modes supported
+///
+/// @type list
+/// @access private
 $animation-name-modes: array-concat((none), $css-default-modes);
 
-/// Checks if animation name is string or css default (inherit, initial)
-/// @name is-animation-name
+/// Checks if animation name is string or animation-name-mode (none, inherit, initial)
+///
 /// @access public
+/// @param {string} $an - the animation name
+/// @link https://www.w3schools.com/cssref/css3_pr_animation-name.asp W3Schools animation-name docs
 /// @return {boolean}
 @function is-animation-name($an) {
   @return is-string($an) or array-contains($animation-name-modes, $an);
 }
 
+/// Checks if animation time is a correct time value
+///
+/// @access public
+/// @param {string} $at - the animation time
+/// @return {boolean}
 @function is-animation-time($at) {
   @return is-time($at) or is-css-default($at);
 }
 
+/// Animation direction modes supported
+///
+/// @type list
+/// @access private
 $animation-direction-modes: array-concat((normal, reverse, alternate, alternate-reverse), $css-default-modes);
 
 @function is-animation-direction($ad) {
