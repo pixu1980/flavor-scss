@@ -1,9 +1,18 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Mixins Box
+/// @group mixins-box
+/// @author blackmirror1980
+////
+
+/// Reset inline-block mixin (useful to fix those annoying auto margins between inline-block children elements
+///
+/// @access public
 @mixin reset-inline-block {
   letter-spacing: -.3em;
   line-height: 0;
-  text-rendering: optimizespeed;
+  text-rendering: optimizeSpeed;
 
   * {
     letter-spacing: initial;
@@ -11,12 +20,63 @@
   }
 }
 
+/// Display modes
+///
+/// @type list
+/// @access private
 $display-modes: array-concat((none, inline, block, inline-block, flex, inline-flex, table, inline-table, table-caption, table-header-group, table-row-group, table-column-group, table-footer-group, table-row, table-column, table-cell, list-item, run-in), $css-default-modes);
 
+/// Checks if something is a correct display mode value
+///
+/// @access public
+/// @param {string} $dm - the display mode
+/// @return {boolean}
 @function is-display-mode($dm) {
   @return is-defined($dm) and array-contains($display-modes, $dm);
 }
 
+/// Display mixin
+///
+/// @access public
+/// @param {string} $dm - the display mode
+/// @param {string} $auto-reset-inline-block [false] - the display mode
+/// @example scss - Usage
+///   .display-element {
+///     @include display(block);
+///   }
+///
+/// @example css - Output
+///   .display-element {
+///     display: block;
+///   }
+///
+/// @example scss - Usage inline-block
+///   .display-element {
+///     @include display(inline-block);
+///   }
+///
+/// @example css - Output inline-block
+///   .display-element {
+///     display: inline-block;
+///   }
+///
+/// @example scss - Usage inline-block with auto reset
+///   .display-element {
+///     @include display(inline-block, true);
+///   }
+///
+/// @example css - Output inline-block with auto reset
+///   .display-element {
+///     display: inline-block;
+///     letter-spacing: -.3em;
+///     line-height: 0;
+///     text-rendering: optimizeSpeed;
+///
+///     * {
+///       letter-spacing: initial;
+///       line-height: initial;
+///     }
+///   }
 @mixin display($dm, $auto-reset-inline-block: false) {
   @if is-display-mode($dm) {
     display: $dm;
@@ -30,12 +90,34 @@ $display-modes: array-concat((none, inline, block, inline-block, flex, inline-fl
   }
 }
 
+/// Box sizing modes
+///
+/// @type list
+/// @access private
 $box-sizing-modes: array-concat((content-box, border-box), $css-default-modes);
 
+/// Checks if something is box sizing mode
+///
+/// @access public
+/// @param {string} $bs - the box sizing mode
+/// @return {boolean}
 @function is-box-sizing-mode($bs) {
   @return is-defined($bs) and array-contains($box-sizing-modes, $bs);
 }
 
+/// Box sizing mixin
+///
+/// @access public
+/// @param {string} $bs - the box sizing mode
+/// @example scss - Usage
+///   .box-sizing-element {
+///     @include box-sizing(content-box);
+///   }
+///
+/// @example css - Output
+///   .box-sizing-element {
+///     box-sizing: content-box;
+///   }
 @mixin box-sizing($bs) {
   @if is-box-sizing-mode($bs) {
     box-sizing: $bs;
@@ -51,10 +133,10 @@ $box-sizes: array-concat((auto), $css-default-modes);
   @return is-size($s) or array-contains($box-sizes, $s);
 }
 
-$bound-box-sizes: array-concat((none), $css-default-modes);
+$box-bound-sizes: array-concat((none), $css-default-modes);
 
-@function is-bound-box-size($s) {
-  @return is-size($s) or array-contains($bound-box-sizes, $s);
+@function is-box-bound-size($s) {
+  @return is-size($s) or array-contains($box-bound-sizes, $s);
 }
 
 @mixin box-bounds($options) {
@@ -92,7 +174,7 @@ $bound-box-sizes: array-concat((none), $css-default-modes);
   $min-width: map-get($settings, min-width);
 
   @if is-defined($min-width) {
-    @if is-bound-box-size($min-width) {
+    @if is-box-bound-size($min-width) {
       min-width: $min-width;
     }
     @else {
@@ -103,7 +185,7 @@ $bound-box-sizes: array-concat((none), $css-default-modes);
   $min-height: map-get($settings, min-height);
 
   @if is-defined($min-height) {
-    @if is-bound-box-size($min-height) {
+    @if is-box-bound-size($min-height) {
       min-height: $min-height;
     }
     @else {
@@ -114,7 +196,7 @@ $bound-box-sizes: array-concat((none), $css-default-modes);
   $max-width: map-get($settings, max-width);
 
   @if is-defined($max-width) {
-    @if is-bound-box-size($max-width) {
+    @if is-box-bound-size($max-width) {
       max-width: $max-width;
     }
     @else {
@@ -125,7 +207,7 @@ $bound-box-sizes: array-concat((none), $css-default-modes);
   $max-height: map-get($settings, max-height);
 
   @if is-defined($max-height) {
-    @if is-bound-box-size($max-height) {
+    @if is-box-bound-size($max-height) {
       max-height: $max-height;
     }
     @else {

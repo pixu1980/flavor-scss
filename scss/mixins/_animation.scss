@@ -263,6 +263,7 @@ $animation-play-state-modes: array-concat((paused, running), $css-default-modes)
 /// @param {string} $options.play-state [initial] - animation play state
 /// @requires {function} is-defined
 /// @requires {function} is-animation-time
+/// @requires {function} is-animation-direction
 /// @requires {mixin} prefixer
 /// @example scss - Usage
 ///   .animated-element {
