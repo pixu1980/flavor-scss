@@ -331,52 +331,52 @@ $animation-play-state-modes: array-concat((paused, running), $css-default-modes)
       $settings: extend($settings, $options);
     }
     @else {
-      $name: if(length($options) > 0, nth($options, 1), null);
+      $name: nth-value($options, 1);
 
       @if is-defined($name) {
-        $settings: map-merge($settings, (name: $name));
+        $settings: extend($settings, (name: $name));
       }
 
-      $duration: if(length($options) > 1, nth($options, 2), null);
+      $duration: nth-value($options, 2);
 
       @if is-defined($duration) {
-        $settings: map-merge($settings, (duration: $duration));
+        $settings: extend($settings, (duration: $duration));
       }
 
-      $delay: if(length($options) > 2, nth($options, 3), null);
+      $delay: nth-value($options, 3);
 
       @if is-defined($delay) {
-        $settings: map-merge($settings, (delay: $delay));
+        $settings: extend($settings, (delay: $delay));
       }
 
-      $direction: if(length($options) > 3, nth($options, 4), null);
+      $direction: nth-value($options, 4);
 
       @if is-defined($direction) {
-        $settings: map-merge($settings, (direction: $direction));
+        $settings: extend($settings, (direction: $direction));
       }
 
-      $iteration-count: if(length($options) > 4, nth($options, 5), null);
+      $iteration-count: nth-value($options, 5);
 
       @if is-defined($iteration-count) {
-        $settings: map-merge($settings, (iteration-count: $iteration-count));
+        $settings: extend($settings, (iteration-count: $iteration-count));
       }
 
-      $timing-function: if(length($options) > 5, nth($options, 6), null);
+      $timing-function: nth-value($options, 6);
 
       @if is-defined($timing-function) {
-        $settings: map-merge($settings, (timing-function: $timing-function));
+        $settings: extend($settings, (timing-function: $timing-function));
       }
 
-      $fill-mode: if(length($options) > 6, nth($options, 7), null);
+      $fill-mode: nth-value($options, 7);
 
       @if is-defined($fill-mode) {
-        $settings: map-merge($settings, (fill-mode: $fill-mode));
+        $settings: extend($settings, (fill-mode: $fill-mode));
       }
 
-      $play-state: if(length($options) > 7, nth($options, 8), null);
+      $play-state: nth-value($options, 8);
 
       @if is-defined($play-state) {
-        $settings: map-merge($settings, (play-state: $play-state));
+        $settings: extend($settings, (play-state: $play-state));
       }
     }
 

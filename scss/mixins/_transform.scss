@@ -239,12 +239,9 @@ $transform-origin-y-axis-modes: (top, center, bottom);
     @include prefixer(transform-origin, $to);
   }
   @else if(length($to) > 1) {
-    $y-axis: if(length($to) > 1, nth($to, 2), 50%);
-    $z-axis: if(length($to) > 2, nth($to, 3), 0);
-
     $transform-origin: ();
 
-    $x-axis: if(length($to) > 0, nth($to, 1), 50%);
+    $x-axis: nth-value($to, 1, 50%);
 
     @if is-transform-origin-axis-value($x-axis, $transform-origin-x-axis-modes) {
       $transform-origin: append($transform-origin, $x-axis);
@@ -253,7 +250,7 @@ $transform-origin-y-axis-modes: (top, center, bottom);
       @warn '`transform-origin x-axis: #{$x-axis}` is not a valid x axis transform origin value';
     }
 
-    $y-axis: if(length($to) > 1, nth($to, 2), 50%);
+    $y-axis: nth-value($to, 2, 50%);
 
     @if is-transform-origin-axis-value($y-axis, $transform-origin-y-axis-modes) {
       $transform-origin: append($transform-origin, $y-axis);
@@ -262,7 +259,7 @@ $transform-origin-y-axis-modes: (top, center, bottom);
       @warn '`transform-origin y-axis: #{$y-axis}` is not a valid y axis transform origin value';
     }
 
-    $z-axis: if(length($to) > 2, nth($to, 3), 0);
+    $z-axis: nth-value($to, 3, 0);
 
     @if is-transform-origin-axis-value($x-axis) {
       $transform-origin: append($transform-origin, $x-axis);

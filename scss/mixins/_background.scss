@@ -42,10 +42,10 @@ $background-position-vertical-modes: array-concat((top, center, bottom), $css-de
 @function is-background-position($bp) {
   @if is-defined($bp) {
     @if is-array($bp) {
-      $h: if(length($bp) > 0, nth($bp, 1), null);
+      $h: nth-value($bp, 1);
       $h-valid: is-size($h) or is-percentage($h) or array-contains($background-position-horizontal-modes, $h);
 
-      $v: if(length($bp) > 1, nth($bp, 2), null);
+      $v: nth-value($bp, 2);
       $v-valid: is-size($v) or is-percentage($v) or array-contains($background-position-vertical-modes, $v);
 
       @return $h-valid and $v-valid;
@@ -72,8 +72,8 @@ $background-size-modes: array-concat((auto, cover, contain), $css-default-modes)
 @function is-background-size($bs) {
   @if is-defined($bs) {
     @if is-array($bs) {
-      $w: if(length($bs) > 0, nth($bs, 1), null);
-      $h: if(length($bs) > 1, nth($bs, 2), null);
+      $w: nth-value($bs, 1);
+      $h: nth-value($bs, 2);
 
       @if (is-size($w) or is-percentage($w)) and (is-size($h) and is-percentage($h)) {
         @return true;
@@ -192,52 +192,52 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
       $settings: extend($settings, $options);
     }
     @else {
-      $color: if(length($options) > 0, nth($options, 1), null);
+      $color: nth-value($options, 1);
 
       @if is-defined($color) {
-        $settings: map-merge($settings, (color: $color));
+        $settings: extend($settings, (color: $color));
       }
 
-      $image: if(length($options) > 1, nth($options, 2), null);
+      $image: nth-value($options, 2);
 
       @if is-defined($image) {
-        $settings: map-merge($settings, (image: $image));
+        $settings: extend($settings, (image: $image));
       }
 
-      $position: if(length($options) > 2, nth($options, 3), null);
+      $position: nth-value($options, 3);
 
       @if is-defined($position) {
-        $settings: map-merge($settings, (position: $position));
+        $settings: extend($settings, (position: $position));
       }
 
-      $size: if(length($options) > 3, nth($options, 4), null);
+      $size: nth-value($options, 4);
 
       @if is-defined($size) {
-        $settings: map-merge($settings, (size: $size));
+        $settings: extend($settings, (size: $size));
       }
 
-      $repeat: if(length($options) > 4, nth($options, 5), null);
+      $repeat: nth-value($options, 5);
 
       @if is-defined($repeat) {
-        $settings: map-merge($settings, (repeat: $repeat));
+        $settings: extend($settings, (repeat: $repeat));
       }
 
-      $origin: if(length($options) > 5, nth($options, 6), null);
+      $origin: nth-value($options, 6);
 
       @if is-defined($origin) {
-        $settings: map-merge($settings, (origin: $origin));
+        $settings: extend($settings, (origin: $origin));
       }
 
-      $clip: if(length($options) > 6, nth($options, 7), null);
+      $clip: nth-value($options, 7);
 
       @if is-defined($clip) {
-        $settings: map-merge($settings, (clip: $clip));
+        $settings: extend($settings, (clip: $clip));
       }
 
-      $attachment: if(length($options) > 7, nth($options, 8), null);
+      $attachment: nth-value($options, 8);
 
       @if is-defined($attachment) {
-        $settings: map-merge($settings, (attachment: $attachment));
+        $settings: extend($settings, (attachment: $attachment));
       }
     }
 

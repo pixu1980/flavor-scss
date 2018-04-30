@@ -32,15 +32,15 @@ $margin-modes: array-concat((auto), $css-default-modes);
 }
 
 @mixin margin($m) {
-  $margin-top: if(length($m) > 0, nth($m, 1), 0);
+  $margin-top:  nth-value($m, 1, 0);
   @include margin-top($margin-top);
 
-  $margin-right: if(length($m) > 1, nth($m, 2), $margin-top);
+  $margin-right: nth-value($m, 2, $margin-top);
   @include margin-right($margin-right);
 
-  $margin-bottom: if(length($m) > 2, nth($m, 3), $margin-top);
+  $margin-bottom: nth-value($m, 3, $margin-top);
   @include margin-bottom($margin-bottom);
 
-  $margin-left: if(length($m) > 3, nth($m, 4), $margin-right);
+  $margin-left: nth-value($m, 4, $margin-right);
   @include margin-left($margin-left);
 }

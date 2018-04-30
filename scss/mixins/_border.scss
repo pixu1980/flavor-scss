@@ -103,7 +103,7 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
 @mixin border-radius($br: 0, $shorthand: false) {
   $border-radius: ();
 
-  $border-top-left-radius: if(length($br) > 0, nth($br, 1), 0);
+  $border-top-left-radius: nth-value($br, 1, 0);
 
   @if is-defined($border-top-left-radius) {
     @if is-border-radius-value($border-top-left-radius) {
@@ -119,7 +119,7 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
     }
   }
 
-  $border-top-right-radius: if(length($br) > 1, nth($br, 2), $border-top-left-radius);
+  $border-top-right-radius: nth-value($br, 2, $border-top-left-radius);
 
   @if is-defined($border-top-right-radius) {
     @if is-border-radius-value($border-top-right-radius) {
@@ -135,7 +135,7 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
     }
   }
 
-  $border-bottom-right-radius: if(length($br) > 2, nth($br, 3), $border-top-left-radius);
+  $border-bottom-right-radius: nth-value($br, 3, $border-top-left-radius);
 
   @if is-defined($border-bottom-right-radius) {
     @if is-border-radius-value($border-bottom-right-radius) {
@@ -151,7 +151,7 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
     }
   }
 
-  $border-bottom-left-radius: if(length($br) > 3, nth($br, 4), $border-top-right-radius);
+  $border-bottom-left-radius: nth-value($br, 4, $border-top-right-radius);
 
   @if is-defined($border-bottom-left-radius) {
     @if is-border-radius-value($border-bottom-left-radius) {
@@ -308,25 +308,25 @@ $border-modes: array-concat((none), $css-default-modes);
       $settings: extend($settings, $options);
     }
     @else {
-      $size: if(length($options) > 0, nth($options, 1), null);
+      $size: nth-value($options, 1);
 
       @if is-defined($size) {
         $settings: extend($settings, (size: $size));
       }
 
-      $style: if(length($options) > 1, nth($options, 2), null);
+      $style: nth-value($options, 2);
 
       @if is-defined($style) {
         $settings: extend($settings, (style: $style));
       }
 
-      $color: if(length($options) > 2, nth($options, 3), null);
+      $color: nth-value($options, 3);
 
       @if is-defined($color) {
         $settings: extend($settings, (color: $color));
       }
 
-      $radius: if(length($options) > 3, nth($options, 4), null);
+      $radius: nth-value($options, 4);
 
       @if is-defined($radius) {
         $settings: extend($settings, (radius: $radius));

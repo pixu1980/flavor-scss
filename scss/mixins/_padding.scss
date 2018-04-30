@@ -30,15 +30,15 @@
 }
 
 @mixin padding($p) {
-  $padding-top: if(length($p) > 0, nth($p, 1), 0);
+  $padding-top: nth-value($p, 1, 0);
   @include padding-top($padding-top);
 
-  $padding-right: if(length($p) > 1, nth($p, 2), $padding-top);
+  $padding-right: nth-value($p, 2, $padding-top);
   @include padding-right($padding-right);
 
-  $padding-bottom: if(length($p) > 2, nth($p, 3), $padding-top);
+  $padding-bottom: nth-value($p, 3, $padding-top);
   @include padding-bottom($padding-bottom);
 
-  $padding-left: if(length($p) > 3, nth($p, 4), $padding-right);
+  $padding-left: nth-value($p, 4, $padding-right);
   @include padding-left($padding-left);
 }

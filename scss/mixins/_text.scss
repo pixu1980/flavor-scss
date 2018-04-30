@@ -29,34 +29,34 @@ $line-height-modes: array-concat((normal), $css-default-modes);
     $settings: extend($settings, $options);
   }
   @else {
-    $size: if(length($options) > 0, nth($options, 1), null);
+    $size: nth-value($options, 1);
 
     @if is-defined($size) {
-      $settings: map-merge($settings, (size: $size));
+      $settings: extend($settings, (size: $size));
     }
 
-    $height: if(length($options) > 1, nth($options, 2), null);
+    $height: nth-value($options, 2);
 
     @if is-defined($height) {
-      $settings: map-merge($settings, (height: $height));
+      $settings: extend($settings, (height: $height));
     }
 
-    $family: if(length($options) > 2, nth($options, 3), null);
+    $family: nth-value($options, 3);
 
     @if is-defined($family) {
-      $settings: map-merge($settings, (family: $family));
+      $settings: extend($settings, (family: $family));
     }
 
-    $weight: if(length($options) > 3, nth($options, 4), null);
+    $weight: nth-value($options, 4);
 
     @if is-defined($weight) {
-      $settings: map-merge($settings, (weight: $weight));
+      $settings: extend($settings, (weight: $weight));
     }
 
-    $color: if(length($options) > 4, nth($options, 5), null);
+    $color: nth-value($options, 5);
 
     @if is-defined($color) {
-      $settings: map-merge($settings, (color: $color));
+      $settings: extend($settings, (color: $color));
     }
   }
 
@@ -153,20 +153,20 @@ $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle
     $settings: extend($settings, $options);
   }
   @else {
-    $h: if(length($options) > 0, nth($options, 1), null);
+    $h: nth-value($options, 1);
 
     @if is-defined($h) {
-      $settings: map-merge($settings, (h: $h));
+      $settings: extend($settings, (h: $h));
     }
 
-    $v: if(length($options) > 1, nth($options, 2), null);
+    $v: nth-value($options, 2);
 
     @if is-defined($v) {
-      $settings: map-merge($settings, (v: $v));
+      $settings: extend($settings, (v: $v));
     }
   }
 
-  $h: map-get($settings, h);
+  $h: get($settings, h);
 
   @if is-defined($h) {
     @if is-text-align($h) {
@@ -177,7 +177,7 @@ $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle
     }
   }
 
-  $v: map-get($settings, v);
+  $v: get($settings, v);
 
   @if is-defined($v) {
     @if is-vertical-align($v) {
