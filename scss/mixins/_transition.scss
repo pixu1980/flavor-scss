@@ -1,5 +1,10 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Mixins Transition
+/// @group mixins-transition
+/// @author blackmirror1980
+////
 // TODO: refactorize
 @mixin transition($transitions) {
   @include prefixer(transition, $transitions);

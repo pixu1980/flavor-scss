@@ -1,3 +1,11 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Padding
+/// @group mixins-padding
+/// @author blackmirror1980
+////
+
 @function is-padding($p) {
   @return is-defined($p) and (array-contains($css-default-modes, $p) or is-size($p) or is-percentage($p));
 }

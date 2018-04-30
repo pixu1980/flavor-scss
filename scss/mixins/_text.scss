@@ -1,5 +1,11 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
 @function is-font-family($ff) {
   @return is-defined($ff) and (is-string($ff) or is-array($ff));
 }

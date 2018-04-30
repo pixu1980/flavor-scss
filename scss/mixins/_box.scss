@@ -167,6 +167,7 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 /// @param {size | percentage} $options.max-width [null] - the max width bound
 /// @param {size | percentage} $options.max-height [null] - the max height bound
 /// @requires {function} extend
+/// @requires {function} is-defined
 /// @requires {function} nth-value
 /// @example scss - Usage
 ///   .bounds-element {
@@ -268,6 +269,7 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 /// @param {size | percentage} $options.max-height [null] - the max height bound
 /// @param {boolean} $height-fallback [true] - falls back the height value to the width value, if height is not specified (useful for square sizes)
 /// @requires {function} extend
+/// @requires {function} is-defined
 /// @requires {function} nth-value
 /// @example scss - Usage - height fallback
 ///   .size-element {
@@ -400,6 +402,7 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 /// @param {color} $options.color [inherit] - the color
 /// @param {color} $options.bgcolor [inherit] - the background color
 /// @requires {function} extend
+/// @requires {function} is-defined
 /// @requires {function} nth-value
 /// @example scss - Usage
 ///   .color-element {

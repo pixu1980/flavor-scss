@@ -1,5 +1,11 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Mixins Media
+/// @group mixins-media
+/// @author blackmirror1980
+////
+
 @mixin media($width, $type: min) {
   @media screen and (#{$type}-width: $width) {
     @content;

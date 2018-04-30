@@ -1,3 +1,11 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Margin
+/// @group mixins-margin
+/// @author blackmirror1980
+////
+
 $margin-modes: array-concat((auto), $css-default-modes);
 
 @function is-margin($m) {
