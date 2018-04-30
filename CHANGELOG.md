@@ -1,3 +1,11 @@
+## [Version 0.7.10](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.10) (2018-4-30)
+
+### Bug fixes
+
+- added documentatio for background and border mixins: [`cf8e1aa`](https://github.com/blackmirror1980/flavor-scss/commit/cf8e1aa)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.7.9...v0.7.10)
+
 ## [Version 0.7.9](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.9) (2018-4-27)
 
 ### Bug fixes
