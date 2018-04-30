@@ -1,28 +1,74 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Mixins Filter
+/// @group mixins-filter
+/// @author blackmirror1980
+////
+
+/// Filter functions
+///
+/// @type list
+/// @access private
 $filter-functions-names: (blur, brightness, contrast, drop-shadow, grayscale, hue-rotate, invert, opacity, saturate, sepia, url);
 
-@function get-filter-function-name($t) {
-  @if(string-contains($t, '(') and string-contains($t, ')')) {
-    @return str-slice($t, 1, str-index($t, '(') - 1);
+/// Extracts filter function name from a string
+///
+/// @access public
+/// @requires {function} string-contains
+/// @param {string} $ff - the filter string (e.g. `blur(5px)`)
+/// @return {string | null} (e.g. `blur`)
+@function get-filter-function-name($ff) {
+  @if(string-contains($ff, '(') and string-contains($ff, ')')) {
+    @return string-slice($ff, 1, string-index($ff, '(') - 1);
   }
 
   @return null;
 }
 
-@function is-filter-function($tf) {
-  $filter-function-name: get-filter-function-name($tf);
+/// Checks if something is a filter function
+///
+/// @access public
+/// @param {string} $ff - the filter string (e.g. `blur(5px)`)
+/// @return {boolean}
+@function is-filter-function($ff) {
+  $filter-function-name: get-filter-function-name($ff);
 
   @return is-defined($filter-function-name) and array-contains($filter-functions-names, $filter-function-name);
 }
 
+/// Filter modes
+///
+/// @type list
+/// @access private
 $filter-modes: array-concat((none), $css-default-modes);
 
+/// Checks if something is a filter mode or function
+///
+/// @access public
+/// @param {string} $filter - the filter string (e.g. `blur(5px)` or `'none`)
+/// @return {boolean}
 @function is-filter-mode-or-function($filter) {
   @return is-defined($filter) and (array-contains($filter-modes, $filter) or is-filter-function($filter));
 }
 
-// TODO: manage multiple filters
+/// Filter mixin
+///
+/// @param {string} $filter - the filter string (e.g. `blur(5px)` or `none`)
+/// @todo manage multiple filters
+/// @example scss - Usage
+///   .filter-element {
+///     @include filter(blur(5px));
+///   }
+///
+/// @example css - Output
+///   .filter-element {
+///     -webkit-filter: blur(5px);
+///     -moz-filter: blur(5px);
+///     -ms-filter: blur(5px);
+///     -o-filter: blur(5px);
+///     filter: blur(5px);
+///   }
 @mixin filter($filter) {
   @if is-filter-mode-or-function($filter) {
     @include prefixer(filter, $filter);
