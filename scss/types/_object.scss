@@ -157,6 +157,7 @@
 /// @access public
 /// @param {object | map} $o - the object to modify in
 /// @param {object | map} $objects - the objects to merge in
+/// @requires {function} is-object
 /// @example scss - Usage
 ///   $o1: (
 ///     prop1: (

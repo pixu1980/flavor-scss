@@ -38,6 +38,7 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
 /// @todo manage fractions (e.g. 2em 1em 4em / 0.5em 0.2em)
 /// @requires {function} is-defined
 /// @requires {function} is-border-radius-value
+/// @requires {function} nth-value
 /// @requires {mixin} prefixer
 /// @example scss - Usage - One value
 ///   .border-radius-element {
@@ -272,9 +273,10 @@ $border-modes: array-concat((none), $css-default-modes);
 /// @param {color} $options.color [transparent] - border-color
 /// @param {size} $options.radius [null] - border-radius
 /// @link https://www.w3schools.com/cssref/pr_border.asp W3Schools border docs
-/// @requires {function} is-defined
 /// @requires {function} extend
 /// @requires {function} get
+/// @requires {function} is-defined
+/// @requires {function} nth-value
 /// @example scss - Usage
 ///   .border-element {
 ///     @include border(1px null red);

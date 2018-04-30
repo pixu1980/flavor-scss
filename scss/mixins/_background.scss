@@ -38,6 +38,7 @@ $background-position-vertical-modes: array-concat((top, center, bottom), $css-de
 /// @access public
 /// @param {string | array} $bp - the background position value/values
 /// @link https://www.w3schools.com/cssref/pr_background-position.asp W3Schools background-position docs
+/// @requires {function} nth-value
 /// @return {boolean}
 @function is-background-position($bp) {
   @if is-defined($bp) {
@@ -68,6 +69,7 @@ $background-size-modes: array-concat((auto, cover, contain), $css-default-modes)
 /// @access public
 /// @param {string | array} $bs - the background size value/values
 /// @link https://www.w3schools.com/cssref/css3_pr_background-size.asp W3Schools background-size docs
+/// @requires {function} nth-value
 /// @return {boolean}
 @function is-background-size($bs) {
   @if is-defined($bs) {
@@ -149,8 +151,10 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
 /// @param {string} $options.clip [border-box] - background clip
 /// @param {string} $options.attachment [scroll] - background attachment
 /// @param {boolean} $shorthand [false] - specifies if shorthand selector will be used or not
+/// @requires {function} extend
 /// @requires {function} is-defined
 /// @requires {function} is-background-origin-clip
+/// @requires {function} nth-value
 /// @example scss - Usage
 ///   .background-element {
 ///     @include background(null url('http://test.com/image.png') null cover no-repeat null null fixed);
