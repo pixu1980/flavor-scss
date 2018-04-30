@@ -1,22 +1,119 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Mixins Border
+/// @group mixins-border
+/// @author blackmirror1980
+////
+
+/// Border style modes
+///
+/// @type list
+/// @access private
 $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset), $css-default-modes);
 
+
+/// Checks if something is border style mode
+///
+/// @access public
+/// @param {string} $bs - the border style mode
+/// @return {boolean}
 @function is-border-style($bs) {
-  @return array-contains($border-styles, $bs);
+  @return is-defined($bs) and array-contains($border-styles, $bs);
 }
 
-@function is-border-radius-value($brv) {
-  @return is-defined($brv) and (is-size($brv) or is-percentage($brv) or array-contains($css-default-modes, $brv));
+/// Checks if something is border radius value
+///
+/// @access public
+/// @param {string} $br - the border radius value
+/// @return {boolean}
+@function is-border-radius-value($br) {
+  @return is-defined($br) and (is-size($br) or is-percentage($br) or array-contains($css-default-modes, $br));
 }
 
-// TODO: manage fractions (e.g. 2em 1em 4em / 0.5em 0.2em)
-@mixin border-radius($br: 0) {
+/// Border radius mixin
+///
+/// @access public
+/// @param {size | array | list} $br [0] - the border radius
+/// @link https://www.w3schools.com/cssref/css3_pr_border-radius.asp W3Schools border-radius docs
+/// @todo manage fractions (e.g. 2em 1em 4em / 0.5em 0.2em)
+/// @requires {function} is-defined
+/// @requires {function} is-border-radius-value
+/// @requires {mixin} prefixer
+/// @example scss - Usage - One value
+///   .border-radius-element {
+///     @include border-radius(0);
+///   }
+///
+/// @example css - Output - One value
+///   .border-radius-element {
+///     border-top-left-radius: 0;
+///     border-top-right-radius: 0;
+///     border-bottom-right-radius: 0;
+///     border-bottom-left-radius: 0;
+///   }
+///
+/// @example scss - Usage - Two values
+///   .border-radius-element {
+///     @include border-radius(0 50%);
+///   }
+///
+/// @example css - Output - Two values
+///   .border-radius-element {
+///     border-top-left-radius: 0;
+///     border-top-right-radius: 50%;
+///     border-bottom-right-radius: 0;
+///     border-bottom-left-radius: 50%;
+///   }
+///
+/// @example scss - Usage - Three values
+///   .border-radius-element {
+///     @include border-radius(10px 50% 30px);
+///   }
+///
+/// @example css - Output - Three values
+///   .border-radius-element {
+///     border-top-left-radius: 10px;
+///     border-top-right-radius: 50%;
+///     border-bottom-right-radius: 30px;
+///     border-bottom-left-radius: 50%;
+///   }
+///
+/// @example scss - Usage - Four values
+///   .border-radius-element {
+///     @include border-radius(10px 50% 30px 20%);
+///   }
+///
+/// @example css - Output - Four values
+///   .border-radius-element {
+///     border-top-left-radius: 10px;
+///     border-top-right-radius: 50%;
+///     border-bottom-right-radius: 30px;
+///     border-bottom-left-radius: 20%;
+///   }
+///
+/// @example scss - Usage - Shorthand
+///   .border-radius-element {
+///     @include border-radius(10px 50% 30px 20%, true);
+///   }
+///
+/// @example css - Output - Shorthand
+///   .border-radius-element {
+///     border-radius: 10px 50% 30px 20%;
+///   }
+@mixin border-radius($br: 0, $shorthand: false) {
+  $border-radius: ();
+
   $border-top-left-radius: if(length($br) > 0, nth($br, 1), 0);
 
   @if is-defined($border-top-left-radius) {
     @if is-border-radius-value($border-top-left-radius) {
-      @include prefixer(border-top-left-radius, $border-top-left-radius);
+      @if $shorthand==true {
+        $border-radius: append($border-radius, $border-top-left-radius);
+      }
+      @else {
+        @include prefixer(border-top-left-radius, $border-top-left-radius);
+      }
     }
     @else {
       @warn '`border-top-left-radius: #{$border-top-left-radius}` is not a valid radius value';
@@ -27,7 +124,12 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
 
   @if is-defined($border-top-right-radius) {
     @if is-border-radius-value($border-top-right-radius) {
-      @include prefixer(border-top-right-radius, $border-top-right-radius);
+      @if $shorthand==true {
+        $border-radius: append($border-radius, $border-top-right-radius);
+      }
+      @else {
+        @include prefixer(border-top-right-radius, $border-top-right-radius);
+      }
     }
     @else {
       @warn '`border-top-right-radius: #{$border-top-right-radius}` is not a valid radius value';
@@ -38,30 +140,164 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
 
   @if is-defined($border-bottom-right-radius) {
     @if is-border-radius-value($border-bottom-right-radius) {
-      @include prefixer(border-bottom-right-radius, $border-bottom-right-radius);
+      @if $shorthand==true {
+        $border-radius: append($border-radius, $border-bottom-right-radius);
+      }
+      @else {
+        @include prefixer(border-bottom-right-radius, $border-bottom-right-radius);
+      }
     }
     @else {
       @warn '`border-bottom-right-radius: #{$border-bottom-right-radius}` is not a valid radius value';
     }
   }
+
   $border-bottom-left-radius: if(length($br) > 3, nth($br, 4), $border-top-right-radius);
 
   @if is-defined($border-bottom-left-radius) {
     @if is-border-radius-value($border-bottom-left-radius) {
-      @include prefixer(border-bottom-left-radius, $border-bottom-left-radius);
+      @if $shorthand==true {
+        $border-radius: append($border-radius, $border-bottom-left-radius);
+      }
+      @else {
+        @include prefixer(border-bottom-left-radius, $border-bottom-left-radius);
+      }
     }
     @else {
       @warn '`border-bottom-left-radius: #{$border-bottom-left-radius}` is not a valid radius value';
     }
   }
+
+  @if $shorthand==true {
+    @include prefixer(border-radius, $border-radius);
+  }
 }
 
+/// Border top radius mixin
+///
+/// @access public
+/// @param {size} $br [0] - the border radius
+/// @link https://www.w3schools.com/cssref/css3_pr_border-radius.asp W3Schools border-radius docs
+/// @example scss - Usage
+///   .border-radius-element {
+///     @include border-top-radius(15px);
+///   }
+///
+/// @example css - Output
+///   .border-radius-element {
+///     border-top-left-radius: 15px;
+///     border-top-right-radius: 15px;
+///   }
+@mixin border-top-radius($br: 0) {
+  @include border-radius($br $br null null);
+}
+
+/// Border right radius mixin
+///
+/// @access public
+/// @param {size} $br [0] - the border radius
+/// @link https://www.w3schools.com/cssref/css3_pr_border-radius.asp W3Schools border-radius docs
+/// @example scss - Usage
+///   .border-radius-element {
+///     @include border-right-radius(15px);
+///   }
+///
+/// @example css - Output
+///   .border-radius-element {
+///     border-top-right-radius: 15px;
+///     border-bottom-right-radius: 15px;
+///   }
+@mixin border-right-radius($br: 0) {
+  @include border-radius(null $br null $br);
+}
+
+/// Border bottom radius mixin
+///
+/// @access public
+/// @param {size} $br [0] - the border radius
+/// @link https://www.w3schools.com/cssref/css3_pr_border-radius.asp W3Schools border-radius docs
+/// @example scss - Usage
+///   .border-radius-element {
+///     @include border-bottom-radius(15px);
+///   }
+///
+/// @example css - Output
+///   .border-radius-element {
+///     border-bottom-left-radius: 15px;
+///     border-bottom-right-radius: 15px;
+///   }
+@mixin border-bottom-radius($br: 0) {
+  @include border-radius(null null $br $br);
+}
+
+/// Border left radius mixin
+///
+/// @access public
+/// @param {size} $br [0] - the border radius
+/// @link https://www.w3schools.com/cssref/css3_pr_border-radius.asp W3Schools border-radius docs
+/// @example scss - Usage
+///   .border-radius-element {
+///     @include border-left-radius(15px);
+///   }
+///
+/// @example css - Output
+///   .border-radius-element {
+///     border-top-left-radius: 15px;
+///     border-bottom-left-radius: 15px;
+///   }
+@mixin border-left-radius($br: 0) {
+  @include border-radius($br null null $br);
+}
+
+/// Border modes
+///
+/// @type list
+/// @access private
 $border-modes: array-concat((none), $css-default-modes);
 
-@function is-border-mode($b) {
-  @return is-defined($b) and array-contains($border-modes, $b);
+/// Checks if something is border mode value (none, initial, inherit)
+///
+/// @access public
+/// @param {string} $bm - the border mode value
+/// @return {boolean}
+@function is-border-mode($bm) {
+  @return is-defined($bm) and array-contains($border-modes, $bm);
 }
 
+/// Border mixin
+///
+/// @access public
+/// @param {string | object | map} $options - the border options
+/// @param {size} $options.size [0] - border-width
+/// @param {string} $options.style [solid] - border-style
+/// @param {color} $options.color [transparent] - border-color
+/// @param {size} $options.radius [null] - border-radius
+/// @link https://www.w3schools.com/cssref/pr_border.asp W3Schools border docs
+/// @requires {function} is-defined
+/// @requires {function} extend
+/// @requires {function} get
+/// @example scss - Usage
+///   .border-element {
+///     @include border(1px null red);
+///   }
+///
+/// @example css - Output
+///   .border-element {
+///     border: 1px solid red;
+///   }
+///
+/// @example scss - Usage - with object parameter
+///   .border-element {
+///     @include border((
+///       size: 2px,
+///       color: black
+///     );
+///   }
+///
+/// @example css - Output - with object parameter
+///   .border-element {
+///     border: 2px solid black;
+///   }
 @mixin border($options, $border-selector: border) {
   @if is-border-mode($options) {
     #{$border-selector}: $options;
@@ -76,31 +312,31 @@ $border-modes: array-concat((none), $css-default-modes);
       $size: if(length($options) > 0, nth($options, 1), null);
 
       @if is-defined($size) {
-        $settings: map-merge($settings, (size: $size));
+        $settings: extend($settings, (size: $size));
       }
 
       $style: if(length($options) > 1, nth($options, 2), null);
 
       @if is-defined($style) {
-        $settings: map-merge($settings, (style: $style));
+        $settings: extend($settings, (style: $style));
       }
 
       $color: if(length($options) > 2, nth($options, 3), null);
 
       @if is-defined($color) {
-        $settings: map-merge($settings, (color: $color));
+        $settings: extend($settings, (color: $color));
       }
 
       $radius: if(length($options) > 3, nth($options, 4), null);
 
       @if is-defined($radius) {
-        $settings: map-merge($settings, (radius: $radius));
+        $settings: extend($settings, (radius: $radius));
       }
     }
 
     $border: ();
 
-    $border-width: map-get($settings, size);
+    $border-width: get($settings, size);
 
     @if is-size($border-width) {
       $border: append($border, $border-width);
@@ -109,7 +345,7 @@ $border-modes: array-concat((none), $css-default-modes);
       @warn '`border-width: #{$border-width}` is not a valid size';
     }
 
-    $border-style: map-get($settings, style);
+    $border-style: get($settings, style);
 
     @if is-border-style($border-style) {
       $border: append($border, $border-style);
@@ -118,7 +354,7 @@ $border-modes: array-concat((none), $css-default-modes);
       @warn '`border-style: #{$border-style}` is not a valid border-style value';
     }
 
-    $border-color: map-get($settings, color);
+    $border-color: get($settings, color);
     @if is-css-color($border-color) {
       $border: append($border, $border-color);
     }
@@ -128,7 +364,7 @@ $border-modes: array-concat((none), $css-default-modes);
 
     #{$border-selector}: $border;
 
-    $border-radius: map-get($settings, radius);
+    $border-radius: get($settings, radius);
 
     @if is-defined($border-radius) {
       @include border-radius($border-radius);
@@ -136,18 +372,70 @@ $border-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// Border top mixin
+///
+/// @access public
+/// @see {mixin} border
+/// @example scss - Usage
+///   .border-element {
+///     @include border-top(1px null red);
+///   }
+///
+/// @example css - Output
+///   .border-element {
+///     border-top: 1px solid red;
+///   }
 @mixin border-top($options) {
   @include border($options, border-top);
 }
 
+/// Border right mixin
+///
+/// @access public
+/// @see {mixin} border
+/// @example scss - Usage
+///   .border-element {
+///     @include border-right(1px null red);
+///   }
+///
+/// @example css - Output
+///   .border-element {
+///     border-right: 1px solid red;
+///   }
 @mixin border-right($options) {
   @include border($options, border-right);
 }
 
+/// Border bottom mixin
+///
+/// @access public
+/// @see {mixin} border
+/// @example scss - Usage
+///   .border-element {
+///     @include border-bottom(1px null red);
+///   }
+///
+/// @example css - Output
+///   .border-element {
+///     border-bottom: 1px solid red;
+///   }
 @mixin border-bottom($options) {
   @include border($options, border-bottom);
 }
 
+/// Border left mixin
+///
+/// @access public
+/// @see {mixin} border
+/// @example scss - Usage
+///   .border-element {
+///     @include border-left(1px null red);
+///   }
+///
+/// @example css - Output
+///   .border-element {
+///     border-left: 1px solid red;
+///   }
 @mixin border-left($options) {
   @include border($options, border-left);
 }

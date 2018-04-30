@@ -1,62 +1,186 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Mixins Background
+/// @group mixins-background
+/// @author blackmirror1980
+////
+
+/// Background image modes
+///
+/// @type list
+/// @access private
 $background-image-modes: array-concat((none), $css-default-modes);
 
+/// Checks if something is background image (url, none, initial, inherit)
+///
+/// @access public
+/// @param {string} $bi - the background image
+/// @return {boolean}
 @function is-background-image($bi) {
   @return is-url($bi) or array-contains($background-image-modes, $bi);
 }
 
-$background-position-horizontal-modes: (left, center, right);
-$background-position-vertical-modes: (top, center, bottom);
-$background-position-modes: array-concat((left, center, right, top, bottom), $css-default-modes);
+/// Background position horizontal modes
+///
+/// @type list
+/// @access private
+$background-position-horizontal-modes: array-concat((left, center, right), $css-default-modes);
 
+/// Background position vertical modes
+///
+/// @type list
+/// @access private
+$background-position-vertical-modes: array-concat((top, center, bottom), $css-default-modes);
+
+/// Checks if something is a background position value
+///
+/// @access public
+/// @param {string | array} $bp - the background position value/values
+/// @link https://www.w3schools.com/cssref/pr_background-position.asp W3Schools background-position docs
+/// @return {boolean}
 @function is-background-position($bp) {
-  @if is-array($bp) {
-    $h: if(length($bp) > 0, nth($bp, 1), null);
-    $h-valid: is-size($h) or array-contains($background-position-horizontal-modes, $h);
+  @if is-defined($bp) {
+    @if is-array($bp) {
+      $h: if(length($bp) > 0, nth($bp, 1), null);
+      $h-valid: is-size($h) or is-percentage($h) or array-contains($background-position-horizontal-modes, $h);
 
-    $v: if(length($bp) > 1, nth($bp, 2), null);
-    $v-valid: is-size($v) or array-contains($background-position-vertical-modes, $v);
+      $v: if(length($bp) > 1, nth($bp, 2), null);
+      $v-valid: is-size($v) or is-percentage($v) or array-contains($background-position-vertical-modes, $v);
 
-    @return $h-valid and $v-valid;
+      @return $h-valid and $v-valid;
+    }
+
+    @return is-size($bp) or is-percentage($bp) or array-contains($background-position-horizontal-modes, $bp) or array-contains($background-position-vertical-modes, $bp);
   }
 
-  @return is-size($bp) or array-contains($background-position-modes, $bp);
+  @return false;
 }
 
+/// Background size modes
+///
+/// @type list
+/// @access private
 $background-size-modes: array-concat((auto, cover, contain), $css-default-modes);
 
+/// Checks if something is a background size value
+///
+/// @access public
+/// @param {string | array} $bs - the background size value/values
+/// @link https://www.w3schools.com/cssref/css3_pr_background-size.asp W3Schools background-size docs
+/// @return {boolean}
 @function is-background-size($bs) {
-  @if is-array($bs) {
-    $w: if(length($bs) > 0, nth($bs, 1), null);
-    $h: if(length($bs) > 1, nth($bs, 2), null);
+  @if is-defined($bs) {
+    @if is-array($bs) {
+      $w: if(length($bs) > 0, nth($bs, 1), null);
+      $h: if(length($bs) > 1, nth($bs, 2), null);
 
-    @if is-size($w) and is-size($h) {
-      @return true;
+      @if (is-size($w) or is-percentage($w)) and (is-size($h) and is-percentage($h)) {
+        @return true;
+      }
     }
+
+    @return is-size($bs) or is-percentage($bs) or array-contains($background-size-modes, $bs);
   }
 
-  @return is-size($bs) or array-contains($background-size-modes, $bs);
+  @return false;
 }
 
+/// Background repeat modes
+///
+/// @type list
+/// @access private
 $background-repeat-modes: array-concat((repeat, repeat-x, repeat-y, no-repeat), $css-default-modes);
 
+/// Checks if something is a background repeat value
+///
+/// @access public
+/// @param {string} $br - the background repeat value
+/// @link https://www.w3schools.com/cssref/pr_background-repeat.asp W3Schools background-repeat docs
+/// @return {boolean}
 @function is-background-repeat($br) {
-  @return array-contains($background-repeat-modes, $br);
+  @return is-defined($br) and array-contains($background-repeat-modes, $br);
 }
 
+/// Background origin and background clip modes
+///
+/// @type list
+/// @access private
 $background-origin-clip-modes: array-concat((border-box, padding-box, content-box), $css-default-modes);
 
-@function is-background-origin-clip($bc) {
-  @return array-contains($background-origin-clip-modes, $bc);
+
+/// Checks if something is a background origin/clip mode
+///
+/// @access public
+/// @param {string} $boc - the background origin/clip value
+/// @link https://www.w3schools.com/cssref/css3_pr_background-clip.asp W3Schools background-clip docs
+/// @link https://www.w3schools.com/cssref/css3_pr_background-origin.asp W3Schools background-origin docs
+/// @return {boolean}
+@function is-background-origin-clip($boc) {
+  @return is-defined($boc) and array-contains($background-origin-clip-modes, $boc);
 }
 
+/// Background attachment modes
+///
+/// @type list
+/// @access private
 $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-modes);
 
+/// Checks if something is a background attachment mode
+///
+/// @access public
+/// @param {string} $ba - the background attachment value
+/// @link https://www.w3schools.com/cssref/pr_background-attachment.asp W3Schools background-attachment docs
+/// @return {boolean}
 @function is-background-attachment($ba) {
   @return array-contains($background-attachment-modes, $ba);
 }
 
+/// Background mixin
+///
+/// @access public
+/// @param {object | map} $options - the background options
+/// @param {color} $options.color [transparent] - background color
+/// @param {image} $options.image [none] - background image
+/// @param {string | array} $options.position [0 0] - background position
+/// @param {string} $options.size [auto] - background size
+/// @param {string} $options.repeat [repeat] - background repeat
+/// @param {string} $options.origin [padding-box] - background origin
+/// @param {string} $options.clip [border-box] - background clip
+/// @param {string} $options.attachment [scroll] - background attachment
+/// @param {boolean} $shorthand [false] - specifies if shorthand selector will be used or not
+/// @requires {function} is-defined
+/// @requires {function} is-background-origin-clip
+/// @example scss - Usage
+///   .background-element {
+///     @include background(null url('http://test.com/image.png') null cover no-repeat null null fixed);
+///   }
+///
+/// @example css - Output
+///   .background-element {
+///     background-color: transparent;
+///     background-image: url('http://test.com/image.png');
+///     background-position: 0 0;
+///     background-size: cover;
+///     background-repeat: no-repeat;
+///     background-origin: padding-box;
+///     background-clip: border-box;
+///     background-attachment: fixed;
+///   }
+/// @example scss - Usage Shorthand
+///   .background-element {
+///     @include background((
+///       image: url('http://test.com/image.png'),
+///       size: cover,
+///       repeat: no-repeat,
+///       attachment: fixed
+///     ), true);
+///   }
+///
+/// @example css - Output Shorthand
+///   .background-element {
+///     background: transparent url('http://test.com/image.png') 0 0/cover no-repeat padding-box border-box fixed;
+///   }
 @mixin background($options, $shorthand: false) {
   @if is-css-default($options) {
     background: $options;
