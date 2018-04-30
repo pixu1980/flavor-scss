@@ -1,3 +1,13 @@
+## [Version 0.7.11](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.11) (2018-4-30)
+
+### Bug fixes
+
+- display & box sizing mixins documentation: [`b259a57`](https://github.com/blackmirror1980/flavor-scss/commit/b259a57)
+- box module documentation wip: [`2df7713`](https://github.com/blackmirror1980/flavor-scss/commit/2df7713)
+- box & cursor documentation done: [`0d253e4`](https://github.com/blackmirror1980/flavor-scss/commit/0d253e4)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.7.10...v0.7.11)
+
 ## [Version 0.7.10](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.10) (2018-4-30)
 
 ### Bug fixes
