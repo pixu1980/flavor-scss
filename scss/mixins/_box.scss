@@ -127,16 +127,34 @@ $box-sizing-modes: array-concat((content-box, border-box), $css-default-modes);
   }
 }
 
-$box-sizes: array-concat((auto), $css-default-modes);
+/// Box size modes
+///
+/// @type list
+/// @access private
+$box-size-modes: array-concat((auto), $css-default-modes);
 
+/// Checks if something is box size
+///
+/// @access public
+/// @param {size | string} $s - the box size
+/// @return {boolean}
 @function is-box-size($s) {
-  @return is-size($s) or array-contains($box-sizes, $s);
+  @return is-defined($s) and (is-size($s) or array-contains($box-size-modes, $s));
 }
 
-$box-bound-sizes: array-concat((none), $css-default-modes);
+/// Box bound size modes
+///
+/// @type list
+/// @access private
+$box-bound-size-modes: array-concat((none), $css-default-modes);
 
+/// Checks if something is box bound size
+///
+/// @access public
+/// @param {size | string} $s - the box size
+/// @return {boolean}
 @function is-box-bound-size($s) {
-  @return is-size($s) or array-contains($box-bound-sizes, $s);
+  @return is-defined($s) and (is-size($s) or array-contains($box-bound-size-modes, $s));
 }
 
 @mixin box-bounds($options) {
@@ -337,14 +355,23 @@ $box-bound-sizes: array-concat((none), $css-default-modes);
   @include prefixer(box-shadow, $shadows);
 }
 
+/// Z-index modes
+///
+/// @type list
+/// @access private
 $z-index-modes: array-concat((auto), $css-default-modes);
 
-@function is-z-index-mode($zi) {
+/// Checks if something is z-index value
+///
+/// @access public
+/// @param {integer | string} $zi - the z-index value
+/// @return {boolean}
+@function is-z-index($zi) {
   @return is-defined($zi) and (is-integer($zi) or array-contains($z-index-modes, $zi));
 }
 
 @mixin z-index($zi) {
-  @if(is-z-index-mode($zi)) {
+  @if(is-z-index($zi)) {
     z-index: $zi;
   }
   @else {
@@ -352,8 +379,17 @@ $z-index-modes: array-concat((auto), $css-default-modes);
   }
 }
 
+/// Visibility modes
+///
+/// @type list
+/// @access private
 $visibility-modes: array-concat((visible, hidden, collapse), $css-default-modes);
 
+/// Checks if something is suppoerted visibility mode
+///
+/// @access public
+/// @param {string} $vm - the visibility mode
+/// @return {boolean}
 @function is-visibility-mode($vm) {
   @return is-defined($vm) and array-contains($visibility-modes, $vm);
 }
@@ -363,7 +399,7 @@ $visibility-modes: array-concat((visible, hidden, collapse), $css-default-modes)
     visibility: $v;
   }
   @else {
-    @warn '`z-index: #{$zi}` is not a valid visibility value';
+    @warn '`visibility: #{$zi}` is not a valid visibility value';
   }
 }
 
@@ -385,8 +421,17 @@ $visibility-modes: array-concat((visible, hidden, collapse), $css-default-modes)
   }
 }
 
+/// Backface visibility modes
+///
+/// @type list
+/// @access private
 $backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
 
+/// Checks if something is suppoerted backface-visibility mode
+///
+/// @access public
+/// @param {string} $bv - the backface-visibility mode
+/// @return {boolean}
 @function is-backface-visibility-mode($bv) {
   @return is-defined($bv) and array-contains($backface-visibility-modes, $bv);
 }
@@ -399,3 +444,4 @@ $backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
     @warn '`backface-visibility: #{$bv}` is not a valid backface-visibility value';
   }
 }
+
