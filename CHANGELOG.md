@@ -1,3 +1,12 @@
+## [Version 0.7.12](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.12) (2018-4-30)
+
+### Bug fixes
+
+- filter mixins documentation: [`260845d`](https://github.com/blackmirror1980/flavor-scss/commit/260845d)
+- updated ternary ifs with nth-value where possible updated map-merge with extend where possible: [`8d5cbd4`](https://github.com/blackmirror1980/flavor-scss/commit/8d5cbd4)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.7.11...v0.7.12)
+
 ## [Version 0.7.11](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.11) (2018-4-30)
 
 ### Bug fixes
