@@ -1,12 +1,40 @@
 @charset 'UTF-8';
 
+////
+/// Flavor SCSS Mixins Cursor
+/// @group mixins-cursor
+/// @author blackmirror1980
+////
+
+/// Cursor modes
+///
+/// @type list
+/// @access private
 $cursor-modes: array-concat((alias, all-scroll, auto, cell, context-menu, col-resize, copy, crosshair, default, e-resize, ew-resize, grab, grabbing, help, move, n-resize, ne-resize, nesw-resize, ns-resize, nw-resize, nwse-resize, no-drop, none, not-allowed, pointer, progress, row-resize, s-resize, se-resize, sw-resize, text, vertical-text, w-resize, wait, zoom-in, zoom-out), $css-default-modes);
 
+/// Checks if something is a correct cursor mode
+///
+/// @access public
+/// @param {string} $c - the cursor mode
+/// @return {boolean}
 @function is-cursor-mode($c) {
   @return is-defined($c) and (array-contains($cursor-modes, $c) or is-url($c));
 }
 
-@mixin cursor($c) {
+/// Cursor mixin
+///
+/// @param {string} $c - the cursor mode
+/// @link https://www.w3schools.com/cssref/pr_class_cursor.asp W3Schools cursor docs
+/// @example scss - Usage
+///   .cursor-element {
+///     @include cursor(pointer);
+///   }
+///
+/// @example css - Output
+///   .cursor-element {
+///     cursor: pointer;
+///   }
+@mixin cursor($c: default) {
   @if is-cursor-mode($c) {
     cursor: $c;
   }
@@ -15,13 +43,35 @@ $cursor-modes: array-concat((alias, all-scroll, auto, cell, context-menu, col-re
   }
 }
 
+/// Pointer events modes
+///
+/// @type list
+/// @access private
 $pointer-events-modes: array-concat((all, auto, bounding-box, fill, none, painted, stroke, unset, visible, visiblefill, visiblepainted, visiblestroke), $css-default-modes);
 
+/// Checks if something is a correct pointer-events mode
+///
+/// @access public
+/// @param {string} $pe - the pointer events mode
+/// @return {boolean}
 @function is-pointer-events-mode($pe) {
   @return is-defined($pe) and array-contains($pointer-events-modes, $pe);
 }
 
-@mixin pointer-events($pe) {
+/// Pointer events mixin
+///
+/// @param {string} $pe - the pointer events mode
+/// @link https://www.w3schools.com/cssref/css3_pr_pointer-events.asp W3Schools pointer-events docs
+/// @example scss - Usage
+///   .pointer-events-element {
+///     @include pointer-events(none);
+///   }
+///
+/// @example css - Output
+///   .pointer-events-element {
+///     pointer-events: none;
+///   }
+@mixin pointer-events($pe: auto) {
   @if is-pointer-events-mode($pe) {
     pointer-events: $pe;
   }

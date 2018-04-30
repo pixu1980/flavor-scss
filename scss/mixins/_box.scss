@@ -157,6 +157,25 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
   @return is-defined($s) and (is-size($s) or array-contains($box-bound-size-modes, $s));
 }
 
+/// Box bounds mixin
+/// <br>useful to set min/max width & height in one shot
+///
+/// @access public
+/// @param {object | map} $options - the bounds options
+/// @param {size | percentage} $options.min-width [null] - the min width bound
+/// @param {size | percentage} $options.min-height [null] - the min height bound
+/// @param {size | percentage} $options.max-width [null] - the max width bound
+/// @param {size | percentage} $options.max-height [null] - the max height bound
+/// @example scss - Usage
+///   .bounds-element {
+///     @include box-bounds(10% null null 610px);
+///   }
+///
+/// @example css - Output
+///   .bounds-element {
+///     min-width: 10%;
+///     max-height: 610px
+///   }
 @mixin box-bounds($options) {
   $settings: (min-width: null, min-height: null, max-width: null, max-height: null);
 
@@ -234,6 +253,63 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// Box size mixin
+/// <br>used to set size & bounds in one shot
+///
+/// @access public
+/// @param {object | map} $options - the bounds options
+/// @param {size | percentage} $options.width [null] - the min width bound
+/// @param {size | percentage} $options.height [null] - the min width bound
+/// @param {size | percentage} $options.min-width [null] - the min width bound
+/// @param {size | percentage} $options.min-height [null] - the min height bound
+/// @param {size | percentage} $options.max-width [null] - the max width bound
+/// @param {size | percentage} $options.max-height [null] - the max height bound
+/// @param {boolean} $height-fallback [true] - falls back the height value to the width value, if height is not specified (useful for square sizes)
+/// @example scss - Usage - height fallback
+///   .size-element {
+///     @include box-size(100px);
+///   }
+///
+/// @example css - Output - height fallback
+///   .size-element {
+///     width: 100px;
+///     height: 100px;
+///   }
+///
+/// @example scss - Usage - no height fallback
+///   .size-element {
+///     @include box-size(100px, false);
+///   }
+///
+/// @example css - Output - no height fallback
+///   .size-element {
+///     width: 100px;
+///   }
+///
+/// @example scss - Usage - height only
+///   .size-element {
+///     @include box-size(null 250px);
+///   }
+///
+/// @example css - Output - height only
+///   .size-element {
+///     height: 250px;
+///   }
+///
+/// @example scss - Usage - full usage
+///   .size-element {
+///     @include box-size(100% auto 30px 0 100% 250px);
+///   }
+///
+/// @example css - Output - full usage
+///   .size-element {
+///     width: 100%;
+///     height: auto;
+///     min-width: 30px;
+///     min-height: 0;
+///     max-width: 100%;
+///     max-height: 250px;
+///   }
 @mixin box-size($options, $height-fallback: true) {
   $settings: (width: null, height: null, min-width: null, min-height: null, max-width: null, max-height: null);
 
@@ -312,6 +388,23 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
   @include box-bounds($min-width $min-height $max-width $max-height);
 }
 
+/// Box color mixin
+/// <br>used to set color & background color in one shot
+///
+/// @access public
+/// @param {object | map} $options - the box color options
+/// @param {color} $options.color [inherit] - the color
+/// @param {color} $options.bgcolor [inherit] - the background color
+/// @example scss - Usage
+///   .color-element {
+///     @include box-color(#ffa transparent);
+///   }
+///
+/// @example css - Output
+///   .color-element {
+///     color: #ffa;
+///     background-color: transparent;
+///   }
 @mixin box-color($options) {
   $settings: (color: inherit, bgcolor: inherit);
 
@@ -351,6 +444,23 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// Box shadow mixin
+///
+/// @access public
+/// @param {shadow} $shadows... - the box shadows list
+/// @example scss - Usage
+///   .shadow-element {
+///     @include box-shadow(inset 0 2px 0px #dcffa6, 0 2px 5px #000);
+///   }
+///
+/// @example css - Output
+///   .color-element {
+///     -webkit-box-shadow: inset 0 2px 0px #dcffa6, 0 2px 5px #000;
+///     -moz-box-shadow: inset 0 2px 0px #dcffa6, 0 2px 5px #000;
+///     -ms-box-shadow: inset 0 2px 0px #dcffa6, 0 2px 5px #000;
+///     -o-box-shadow: inset 0 2px 0px #dcffa6, 0 2px 5px #000;
+///     box-shadow: inset 0 2px 0px #dcffa6, 0 2px 5px #000;
+///   }
 @mixin box-shadow($shadows...) {
   @include prefixer(box-shadow, $shadows);
 }
@@ -370,6 +480,19 @@ $z-index-modes: array-concat((auto), $css-default-modes);
   @return is-defined($zi) and (is-integer($zi) or array-contains($z-index-modes, $zi));
 }
 
+/// Z-index mixin
+///
+/// @access public
+/// @param {integer | string} $zi - the z-index
+/// @example scss - Usage
+///   .z-index-element {
+///     @include z-index(1);
+///   }
+///
+/// @example css - Output
+///   .z-index-element {
+///     z-index: 1;
+///   }
 @mixin z-index($zi) {
   @if(is-z-index($zi)) {
     z-index: $zi;
@@ -394,30 +517,25 @@ $visibility-modes: array-concat((visible, hidden, collapse), $css-default-modes)
   @return is-defined($vm) and array-contains($visibility-modes, $vm);
 }
 
+/// Visibility mixin
+///
+/// @access public
+/// @param {string} $v - the visibility
+/// @example scss - Usage
+///   .visibility-element {
+///     @include visibility(hidden);
+///   }
+///
+/// @example css - Output
+///   .visibility-element {
+///     visibility: hidden;
+///   }
 @mixin visibility($v) {
   @if(is-visibility-mode($v)) {
     visibility: $v;
   }
   @else {
     @warn '`visibility: #{$zi}` is not a valid visibility value';
-  }
-}
-
-@mixin aspect-ratio($width, $height, $content-selector: '.content') {
-  @include display(block);
-  @include position(relative);
-
-  &:before {
-    @include display(block);
-    @include box-size(100%, false);
-    @include padding(((strip-unit($height) / strip-unit($width)) * 100%) null null null);
-
-    content: '';
-  }
-
-  > #{$content-selector} {
-    @include position(absolute, 0 0 0 0);
-    @include box-size(100%);
   }
 }
 
@@ -436,6 +554,23 @@ $backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
   @return is-defined($bv) and array-contains($backface-visibility-modes, $bv);
 }
 
+/// Backface visibility mixin
+///
+/// @access public
+/// @param {string} $bv - the backface visibility
+/// @example scss - Usage
+///   .backface-visibility-element {
+///     @include backface-visibility(visible);
+///   }
+///
+/// @example css - Output
+///   .backface-visibility-element {
+///     -webkit-backface-visibility: visible;
+///     -moz-backface-visibility: visible;
+///     -ms-backface-visibility: visible;
+///     -o-backface-visibility: visible;
+///     backface-visibility: visible;
+///   }
 @mixin backface-visibility($bv) {
   @if is-backface-visibility($bv) {
     @include prefixer(backface-visibility, $bv);
@@ -445,3 +580,60 @@ $backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
   }
 }
 
+/// Aspect ratio mixin
+///
+/// @access public
+/// @param {integer | size} $width [1] - desired width for aspect ratio calculation
+/// @param {integer | size} $height [1] - desired height for aspect ratio calculation
+/// @param {integer | size} $content-selector ['.content'] - desired content selector
+/// @example scss - Usage
+///   .aspect-ratio-element {
+///     @include aspect-ratio(170px, 20px);
+///   }
+///
+/// @example css - Output
+///   .aspect-ratio-element {
+///     position: relative;
+///     display: inline-block; // so you can use text align to align the element
+///
+///     &:before {
+///       display: inline-block;
+///       width: 100%;
+///       padding-top: 11,764705882352941%; // = 20 / 170 * 100%
+///       content: '';
+///     }
+///
+///     > .content {
+///       position: absolute;
+///       display: inline-block;
+///       top: 0;
+///       right: 0;
+///       bottom: 0;
+///       left: 0;
+///       width: 100%;
+///       height: 100%;
+///     }
+///   }
+@mixin aspect-ratio($width, $height, $content-selector: '.content') {
+  @if (unit($height) == unit($width)) {
+    @include position(relative);
+    @include display(inline-block);
+
+    &:before {
+      @include display(inline-block);
+      @include box-size(100%, false);
+      @include padding(((strip-unit($height) / strip-unit($width)) * 100%) null null null);
+
+      content: '';
+    }
+
+    > #{$content-selector} {
+      @include position(absolute, 0 0 0 0);
+      @include display(inline-block);
+      @include box-size(100%);
+    }
+  }
+  @else {
+    @warn '`$width: #{$widgh}` and `$height: #{$height}` should have the same measure unit';
+  }
+}

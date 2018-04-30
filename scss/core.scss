@@ -24,5 +24,11 @@
   @return $d and not is-null($d);
 }
 
+// Helper function
+// Return null rather than throwing an error if index is outside list range.
+@function nth-value($list, $index, $default: null) {
+  @return if(length($list) >= $index, nth($list, $index), $default);
+}
+
 @import 'types/types';
 @import 'mixins/mixins';
