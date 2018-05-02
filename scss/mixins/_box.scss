@@ -269,8 +269,11 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 /// @param {size | percentage} $options.max-height [null] - the max height bound
 /// @param {boolean} $height-fallback [true] - falls back the height value to the width value, if height is not specified (useful for square sizes)
 /// @requires {function} extend
+/// @requires {function} is-box-size
 /// @requires {function} is-defined
+/// @requires {function} is-object
 /// @requires {function} nth-value
+/// @requires {mixin} box-bounds
 /// @example scss - Usage - height fallback
 ///   .size-element {
 ///     @include box-size(100px);
@@ -595,6 +598,9 @@ $backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
 /// @param {integer | size} $width [1] - desired width for aspect ratio calculation
 /// @param {integer | size} $height [1] - desired height for aspect ratio calculation
 /// @param {integer | size} $content-selector ['.content'] - desired content selector
+/// @requires {function} strip-unit
+/// @requires {mixin} box-size
+/// @requires {mixin} display
 /// @example scss - Usage
 ///   .aspect-ratio-element {
 ///     @include aspect-ratio(170px, 20px);

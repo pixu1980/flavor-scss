@@ -70,6 +70,9 @@
 /// @access public
 /// @param {string} $h - the haystack
 /// @param {string} $n - the needle
+/// @requires {function} is-string
+/// @requires {function} string-length
+/// @requires {function} string-slice
 /// @return {boolean}
 @function string-starts-with($h, $n) {
   @if is-string($h) and is-string($n) {
@@ -85,6 +88,8 @@
 /// @access public
 /// @param {string} $h - the haystack
 /// @param {string} $n - the needle
+/// @requires {function} is-string
+/// @requires {function} string-index
 /// @return {boolean}
 @function string-contains($h, $n) {
   @if is-string($h) and is-string($n) {
@@ -100,6 +105,9 @@
 /// @access public
 /// @param {string} $h - the haystack
 /// @param {string} $n - the needle
+/// @requires {function} is-string
+/// @requires {function} string-length
+/// @requires {function} string-slice
 /// @return {boolean}
 @function string-ends-with($h, $n) {
   @if is-string($h) and is-string($n) {
@@ -118,6 +126,9 @@
 /// @access public
 /// @param {string} $s - the string to split
 /// @param {string} $sep ['.'] - the separator
+/// @requires {function} array-concat
+/// @requires {function} string-index
+/// @requires {function} string-slice
 /// @return {list | array}
 @function string-split($s, $sep: '.') {
   $split: ();
@@ -142,6 +153,7 @@
 /// @param {string} $h - the haystack
 /// @param {string} $n - the needle
 /// @param {string} $r [''] - the string to use for replacement
+/// @requires {function} string-slice
 /// @return {string} - the updated string
 @function string-replace($h, $n, $r: '') {
   $i: string-index($h, $n);

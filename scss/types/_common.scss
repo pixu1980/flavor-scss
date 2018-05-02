@@ -34,6 +34,7 @@ $css-default-modes: (initial, inherit);
 ///
 /// @access public
 /// @param {any} $cl - the value to check
+/// @requires {function} string-replace
 /// @return {css-expression}
 @function get-calc-length-expression($cl) {
   @if is-calc-length($cl) {

@@ -10,6 +10,7 @@
 ///
 /// @type list
 /// @access private
+/// @requires {function} array-concat
 $font-size-modes: array-concat((medium, xx-small, x-small, small, large, x-large, xx-large, smaller, larger), $css-default-modes);
 
 /// Checks if something is a supported font-size value
@@ -166,6 +167,10 @@ $font-weight-modes: array-concat((normal, bold, bolder, lighter, 100, 200, 300, 
 /// @param {string | array | list} $options.family [null] - the font-family value
 /// @param {string | integer} $options.weight [normal] - the font-weight value
 /// @param {color} $options.color [null] - the color value
+/// @requires {function} extend
+/// @requires {function} is-defined
+/// @requires {function} is-object
+/// @requires {function} nth-value
 /// @example scss - Usage
 ///   .font-element {
 ///     @include font(1.5rem 2.5rem);

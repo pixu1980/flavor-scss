@@ -7,10 +7,6 @@ description: |
     * [Hugo Giraudel](https://hugogiraudel.com)
     * [Bootstrap](https://getbootstrap.com)
     * [normalize.css](https://github.com/necolas/normalize.css)
-sort:
-  - group
-  - file
-  - access
 groups:
   undefined: Core
   core: Core

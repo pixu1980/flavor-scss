@@ -90,6 +90,10 @@ $animation-timing-function-modes: array-concat((linear, ease, ease-in, ease-out,
 ///
 /// @access public
 /// @param {string} $atf - the animation timing function
+/// @requires {function} array-contains
+/// @requires {function} is-defined
+/// @requires {function} string-starts-with
+/// @requires {variable} animation-timing-function-modes
 /// @link https://www.w3schools.com/cssref/css3_pr_animation-timing-function.asp W3Schools animation-timing-function docs
 /// @return {boolean}
 @function is-animation-timing-function($atf) {
