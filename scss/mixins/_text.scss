@@ -122,7 +122,7 @@ $line-height-modes: array-concat((normal), $css-default-modes);
   }
 }
 
-/// font weight modes
+/// Font weight modes
 ///
 /// @type list
 /// @access private
@@ -172,14 +172,20 @@ $font-weight-modes: array-concat((normal, bold, bolder, lighter, 100, 200, 300, 
 /// @requires {function} is-object
 /// @requires {function} nth-value
 /// @example scss - Usage
+///
+///   $font-family: OpenSans, Verdana, sans-serif;
+///
 ///   .font-element {
-///     @include font(1.5rem 2.5rem);
+///     @include font(1.5rem 2.5rem $font-family bold white);
 ///   }
 ///
 /// @example css - Output
 ///   .font-element {
 ///     font-size: 1.5rem;
 ///     line-height: 2.5rem;
+///     font-family: OpenSans, Verdana, sans-serif;
+///     font-weight: bold;
+///     color: white;
 ///   }
 @mixin font($options) {
   $settings: (size: 1rem, height: 1rem, family: null, weight: normal, color: null);
@@ -250,12 +256,34 @@ $font-weight-modes: array-concat((normal, bold, bolder, lighter, 100, 200, 300, 
   }
 }
 
+/// Text align modes
+///
+/// @type list
+/// @access private
 $text-align-modes: array-concat((left, center, right, justify), $css-default-modes);
 
+/// Checks if something is a supported text-align value
+///
+/// @access public
+/// @param {string} $ta - the text-align value
+/// @link https://www.w3schools.com/cssref/pr_text_text-align.asp - W3Schools text-align docs
+/// @return {boolean}
 @function is-text-align($ta) {
   @return is-defined($ta) and array-contains($text-align-modes, $ta);
 }
 
+/// Text align mixin
+///
+/// @param {string} $ta - the text-align value
+/// @example scss - Usage
+///   .text-align-element {
+///     @include text-align(center);
+///   }
+///
+/// @example css - Output
+///   .text-align-element {
+///     text-align: center;
+///   }
 @mixin text-align($ta) {
   @if(is-text-align($ta)) {
     text-align: $ta;
@@ -265,12 +293,34 @@ $text-align-modes: array-concat((left, center, right, justify), $css-default-mod
   }
 }
 
+/// Vertical align modes
+///
+/// @type list
+/// @access private
 $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle, bottom, text-bottom), $css-default-modes);
 
+/// Checks if something is a supported vertical-align value
+///
+/// @access public
+/// @param {string} $va - the vertical-align value
+/// @link https://www.w3schools.com/cssref/pr_pos_vertical-align.asp - W3Schools vertical-align docs
+/// @return {boolean}
 @function is-vertical-align($va) {
   @return is-defined($va) and (is-size($va) or array-contains($vertical-align-modes, $va));
 }
 
+/// Vertical align mixin
+///
+/// @param {string} $va - the vertical-align value
+/// @example scss - Usage
+///   .vertical-align-element {
+///     @include vertical-align(top);
+///   }
+///
+/// @example css - Output
+///   .vertical-align-element {
+///     vertical-align: top;
+///   }
 @mixin vertical-align($va) {
   @if(is-vertical-align($va)) {
     vertical-align: $va;
@@ -280,6 +330,21 @@ $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle
   }
 }
 
+/// Content align mixin
+///
+/// @param {object | map} $options - the content-align options value
+/// @param {string} $options.h [inherit] - the text-align value
+/// @param {string} $options.v [inherit] - the vertical-align value
+/// @example scss - Usage
+///   .content-align-element {
+///     @include content-align(center middle);
+///   }
+///
+/// @example css - Output
+///   .content-align-element {
+///     text-align: center;
+///     vertical-align: middle;
+///   }
 @mixin content-align($options) {
   $settings: (h: inherit, v: inherit);
 
@@ -313,12 +378,35 @@ $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle
   }
 }
 
+/// Text overflow modes
+///
+/// @type list
+/// @access private
 $text-overflow-modes: array-concat((clip, ellipsis), $css-default-modes);
 
+/// Checks if something is a supported text-overflow value
+///
+/// @access public
+/// @param {string} $to - the text-overflow value
+/// @link https://www.w3schools.com/cssref/css3_pr_text-overflow.asp - W3Schools text-overflow docs
+/// @return {boolean}
 @function is-text-overflow-mode($to) {
   @return is-defined($to) and (array-contains($text-overflow-modes, $to) or is-string($to));
 }
 
+/// Text overflow mixin
+///
+/// @param {string} $to - the text-overflow value
+/// @example scss - Usage
+///   .text-overflow-element {
+///     @include text-overflow(ellipsis);
+///   }
+///
+/// @example css - Output
+///   .text-overflow-element {
+///     -o-overflow: ellipsis;
+///     text-overflow: ellipsis;
+///   }
 @mixin text-overflow($to) {
   @if is-text-overflow($to) {
     @include prefixer(text-overflow, $to, o spec);
@@ -328,12 +416,38 @@ $text-overflow-modes: array-concat((clip, ellipsis), $css-default-modes);
   }
 }
 
+/// Hyphens modes
+///
+/// @type list
+/// @access private
 $hyphens-modes: array-concat((none, manual, auto, unset), $css-default-modes);
 
+/// Checks if something is a supported hyphens value
+///
+/// @access public
+/// @param {string} $h - the hyphens value
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens - MDN hyphens docs
+/// @return {boolean}
 @function is-hyphens-mode($h) {
   @return is-defined($h) and array-contains($hyphens-modes, $h);
 }
 
+/// Hyphens mixin
+///
+/// @param {string} $h - the hyphens value
+/// @example scss - Usage
+///   .hyphens-element {
+///     @include hyphens(manual);
+///   }
+///
+/// @example css - Output
+///   .hyphens-element {
+///     -webkit-overflow: manual;
+///     -moz-overflow: manual;
+///     -ms-overflow: manual;
+///     -o-overflow: manual;
+///     hyphens: manual;
+///   }
 @mixin hyphens($h) {
   @if is-hyphens($h) {
     @include prefixer(hyphens, $h);
@@ -492,6 +606,5 @@ $text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
 @mixin word-wrap-force {
   @include hyphens(auto);
   @include word-break(break-all);
-
-  word-break: break-word;
+  @include word-break(break-word);
 }
