@@ -6,28 +6,176 @@
 /// @author blackmirror1980
 ////
 
+/// Font size modes
+///
+/// @type list
+/// @access private
+$font-size-modes: array-concat((medium, xx-small, x-small, small, large, x-large, xx-large, smaller, larger), $css-default-modes);
+
+/// Checks if something is a supported font-size value
+///
+/// @access public
+/// @param {size | percentage | font-size-mode} $fs - the font-size value
+/// @link https://www.w3schools.com/cssref/pr_font_font-size.asp - W3Schools font-size docs
+/// @return {boolean}
+@function is-font-size($fs) {
+  @return is-defined($fs) and (is-size($fs) or is-percentage($fs) or array-contains($font-size-modes, $fs));
+}
+
+/// Font size mixin
+///
+/// @param {size | percentage | font-size-mode} $fs - the font-size value
+/// @example scss - Usage
+///   .font-size-element {
+///     @include font-size(1.8rem);
+///   }
+///
+/// @example css - Output
+///   .font-size-element {
+///     font-size: 1.8rem;
+///   }
+@mixin font-size($fs) {
+  @if is-font-size($fs) {
+    font-size: $fs;
+  }
+  @else {
+    @warn '`font-size: #{$fs}` is not a valid font-size value';
+  }
+}
+
+/// Line height modes
+///
+/// @type list
+/// @access private
+$line-height-modes: array-concat((normal), $css-default-modes);
+
+/// Checks if something is a supported line-height value
+///
+/// @access public
+/// @param {size | percentage | line-height-mode} $lh - the line-height value
+/// @link https://www.w3schools.com/cssref/pr_dim_line-height.asp - W3Schools line-height docs
+/// @return {boolean}
+@function is-line-height($lh) {
+  @return is-defined($lh) and (is-size($lh) or is-percentage($lh) or array-contains($line-height-modes, $lh));
+}
+
+/// Line height mixin
+///
+/// @param {size | percentage | line-height-mode} $lh - the line-height value
+/// @example scss - Usage
+///   .line-height-element {
+///     @include line-height(2.5rem);
+///   }
+///
+/// @example css - Output
+///   .line-height-element {
+///     line-height: 2.5rem;
+///   }
+@mixin line-height($lh) {
+  @if is-line-height($lh) {
+    line-height: $lh;
+  }
+  @else {
+    @warn '`line-height: #{$lh}` is not a valid line-height value';
+  }
+}
+
+/// Checks if something is a supported font-family value
+///
+/// @access public
+/// @param {string | array | list} $ff - the font-family value
+/// @link https://www.w3schools.com/cssref/pr_font_font-family.asp - W3Schools font-family docs
+/// @return {boolean}
 @function is-font-family($ff) {
   @return is-defined($ff) and (is-string($ff) or is-array($ff));
 }
 
+/// Font family mixin
+///
+/// @param {string | array | list} $ff - the font-family value
+/// @example scss - Usage
+///   .font-family-element {
+///     @include font-family('Source Sans Pro');
+///   }
+///
+/// @example css - Output
+///   .font-family-element {
+///     font-family: 'Source Sans Pro';
+///   }
+///
+/// @example scss - Usage
+///   .font-family-element {
+///     @include font-family('Source Sans Pro', Verdana, sans-serif);
+///   }
+///
+/// @example css - Output
+///   .font-family-element {
+///     font-family: 'Source Sans Pro', Verdana, sans-serif;
+///   }
+@mixin font-family($ff) {
+  @if is-font-family($ff) {
+    font-family: #{$ff};
+  }
+  @else {
+    @warn '`font-family: #{$ff}` is not a valid font-family value';
+  }
+}
+
+/// font weight modes
+///
+/// @type list
+/// @access private
 $font-weight-modes: array-concat((normal, bold, bolder, lighter, 100, 200, 300, 400, 500, 600, 700, 800, 900), $css-default-modes);
 
+/// Checks if something is a supported font-weight value
+///
+/// @access public
+/// @param {string | integer} $fw - the font-weight value
+/// @link https://www.w3schools.com/cssref/pr_font_weight.asp - W3Schools font-weight docs
+/// @return {boolean}
 @function is-font-weight($fw) {
-  @return array-contains($font-weight-modes, $fw);
+  @return is-defined($fw) and array-contains($font-weight-modes, $fw);
 }
 
-$font-modes: array-concat((medium, xx-small, x-small, small, large, x-large, xx-large, smaller, larger), $css-default-modes);
-
-@function is-font-size($fs) {
-  @return is-size($fs) or array-contains($font-modes, $fs);
+/// Font weight mixin
+///
+/// @param {string | integer} $fw - the font-weight value
+/// @example scss - Usage
+///   .font-weight-element {
+///     @include font-weight(bold);
+///   }
+///
+/// @example css - Output
+///   .font-weight-element {
+///     font-weight: bold;
+///   }
+@mixin font-weight($fw) {
+  @if is-font-weight($fw) {
+    font-weight: $fw;
+  }
+  @else {
+    @warn '`font-weight: #{$fw}` is not a valid font-weight';
+  }
 }
 
-$line-height-modes: array-concat((normal), $css-default-modes);
-
-@function is-line-height($s) {
-  @return is-size($s) or array-contains($line-height-modes, $s);
-}
-
+/// Font mixin
+///
+/// @param {object | map} $options - the options
+/// @param {size | percentage | font-size-mode} $options.size [1rem] - the font-size value
+/// @param {size | percentage | line-height-mode} $options.height [1rem] - the line-height value
+/// @param {string | array | list} $options.family [null] - the font-family value
+/// @param {string | integer} $options.weight [normal] - the font-weight value
+/// @param {color} $options.color [null] - the color value
+/// @example scss - Usage
+///   .font-element {
+///     @include font(1.5rem 2.5rem);
+///   }
+///
+/// @example css - Output
+///   .font-element {
+///     font-size: 1.5rem;
+///     line-height: 2.5rem;
+///   }
 @mixin font($options) {
   $settings: (size: 1rem, height: 1rem, family: null, weight: normal, color: null);
 
@@ -69,56 +217,31 @@ $line-height-modes: array-concat((normal), $css-default-modes);
   $font-size: map-get($settings, size);
 
   @if is-defined($font-size) {
-    @if is-font-size($font-size) {
-      font-size: $font-size;
-    }
-    @else {
-      @warn '`font-size: #{$font-size}` is not a valid css size';
-    }
+    @include font-size($font-size);
   }
 
   $line-height: map-get($settings, height);
 
   @if is-defined($line-height) {
-    @if is-line-height($line-height) {
-      line-height: $line-height;
-    }
-    @else {
-      @warn '`line-height: #{$line-height}` is not a valid line-height value';
-    }
+    @include line-height($line-height);
   }
 
   $font-family: map-get($settings, family);
 
   @if is-defined($font-family) {
-    @if is-font-family($font-family) {
-      font-family: #{$font-family};
-    }
-    @else {
-      @warn '`font-family: #{$font-family}` is not a valid font-family value';
-    }
+    @include font-family($font-family);
   }
 
   $font-weight: map-get($settings, weight);
 
   @if is-defined($font-weight) {
-    @if is-font-weight($font-weight) {
-      font-weight: $font-weight;
-    }
-    @else {
-      @warn '`font-weight: #{$font-weight}` is not a valid font-weight';
-    }
+    @include font-weight($font-weight);
   }
 
   $font-color: map-get($settings, color);
 
   @if is-defined($font-color) {
-    @if is-css-color($font-color) {
-      color: $font-color;
-    }
-    @else {
-      @warn '`color: #{$font-color}` is not a valid css color';
-    }
+    @include box-color($font-color null);
   }
 }
 
@@ -175,23 +298,13 @@ $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle
   $h: get($settings, h);
 
   @if is-defined($h) {
-    @if is-text-align($h) {
-      text-align: $h;
-    }
-    @else {
-      @warn '`text-align: #{$h}` is not a valid text-align value';
-    }
+    @include text-align($h);
   }
 
   $v: get($settings, v);
 
   @if is-defined($v) {
-    @if is-vertical-align($v) {
-      vertical-align: $v;
-    }
-    @else {
-      @warn '`vertical-align: #{$v}` is not a valid vertical-align value';
-    }
+    @include vertical-align($v);
   }
 }
 

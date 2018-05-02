@@ -6,12 +6,45 @@
 /// @author blackmirror1980
 ////
 
+/// Overflow modes
+///
+/// @type list
+/// @access private
 $overflow-modes: array-concat((visible, hidden, scroll, overlay, unset, auto), $css-default-modes);
 
+/// Checks if something is a supported overflow mode
+///
+/// @access public
+/// @param {string} $o - the overflow mode
+/// @return {boolean}
 @function is-overflow-mode($o) {
   @return is-defined($o) and array-contains($overflow-modes, $o);
 }
 
+/// Overflow mixin
+///
+/// @param {string} $o - the overflow mode
+/// @example scss - Usage
+///   .overflow-element {
+///     @include overflow(hidden);
+///   }
+///
+/// @example css - Output
+///   .overflow-element {
+///     overflow-x: hidden;
+///     overflow-y: hidden;
+///   }
+///
+/// @example scss - Usage
+///   .overflow-element {
+///     @include overflow(hidden scroll);
+///   }
+///
+/// @example css - Output
+///   .overflow-element {
+///     overflow-x: hidden;
+///     overflow-y: scroll;
+///   }
 @mixin overflow($o) {
   $overflow-x: nth-value($o, 1);
 

@@ -39,6 +39,11 @@ $background-position-vertical-modes: array-concat((top, center, bottom), $css-de
 /// @param {string | array} $bp - the background position value/values
 /// @link https://www.w3schools.com/cssref/pr_background-position.asp W3Schools background-position docs
 /// @requires {function} nth-value
+/// @requires {function} is-size
+/// @requires {function} is-percentage
+/// @requires {function} array-contains
+/// @requires {variable} background-position-horizontal-modes
+/// @requires {variable} background-position-vertical-modes
 /// @return {boolean}
 @function is-background-position($bp) {
   @if is-defined($bp) {
