@@ -3,7 +3,7 @@
 ### Bug fixes
 
 - documentation improving: [`c0cf834`](https://github.com/blackmirror1980/flavor-scss/commit/c0cf834)
-- text mixinx documentation improving: [`44e6e04`](https://github.com/blackmirror1980/flavor-scss/commit/44e6e04)
+- text mixins documentation improving: [`44e6e04`](https://github.com/blackmirror1980/flavor-scss/commit/44e6e04)
 
 [...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.7.17...v0.7.18)
 
