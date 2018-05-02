@@ -1,6 +1,6 @@
 {
   "name": "flavor-scss",
-  "version": "0.7.15",
+  "version": "0.7.16",
   "description": "Flavor SCSS, bourbon.io based mixins & helpers",
   "main": "scss/flavor.scss",
   "scripts": {

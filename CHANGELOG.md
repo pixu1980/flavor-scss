@@ -1,3 +1,11 @@
+## [Version 0.7.16](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.16) (2018-5-2)
+
+### Bug fixes
+
+- documentation improving: [`acc2ac9`](https://github.com/blackmirror1980/flavor-scss/commit/acc2ac9)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.7.15...v0.7.16)
+
 ## [Version 0.7.15](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.15) (2018-4-30)
 
 ### Bug fixes
