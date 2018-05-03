@@ -1,3 +1,11 @@
+## [Version 0.8.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.8.1) (2018-5-3)
+
+### Bug fixes
+
+- updated pkg-2-readme template: [`ceb4ff9`](https://github.com/blackmirror1980/flavor-scss/commit/ceb4ff9)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.8.0...v0.8.1)
+
 ## [Version 0.8.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.8.0) (2018-5-3)
 
 ### Breaking changes
