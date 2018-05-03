@@ -1,3 +1,11 @@
+## [Version 0.7.21](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.21) (2018-5-3)
+
+### New features
+
+- added multiple transforms support: [`ef34961`](https://github.com/blackmirror1980/flavor-scss/commit/ef34961)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.7.20...v0.7.21)
+
 ## [Version 0.7.20](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.20) (2018-5-3)
 
 ### Bug fixes
