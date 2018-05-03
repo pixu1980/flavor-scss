@@ -1,3 +1,11 @@
+## [Version 0.8.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.8.0) (2018-5-3)
+
+### Breaking changes
+
+- refactored transform & transition mixins for multiple values: [`b887a59`](https://github.com/blackmirror1980/flavor-scss/commit/b887a59)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.7.21...v0.8.0)
+
 ## [Version 0.7.21](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.21) (2018-5-3)
 
 ### New features
