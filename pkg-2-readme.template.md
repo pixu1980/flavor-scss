@@ -20,7 +20,7 @@ v{{version}}
 Check out the [Latest Documentation]({{documentation}}) here
 
 ## Changelog
-Check out the [Changelog](https://github.com/blackmirror1980/flavor-scss/blob/master/CHANGELOG.md) here
+Check out the [Changelog](https://github.com/blackmirror1980/flavor-scss/blob/master/CHANGELOG.md)
 
 ## Description
 {{description}}
