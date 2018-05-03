@@ -4,7 +4,7 @@
 Black Mirror
 
 ## Version
-v0.8.0
+v0.8.1
 
 ## Badges
 
@@ -14,6 +14,9 @@ v0.8.0
 
 ## Documentation
 Check out the [Latest Documentation](https://blackmirror1980.github.io/flavor-scss/index.html) here
+
+## Changelog
+Check out the [Changelog](https://github.com/blackmirror1980/flavor-scss/blob/master/CHANGELOG.md)
 
 ## Description
 Flavor SCSS, bourbon.io based mixins &amp; helpers
