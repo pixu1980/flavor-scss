@@ -5,11 +5,6 @@
 /// @group mixins-transition
 /// @author blackmirror1980
 ////
-// TODO: refactorize
-@mixin transition($transitions) {
-  @include prefixer(transition, $transitions);
-}
-
 /// *** transiion time check ***
 @function is-transition-time($td) {
   @return is-defined($td) and (is-time($td) or is-css-default($td));
@@ -81,5 +76,100 @@ $transition-timing-modes: array-concat((linear, ease, ease-in, ease-out, ease-in
   }
   @else {
     @warn '`transition-timing-function: #{$ttf}` is not a valid transition-timing-function value';
+  }
+}
+
+@function is-transition($transition) {
+  $defaults: (property: all, duration: 0s, timing: ease, delay: 0s);
+
+  @if is-object($transition) {
+    $transition: extend($defaults, $transition);
+  }
+  @else {
+    $transition-property: nth-value($transition, 1);
+    $transition-duration: nth-value($transition, 2);
+    $transition-timing-function: nth-value($transition, 3);
+    $transition-delay: nth-value($transition, 4);
+
+    $transition: extend($defaults, ());
+
+    @if is-defined($transition-property) {
+      $transition: extend($transition, (property: $transition-property));
+    }
+
+    @if is-defined($transition-duration) {
+      $transition: extend($transition, (duration: $transition-duration));
+    }
+
+    @if is-defined($transition-timing-function) {
+      $transition: extend($transition, (timing: $transition-timing-function));
+    }
+
+    @if is-defined($transition-delay) {
+      $transition: extend($transition, (delay: $transition-delay));
+    }
+  }
+
+  $is-transition-valid: true;
+
+  $transition-property: get($transition, property);
+
+  @if not is-transition-property($transition-property) {
+    $is-transition-valid: false;
+
+    @warn '`transition-property: #{$transition-property}` is not a valid transition-property value';
+  }
+
+  @if $is-transition-valid {
+    $transition-duration: get($transition, duration);
+
+    @if not is-transition-time($transition-duration) {
+      $is-transition-valid: false;
+
+      @warn '`transition-duration: #{$transition-duration}` is not a valid transition-duration value';
+    }
+  }
+
+  @if $is-transition-valid {
+    $transition-timing-function: get($transition, timing);
+
+    @if not is-transition-timing-mode-or-function($transition-timing-function) {
+      $is-transition-valid: false;
+
+      @warn '`transition-timing-function: #{$transition-timing-function}` is not a valid transition-timing-function value';
+    }
+  }
+
+  @if $is-transition-valid {
+    $transition-delay: get($transition, delay);
+
+    @if not is-transition-time($transition-delay) {
+      $is-transition-valid: false;
+
+      @warn '`transition-delay: #{$transition-delay}` is not a valid transition-delay value';
+    }
+  }
+
+  @return $is-transition-valid;
+}
+
+@function is-transitions($transitions...) {
+  $is-transitions-valid: true;
+
+  @each $transition in $transitions {
+    @if $is-transitions-valid {
+      $is-transitions-valid: is-transition($transition);
+    }
+  }
+
+  @return $is-transitions-valid;
+}
+
+@mixin transition($transitions...) {
+  @if is-transitions($transitions...) {
+    @include prefixer(transition, $transitions);
+  }
+  @else {
+    @warn '`transition: #{$transitions}` one or more are not valid css transition values';
   }
 }

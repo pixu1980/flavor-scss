@@ -30,15 +30,15 @@ $transform-modes: array-concat((none), $css-default-modes);
 }
 
 @function is-transforms-mode-or-function($transforms) {
-  $valid: true;
+  $is-transforms-valid: true;
 
   @each $transform in $transforms {
-    @if $valid {
-      $valid: is-transform-mode-or-function(to-string($transform));
+    @if $is-transforms-valid {
+      $is-transforms-valid: is-transform-mode-or-function(to-string($transform));
     }
   }
 
-  @return $valid;
+  @return $is-transforms-valid;
 }
 
 @mixin transform($transforms) {
@@ -242,7 +242,6 @@ $transform-modes: array-concat((none), $css-default-modes);
     @warn '`transform: translateZ(#{$tz})` is not valid transform:translateZ factor value';
   }
 }
-
 
 $transform-origin-x-axis-modes: (left, right, center);
 $transform-origin-y-axis-modes: (top, center, bottom);
