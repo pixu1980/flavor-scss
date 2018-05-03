@@ -1,3 +1,11 @@
+## [Version 0.7.19](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.19) (2018-5-3)
+
+### New features
+
+- text mixins documentation completed testing multiple transforms mixin: [`382a054`](https://github.com/blackmirror1980/flavor-scss/commit/382a054)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.7.18...v0.7.19)
+
 ## [Version 0.7.18](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.18) (2018-5-2)
 
 ### Bug fixes
