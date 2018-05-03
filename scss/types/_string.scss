@@ -15,6 +15,15 @@
   @return is-defined($s) and type-of($s)==string;
 }
 
+/// Converts something to a string
+///
+/// @access public
+/// @param {any} $a - the value to convert
+/// @return {string}
+@function to-string($a) {
+  @return inspect($a);
+}
+
 /// Returns the number of characters in a string.
 /// <br><br><u>Note: aliases the native str-length method</u>
 ///

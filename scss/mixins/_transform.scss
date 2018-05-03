@@ -11,7 +11,7 @@ $transform-functions-names: (matrix, matrix3d, translate, translate3d, translate
 
 @function get-transform-function-name($t) {
   @if(string-contains($t, '(') and string-contains($t, ')')) {
-    @return str-slice($t, 1, str-index($t, '(') - 1);
+    @return string-slice($t, 1, string-index($t, '(') - 1);
   }
 
   @return null;
@@ -34,7 +34,7 @@ $transform-modes: array-concat((none), $css-default-modes);
 
   @each $transform in $transforms {
     @if $valid {
-      $valid: is-transform-mode-or-function($transform);
+      $valid: is-transform-mode-or-function(to-string($transform));
     }
   }
 
