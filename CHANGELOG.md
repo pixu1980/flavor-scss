@@ -1,3 +1,11 @@
+## [Version 0.7.20](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.20) (2018-5-3)
+
+### Bug fixes
+
+- to-string & transform bugfix: [`b9302c8`](https://github.com/blackmirror1980/flavor-scss/commit/b9302c8)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.7.19...v0.7.20)
+
 ## [Version 0.7.19](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.7.19) (2018-5-3)
 
 ### New features
