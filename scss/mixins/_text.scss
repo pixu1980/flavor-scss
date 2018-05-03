@@ -457,12 +457,34 @@ $hyphens-modes: array-concat((none, manual, auto, unset), $css-default-modes);
   }
 }
 
+/// Letter spacing modes
+///
+/// @type list
+/// @access private
 $letter-spacing-modes: array-concat((normal), $css-default-modes);
 
+/// Checks if something is a supported letter-spacing value
+///
+/// @access public
+/// @param {size | string} $ls - the letter-spacing value
+/// @link https://www.w3schools.com/cssref/pr_text_letter-spacing.asp - W3Schools letter-spacing docs
+/// @return {boolean}
 @function is-letter-spacing-mode($ls) {
   @return is-defined($ls) and (array-contains($letter-spacing-modes, $ls) or is-size($ls));
 }
 
+/// Letter spacing mixin
+///
+/// @param {size | string} $ls - the letter-spacing value
+/// @example scss - Usage
+///   .letter-spacing-element {
+///     @include letter-spacing(3px);
+///   }
+///
+/// @example css - Output
+///   .letter-spacing-element {
+///     letter-spacing: 3px;
+///   }
 @mixin letter-spacing($ls) {
   @if is-letter-spacing($ls) {
     letter-spacing: $ls;
@@ -472,12 +494,34 @@ $letter-spacing-modes: array-concat((normal), $css-default-modes);
   }
 }
 
+/// Word spacing modes
+///
+/// @type list
+/// @access private
 $word-spacing-modes: array-concat((normal), $css-default-modes);
 
+/// Checks if something is a supported word-spacing value
+///
+/// @access public
+/// @param {size | string} $ws - the word-spacing value
+/// @link https://www.w3schools.com/cssref/pr_text_word-spacing.asp - W3Schools word-spacing docs
+/// @return {boolean}
 @function is-word-spacing-mode($ws) {
   @return is-defined($ws) and (array-contains($word-spacing-modes, $ws) or is-size($ws));
 }
 
+/// Word spacing mixin
+///
+/// @param {size | string} $ws - the word-spacing value
+/// @example scss - Usage
+///   .word-spacing-element {
+///     @include word-spacing(1rem);
+///   }
+///
+/// @example css - Output
+///   .word-spacing-element {
+///     word-spacing: 1rem;
+///   }
 @mixin word-spacing($ws) {
   @if is-word-spacing($ws) {
     word-spacing: $ws;
@@ -487,12 +531,38 @@ $word-spacing-modes: array-concat((normal), $css-default-modes);
   }
 }
 
+/// User select modes
+///
+/// @type list
+/// @access private
 $user-select-modes: (auto, none, text, all);
 
+/// Checks if something is a supported user-select value
+///
+/// @access public
+/// @param {string} $us - the user-select value
+/// @link https://www.w3schools.com/cssref/css3_pr_user-select.asp - W3Schools user-select docs
+/// @return {boolean}
 @function is-user-select-mode($us) {
   @return is-defined($us) and array-contains($user-select-modes, $us);
 }
 
+/// User select mixin
+///
+/// @param {string} $us - the user-select value
+/// @example scss - Usage
+///   .user-select-element {
+///     @include user-select(none);
+///   }
+///
+/// @example css - Output
+///   .user-select-element {
+///     -webkit-user-select: none;
+///     -moz-user-select: none;
+///     -ms-user-select: none;
+///     -o-user-select: none;
+///     user-select: none;
+///   }
 @mixin user-select($us) {
   @if is-user-select($us) {
     @include prefixer(user-select, $us);
@@ -502,12 +572,34 @@ $user-select-modes: (auto, none, text, all);
   }
 }
 
+/// Direction modes
+///
+/// @type list
+/// @access private
 $direction-modes: array-concat((ltr, rtl), $css-default-modes);
 
+/// Checks if something is a supported direction value
+///
+/// @access public
+/// @param {string} $d - the direction value
+/// @link https://www.w3schools.com/cssref/pr_text_direction.asp - W3Schools direction docs
+/// @return {boolean}
 @function is-direction-mode($d) {
   @return is-defined($d) and array-contains($direction-modes, $d);
 }
 
+/// Direction mixin
+///
+/// @param {string} $d - the direction value
+/// @example scss - Usage
+///   .direction-element {
+///     @include direction(rtl);
+///   }
+///
+/// @example css - Output
+///   .direction-element {
+///     direction: rtl;
+///   }
 @mixin direction($d) {
   @if is-direction($d) {
     direction: $d;
@@ -517,12 +609,34 @@ $direction-modes: array-concat((ltr, rtl), $css-default-modes);
   }
 }
 
+/// White space modes
+///
+/// @type list
+/// @access private
 $white-space-modes: array-concat((normal, nowrap, pre, pre-line, pre-wrap), $css-default-modes);
 
+/// Checks if something is a supported white-space value
+///
+/// @access public
+/// @param {string} $ws - the white-space value
+/// @link https://www.w3schools.com/cssref/pr_text_white-space.asp - W3Schools white-space docs
+/// @return {boolean}
 @function is-white-space-mode($ws) {
   @return is-defined($ws) and array-contains($white-space-modes, $ws);
 }
 
+/// White space mixin
+///
+/// @param {string} $ws - the white-space value
+/// @example scss - Usage
+///   .white-space-element {
+///     @include white-space(nowrap);
+///   }
+///
+/// @example css - Output
+///   .white-space-element {
+///     white-space: nowrap;
+///   }
 @mixin white-space($ws) {
   @if is-white-space($ws) {
     white-space: $ws;
@@ -532,12 +646,34 @@ $white-space-modes: array-concat((normal, nowrap, pre, pre-line, pre-wrap), $css
   }
 }
 
+/// Word break modes
+///
+/// @type list
+/// @access private
 $word-break-modes: array-concat((normal, break-all, keep-all), $css-default-modes);
 
+/// Checks if something is a supported word-break value
+///
+/// @access public
+/// @param {string} $wb - the word-break value
+/// @link https://www.w3schools.com/cssref/css3_pr_word-break.asp - W3Schools word-break docs
+/// @return {boolean}
 @function is-word-break-mode($wb) {
   @return is-defined($wb) and array-contains($word-break-modes, $wb);
 }
 
+/// Word break mixin
+///
+/// @param {string} $wb - the word-break value
+/// @example scss - Usage
+///   .word-break-element {
+///     @include word-break(break-all);
+///   }
+///
+/// @example css - Output
+///   .word-break-element {
+///     word-break: break-all;
+///   }
 @mixin word-break($wb) {
   @if is-word-break($wb) {
     word-break: $wb;
@@ -547,12 +683,34 @@ $word-break-modes: array-concat((normal, break-all, keep-all), $css-default-mode
   }
 }
 
+/// Word wrap modes
+///
+/// @type list
+/// @access private
 $word-wrap-modes: array-concat((normal, break-word), $css-default-modes);
 
+/// Checks if something is a supported word-wrap value
+///
+/// @access public
+/// @param {string} $ww - the word-wrap value
+/// @link https://www.w3schools.com/cssref/css3_pr_word-wrap.asp - W3Schools word-wrap docs
+/// @return {boolean}
 @function is-word-wrap-mode($ww) {
   @return is-defined($ww) and array-contains($word-wrap-modes, $ww);
 }
 
+/// Word wrap mixin
+///
+/// @param {string} $ww - the word-wrap value
+/// @example scss - Usage
+///   .word-wrap-element {
+///     @include word-wrap(break-word);
+///   }
+///
+/// @example css - Output
+///   .word-wrap-element {
+///     word-wrap: break-word;
+///   }
 @mixin word-wrap($ww) {
   @if is-word-wrap($ww) {
     word-wrap: $ww;
@@ -562,12 +720,38 @@ $word-wrap-modes: array-concat((normal, break-word), $css-default-modes);
   }
 }
 
+/// Text size adjust modes
+///
+/// @type list
+/// @access private
 $text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
 
+/// Checks if something is a supported text-size-adjust value
+///
+/// @access public
+/// @param {percentage | string} $tsa - the text-size-adjust value
+/// @link https://developer.mozilla.org/it/docs/Web/CSS/text-size-adjust - MDN text-size-adjust docs
+/// @return {boolean}
 @function is-text-size-adjust($tsa) {
   @return is-defined($tsa) and (is-percentage($tsa) or array-contains($text-size-adjust-modes, $tsa));
 }
 
+/// Text size adjust mixin
+///
+/// @param {string} $tsa - the text-size-adjust value
+/// @example scss - Usage
+///   .text-size-adjust-element {
+///     @include text-size-adjust(67%);
+///   }
+///
+/// @example css - Output
+///   .text-size-adjust-element {
+///     -webkit-text-size-adjust: 67%;
+///     -moz-text-size-adjust: 67%;
+///     -ms-text-size-adjust: 67%;
+///     -o-text-size-adjust: 67%;
+///     text-size-adjust: 67%;
+///   }
 @mixin text-size-adjust($tsa) {
   @if(is-text-size-adjust($tsa)) {
     @include prefixer(text-size-adjust, $tsa);
@@ -577,10 +761,53 @@ $text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
   }
 }
 
-@mixin ellipsis($multiline: false, $width: 100%, $font-size: 16px, $line-height: 1.4, $lines-to-show: 3) {
-  @include overflow(hidden);
-  @include text-overflow(ellipsis);
-
+/// Ellipsis mixin
+/// <br>useful to ellipse text containers also in multiline mode
+///
+/// @param {boolean} $multiline [false] - the multiline mode
+/// @param {size | length | percentage} $width [100%] - the width to use
+/// @param {size | length | percentage} $font-size [$font-size-base] - the font-size
+/// @param {size | length | percentage} $line-height [$line-height-base] - the line-height
+/// @param {integer} $lines-to-show [3] - the lines to show before ellipsis
+/// @param {string} $text-overflow [ellipsis] - the text to use for overflowing
+///
+/// @example scss - Usage - single line
+///   .ellipsis-element {
+///     @include ellipsis;
+///   }
+///
+/// @example css - Output - single line
+///   .ellipsis-element {
+///     display: inline-block;
+///     white-space: nowrap;
+///     word-wrap: normal;
+///     max-width: 100%;
+///     overflow: hidden;
+///     text-overflow: ellipsis;
+///   }
+///
+/// @example scss - Usage - multi line
+///   .ellipsis-element {
+///     @include ellipsis(true);
+///   }
+///
+/// @example css - Output - multi line
+///   .ellipsis-element {
+///     display: block;
+///     display: -webkit-box;
+///     margin: 0 auto;
+///     font-size: 10px;
+///     line-height: 1.5;
+///     max-width: 100%;
+///     height: 45px;
+///     min-height: 45px;
+///     -webkit-line-clamp: 3;
+///     -webkit-box-orient: vertical;
+///     overflow: hidden;
+///     text-overflow: ellipsis;
+///   }
+///
+@mixin ellipsis($multiline: false, $width: 100%, $font-size: $font-size-base, $line-height: $line-height-base, $lines-to-show: 3, $text-overflow: ellipsis) {
   @if $multiline {
     @include display(block); // Fallback for non-webkit
     @include margin(0 auto);
@@ -600,11 +827,26 @@ $text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
 
     max-width: $width;
   }
+
+  @include overflow(hidden);
+  @include text-overflow($text-overflow);
 }
 
-// Word Wrapping Force
+/// Word Wrap Force mixin
+///
+/// @example scss - Usage - single line
+///   .word-wrap-force-element {
+///     @include word-wrap-force;
+///   }
+///
+/// @example css - Output - single line
+///   .word-wrap-force-element {
+///     hyphens: auto;
+///     word-break: break-all;
+///     word-wrap: break-word;
+///   }
 @mixin word-wrap-force {
   @include hyphens(auto);
   @include word-break(break-all);
-  @include word-break(break-word);
+  @include word-wrap(break-word);
 }

@@ -29,12 +29,24 @@ $transform-modes: array-concat((none), $css-default-modes);
   @return is-defined($transform) and (array-contains($transform-modes, $transform) or is-transform-function($transform));
 }
 
-@mixin transform($transform) {
-  @if is-transform-mode-or-function($transform) {
-    @include prefixer(transform, $transform);
+@function is-transforms-mode-or-function($transforms...) {
+  $valid: true;
+
+  @each $transform in $transforms {
+    @if $valid {
+      $valid: is-transform-mode-or-function($transform);
+    }
+  }
+
+  @return $valid;
+}
+
+@mixin transform($transforms...) {
+  @if is-transforms-mode-or-function($transforms) {
+    @include prefixer(transform, $transforms...);
   }
   @else {
-    @warn '`transform: #{$transform}` is not a valid transform value';
+    @warn '`transform: #{$transforms}` is not a valid transform value';
   }
 }
 

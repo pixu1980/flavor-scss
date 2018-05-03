@@ -10,13 +10,14 @@
 ///
 /// @access public
 @mixin reset-inline-block {
-  letter-spacing: -.3em;
-  line-height: 0;
+  @include letter-spacing(-.3rem);
+  @include line-height(0);
+
   text-rendering: optimizeSpeed;
 
   * {
-    letter-spacing: initial;
-    line-height: initial;
+    @include letter-spacing(initial);
+    @include line-height(initial);
   }
 }
 
