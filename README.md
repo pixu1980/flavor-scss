@@ -4,7 +4,7 @@
 Black Mirror
 
 ## Version
-v0.8.1
+v0.9.0
 
 ## Badges
 
@@ -39,14 +39,14 @@ npm install flavor-scss --save
 
 ## Dependencies
 
-- [bourbon](https://ghub.io/bourbon): A simple and lightweight mixin library for Sass.
-- [pkg-2-readme](https://ghub.io/pkg-2-readme): Generate a README.md from package.json contents
+None
 
 ## Dev Dependencies
 
 - [sass-lint](https://ghub.io/sass-lint): All Node Sass linter!
 - [sassdoc](https://ghub.io/sassdoc): Release the docs!
 - [sassdoc-theme-flippant](https://ghub.io/sassdoc-theme-flippant): A modified version of Sassdoc&#39;s default theme
+- [pkg-2-readme](https://ghub.io/pkg-2-readme): Generate a README.md from package.json contents
 
 ## Tests
 
