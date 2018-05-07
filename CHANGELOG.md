@@ -1,3 +1,11 @@
+## [Version 0.9.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.9.0) (2018-5-7)
+
+### Breaking changes
+
+- finally removed bourbon dependency added position, margin, padding mixins: [`a71dbc5`](https://github.com/blackmirror1980/flavor-scss/commit/a71dbc5)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.8.1...v0.9.0)
+
 ## [Version 0.8.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.8.1) (2018-5-3)
 
 ### Bug fixes
