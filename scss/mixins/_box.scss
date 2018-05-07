@@ -5,7 +5,6 @@
 /// @group mixins-box
 /// @author blackmirror1980
 ////
-
 /// Reset inline-block mixin (useful to fix those annoying auto margins between inline-block children elements
 ///
 /// @access public
@@ -457,25 +456,190 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// Box shadow modes
+///
+/// @type list
+/// @access private
+$box-shadow-modes: array-concat((none), $css-default-modes);
+
+/// Checks if something is box shadow mode
+///
+/// @access public
+/// @param {string} $bsm - the box shadow mode
+/// @return {boolean}
+@function is-box-shadow-mode($bsm) {
+  @return is-defined($bsm) and array-contains($box-shadow-modes, $bsm);
+}
+
+/// Checks if something is box shadow
+///
+/// @access public
+/// @param {any} $box-shadow - the box shadow
+/// @return {boolean}
+@function is-box-shadow($box-shadow) {
+  @if is-defined($box-shadow) {
+    @if is-box-shadow-mode($box-shadow) {
+      @return true;
+    }
+    @else {
+      $defaults: (h-offset: 0, v-offset: 0, blur: 0, spread: 0, color: transparent, inset: null);
+
+      @if is-object($box-shadow) {
+        $box-shadow: extend($defaults, $box-shadow);
+      }
+      @else {
+        $box-shadow-h-offset: nth-value($box-shadow, 1);
+        $box-shadow-v-offset: nth-value($box-shadow, 2);
+        $box-shadow-blur: nth-value($box-shadow, 3);
+        $box-shadow-spread: nth-value($box-shadow, 4);
+        $box-shadow-color: nth-value($box-shadow, 5);
+        $box-shadow-inset: nth-value($box-shadow, 6);
+
+        $box-shadow: extend($defaults, ());
+
+        @if is-defined($box-shadow-h-offset) {
+          $box-shadow: extend($box-shadow, (h-offset: $box-shadow-h-offset));
+        }
+
+        @if is-defined($box-shadow-v-offset) {
+          $box-shadow: extend($box-shadow, (v-offset: $box-shadow-v-offset));
+        }
+
+        @if is-defined($box-shadow-blur) {
+          $box-shadow: extend($box-shadow, (blur: $box-shadow-blur));
+        }
+
+        @if is-defined($box-shadow-spread) {
+          $box-shadow: extend($box-shadow, (spread: $box-shadow-spread));
+        }
+
+        @if is-defined($box-shadow-color) {
+          $box-shadow: extend($box-shadow, (color: $box-shadow-color));
+        }
+
+        @if is-defined($box-shadow-inset) {
+          $box-shadow: extend($box-shadow, (inset: $box-shadow-inset));
+        }
+      }
+
+      $is-box-shadow-valid: true;
+
+      $box-shadow-h-offset: get($box-shadow, h-offset);
+
+      @if not is-length($box-shadow-h-offset) {
+        $is-box-shadow-valid: false;
+
+        @warn '`box-shadow h-offset: #{$box-shadow-h-offset}` is not a valid css length value';
+      }
+
+      $box-shadow-v-offset: get($box-shadow, v-offset);
+
+      @if $is-box-shadow-valid {
+        @if not is-length($box-shadow-v-offset) {
+          $is-box-shadow-valid: false;
+
+          @warn '`box-shadow v-offset: #{$box-shadow-v-offset}` is not a valid css length value';
+        }
+      }
+
+      $box-shadow-blur: get($box-shadow, blur);
+
+      @if $is-box-shadow-valid {
+        @if not is-length($box-shadow-blur) {
+          $is-box-shadow-valid: false;
+
+          @warn '`box-shadow blur: #{$box-shadow-blur}` is not a valid css length value';
+        }
+      }
+
+      $box-shadow-spread: get($box-shadow, spread);
+
+      @if $is-box-shadow-valid {
+        @if not is-length($box-shadow-spread) {
+          $is-box-shadow-valid: false;
+
+          @warn '`box-shadow spread: #{$box-shadow-spread}` is not a valid css length value';
+        }
+      }
+
+      $box-shadow-color: get($box-shadow, color);
+
+      @if $is-box-shadow-valid {
+        @if not is-css-color($box-shadow-color) {
+          $is-box-shadow-valid: false;
+
+          @warn '`box-shadow color: #{$box-shadow-color}` is not a valid css color value';
+        }
+      }
+
+      $box-shadow-inset: get($box-shadow, inset);
+
+      @if $is-box-shadow-valid {
+        @if is-string($box-shadow-inset) and $box-shadow-inset !=inset {
+          $is-box-shadow-valid: false;
+
+          @warn '`box-shadow inset: #{$box-shadow-inset}` is not a valid css inset value';
+        }
+      }
+
+      @return $is-box-shadow-valid;
+    }
+  }
+
+  @return false;
+}
+
+/// Checks if a list is a box-shadow list (e.g. `0 2px 0 0 #dcffa6 inset, 0 2px 5px 0 #000`)
+///
+/// @access public
+/// @param {array | list} $box-shadows - the box shadows list
+/// @return {boolean}
+@function is-box-shadows($box-shadows-list...) {
+  @if is-defined($box-shadows-list) {
+    $is-box-shadows-valid: true;
+
+    @each $box-shadows in $box-shadows-list {
+      @each $box-shadow in $box-shadows {
+        @if $is-box-shadows-valid {
+          $is-box-shadows-valid: is-box-shadow($box-shadow);
+        }
+      }
+    }
+
+    @return $is-box-shadows-valid;
+  }
+
+  @return false;
+}
+
 /// Box shadow mixin
 ///
 /// @access public
-/// @param {shadow} $shadows... - the box shadows list
+/// @param {shadow} $box-shadows... - the box shadows list
 /// @example scss - Usage
-///   .shadow-element {
-///     @include box-shadow(inset 0 2px 0px #dcffa6, 0 2px 5px #000);
+///   .box-shadow-element {
+///     @include box-shadow(0 2px 0 0 #dcffa6 inset, 0 2px 5px 0 #000);
 ///   }
 ///
 /// @example css - Output
-///   .color-element {
-///     -webkit-box-shadow: inset 0 2px 0px #dcffa6, 0 2px 5px #000;
-///     -moz-box-shadow: inset 0 2px 0px #dcffa6, 0 2px 5px #000;
-///     -ms-box-shadow: inset 0 2px 0px #dcffa6, 0 2px 5px #000;
-///     -o-box-shadow: inset 0 2px 0px #dcffa6, 0 2px 5px #000;
-///     box-shadow: inset 0 2px 0px #dcffa6, 0 2px 5px #000;
+///   .box-shadow-element {
+///     -webkit-box-shadow: 0 2px 0 0 #dcffa6 inset, 0 2px 5px 0 #000;
+///     -moz-box-shadow: 0 2px 0 0 #dcffa6 inset, 0 2px 5px 0 #000;
+///     -ms-box-shadow: 0 2px 0 0 #dcffa6 inset, 0 2px 5px 0 #000;
+///     -o-box-shadow: 0 2px 0 0 #dcffa6 inset, 0 2px 5px 0 #000;
+///     box-shadow: 0 2px 0 0 #dcffa6 inset, 0 2px 5px 0 #000;
 ///   }
-@mixin box-shadow($shadows...) {
-  @include prefixer(box-shadow, $shadows);
+@mixin box-shadow($box-shadows...) {
+  @if list-separator($box-shadows...) != comma {
+    $box-shadows: $box-shadows, ;
+  }
+
+  @if is-box-shadows($box-shadows...) {
+    @include prefixer(box-shadow, $box-shadows);
+  }
+  @else {
+    @warn '`box-shadow: #{$box-shadows}` one or more are not valid css box-shadow values';
+  }
 }
 
 /// Z-index modes
@@ -631,7 +795,7 @@ $backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
 ///     }
 ///   }
 @mixin aspect-ratio($width, $height, $content-selector: '.content') {
-  @if (unit($height) == unit($width)) {
+  @if (unit($height)==unit($width)) {
     @include position(relative);
     @include display(inline-block);
 

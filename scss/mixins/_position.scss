@@ -1,0 +1,250 @@
+/// Position modes
+///
+/// @type list
+/// @access private
+$position-modes: array-concat((static, absolute, fixed, relative, sticky), $css-default-modes);
+
+/// Checks if something is a position mode
+///
+/// @access public
+/// @param {string} $pm - the position mode
+/// @return {boolean}
+@function is-position($pm) {
+  @return is-defined($pm) and array-contains($position-modes, $pm);
+}
+
+/// Position point modes
+///
+/// @type list
+/// @access private
+$position-point-modes: array-concat((auto), $css-default-modes);
+
+/// Checks if something is a position point value
+///
+/// @access public
+/// @param {string | length} $ppv - the position point value
+/// @return {boolean}
+@function is-position-point-value($ppv) {
+  @return is-defined($ppv) and (is-length($ppv) or array-contains($position-point-modes, $ppv));
+}
+
+/// Position points
+///
+/// @type list
+/// @access private
+$position-points: (top, right, bottom, left);
+
+/// Checks if something is a position point
+///
+/// @access public
+/// @param {string} $pp - the position point
+/// @return {boolean}
+@function is-position-point($pp) {
+  @return is-defined($pp) and array-contains($position-points, $pp);
+}
+
+/// Position point mixin
+///
+/// @access public
+/// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
+/// @param {string} $p - the point (top, right, bottom, left)
+/// @example scss - Usage
+///   .position-point-element {
+///     @include position-point(0, top);
+///   }
+///
+/// @example css - Output
+///   .position-point-element {
+///     top: 0;
+///   }
+@mixin position-point($v: auto, $p: null) {
+  @if is-position-point-value($v) and is-position-point($p) {
+    #{$p}: $v;
+  }
+  @else {
+    @warn '`#{$p}: #{$v}` is not a valid position point value';
+  }
+}
+
+/// Top mixin
+///
+/// @access public
+/// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
+/// @example scss - Usage
+///   .top-element {
+///     @include top(0);
+///   }
+///
+/// @example css - Output
+///   .top-element {
+///     top: 0;
+///   }
+@mixin top($v: auto) {
+  @include position-point($v, top);
+}
+
+/// Right mixin
+///
+/// @access public
+/// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
+/// @example scss - Usage
+///   .right-element {
+///     @include right(0);
+///   }
+///
+/// @example css - Output
+///   .right-element {
+///     right: 0;
+///   }
+@mixin right($v: auto) {
+  @include position-point($v, right);
+}
+
+/// Bottom mixin
+///
+/// @access public
+/// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
+/// @example scss - Usage
+///   .bottom-element {
+///     @include bottom(0);
+///   }
+///
+/// @example css - Output
+///   .bottom-element {
+///     bottom: 0;
+///   }
+@mixin bottom($v: auto) {
+  @include position-point($v, bottom);
+}
+
+/// Left mixin
+///
+/// @access public
+/// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
+/// @example scss - Usage
+///   .left-element {
+///     @include left(0);
+///   }
+///
+/// @example css - Output
+///   .left-element {
+///     left: 0;
+///   }
+@mixin left($v: auto) {
+  @include position-point($v, left);
+}
+
+/// Position mixin
+///
+/// @access public
+/// @param {string} $options - the options
+/// @param {string} $options.position - the position mode
+/// @param {length} $options.top - the top
+/// @param {length} $options.right - the right
+/// @param {length} $options.bottom - the bottom
+/// @param {length} $options.left - the left
+/// @example scss - Usage
+///   .position-element {
+///     @include position(absolute 0 0 0 0);
+///   }
+///
+/// @example css - Output
+///   .position-element {
+///     position: absolute;
+///     top: 0;
+///     right: 0;
+///     bottom: 0;
+///     left: 0;
+///   }
+///
+/// @example scss - Usage - sticky
+///   .position-element {
+///     @include position(sticky 10px 2rem);
+///   }
+///
+/// @example css - Output
+///   .position-element {
+///     position: -webkit-sticky;
+///     position: sticky;
+///     top: 10px;
+///     right: 2rem;
+///     bottom: 10px;
+///     left: 2rem;
+///   }
+@mixin position($options) {
+  $settings: (position: static, top: null, right: null, bottom: null, left: null);
+
+  @if is-object($options) {
+    $settings: extend($settings, $options);
+  }
+  @else {
+    $position: nth-value($options, 1);
+
+    @if is-defined($position) {
+      $settings: extend($settings, (position: $position));
+    }
+
+    $top: nth-value($options, 2, null);
+
+    @if is-defined($top) {
+      $settings: extend($settings, (top: $top));
+    }
+
+    $right: nth-value($options, 3, $top);
+
+    @if is-defined($right) {
+      $settings: extend($settings, (right: $right));
+    }
+
+    $bottom: nth-value($options, 4, $top);
+
+    @if is-defined($bottom) {
+      $settings: extend($settings, (bottom: $bottom));
+    }
+
+    $left: nth-value($options, 5, $right);
+
+    @if is-defined($left) {
+      $settings: extend($settings, (left: $left));
+    }
+  }
+
+  $position: get($settings, position);
+
+  @if is-defined($position) {
+    @if is-position($position) {
+      @if $position == sticky {
+        position: -webkit-sticky;
+      }
+
+      position: $position;
+    }
+    @else {
+      @warn '`position: #{$position}` is not a valid position mode';
+    }
+  }
+
+  $top: get($settings, top);
+
+  @if is-defined($top) {
+    @include top($top);
+  }
+
+  $right: get($settings, right);
+
+  @if is-defined($right) {
+    @include right($right);
+  }
+
+  $bottom: get($settings, bottom);
+
+  @if is-defined($bottom) {
+    @include bottom($bottom);
+  }
+
+  $left: get($settings, left);
+
+  @if is-defined($left) {
+    @include left($left);
+  }
+}

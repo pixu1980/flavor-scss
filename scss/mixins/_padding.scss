@@ -7,7 +7,7 @@
 ////
 
 @function is-padding($p) {
-  @return is-defined($p) and (array-contains($css-default-modes, $p) or is-size($p) or is-percentage($p));
+  @return is-defined($p) and (array-contains($css-default-modes, $p) or is-length($p));
 }
 
 @mixin padding-direction($p, $padding-direction-selector: padding) {
@@ -39,14 +39,12 @@
 
 @mixin padding($p) {
   $padding-top: nth-value($p, 1, 0);
-  @include padding-top($padding-top);
-
   $padding-right: nth-value($p, 2, $padding-top);
-  @include padding-right($padding-right);
-
   $padding-bottom: nth-value($p, 3, $padding-top);
-  @include padding-bottom($padding-bottom);
-
   $padding-left: nth-value($p, 4, $padding-right);
+
+  @include padding-top($padding-top);
+  @include padding-right($padding-right);
+  @include padding-bottom($padding-bottom);
   @include padding-left($padding-left);
 }

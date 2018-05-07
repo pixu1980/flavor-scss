@@ -8,12 +8,13 @@
 
 @import 'utils';
 @import 'cursor';
+@import 'position';
 @import 'box';
 @import 'background';
 @import 'text';
-// @import 'padding'; TODO: fix this type checking
+@import 'padding';
 @import 'border';
-// @import 'margin'; TODO: fix this type checking
+@import 'margin';
 @import 'media';
 @import 'overflow';
 @import 'transform';

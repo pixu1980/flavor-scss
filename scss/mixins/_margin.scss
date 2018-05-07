@@ -9,7 +9,7 @@
 $margin-modes: array-concat((auto), $css-default-modes);
 
 @function is-margin($m) {
-  @return is-defined($m) and (array-contains($margin-modes, $m) or is-size($m) or is-percentage($m));
+  @return is-defined($m) and (array-contains($margin-modes, $m) or is-length($m));
 }
 
 @mixin margin-direction($m, $margin-direction-selector: margin) {
@@ -41,14 +41,12 @@ $margin-modes: array-concat((auto), $css-default-modes);
 
 @mixin margin($m) {
   $margin-top: nth-value($m, 1, 0);
-  @include margin-top($margin-top);
-
   $margin-right: nth-value($m, 2, $margin-top);
-  @include margin-right($margin-right);
-
   $margin-bottom: nth-value($m, 3, $margin-top);
-  @include margin-bottom($margin-bottom);
-
   $margin-left: nth-value($m, 4, $margin-right);
+
+  @include margin-top($margin-top);
+  @include margin-right($margin-right);
+  @include margin-bottom($margin-bottom);
   @include margin-left($margin-left);
 }

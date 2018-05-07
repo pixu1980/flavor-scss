@@ -89,13 +89,13 @@ $absolute-length-units: (cm, mm, in, px, pt, pc);
 }
 
 /// Checks if a value is a valid CSS length
-/// <br>Relative, Absolute, Calc or Length Mode
+/// <br>Relative, Absolute, Percentage, Calc or Length Mode
 ///
 /// @access public
 /// @param {any} $l
 /// @return {boolean}
 @function is-length($l) {
-  @return is-defined($l) and (is-relative-length($l) or is-absolute-length($l) or is-calc-length($l) or is-length-mode($l));
+  @return is-defined($l) and (is-relative-length($l) or is-absolute-length($l) or is-calc-length($l) or is-percentage($l) or is-length-mode($l));
 }
 
 /// CSS size/length modes supported
