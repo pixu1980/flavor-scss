@@ -8,8 +8,8 @@
 
 /// Overflow modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $overflow-modes: array-concat((visible, hidden, scroll, overlay, unset, auto), $css-default-modes);
 
 /// Checks if something is a supported overflow mode
@@ -23,8 +23,6 @@ $overflow-modes: array-concat((visible, hidden, scroll, overlay, unset, auto), $
 
 /// Overflow mixin
 ///
-/// @param {string} $o - the overflow mode
-/// @requires {function} nth-value
 /// @example scss - Usage
 ///   .overflow-element {
 ///     @include overflow(hidden);
@@ -46,6 +44,9 @@ $overflow-modes: array-concat((visible, hidden, scroll, overlay, unset, auto), $
 ///     overflow-x: hidden;
 ///     overflow-y: scroll;
 ///   }
+/// @requires {function} nth-value
+/// @access public
+/// @param {string} $o - the overflow mode
 @mixin overflow($o) {
   $overflow-x: nth-value($o, 1);
 

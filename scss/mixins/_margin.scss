@@ -8,8 +8,8 @@
 
 /// Margin modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $margin-modes: array-concat((auto), $css-default-modes);
 
 /// Checks if something is a margin value
@@ -23,8 +23,6 @@ $margin-modes: array-concat((auto), $css-default-modes);
 
 /// Margin direction mixin
 ///
-/// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
-/// @param {string} $margin-direction-selector [margin] - the margin direction (e.g. `margin-top`)
 /// @example scss - Usage
 ///   .margin-direction-element {
 ///     @include margin-direction(5px);
@@ -44,6 +42,9 @@ $margin-modes: array-concat((auto), $css-default-modes);
 ///   .margin-direction-element {
 ///     margin-left: 5px;
 ///   }
+/// @access public
+/// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
+/// @param {string} $margin-direction-selector [margin] - the margin direction (e.g. `margin-top`)
 @mixin margin-direction($m, $margin-direction-selector: margin) {
   @if is-defined($m) {
     @if is-margin($m) {
@@ -57,8 +58,6 @@ $margin-modes: array-concat((auto), $css-default-modes);
 
 /// Margin top mixin
 ///
-/// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
-/// @alias {mixin} margin-direction
 /// @example scss - Usage
 ///   .margin-top-element {
 ///     @include margin-top(5px);
@@ -68,14 +67,15 @@ $margin-modes: array-concat((auto), $css-default-modes);
 ///   .margin-top-element {
 ///     margin-top: 5px;
 ///   }
+/// @alias {mixin} margin-direction
+/// @access public
+/// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
 @mixin margin-top($m) {
   @include margin-direction($m, margin-top);
 }
 
 /// Margin right mixin
 ///
-/// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
-/// @alias {mixin} margin-direction
 /// @example scss - Usage
 ///   .margin-right-element {
 ///     @include margin-right(5px);
@@ -85,14 +85,15 @@ $margin-modes: array-concat((auto), $css-default-modes);
 ///   .margin-right-element {
 ///     margin-right: 5px;
 ///   }
+/// @alias {mixin} margin-direction
+/// @access public
+/// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
 @mixin margin-right($m) {
   @include margin-direction($m, margin-right);
 }
 
 /// Margin bottom mixin
 ///
-/// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
-/// @alias {mixin} margin-direction
 /// @example scss - Usage
 ///   .margin-bottom-element {
 ///     @include margin-bottom(5px);
@@ -102,14 +103,15 @@ $margin-modes: array-concat((auto), $css-default-modes);
 ///   .margin-bottom-element {
 ///     margin-bottom: 5px;
 ///   }
+/// @alias {mixin} margin-direction
+/// @access public
+/// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
 @mixin margin-bottom($m) {
   @include margin-direction($m, margin-bottom);
 }
 
 /// Margin left mixin
 ///
-/// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
-/// @alias {mixin} margin-direction
 /// @example scss - Usage
 ///   .margin-left-element {
 ///     @include margin-left(5px);
@@ -119,13 +121,15 @@ $margin-modes: array-concat((auto), $css-default-modes);
 ///   .margin-left-element {
 ///     margin-left: 5px;
 ///   }
+/// @alias {mixin} margin-direction
+/// @access public
+/// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
 @mixin margin-left($m) {
   @include margin-direction($m, margin-left);
 }
 
 /// Margin mixin
 ///
-/// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
 /// @example scss - Usage - single value
 ///   .margin-element {
 ///     @include margin(5px);
@@ -188,6 +192,8 @@ $margin-modes: array-concat((auto), $css-default-modes);
 ///     margin-top: 5px;
 ///     margin-left: 15px;
 ///   }
+/// @access public
+/// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
 @mixin margin($m) {
   $margin-top: nth-value($m, 1, 0);
   $margin-right: nth-value($m, 2, $margin-top);

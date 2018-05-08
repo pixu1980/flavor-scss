@@ -17,8 +17,6 @@
 
 /// Padding direction mixin
 ///
-/// @param {string | length} $p - the padding value (e.g. `initial` or `20px`)
-/// @param {string} $pargin-direction-selector [padding] - the padding direction (e.g. `padding-top`)
 /// @example scss - Usage
 ///   .padding-direction-element {
 ///     @include padding-direction(5px);
@@ -38,6 +36,9 @@
 ///   .padding-direction-element {
 ///     padding-left: 5px;
 ///   }
+/// @access public
+/// @param {string | length} $p - the padding value (e.g. `initial` or `20px`)
+/// @param {string} $pargin-direction-selector [padding] - the padding direction (e.g. `padding-top`)
 @mixin padding-direction($p, $padding-direction-selector: padding) {
   @if is-defined($p) {
     @if is-padding($p) {
@@ -51,8 +52,6 @@
 
 /// Padding top mixin
 ///
-/// @param {string | length} $p - the padding value (e.g. `initial` or `20px`)
-/// @alias {mixin} padding-direction
 /// @example scss - Usage
 ///   .padding-top-element {
 ///     @include padding-top(5px);
@@ -62,14 +61,15 @@
 ///   .padding-top-element {
 ///     padding-top: 5px;
 ///   }
+/// @alias {mixin} padding-direction
+/// @access public
+/// @param {string | length} $p - the padding value (e.g. `initial` or `20px`)
 @mixin padding-top($p) {
   @include padding-direction($p, padding-top);
 }
 
 /// Padding right mixin
 ///
-/// @param {string | length} $p - the padding value (e.g. `initial` or `20px`)
-/// @alias {mixin} padding-direction
 /// @example scss - Usage
 ///   .padding-right-element {
 ///     @include padding-right(5px);
@@ -79,14 +79,15 @@
 ///   .padding-right-element {
 ///     padding-right: 5px;
 ///   }
+/// @alias {mixin} padding-direction
+/// @access public
+/// @param {string | length} $p - the padding value (e.g. `initial` or `20px`)
 @mixin padding-right($p) {
   @include padding-direction($p, padding-right);
 }
 
 /// Padding bottom mixin
 ///
-/// @param {string | length} $p - the padding value (e.g. `initial` or `20px`)
-/// @alias {mixin} padding-direction
 /// @example scss - Usage
 ///   .padding-bottom-element {
 ///     @include padding-bottom(5px);
@@ -96,14 +97,15 @@
 ///   .padding-bottom-element {
 ///     padding-bottom: 5px;
 ///   }
+/// @alias {mixin} padding-direction
+/// @access public
+/// @param {string | length} $p - the padding value (e.g. `initial` or `20px`)
 @mixin padding-bottom($p) {
   @include padding-direction($p, padding-bottom);
 }
 
 /// Padding left mixin
 ///
-/// @param {string | length} $p - the padding value (e.g. `initial` or `20px`)
-/// @alias {mixin} padding-direction
 /// @example scss - Usage
 ///   .padding-left-element {
 ///     @include padding-left(5px);
@@ -113,13 +115,15 @@
 ///   .padding-left-element {
 ///     padding-left: 5px;
 ///   }
+/// @alias {mixin} padding-direction
+/// @access public
+/// @param {string | length} $p - the padding value (e.g. `initial` or `20px`)
 @mixin padding-left($p) {
   @include padding-direction($p, padding-left);
 }
 
 /// Padding mixin
 ///
-/// @param {string | length} $p - the padding value (e.g. `initial` or `20px`)
 /// @example scss - Usage - single value
 ///   .padding-element {
 ///     @include padding(5px);
@@ -182,6 +186,8 @@
 ///     padding-top: 5px;
 ///     padding-left: 15px;
 ///   }
+/// @access public
+/// @param {string | length} $p - the padding value (e.g. `initial` or `20px`)
 @mixin padding($p) {
   $padding-top: nth-value($p, 1, 0);
   $padding-right: nth-value($p, 2, $padding-top);

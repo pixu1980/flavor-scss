@@ -5,12 +5,34 @@
 /// @group mixins-transition
 /// @author blackmirror1980
 ////
-/// *** transiion time check ***
-@function is-transition-time($td) {
-  @return is-defined($td) and (is-time($td) or is-css-default($td));
+
+/// Checks if something is a transition time value
+///
+/// @access public
+/// @param {string | time} $tt - the transition time value (e.g. `initial` or `20ms`)
+/// @return {boolean}
+@function is-transition-time($tt) {
+  @return is-defined($tt) and (is-time($tt) or is-css-default($tt));
 }
 
-/// *** transition delay ***
+/// Transition delay mixin
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_transition-delay.asp W3Schools transition-delay docs
+/// @example scss - Usage
+///   .transition-delay-element {
+///     @include transition-delay(1s);
+///   }
+///
+/// @example css - Output
+///   .transition-delay-element {
+///     -webkit-transition-delay: 1s;
+///     -moz-transition-delay: 1s;
+///     -ms-transition-delay: 1s;
+///     -o-transition-delay: 1s;
+///     transition-delay: 1s;
+///   }
+/// @access public
+/// @param {string | time} $td - the transition delay value (e.g. `initial` or `10s`)
 @mixin transition-delay($td) {
   @if is-transition-time($td) {
     @include prefixer(transition-delay, $td);
@@ -20,7 +42,24 @@
   }
 }
 
-/// *** transition duration ***
+/// Transition duration mixin
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_transition-duration.asp W3Schools transition-duration docs
+/// @example scss - Usage
+///   .transition-duration-element {
+///     @include transition-duration(1s);
+///   }
+///
+/// @example css - Output
+///   .transition-duration-element {
+///     -webkit-transition-duration: 1s;
+///     -moz-transition-duration: 1s;
+///     -ms-transition-duration: 1s;
+///     -o-transition-duration: 1s;
+///     transition-duration: 1s;
+///   }
+/// @access public
+/// @param {string | time} $td - the transition duration value (e.g. `initial` or `10s`)
 @mixin transition-duration($td) {
   @if is-transition-time($td) {
     @include prefixer(transition-duration, $td);
@@ -30,14 +69,45 @@
   }
 }
 
-/// *** transition property ***
+/// Transitionable properties
+///
+/// @access private
+/// @type list
 $transitionable-properties: (background, background-color, background-position, background-size, border, border-bottom, border-bottom-color, border-bottom-left-radius, border-bottom-right-radius, border-bottom-width, border-color, border-left, border-left-color, border-left-width, border-right, border-right-color, border-right-width, border-spacing, border-top, border-top-color, border-top-left-radius, border-top-right-radius, border-top-width, bottom, box-shadow, clip, color, column-count, column-gap, column-rule, column-rule-color, column-rule-width, column-width, columns, filter, flex, flex-basis, flex-grow, flex-shrink, font, font-size, font-size-adjust font-stretch font-weight, height, left, letter-spacing, line-height, margin, margin-bottom, margin-left, margin-right, margin-top, max-height, max-width, min-height, min-width, opacity, order, outline, outline-color, outline-offset, outline-width, padding, padding-bottom, padding-left, padding-right, padding-top, perspective, perspective-origin, right, text-decoration-color, text-indent, text-shadow, top, transform, transform-origin, vertical-align, visibility width, word-spacing, z-index);
+
+/// Transition property modes
+///
+/// @access private
+/// @type list
 $transition-property-modes: array-concat((none, all), $transitionable-properties, $css-default-modes);
 
+/// Checks if something is a transition property value
+///
+/// @access public
+/// @param {string} $tp - the transform property value (e.g. `none` or `all` or `initial`)
+/// @return {boolean}
 @function is-transition-property($tp) {
   @return is-defined($tp) and array-contains($transition-property-modes, $tp);
 }
 
+/// Transition property mixin
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_transition-property.asp W3Schools transition-property docs
+/// @example scss - Usage
+///   .transition-property-element {
+///     @include transition-property(background-color);
+///   }
+///
+/// @example css - Output
+///   .transition-property-element {
+///     -webkit-transition-property: background-color;
+///     -moz-transition-property: background-color;
+///     -ms-transition-property: background-color;
+///     -o-transition-property: background-color;
+///     transition-property: background-color;
+///   }
+/// @access public
+/// @param {string} $tp - the transform property value (e.g. `none` or `all` or `initial`)
 @mixin transition-property($tp) {
   @if is-transition-property($tp) {
     @include prefixer(transition-property, $tp);
@@ -47,9 +117,17 @@ $transition-property-modes: array-concat((none, all), $transitionable-properties
   }
 }
 
-/// *** transition timing ***
+/// Transition timing functions
+///
+/// @access private
+/// @type list
 $transition-timing-functions-names: (steps, cubic-bezier);
 
+/// Extracts transition function name from a transition value
+///
+/// @access public
+/// @param {string} $t - the transition value (e.g. `cubic-bezier(0,0,1,1)`)
+/// @return {boolean}
 @function get-transition-timing-function-name($t) {
   @if(string-contains($t, '(') and string-contains($t, ')')) {
     @return str-slice($t, 1, str-index($t, '(') - 1);
@@ -58,18 +136,50 @@ $transition-timing-functions-names: (steps, cubic-bezier);
   @return null;
 }
 
-@function is-transition-timing-function($tf) {
-  $transition-timing-function-name: get-transition-timing-function-name($tf);
+/// Checks if something is a transition timing function value
+///
+/// @access public
+/// @param {string} $t - the transition value (e.g. `cubic-bezier(0,0,1,1)`)
+/// @return {boolean}
+@function is-transition-timing-function($t) {
+  $transition-timing-function-name: get-transition-timing-function-name($t);
 
   @return is-defined($transition-timing-function-name) and array-contains($transition-timing-functions-names, $transition-timing-function-name);
 }
 
+/// Transition timing modes
+///
+/// @access private
+/// @type list
 $transition-timing-modes: array-concat((linear, ease, ease-in, ease-out, ease-in-out, step-start, step-end), $css-default-modes);
 
+/// Checks if something is a transition timing mode or function value
+///
+/// @access public
+/// @param {string} $ttf - the transition timing function value (e.g. `cubic-bezier(0,0,1,1)` or `ease-in-out`)
+/// @return {boolean}
 @function is-transition-timing-mode-or-function($ttf) {
   @return is-defined($ttf) and (array-contains($transition-timing-modes, $ttf) or is-transition-timing-function($ttf));
 }
 
+/// Transition timing function mixin
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_transition-timing-function.asp W3Schools transition-timing-function docs
+/// @example scss - Usage
+///   .transition-timing-function-element {
+///     @include transition-timing-function(linear);
+///   }
+///
+/// @example css - Output
+///   .transition-timing-function-element {
+///     -webkit-transition-timing-function: linear;
+///     -moz-transition-timing-function: linear;
+///     -ms-transition-timing-function: linear;
+///     -o-transition-timing-function: linear;
+///     transition-timing-function: linear;
+///   }
+/// @access public
+/// @param {string} $ttf - the transition timing function value (e.g. `cubic-bezier(0,0,1,1)` or `ease-in-out`)
 @mixin transition-timing-function($ttf) {
   @if is-transition-timing-mode-or-function($ttf) {
     @include prefixer(transition-timing-function, $ttf);
@@ -79,6 +189,11 @@ $transition-timing-modes: array-concat((linear, ease, ease-in, ease-out, ease-in
   }
 }
 
+/// Checks if something is a transition value
+///
+/// @access public
+/// @param {string} $transition - the transition value (e.g. `background .3s linear 0`)
+/// @return {boolean}
 @function is-transition($transition) {
   $defaults: (property: all, duration: 0s, timing: ease, delay: 0s);
 
@@ -153,6 +268,11 @@ $transition-timing-modes: array-concat((linear, ease, ease-in, ease-out, ease-in
   @return $is-transition-valid;
 }
 
+/// Checks if a comma separated list is a transitions values list
+///
+/// @access public
+/// @param {string | array | list} $transitions - the transitions list (e.g. `background .3s linear 0, top .2s ease-in-out 1s`)
+/// @return {boolean}
 @function is-transitions($transitions...) {
   $is-transitions-valid: true;
 
@@ -165,6 +285,37 @@ $transition-timing-modes: array-concat((linear, ease, ease-in, ease-out, ease-in
   @return $is-transitions-valid;
 }
 
+/// Transform mixin
+///
+/// @example scss - Usage - single transition
+///   .transition-element {
+///     @include transition(background .3s linear 0);
+///   }
+///
+/// @example css - Output - single transition
+///   .transition-element {
+///     -webkit-transition: background .3s linear 0;
+///     -moz-transition: background .3s linear 0;
+///     -ms-transition: background .3s linear 0;
+///     -o-transition: background .3s linear 0;
+///     transition: background .3s linear 0;
+///   }
+///
+/// @example scss - Usage - multiple transitions
+///   .transition-element {
+///     @include transition(background .3s linear 0, top .2s ease-in-out 1s);
+///   }
+///
+/// @example css - Output - multiple transitions
+///   .transition-element {
+///     -webkit-transition: background .3s linear 0, top .2s ease-in-out 1s;
+///     -moz-transition: background .3s linear 0, top .2s ease-in-out 1s;
+///     -ms-transition: background .3s linear 0, top .2s ease-in-out 1s;
+///     -o-transition: background .3s linear 0, top .2s ease-in-out 1s;
+///     transition: background .3s linear 0, top .2s ease-in-out 1s;
+///   }
+/// @access public
+/// @param {string | array | list} $transitions - the transitions list (e.g. `background .3s linear 0, top .2s ease-in-out 1s`)
 @mixin transition($transitions...) {
   @if is-transitions($transitions...) {
     @include prefixer(transition, $transitions);

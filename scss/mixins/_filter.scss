@@ -8,14 +8,14 @@
 
 /// Filter functions
 ///
-/// @type list
 /// @access private
+/// @type list
 $filter-functions-names: (blur, brightness, contrast, drop-shadow, grayscale, hue-rotate, invert, opacity, saturate, sepia, url);
 
 /// Extracts filter function name from a string
 ///
-/// @access public
 /// @requires {function} string-contains
+/// @access public
 /// @param {string} $ff - the filter string (e.g. `blur(5px)`)
 /// @return {string | null} (e.g. `blur`)
 @function get-filter-function-name($ff) {
@@ -39,8 +39,8 @@ $filter-functions-names: (blur, brightness, contrast, drop-shadow, grayscale, hu
 
 /// Filter modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $filter-modes: array-concat((none), $css-default-modes);
 
 /// Checks if something is a filter mode or function
@@ -54,7 +54,6 @@ $filter-modes: array-concat((none), $css-default-modes);
 
 /// Filter mixin
 ///
-/// @param {string} $filter - the filter string (e.g. `blur(5px)` or `none`)
 /// @todo manage multiple filters
 /// @example scss - Usage
 ///   .filter-element {
@@ -69,6 +68,8 @@ $filter-modes: array-concat((none), $css-default-modes);
 ///     -o-filter: blur(5px);
 ///     filter: blur(5px);
 ///   }
+/// @access public
+/// @param {string} $filter - the filter string (e.g. `blur(5px)` or `none`)
 @mixin filter($filter) {
   @if is-filter-mode-or-function($filter) {
     @include prefixer(filter, $filter);

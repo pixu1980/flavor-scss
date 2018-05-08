@@ -8,8 +8,8 @@
 
 /// Cursor modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $cursor-modes: array-concat((alias, all-scroll, auto, cell, context-menu, col-resize, copy, crosshair, default, e-resize, ew-resize, grab, grabbing, help, move, n-resize, ne-resize, nesw-resize, ns-resize, nw-resize, nwse-resize, no-drop, none, not-allowed, pointer, progress, row-resize, s-resize, se-resize, sw-resize, text, vertical-text, w-resize, wait, zoom-in, zoom-out), $css-default-modes);
 
 /// Checks if something is a correct cursor mode
@@ -23,7 +23,6 @@ $cursor-modes: array-concat((alias, all-scroll, auto, cell, context-menu, col-re
 
 /// Cursor mixin
 ///
-/// @param {string} $c - the cursor mode
 /// @link https://www.w3schools.com/cssref/pr_class_cursor.asp W3Schools cursor docs
 /// @example scss - Usage
 ///   .cursor-element {
@@ -34,6 +33,8 @@ $cursor-modes: array-concat((alias, all-scroll, auto, cell, context-menu, col-re
 ///   .cursor-element {
 ///     cursor: pointer;
 ///   }
+/// @access public
+/// @param {string} $c - the cursor mode
 @mixin cursor($c: default) {
   @if is-cursor-mode($c) {
     cursor: $c;
@@ -45,8 +46,8 @@ $cursor-modes: array-concat((alias, all-scroll, auto, cell, context-menu, col-re
 
 /// Pointer events modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $pointer-events-modes: array-concat((all, auto, bounding-box, fill, none, painted, stroke, unset, visible, visiblefill, visiblepainted, visiblestroke), $css-default-modes);
 
 /// Checks if something is a correct pointer-events mode
@@ -60,7 +61,6 @@ $pointer-events-modes: array-concat((all, auto, bounding-box, fill, none, painte
 
 /// Pointer events mixin
 ///
-/// @param {string} $pe - the pointer events mode
 /// @link https://www.w3schools.com/cssref/css3_pr_pointer-events.asp W3Schools pointer-events docs
 /// @example scss - Usage
 ///   .pointer-events-element {
@@ -71,6 +71,8 @@ $pointer-events-modes: array-concat((all, auto, bounding-box, fill, none, painte
 ///   .pointer-events-element {
 ///     pointer-events: none;
 ///   }
+/// @access public
+/// @param {string} $pe - the pointer events mode
 @mixin pointer-events($pe: auto) {
   @if is-pointer-events-mode($pe) {
     pointer-events: $pe;

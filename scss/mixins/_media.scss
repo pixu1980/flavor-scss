@@ -6,6 +6,11 @@
 /// @author blackmirror1980
 ////
 
+/// Media query mixin
+///
+/// @todo refactor this mixin
+/// @todo write documentation
+/// @access public
 @mixin media($width, $type: min) {
   @media screen and (#{$type}-width: $width) {
     @content;

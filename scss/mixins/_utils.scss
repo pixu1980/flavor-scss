@@ -10,6 +10,7 @@
 /// <br>eg. for a relational value of 12px write rem(12)
 /// <br>Assumes $base is the font-size of <html>
 ///
+/// @access public
 /// @param {size} $px - pixels size you want to convert
 /// @param {size} $base [$font-size-base] - html font-size base
 /// @return {size}
@@ -25,16 +26,14 @@
   @return ($px / $base) * 1rem;
 }
 
-/// A mixin for generating vendor prefixes on non-standardized properties.
-///
-/// @param {String} $property
-///   Property to prefix
-///
-/// @param {*} $value
-///   Value to use
-///
-/// @param {List} $prefixes
-///   Prefixes to define
+$prefixes-available: (webkit, moz, ms, o, spec);
+
+@function is-prefix-available($p) {
+  @return is-defined($p) and array-contains($prefixes-available, $p);
+}
+
+/// Prefixer mixin
+/// <br>for generating vendor prefixes on non-standardized properties.
 ///
 /// @example scss - Usage
 ///   .element {
@@ -47,23 +46,17 @@
 ///     -moz-border-radius: 10px;
 ///     border-radius: 10px;
 ///   }
-///
+/// @param {string} $property - the property to prefix
+/// @param {any} $values - the values list to use
+/// @param {array | list} $prefixes - space separated list
 @mixin prefixer($property, $values, $prefixes: webkit moz ms o spec) {
+  $prefix-selector: '';
+
   @each $prefix in $prefixes {
-    @if $prefix==webkit {
-      -webkit-#{$property}: $values;
-    }
-    @else if $prefix==moz {
-      -moz-#{$property}: $values;
-    }
-    @else if $prefix==ms {
-      -ms-#{$property}: $values;
-    }
-    @else if $prefix==o {
-      -o-#{$property}: $values;
-    }
-    @else if $prefix==spec {
-      #{$property}: $values;
+    @if is-prefix-available($prefix) {
+      $prefix-selector: if($prefix != spec, '-#{$prefix}-', '');
+
+      #{$prefix-selector}#{$property}: $values;
     }
     @else {
       @warn 'Unrecognized prefix: #{$prefix}';

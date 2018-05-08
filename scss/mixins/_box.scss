@@ -5,6 +5,7 @@
 /// @group mixins-box
 /// @author blackmirror1980
 ////
+
 /// Reset inline-block mixin (useful to fix those annoying auto margins between inline-block children elements
 ///
 /// @access public
@@ -22,8 +23,8 @@
 
 /// Display modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $display-modes: array-concat((none, inline, block, inline-block, flex, inline-flex, table, inline-table, table-caption, table-header-group, table-row-group, table-column-group, table-footer-group, table-row, table-column, table-cell, list-item, run-in), $css-default-modes);
 
 /// Checks if something is a correct display mode value
@@ -37,9 +38,6 @@ $display-modes: array-concat((none, inline, block, inline-block, flex, inline-fl
 
 /// Display mixin
 ///
-/// @access public
-/// @param {string} $dm - the display mode
-/// @param {string} $auto-reset-inline-block [false] - the display mode
 /// @example scss - Usage
 ///   .display-element {
 ///     @include display(block);
@@ -77,6 +75,9 @@ $display-modes: array-concat((none, inline, block, inline-block, flex, inline-fl
 ///       line-height: initial;
 ///     }
 ///   }
+/// @access public
+/// @param {string} $dm - the display mode
+/// @param {string} $auto-reset-inline-block [false] - the display mode
 @mixin display($dm, $auto-reset-inline-block: false) {
   @if is-display-mode($dm) {
     display: $dm;
@@ -92,8 +93,8 @@ $display-modes: array-concat((none, inline, block, inline-block, flex, inline-fl
 
 /// Box sizing modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $box-sizing-modes: array-concat((content-box, border-box), $css-default-modes);
 
 /// Checks if something is box sizing mode
@@ -107,8 +108,6 @@ $box-sizing-modes: array-concat((content-box, border-box), $css-default-modes);
 
 /// Box sizing mixin
 ///
-/// @access public
-/// @param {string} $bs - the box sizing mode
 /// @example scss - Usage
 ///   .box-sizing-element {
 ///     @include box-sizing(content-box);
@@ -118,6 +117,8 @@ $box-sizing-modes: array-concat((content-box, border-box), $css-default-modes);
 ///   .box-sizing-element {
 ///     box-sizing: content-box;
 ///   }
+/// @access public
+/// @param {string} $bs - the box sizing mode
 @mixin box-sizing($bs) {
   @if is-box-sizing-mode($bs) {
     box-sizing: $bs;
@@ -129,8 +130,8 @@ $box-sizing-modes: array-concat((content-box, border-box), $css-default-modes);
 
 /// Box size modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $box-size-modes: array-concat((auto), $css-default-modes);
 
 /// Checks if something is box size
@@ -144,8 +145,8 @@ $box-size-modes: array-concat((auto), $css-default-modes);
 
 /// Box bound size modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $box-bound-size-modes: array-concat((none), $css-default-modes);
 
 /// Checks if something is box bound size
@@ -160,15 +161,6 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 /// Box bounds mixin
 /// <br>useful to set min/max width & height in one shot
 ///
-/// @access public
-/// @param {object | map} $options - the bounds options
-/// @param {size | percentage} $options.min-width [null] - the min width bound
-/// @param {size | percentage} $options.min-height [null] - the min height bound
-/// @param {size | percentage} $options.max-width [null] - the max width bound
-/// @param {size | percentage} $options.max-height [null] - the max height bound
-/// @requires {function} extend
-/// @requires {function} is-defined
-/// @requires {function} nth-value
 /// @example scss - Usage
 ///   .bounds-element {
 ///     @include box-bounds(10% null null 610px);
@@ -179,6 +171,15 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 ///     min-width: 10%;
 ///     max-height: 610px
 ///   }
+/// @requires {function} extend
+/// @requires {function} is-defined
+/// @requires {function} nth-value
+/// @access public
+/// @param {object | map} $options - the bounds options
+/// @param {size | percentage} $options.min-width [null] - the min width bound
+/// @param {size | percentage} $options.min-height [null] - the min height bound
+/// @param {size | percentage} $options.max-width [null] - the max width bound
+/// @param {size | percentage} $options.max-height [null] - the max height bound
 @mixin box-bounds($options) {
   $settings: (min-width: null, min-height: null, max-width: null, max-height: null);
 
@@ -259,21 +260,6 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 /// Box size mixin
 /// <br>used to set size & bounds in one shot
 ///
-/// @access public
-/// @param {object | map} $options - the bounds options
-/// @param {size | percentage} $options.width [null] - the min width bound
-/// @param {size | percentage} $options.height [null] - the min width bound
-/// @param {size | percentage} $options.min-width [null] - the min width bound
-/// @param {size | percentage} $options.min-height [null] - the min height bound
-/// @param {size | percentage} $options.max-width [null] - the max width bound
-/// @param {size | percentage} $options.max-height [null] - the max height bound
-/// @param {boolean} $height-fallback [true] - falls back the height value to the width value, if height is not specified (useful for square sizes)
-/// @requires {function} extend
-/// @requires {function} is-box-size
-/// @requires {function} is-defined
-/// @requires {function} is-object
-/// @requires {function} nth-value
-/// @requires {mixin} box-bounds
 /// @example scss - Usage - height fallback
 ///   .size-element {
 ///     @include box-size(100px);
@@ -319,6 +305,21 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 ///     max-width: 100%;
 ///     max-height: 250px;
 ///   }
+/// @requires {function} extend
+/// @requires {function} is-box-size
+/// @requires {function} is-defined
+/// @requires {function} is-object
+/// @requires {function} nth-value
+/// @requires {mixin} box-bounds
+/// @access public
+/// @param {object | map} $options - the bounds options
+/// @param {size | percentage} $options.width [null] - the min width bound
+/// @param {size | percentage} $options.height [null] - the min width bound
+/// @param {size | percentage} $options.min-width [null] - the min width bound
+/// @param {size | percentage} $options.min-height [null] - the min height bound
+/// @param {size | percentage} $options.max-width [null] - the max width bound
+/// @param {size | percentage} $options.max-height [null] - the max height bound
+/// @param {boolean} $height-fallback [true] - falls back the height value to the width value, if height is not specified (useful for square sizes)
 @mixin box-size($options, $height-fallback: true) {
   $settings: (width: null, height: null, min-width: null, min-height: null, max-width: null, max-height: null);
 
@@ -400,13 +401,6 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 /// Box color mixin
 /// <br>used to set color & background color in one shot
 ///
-/// @access public
-/// @param {object | map} $options - the box color options
-/// @param {color} $options.color [inherit] - the color
-/// @param {color} $options.bgcolor [inherit] - the background color
-/// @requires {function} extend
-/// @requires {function} is-defined
-/// @requires {function} nth-value
 /// @example scss - Usage
 ///   .color-element {
 ///     @include box-color(#ffa transparent);
@@ -417,6 +411,13 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 ///     color: #ffa;
 ///     background-color: transparent;
 ///   }
+/// @requires {function} extend
+/// @requires {function} is-defined
+/// @requires {function} nth-value
+/// @access public
+/// @param {object | map} $options - the box color options
+/// @param {color} $options.color [inherit] - the color
+/// @param {color} $options.bgcolor [inherit] - the background color
 @mixin box-color($options) {
   $settings: (color: inherit, bgcolor: inherit);
 
@@ -458,8 +459,8 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 
 /// Box shadow modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $box-shadow-modes: array-concat((none), $css-default-modes);
 
 /// Checks if something is box shadow mode
@@ -614,8 +615,6 @@ $box-shadow-modes: array-concat((none), $css-default-modes);
 
 /// Box shadow mixin
 ///
-/// @access public
-/// @param {shadow} $box-shadows... - the box shadows list
 /// @example scss - Usage
 ///   .box-shadow-element {
 ///     @include box-shadow(0 2px 0 0 #dcffa6 inset, 0 2px 5px 0 #000);
@@ -629,6 +628,8 @@ $box-shadow-modes: array-concat((none), $css-default-modes);
 ///     -o-box-shadow: 0 2px 0 0 #dcffa6 inset, 0 2px 5px 0 #000;
 ///     box-shadow: 0 2px 0 0 #dcffa6 inset, 0 2px 5px 0 #000;
 ///   }
+/// @access public
+/// @param {shadow} $box-shadows... - the box shadows list
 @mixin box-shadow($box-shadows...) {
   @if list-separator($box-shadows...) != comma {
     $box-shadows: $box-shadows, ;
@@ -644,8 +645,8 @@ $box-shadow-modes: array-concat((none), $css-default-modes);
 
 /// Z-index modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $z-index-modes: array-concat((auto), $css-default-modes);
 
 /// Checks if something is z-index value
@@ -659,8 +660,6 @@ $z-index-modes: array-concat((auto), $css-default-modes);
 
 /// Z-index mixin
 ///
-/// @access public
-/// @param {integer | string} $zi - the z-index
 /// @example scss - Usage
 ///   .z-index-element {
 ///     @include z-index(1);
@@ -670,6 +669,8 @@ $z-index-modes: array-concat((auto), $css-default-modes);
 ///   .z-index-element {
 ///     z-index: 1;
 ///   }
+/// @access public
+/// @param {integer | string} $zi - the z-index
 @mixin z-index($zi) {
   @if(is-z-index($zi)) {
     z-index: $zi;
@@ -681,8 +682,8 @@ $z-index-modes: array-concat((auto), $css-default-modes);
 
 /// Visibility modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $visibility-modes: array-concat((visible, hidden, collapse), $css-default-modes);
 
 /// Checks if something is suppoerted visibility mode
@@ -696,8 +697,6 @@ $visibility-modes: array-concat((visible, hidden, collapse), $css-default-modes)
 
 /// Visibility mixin
 ///
-/// @access public
-/// @param {string} $v - the visibility
 /// @example scss - Usage
 ///   .visibility-element {
 ///     @include visibility(hidden);
@@ -707,6 +706,8 @@ $visibility-modes: array-concat((visible, hidden, collapse), $css-default-modes)
 ///   .visibility-element {
 ///     visibility: hidden;
 ///   }
+/// @access public
+/// @param {string} $v - the visibility
 @mixin visibility($v) {
   @if(is-visibility-mode($v)) {
     visibility: $v;
@@ -718,8 +719,8 @@ $visibility-modes: array-concat((visible, hidden, collapse), $css-default-modes)
 
 /// Backface visibility modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
 
 /// Checks if something is suppoerted backface-visibility mode
@@ -733,8 +734,6 @@ $backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
 
 /// Backface visibility mixin
 ///
-/// @access public
-/// @param {string} $bv - the backface visibility
 /// @example scss - Usage
 ///   .backface-visibility-element {
 ///     @include backface-visibility(visible);
@@ -748,6 +747,8 @@ $backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
 ///     -o-backface-visibility: visible;
 ///     backface-visibility: visible;
 ///   }
+/// @access public
+/// @param {string} $bv - the backface visibility
 @mixin backface-visibility($bv) {
   @if is-backface-visibility($bv) {
     @include prefixer(backface-visibility, $bv);
@@ -759,13 +760,6 @@ $backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
 
 /// Aspect ratio mixin
 ///
-/// @access public
-/// @param {integer | size} $width [1] - desired width for aspect ratio calculation
-/// @param {integer | size} $height [1] - desired height for aspect ratio calculation
-/// @param {integer | size} $content-selector ['.content'] - desired content selector
-/// @requires {function} strip-unit
-/// @requires {mixin} box-size
-/// @requires {mixin} display
 /// @example scss - Usage
 ///   .aspect-ratio-element {
 ///     @include aspect-ratio(170px, 20px);
@@ -794,6 +788,13 @@ $backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
 ///       height: 100%;
 ///     }
 ///   }
+/// @requires {function} strip-unit
+/// @requires {mixin} box-size
+/// @requires {mixin} display
+/// @access public
+/// @param {integer | size} $width [1] - desired width for aspect ratio calculation
+/// @param {integer | size} $height [1] - desired height for aspect ratio calculation
+/// @param {integer | size} $content-selector ['.content'] - desired content selector
 @mixin aspect-ratio($width, $height, $content-selector: '.content') {
   @if (unit($height)==unit($width)) {
     @include position(relative);

@@ -8,16 +8,16 @@
 
 /// Font size modes
 ///
-/// @type list
 /// @access private
 /// @requires {function} array-concat
+/// @type list
 $font-size-modes: array-concat((medium, xx-small, x-small, small, large, x-large, xx-large, smaller, larger), $css-default-modes);
 
 /// Checks if something is a supported font-size value
 ///
+/// @link https://www.w3schools.com/cssref/pr_font_font-size.asp - W3Schools font-size docs
 /// @access public
 /// @param {size | percentage | font-size-mode} $fs - the font-size value
-/// @link https://www.w3schools.com/cssref/pr_font_font-size.asp - W3Schools font-size docs
 /// @return {boolean}
 @function is-font-size($fs) {
   @return is-defined($fs) and (is-size($fs) or is-percentage($fs) or array-contains($font-size-modes, $fs));
@@ -25,7 +25,6 @@ $font-size-modes: array-concat((medium, xx-small, x-small, small, large, x-large
 
 /// Font size mixin
 ///
-/// @param {size | percentage | font-size-mode} $fs - the font-size value
 /// @example scss - Usage
 ///   .font-size-element {
 ///     @include font-size(1.8rem);
@@ -35,6 +34,8 @@ $font-size-modes: array-concat((medium, xx-small, x-small, small, large, x-large
 ///   .font-size-element {
 ///     font-size: 1.8rem;
 ///   }
+/// @access public
+/// @param {size | percentage | font-size-mode} $fs - the font-size value
 @mixin font-size($fs) {
   @if is-font-size($fs) {
     font-size: $fs;
@@ -46,15 +47,15 @@ $font-size-modes: array-concat((medium, xx-small, x-small, small, large, x-large
 
 /// Line height modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $line-height-modes: array-concat((normal), $css-default-modes);
 
 /// Checks if something is a supported line-height value
 ///
+/// @link https://www.w3schools.com/cssref/pr_dim_line-height.asp - W3Schools line-height docs
 /// @access public
 /// @param {size | percentage | line-height-mode} $lh - the line-height value
-/// @link https://www.w3schools.com/cssref/pr_dim_line-height.asp - W3Schools line-height docs
 /// @return {boolean}
 @function is-line-height($lh) {
   @return is-defined($lh) and (is-size($lh) or is-percentage($lh) or array-contains($line-height-modes, $lh));
@@ -62,7 +63,6 @@ $line-height-modes: array-concat((normal), $css-default-modes);
 
 /// Line height mixin
 ///
-/// @param {size | percentage | line-height-mode} $lh - the line-height value
 /// @example scss - Usage
 ///   .line-height-element {
 ///     @include line-height(2.5rem);
@@ -72,6 +72,8 @@ $line-height-modes: array-concat((normal), $css-default-modes);
 ///   .line-height-element {
 ///     line-height: 2.5rem;
 ///   }
+/// @access public
+/// @param {size | percentage | line-height-mode} $lh - the line-height value
 @mixin line-height($lh) {
   @if is-line-height($lh) {
     line-height: $lh;
@@ -83,9 +85,9 @@ $line-height-modes: array-concat((normal), $css-default-modes);
 
 /// Checks if something is a supported font-family value
 ///
+/// @link https://www.w3schools.com/cssref/pr_font_font-family.asp - W3Schools font-family docs
 /// @access public
 /// @param {string | array | list} $ff - the font-family value
-/// @link https://www.w3schools.com/cssref/pr_font_font-family.asp - W3Schools font-family docs
 /// @return {boolean}
 @function is-font-family($ff) {
   @return is-defined($ff) and (is-string($ff) or is-array($ff));
@@ -93,7 +95,6 @@ $line-height-modes: array-concat((normal), $css-default-modes);
 
 /// Font family mixin
 ///
-/// @param {string | array | list} $ff - the font-family value
 /// @example scss - Usage
 ///   .font-family-element {
 ///     @include font-family('Source Sans Pro');
@@ -113,6 +114,8 @@ $line-height-modes: array-concat((normal), $css-default-modes);
 ///   .font-family-element {
 ///     font-family: 'Source Sans Pro', Verdana, sans-serif;
 ///   }
+/// @access public
+/// @param {string | array | list} $ff - the font-family value
 @mixin font-family($ff) {
   @if is-font-family($ff) {
     font-family: #{$ff};
@@ -124,15 +127,15 @@ $line-height-modes: array-concat((normal), $css-default-modes);
 
 /// Font weight modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $font-weight-modes: array-concat((normal, bold, bolder, lighter, 100, 200, 300, 400, 500, 600, 700, 800, 900), $css-default-modes);
 
 /// Checks if something is a supported font-weight value
 ///
+/// @link https://www.w3schools.com/cssref/pr_font_weight.asp - W3Schools font-weight docs
 /// @access public
 /// @param {string | integer} $fw - the font-weight value
-/// @link https://www.w3schools.com/cssref/pr_font_weight.asp - W3Schools font-weight docs
 /// @return {boolean}
 @function is-font-weight($fw) {
   @return is-defined($fw) and array-contains($font-weight-modes, $fw);
@@ -140,7 +143,6 @@ $font-weight-modes: array-concat((normal, bold, bolder, lighter, 100, 200, 300, 
 
 /// Font weight mixin
 ///
-/// @param {string | integer} $fw - the font-weight value
 /// @example scss - Usage
 ///   .font-weight-element {
 ///     @include font-weight(bold);
@@ -150,6 +152,8 @@ $font-weight-modes: array-concat((normal, bold, bolder, lighter, 100, 200, 300, 
 ///   .font-weight-element {
 ///     font-weight: bold;
 ///   }
+/// @access public
+/// @param {string | integer} $fw - the font-weight value
 @mixin font-weight($fw) {
   @if is-font-weight($fw) {
     font-weight: $fw;
@@ -161,16 +165,6 @@ $font-weight-modes: array-concat((normal, bold, bolder, lighter, 100, 200, 300, 
 
 /// Font mixin
 ///
-/// @param {object | map} $options - the options
-/// @param {size | percentage | font-size-mode} $options.size [1rem] - the font-size value
-/// @param {size | percentage | line-height-mode} $options.height [1rem] - the line-height value
-/// @param {string | array | list} $options.family [null] - the font-family value
-/// @param {string | integer} $options.weight [normal] - the font-weight value
-/// @param {color} $options.color [null] - the color value
-/// @requires {function} extend
-/// @requires {function} is-defined
-/// @requires {function} is-object
-/// @requires {function} nth-value
 /// @example scss - Usage
 ///
 ///   $font-family: OpenSans, Verdana, sans-serif;
@@ -187,6 +181,17 @@ $font-weight-modes: array-concat((normal, bold, bolder, lighter, 100, 200, 300, 
 ///     font-weight: bold;
 ///     color: white;
 ///   }
+/// @requires {function} extend
+/// @requires {function} is-defined
+/// @requires {function} is-object
+/// @requires {function} nth-value
+/// @access public
+/// @param {object | map} $options - the options
+/// @param {size | percentage | font-size-mode} $options.size [1rem] - the font-size value
+/// @param {size | percentage | line-height-mode} $options.height [1rem] - the line-height value
+/// @param {string | array | list} $options.family [null] - the font-family value
+/// @param {string | integer} $options.weight [normal] - the font-weight value
+/// @param {color} $options.color [null] - the color value
 @mixin font($options) {
   $settings: (size: 1rem, height: 1rem, family: null, weight: normal, color: null);
 
@@ -258,15 +263,15 @@ $font-weight-modes: array-concat((normal, bold, bolder, lighter, 100, 200, 300, 
 
 /// Text align modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $text-align-modes: array-concat((left, center, right, justify), $css-default-modes);
 
 /// Checks if something is a supported text-align value
 ///
+/// @link https://www.w3schools.com/cssref/pr_text_text-align.asp - W3Schools text-align docs
 /// @access public
 /// @param {string} $ta - the text-align value
-/// @link https://www.w3schools.com/cssref/pr_text_text-align.asp - W3Schools text-align docs
 /// @return {boolean}
 @function is-text-align($ta) {
   @return is-defined($ta) and array-contains($text-align-modes, $ta);
@@ -274,7 +279,6 @@ $text-align-modes: array-concat((left, center, right, justify), $css-default-mod
 
 /// Text align mixin
 ///
-/// @param {string} $ta - the text-align value
 /// @example scss - Usage
 ///   .text-align-element {
 ///     @include text-align(center);
@@ -284,6 +288,8 @@ $text-align-modes: array-concat((left, center, right, justify), $css-default-mod
 ///   .text-align-element {
 ///     text-align: center;
 ///   }
+/// @access public
+/// @param {string} $ta - the text-align value
 @mixin text-align($ta) {
   @if(is-text-align($ta)) {
     text-align: $ta;
@@ -295,15 +301,15 @@ $text-align-modes: array-concat((left, center, right, justify), $css-default-mod
 
 /// Vertical align modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle, bottom, text-bottom), $css-default-modes);
 
 /// Checks if something is a supported vertical-align value
 ///
+/// @link https://www.w3schools.com/cssref/pr_pos_vertical-align.asp - W3Schools vertical-align docs
 /// @access public
 /// @param {string} $va - the vertical-align value
-/// @link https://www.w3schools.com/cssref/pr_pos_vertical-align.asp - W3Schools vertical-align docs
 /// @return {boolean}
 @function is-vertical-align($va) {
   @return is-defined($va) and (is-size($va) or array-contains($vertical-align-modes, $va));
@@ -311,7 +317,6 @@ $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle
 
 /// Vertical align mixin
 ///
-/// @param {string} $va - the vertical-align value
 /// @example scss - Usage
 ///   .vertical-align-element {
 ///     @include vertical-align(top);
@@ -321,6 +326,8 @@ $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle
 ///   .vertical-align-element {
 ///     vertical-align: top;
 ///   }
+/// @access public
+/// @param {string} $va - the vertical-align value
 @mixin vertical-align($va) {
   @if(is-vertical-align($va)) {
     vertical-align: $va;
@@ -332,9 +339,6 @@ $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle
 
 /// Content align mixin
 ///
-/// @param {object | map} $options - the content-align options value
-/// @param {string} $options.h [inherit] - the text-align value
-/// @param {string} $options.v [inherit] - the vertical-align value
 /// @example scss - Usage
 ///   .content-align-element {
 ///     @include content-align(center middle);
@@ -345,6 +349,10 @@ $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle
 ///     text-align: center;
 ///     vertical-align: middle;
 ///   }
+/// @access public
+/// @param {object | map} $options - the content-align options value
+/// @param {string} $options.h [inherit] - the text-align value
+/// @param {string} $options.v [inherit] - the vertical-align value
 @mixin content-align($options) {
   $settings: (h: inherit, v: inherit);
 
@@ -380,15 +388,15 @@ $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle
 
 /// Text overflow modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $text-overflow-modes: array-concat((clip, ellipsis), $css-default-modes);
 
 /// Checks if something is a supported text-overflow value
 ///
+/// @link https://www.w3schools.com/cssref/css3_pr_text-overflow.asp - W3Schools text-overflow docs
 /// @access public
 /// @param {string} $to - the text-overflow value
-/// @link https://www.w3schools.com/cssref/css3_pr_text-overflow.asp - W3Schools text-overflow docs
 /// @return {boolean}
 @function is-text-overflow-mode($to) {
   @return is-defined($to) and (array-contains($text-overflow-modes, $to) or is-string($to));
@@ -396,7 +404,6 @@ $text-overflow-modes: array-concat((clip, ellipsis), $css-default-modes);
 
 /// Text overflow mixin
 ///
-/// @param {string} $to - the text-overflow value
 /// @example scss - Usage
 ///   .text-overflow-element {
 ///     @include text-overflow(ellipsis);
@@ -407,6 +414,8 @@ $text-overflow-modes: array-concat((clip, ellipsis), $css-default-modes);
 ///     -o-overflow: ellipsis;
 ///     text-overflow: ellipsis;
 ///   }
+/// @access public
+/// @param {string} $to - the text-overflow value
 @mixin text-overflow($to) {
   @if is-text-overflow($to) {
     @include prefixer(text-overflow, $to, o spec);
@@ -418,15 +427,15 @@ $text-overflow-modes: array-concat((clip, ellipsis), $css-default-modes);
 
 /// Hyphens modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $hyphens-modes: array-concat((none, manual, auto, unset), $css-default-modes);
 
 /// Checks if something is a supported hyphens value
 ///
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens - MDN hyphens docs
 /// @access public
 /// @param {string} $h - the hyphens value
-/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens - MDN hyphens docs
 /// @return {boolean}
 @function is-hyphens-mode($h) {
   @return is-defined($h) and array-contains($hyphens-modes, $h);
@@ -434,7 +443,6 @@ $hyphens-modes: array-concat((none, manual, auto, unset), $css-default-modes);
 
 /// Hyphens mixin
 ///
-/// @param {string} $h - the hyphens value
 /// @example scss - Usage
 ///   .hyphens-element {
 ///     @include hyphens(manual);
@@ -448,6 +456,8 @@ $hyphens-modes: array-concat((none, manual, auto, unset), $css-default-modes);
 ///     -o-overflow: manual;
 ///     hyphens: manual;
 ///   }
+/// @access public
+/// @param {string} $h - the hyphens value
 @mixin hyphens($h) {
   @if is-hyphens($h) {
     @include prefixer(hyphens, $h);
@@ -459,15 +469,15 @@ $hyphens-modes: array-concat((none, manual, auto, unset), $css-default-modes);
 
 /// Letter spacing modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $letter-spacing-modes: array-concat((normal), $css-default-modes);
 
 /// Checks if something is a supported letter-spacing value
 ///
+/// @link https://www.w3schools.com/cssref/pr_text_letter-spacing.asp - W3Schools letter-spacing docs
 /// @access public
 /// @param {size | string} $ls - the letter-spacing value
-/// @link https://www.w3schools.com/cssref/pr_text_letter-spacing.asp - W3Schools letter-spacing docs
 /// @return {boolean}
 @function is-letter-spacing-mode($ls) {
   @return is-defined($ls) and (array-contains($letter-spacing-modes, $ls) or is-size($ls));
@@ -475,7 +485,6 @@ $letter-spacing-modes: array-concat((normal), $css-default-modes);
 
 /// Letter spacing mixin
 ///
-/// @param {size | string} $ls - the letter-spacing value
 /// @example scss - Usage
 ///   .letter-spacing-element {
 ///     @include letter-spacing(3px);
@@ -485,6 +494,8 @@ $letter-spacing-modes: array-concat((normal), $css-default-modes);
 ///   .letter-spacing-element {
 ///     letter-spacing: 3px;
 ///   }
+/// @access public
+/// @param {size | string} $ls - the letter-spacing value
 @mixin letter-spacing($ls) {
   @if is-letter-spacing($ls) {
     letter-spacing: $ls;
@@ -496,15 +507,15 @@ $letter-spacing-modes: array-concat((normal), $css-default-modes);
 
 /// Word spacing modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $word-spacing-modes: array-concat((normal), $css-default-modes);
 
 /// Checks if something is a supported word-spacing value
 ///
+/// @link https://www.w3schools.com/cssref/pr_text_word-spacing.asp - W3Schools word-spacing docs
 /// @access public
 /// @param {size | string} $ws - the word-spacing value
-/// @link https://www.w3schools.com/cssref/pr_text_word-spacing.asp - W3Schools word-spacing docs
 /// @return {boolean}
 @function is-word-spacing-mode($ws) {
   @return is-defined($ws) and (array-contains($word-spacing-modes, $ws) or is-size($ws));
@@ -512,7 +523,6 @@ $word-spacing-modes: array-concat((normal), $css-default-modes);
 
 /// Word spacing mixin
 ///
-/// @param {size | string} $ws - the word-spacing value
 /// @example scss - Usage
 ///   .word-spacing-element {
 ///     @include word-spacing(1rem);
@@ -522,6 +532,8 @@ $word-spacing-modes: array-concat((normal), $css-default-modes);
 ///   .word-spacing-element {
 ///     word-spacing: 1rem;
 ///   }
+/// @access public
+/// @param {size | string} $ws - the word-spacing value
 @mixin word-spacing($ws) {
   @if is-word-spacing($ws) {
     word-spacing: $ws;
@@ -533,15 +545,15 @@ $word-spacing-modes: array-concat((normal), $css-default-modes);
 
 /// User select modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $user-select-modes: (auto, none, text, all);
 
 /// Checks if something is a supported user-select value
 ///
+/// @link https://www.w3schools.com/cssref/css3_pr_user-select.asp - W3Schools user-select docs
 /// @access public
 /// @param {string} $us - the user-select value
-/// @link https://www.w3schools.com/cssref/css3_pr_user-select.asp - W3Schools user-select docs
 /// @return {boolean}
 @function is-user-select-mode($us) {
   @return is-defined($us) and array-contains($user-select-modes, $us);
@@ -549,7 +561,6 @@ $user-select-modes: (auto, none, text, all);
 
 /// User select mixin
 ///
-/// @param {string} $us - the user-select value
 /// @example scss - Usage
 ///   .user-select-element {
 ///     @include user-select(none);
@@ -563,6 +574,8 @@ $user-select-modes: (auto, none, text, all);
 ///     -o-user-select: none;
 ///     user-select: none;
 ///   }
+/// @access public
+/// @param {string} $us - the user-select value
 @mixin user-select($us) {
   @if is-user-select($us) {
     @include prefixer(user-select, $us);
@@ -574,15 +587,15 @@ $user-select-modes: (auto, none, text, all);
 
 /// Direction modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $direction-modes: array-concat((ltr, rtl), $css-default-modes);
 
 /// Checks if something is a supported direction value
 ///
+/// @link https://www.w3schools.com/cssref/pr_text_direction.asp - W3Schools direction docs
 /// @access public
 /// @param {string} $d - the direction value
-/// @link https://www.w3schools.com/cssref/pr_text_direction.asp - W3Schools direction docs
 /// @return {boolean}
 @function is-direction-mode($d) {
   @return is-defined($d) and array-contains($direction-modes, $d);
@@ -590,7 +603,6 @@ $direction-modes: array-concat((ltr, rtl), $css-default-modes);
 
 /// Direction mixin
 ///
-/// @param {string} $d - the direction value
 /// @example scss - Usage
 ///   .direction-element {
 ///     @include direction(rtl);
@@ -600,6 +612,8 @@ $direction-modes: array-concat((ltr, rtl), $css-default-modes);
 ///   .direction-element {
 ///     direction: rtl;
 ///   }
+/// @access public
+/// @param {string} $d - the direction value
 @mixin direction($d) {
   @if is-direction($d) {
     direction: $d;
@@ -611,15 +625,15 @@ $direction-modes: array-concat((ltr, rtl), $css-default-modes);
 
 /// White space modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $white-space-modes: array-concat((normal, nowrap, pre, pre-line, pre-wrap), $css-default-modes);
 
 /// Checks if something is a supported white-space value
 ///
+/// @link https://www.w3schools.com/cssref/pr_text_white-space.asp - W3Schools white-space docs
 /// @access public
 /// @param {string} $ws - the white-space value
-/// @link https://www.w3schools.com/cssref/pr_text_white-space.asp - W3Schools white-space docs
 /// @return {boolean}
 @function is-white-space-mode($ws) {
   @return is-defined($ws) and array-contains($white-space-modes, $ws);
@@ -627,7 +641,6 @@ $white-space-modes: array-concat((normal, nowrap, pre, pre-line, pre-wrap), $css
 
 /// White space mixin
 ///
-/// @param {string} $ws - the white-space value
 /// @example scss - Usage
 ///   .white-space-element {
 ///     @include white-space(nowrap);
@@ -637,6 +650,8 @@ $white-space-modes: array-concat((normal, nowrap, pre, pre-line, pre-wrap), $css
 ///   .white-space-element {
 ///     white-space: nowrap;
 ///   }
+/// @access public
+/// @param {string} $ws - the white-space value
 @mixin white-space($ws) {
   @if is-white-space($ws) {
     white-space: $ws;
@@ -648,15 +663,15 @@ $white-space-modes: array-concat((normal, nowrap, pre, pre-line, pre-wrap), $css
 
 /// Word break modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $word-break-modes: array-concat((normal, break-all, keep-all), $css-default-modes);
 
 /// Checks if something is a supported word-break value
 ///
+/// @link https://www.w3schools.com/cssref/css3_pr_word-break.asp - W3Schools word-break docs
 /// @access public
 /// @param {string} $wb - the word-break value
-/// @link https://www.w3schools.com/cssref/css3_pr_word-break.asp - W3Schools word-break docs
 /// @return {boolean}
 @function is-word-break-mode($wb) {
   @return is-defined($wb) and array-contains($word-break-modes, $wb);
@@ -664,7 +679,6 @@ $word-break-modes: array-concat((normal, break-all, keep-all), $css-default-mode
 
 /// Word break mixin
 ///
-/// @param {string} $wb - the word-break value
 /// @example scss - Usage
 ///   .word-break-element {
 ///     @include word-break(break-all);
@@ -674,6 +688,8 @@ $word-break-modes: array-concat((normal, break-all, keep-all), $css-default-mode
 ///   .word-break-element {
 ///     word-break: break-all;
 ///   }
+/// @access public
+/// @param {string} $wb - the word-break value
 @mixin word-break($wb) {
   @if is-word-break($wb) {
     word-break: $wb;
@@ -685,15 +701,15 @@ $word-break-modes: array-concat((normal, break-all, keep-all), $css-default-mode
 
 /// Word wrap modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $word-wrap-modes: array-concat((normal, break-word), $css-default-modes);
 
 /// Checks if something is a supported word-wrap value
 ///
+/// @link https://www.w3schools.com/cssref/css3_pr_word-wrap.asp - W3Schools word-wrap docs
 /// @access public
 /// @param {string} $ww - the word-wrap value
-/// @link https://www.w3schools.com/cssref/css3_pr_word-wrap.asp - W3Schools word-wrap docs
 /// @return {boolean}
 @function is-word-wrap-mode($ww) {
   @return is-defined($ww) and array-contains($word-wrap-modes, $ww);
@@ -701,7 +717,6 @@ $word-wrap-modes: array-concat((normal, break-word), $css-default-modes);
 
 /// Word wrap mixin
 ///
-/// @param {string} $ww - the word-wrap value
 /// @example scss - Usage
 ///   .word-wrap-element {
 ///     @include word-wrap(break-word);
@@ -711,6 +726,8 @@ $word-wrap-modes: array-concat((normal, break-word), $css-default-modes);
 ///   .word-wrap-element {
 ///     word-wrap: break-word;
 ///   }
+/// @access public
+/// @param {string} $ww - the word-wrap value
 @mixin word-wrap($ww) {
   @if is-word-wrap($ww) {
     word-wrap: $ww;
@@ -722,15 +739,15 @@ $word-wrap-modes: array-concat((normal, break-word), $css-default-modes);
 
 /// Text size adjust modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
 
 /// Checks if something is a supported text-size-adjust value
 ///
+/// @link https://developer.mozilla.org/it/docs/Web/CSS/text-size-adjust - MDN text-size-adjust docs
 /// @access public
 /// @param {percentage | string} $tsa - the text-size-adjust value
-/// @link https://developer.mozilla.org/it/docs/Web/CSS/text-size-adjust - MDN text-size-adjust docs
 /// @return {boolean}
 @function is-text-size-adjust($tsa) {
   @return is-defined($tsa) and (is-percentage($tsa) or array-contains($text-size-adjust-modes, $tsa));
@@ -738,7 +755,6 @@ $text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
 
 /// Text size adjust mixin
 ///
-/// @param {string} $tsa - the text-size-adjust value
 /// @example scss - Usage
 ///   .text-size-adjust-element {
 ///     @include text-size-adjust(67%);
@@ -752,6 +768,8 @@ $text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
 ///     -o-text-size-adjust: 67%;
 ///     text-size-adjust: 67%;
 ///   }
+/// @access public
+/// @param {string} $tsa - the text-size-adjust value
 @mixin text-size-adjust($tsa) {
   @if(is-text-size-adjust($tsa)) {
     @include prefixer(text-size-adjust, $tsa);
@@ -763,13 +781,6 @@ $text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
 
 /// Ellipsis mixin
 /// <br>useful to ellipse text containers also in multiline mode
-///
-/// @param {boolean} $multiline [false] - the multiline mode
-/// @param {size | length | percentage} $width [100%] - the width to use
-/// @param {size | length | percentage} $font-size [$font-size-base] - the font-size
-/// @param {size | length | percentage} $line-height [$line-height-base] - the line-height
-/// @param {integer} $lines-to-show [3] - the lines to show before ellipsis
-/// @param {string} $text-overflow [ellipsis] - the text to use for overflowing
 ///
 /// @example scss - Usage - single line
 ///   .ellipsis-element {
@@ -806,7 +817,13 @@ $text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
 ///     overflow: hidden;
 ///     text-overflow: ellipsis;
 ///   }
-///
+/// @access public
+/// @param {boolean} $multiline [false] - the multiline mode
+/// @param {size | length | percentage} $width [100%] - the width to use
+/// @param {size | length | percentage} $font-size [$font-size-base] - the font-size
+/// @param {size | length | percentage} $line-height [$line-height-base] - the line-height
+/// @param {integer} $lines-to-show [3] - the lines to show before ellipsis
+/// @param {string} $text-overflow [ellipsis] - the text to use for overflowing
 @mixin ellipsis($multiline: false, $width: 100%, $font-size: $font-size-base, $line-height: $line-height-base, $lines-to-show: 3, $text-overflow: ellipsis) {
   @if $multiline {
     @include display(block); // Fallback for non-webkit
@@ -845,6 +862,7 @@ $text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
 ///     word-break: break-all;
 ///     word-wrap: break-word;
 ///   }
+/// @access public
 @mixin word-wrap-force {
   @include hyphens(auto);
   @include word-break(break-all);

@@ -1,7 +1,7 @@
 /// Position modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $position-modes: array-concat((static, absolute, fixed, relative, sticky), $css-default-modes);
 
 /// Checks if something is a position mode
@@ -15,8 +15,8 @@ $position-modes: array-concat((static, absolute, fixed, relative, sticky), $css-
 
 /// Position point modes
 ///
-/// @type list
 /// @access private
+/// @type list
 $position-point-modes: array-concat((auto), $css-default-modes);
 
 /// Checks if something is a position point value
@@ -30,8 +30,8 @@ $position-point-modes: array-concat((auto), $css-default-modes);
 
 /// Position points
 ///
-/// @type list
 /// @access private
+/// @type list
 $position-points: (top, right, bottom, left);
 
 /// Checks if something is a position point
@@ -45,9 +45,6 @@ $position-points: (top, right, bottom, left);
 
 /// Position point mixin
 ///
-/// @access public
-/// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
-/// @param {string} $p - the point (top, right, bottom, left)
 /// @example scss - Usage
 ///   .position-point-element {
 ///     @include position-point(0, top);
@@ -57,6 +54,9 @@ $position-points: (top, right, bottom, left);
 ///   .position-point-element {
 ///     top: 0;
 ///   }
+/// @access public
+/// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
+/// @param {string} $p - the point (top, right, bottom, left)
 @mixin position-point($v: auto, $p: null) {
   @if is-position-point-value($v) and is-position-point($p) {
     #{$p}: $v;
@@ -68,8 +68,6 @@ $position-points: (top, right, bottom, left);
 
 /// Top mixin
 ///
-/// @access public
-/// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
 /// @example scss - Usage
 ///   .top-element {
 ///     @include top(0);
@@ -79,14 +77,15 @@ $position-points: (top, right, bottom, left);
 ///   .top-element {
 ///     top: 0;
 ///   }
+/// @alias {mixin} position-point
+/// @access public
+/// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
 @mixin top($v: auto) {
   @include position-point($v, top);
 }
 
 /// Right mixin
 ///
-/// @access public
-/// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
 /// @example scss - Usage
 ///   .right-element {
 ///     @include right(0);
@@ -96,14 +95,15 @@ $position-points: (top, right, bottom, left);
 ///   .right-element {
 ///     right: 0;
 ///   }
+/// @alias {mixin} position-point
+/// @access public
+/// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
 @mixin right($v: auto) {
   @include position-point($v, right);
 }
 
 /// Bottom mixin
 ///
-/// @access public
-/// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
 /// @example scss - Usage
 ///   .bottom-element {
 ///     @include bottom(0);
@@ -113,14 +113,15 @@ $position-points: (top, right, bottom, left);
 ///   .bottom-element {
 ///     bottom: 0;
 ///   }
+/// @alias {mixin} position-point
+/// @access public
+/// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
 @mixin bottom($v: auto) {
   @include position-point($v, bottom);
 }
 
 /// Left mixin
 ///
-/// @access public
-/// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
 /// @example scss - Usage
 ///   .left-element {
 ///     @include left(0);
@@ -130,19 +131,15 @@ $position-points: (top, right, bottom, left);
 ///   .left-element {
 ///     left: 0;
 ///   }
+/// @alias {mixin} position-point
+/// @access public
+/// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
 @mixin left($v: auto) {
   @include position-point($v, left);
 }
 
 /// Position mixin
 ///
-/// @access public
-/// @param {string} $options - the options
-/// @param {string} $options.position - the position mode
-/// @param {length} $options.top - the top
-/// @param {length} $options.right - the right
-/// @param {length} $options.bottom - the bottom
-/// @param {length} $options.left - the left
 /// @example scss - Usage
 ///   .position-element {
 ///     @include position(absolute 0 0 0 0);
@@ -171,6 +168,13 @@ $position-points: (top, right, bottom, left);
 ///     bottom: 10px;
 ///     left: 2rem;
 ///   }
+/// @access public
+/// @param {string} $options - the options
+/// @param {string} $options.position - the position mode
+/// @param {length} $options.top - the top
+/// @param {length} $options.right - the right
+/// @param {length} $options.bottom - the bottom
+/// @param {length} $options.left - the left
 @mixin position($options) {
   $settings: (position: static, top: null, right: null, bottom: null, left: null);
 
