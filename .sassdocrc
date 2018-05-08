@@ -4,9 +4,9 @@ description: |
   ## Flavor SCSS - Advanced type checking Sass/SCSS Framework with Mixins & Helpers and a fully customizable Grid System
   ---
   #### Greetings to
-    * [Hugo Giraudel](https://hugogiraudel.com)
-    * [Bootstrap](https://getbootstrap.com)
-    * [normalize.css](https://github.com/necolas/normalize.css)
+    * [Hugo Giraudel](https://hugogiraudel.com) for his knowledge
+    * [Bootstrap](https://getbootstrap.com) for the grid system idea
+    * [normalize.css](https://github.com/necolas/normalize.css) for the reboot idea
 groups:
   undefined: Core
   core: Core
@@ -26,6 +26,7 @@ groups:
   mixins-filter: Mixins - Filter
   mixins-margin: Mixins - Margin
   mixins-media: Mixins - Media
+  mixins-outline: Mixins - Outline
   mixins-overflow: Mixins - Overflow
   mixins-padding: Mixins - Padding
   mixins-text: Mixins - Text

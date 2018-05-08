@@ -97,7 +97,7 @@
   //
   // Credit: https://github.com/suitcss/base
   [tabindex='-1'] {
-    @include outline(none);
+    @include outline-force(none);
   }
 
 
@@ -304,7 +304,7 @@
   // Details at https://github.com/twbs/bootstrap/issues/24093
   button {
     @include border-radius(0);
-    @include outline(none);
+    @include outline-force(none);
 
     -webkit-appearance: button;
 

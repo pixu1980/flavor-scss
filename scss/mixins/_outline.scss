@@ -1,0 +1,270 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Outline
+/// @group mixins-outline
+/// @author blackmirror1980
+////
+
+/// Outline width modes
+///
+/// @access private
+/// @type list
+$outline-width-modes: array-concat((medium, thin, thick), $css-default-modes);
+
+/// Checks if something is a supported outline width value
+///
+/// @access public
+/// @param {string} $ow - the outline width value
+/// @return {boolean}
+@function is-outline-width($ow) {
+  @return is-defined($ow) and (is-length($ow) or array-contains($overflow-width-modes, $ow));
+}
+
+/// Outline width mixin
+///
+/// @link https://www.w3schools.com/cssref/pr_outline-width.asp W3Schools outline-width docs
+/// @example scss - Usage
+///   .outline-width-element {
+///     @include outline-width(2px);
+///   }
+///
+/// @example css - Output
+///   .outline-width-element {
+///     outline-width: 2px;
+///   }
+/// @access public
+/// @param {string | size | length} $ow [medium] - the outline-width value
+@mixin outline-width($ow: medium) {
+    @if is-outline-width($ow) {
+      outline-width: $ow;
+    }
+    @else {
+      @warn '`outline-width: #{$ow}` is not a valid outline-width value';
+    }
+}
+
+/// Outline style modes
+///
+/// @access private
+/// @type list
+$outline-style-modes: array-concat((none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset), $css-default-modes);
+
+/// Checks if something is a supported outline style value
+///
+/// @access public
+/// @param {string} $os - the outline style value
+/// @return {boolean}
+@function is-outline-style($os) {
+  @return is-defined($os) and array-contains($overflow-style-modes, $os);
+}
+
+/// Outline style mixin
+///
+/// @link https://www.w3schools.com/cssref/pr_outline-style.asp W3Schools outline-style docs
+/// @example scss - Usage
+///   .outline-style-element {
+///     @include outline-style(dotted);
+///   }
+///
+/// @example css - Output
+///   .outline-style-element {
+///     outline-style: dotted;
+///   }
+/// @access public
+/// @param {string} $os [none] - the outline-style value
+@mixin outline-style($os: none) {
+    @if is-outline-style($os) {
+      outline-style: $os;
+    }
+    @else {
+      @warn '`outline-style: #{$os}` is not a valid outline-style value';
+    }
+}
+
+/// Outline color modes
+///
+/// @access private
+/// @type list
+$outline-color-modes: array-concat((invert), $css-default-modes);
+
+/// Checks if something is a supported outline color value
+///
+/// @access public
+/// @param {string} $oc - the outline color value
+/// @return {boolean}
+@function is-outline-color($oc) {
+  @return is-defined($oc) and (is-color($oc) or array-contains($overflow-color-modes, $oc));
+}
+
+/// Outline color mixin
+///
+/// @link https://www.w3schools.com/cssref/pr_outline-color.asp W3Schools outline-color docs
+/// @example scss - Usage
+///   .outline-color-element {
+///     @include outline-color(#ffa);
+///   }
+///
+/// @example css - Output
+///   .outline-color-element {
+///     outline-color: #ffa;
+///   }
+/// @access public
+/// @param {string | color} $oc [invert] - the outline-color value
+@mixin outline-color($oc: invert) {
+    @if is-outline-color($oc) {
+      outline-color: $oc;
+    }
+    @else {
+      @warn '`outline-color: #{$oc}` is not a valid outline-color value';
+    }
+}
+
+/// Checks if something is a supported outline offset value
+///
+/// @access public
+/// @param {string} $oo - the outline offset value
+/// @return {boolean}
+@function is-outline-offset($oo) {
+  @return is-defined($oo) and (is-length($oo) or array-contains($css-default-modes, $oo));
+}
+
+/// Outline offset mixin
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_outline-offset.asp W3Schools outline-offset docs
+/// @example scss - Usage
+///   .outline-offset-element {
+///     @include outline-offset(2px);
+///   }
+///
+/// @example css - Output
+///   .outline-offset-element {
+///     outline-offset: 2px;
+///   }
+/// @access public
+/// @param {string | size | length} $oo [0] - the outline-offset value
+@mixin outline-offset($oo: 0) {
+    @if is-outline-offset($oo) {
+      outline-offset: $oo;
+    }
+    @else {
+      @warn '`outline-offset: #{$oo}` is not a valid outline-offset value';
+    }
+}
+
+/// Outline mixin
+///
+/// @example scss - Usage
+///   .outline-element {
+///     @include outline(2px solid #000 1px);
+///   }
+///
+/// @example css - Output
+///   .outline-element {
+///     outline-width: 2px;
+///     outline-style: solid;
+///     outline-color: #000;
+///     outline-offset: 1px;
+///   }
+/// @access public
+/// @param {string | object | map | array | list} $options - the outline options
+/// @param {string | size | length} $options.size [medium] - the outline-width value
+/// @param {string} $options.style [none] - the outline-style value
+/// @param {string | color} $options.color [invert] - the outline-color value
+/// @param {string | size | length} $options.offset [null] - the outline-offset value
+@mixin outline($options) {
+  @if is-outline-mode($options) {
+    outline: $options;
+  }
+  @else {
+    $settings: (size: medium, style: none, color: invert, offset: null);
+
+    @if is-object($options) {
+      $settings: extend($settings, $options);
+    }
+    @else {
+      $size: nth-value($options, 1);
+
+      @if is-defined($size) {
+        $settings: extend($settings, (size: $size));
+      }
+
+      $style: nth-value($options, 2);
+
+      @if is-defined($style) {
+        $settings: extend($settings, (style: $style));
+      }
+
+      $color: nth-value($options, 3);
+
+      @if is-defined($color) {
+        $settings: extend($settings, (color: $color));
+      }
+
+      $offset: nth-value($options, 4);
+
+      @if is-defined($offset) {
+        $settings: extend($settings, (offset: $offset));
+      }
+    }
+
+    $outline-width: get($settings, size);
+
+    @if is-defined($outline-width) {
+      @include outline-width($outline-width);
+    }
+
+    $outline-style: get($settings, style);
+
+    @if is-defined($outline-style) {
+      @include outline-style($outline-style);
+    }
+
+    $outline-color: get($settings, color);
+
+    @if is-defined($outline-color) {
+      @include outline-color($outline-color);
+    }
+
+    $outline-offset: get($settings, offset);
+
+    @if is-defined($outline-offset) {
+      @include outline-offset($outline-offset);
+    }
+  }
+}
+
+/// Outline force mixin
+///
+/// @example scss - Usage
+///   .outline-force-element {
+///     @include outline-force(none);
+///   }
+///
+/// @example css - Output
+///   .outline-force-element {
+///     outline-width: medium;
+///     outline-style: none;
+///     outline-color: invert;
+///   }
+///
+///   .outline-force-element:active,
+///   .outline-force-element:focus, {
+///     outline-width: medium;
+///     outline-style: none;
+///     outline-color: invert;
+///   }
+/// @access public
+/// @param {string | object | map | array | list} $options - the outline options
+/// @param {string | size | length} $options.size [medium] - the outline-width value
+/// @param {string} $options.style [none] - the outline-style value
+/// @param {string | color} $options.color [invert] - the outline-color value
+/// @param {string | size | length} $options.offset [null] - the outline-offset value
+@mixin outline-force($o) {
+  @include outline($o);
+
+  &:active,
+  &:focus {
+    @include outline($o);
+  }
+}

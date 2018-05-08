@@ -46,6 +46,7 @@ $prefixes-available: (webkit, moz, ms, o, spec);
 ///     -moz-border-radius: 10px;
 ///     border-radius: 10px;
 ///   }
+/// @access public
 /// @param {string} $property - the property to prefix
 /// @param {any} $values - the values list to use
 /// @param {array | list} $prefixes - space separated list
@@ -61,15 +62,6 @@ $prefixes-available: (webkit, moz, ms, o, spec);
     @else {
       @warn 'Unrecognized prefix: #{$prefix}';
     }
-  }
-}
-
-@mixin outline($outline) {
-  outline: $outline;
-
-  &:active,
-  &:focus {
-    outline: $outline;
   }
 }
 
