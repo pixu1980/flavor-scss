@@ -77,7 +77,7 @@ $position-points: (top, right, bottom, left);
 ///   .top-element {
 ///     top: 0;
 ///   }
-/// @alias {mixin} position-point
+/// @see {mixin} position-point
 /// @access public
 /// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
 @mixin top($v: auto) {
@@ -95,7 +95,7 @@ $position-points: (top, right, bottom, left);
 ///   .right-element {
 ///     right: 0;
 ///   }
-/// @alias {mixin} position-point
+/// @see {mixin} position-point
 /// @access public
 /// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
 @mixin right($v: auto) {
@@ -113,7 +113,7 @@ $position-points: (top, right, bottom, left);
 ///   .bottom-element {
 ///     bottom: 0;
 ///   }
-/// @alias {mixin} position-point
+/// @see {mixin} position-point
 /// @access public
 /// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
 @mixin bottom($v: auto) {
@@ -131,7 +131,7 @@ $position-points: (top, right, bottom, left);
 ///   .left-element {
 ///     left: 0;
 ///   }
-/// @alias {mixin} position-point
+/// @see {mixin} position-point
 /// @access public
 /// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
 @mixin left($v: auto) {

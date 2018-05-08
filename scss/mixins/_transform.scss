@@ -125,7 +125,7 @@ $transform-modes: array-concat((none), $css-default-modes);
 ///     -o-transform: matrix(1, 2, -1, 1, 80, 80);
 ///     transform: matrix(1, 2, -1, 1, 80, 80);
 ///   }
-/// @alias {mixin} transform
+/// @see {mixin} transform
 /// @access public
 /// @param {number} $a - the a value for the linear transformation
 /// @param {number} $b - the b value for the linear transformation
@@ -159,7 +159,7 @@ $transform-modes: array-concat((none), $css-default-modes);
 ///     -o-transform: matrix3d(0.515078, -0.199333, 0, 0.00021, 0.502268, 0.802615, 0, 0.00008, 0, 0, 1, 0, 438, 240, 0, 1);
 ///     transform: matrix3d(0.515078, -0.199333, 0, 0.00021, 0.502268, 0.802615, 0, 0.00008, 0, 0, 1, 0, 438, 240, 0, 1);
 ///   }
-/// @alias {mixin} transform
+/// @see {mixin} transform
 /// @access public
 /// @param {number} $a1 - the a1 value for the linear transformation
 /// @param {number} $b1 - the b1 value for the linear transformation

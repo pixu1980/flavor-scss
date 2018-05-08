@@ -27,7 +27,7 @@
 /// Returns the number of characters in a string.
 /// <br><br><u>Note: aliases the native str-length method</u>
 ///
-/// @alias str-length
+/// @link https://sass-lang.com/documentation/Sass/Script/Functions.html#str_length-instance_method SassLang str-length docs
 /// @access public
 /// @param {string} $s - the string to count
 /// @return {number}
@@ -38,7 +38,7 @@
 /// Returns the position index of the first occurrence of string needle in string haystack
 /// <br><br><u>Note: aliases the native str-index method</u>
 ///
-/// @alias str-index
+/// @link https://sass-lang.com/documentation/Sass/Script/Functions.html#str_index-instance_method SassLang str-index docs
 /// @access public
 /// @param {string} $h - the haystack
 /// @param {string} $n - the needle
@@ -50,7 +50,7 @@
 /// Inserts string $i in string $s at $p position
 /// <br><br><u>Note: aliases the native str-insert method</u>
 ///
-/// @alias str-insert
+/// @link https://sass-lang.com/documentation/Sass/Script/Functions.html#str_insert-instance_method SassLang str-insert docs
 /// @access public
 /// @param {string} $s - the string to modify
 /// @param {string} $i - the string to insert into
@@ -64,7 +64,7 @@
 /// <br>if to position index is not specified (null), will be between from & the end of the string
 /// <br><br><u>Note: aliases the native str-slice method</u>
 ///
-/// @alias str-slice
+/// @link https://sass-lang.com/documentation/Sass/Script/Functions.html#str_slice-instance_method SassLang str-slice docs
 /// @access public
 /// @param {string} $s - the string
 /// @param {string} $from [1] - the needle

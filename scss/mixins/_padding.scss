@@ -61,7 +61,7 @@
 ///   .padding-top-element {
 ///     padding-top: 5px;
 ///   }
-/// @alias {mixin} padding-direction
+/// @see {mixin} padding-direction
 /// @access public
 /// @param {string | length} $p - the padding value (e.g. `initial` or `20px`)
 @mixin padding-top($p) {
@@ -79,7 +79,7 @@
 ///   .padding-right-element {
 ///     padding-right: 5px;
 ///   }
-/// @alias {mixin} padding-direction
+/// @see {mixin} padding-direction
 /// @access public
 /// @param {string | length} $p - the padding value (e.g. `initial` or `20px`)
 @mixin padding-right($p) {
@@ -97,7 +97,7 @@
 ///   .padding-bottom-element {
 ///     padding-bottom: 5px;
 ///   }
-/// @alias {mixin} padding-direction
+/// @see {mixin} padding-direction
 /// @access public
 /// @param {string | length} $p - the padding value (e.g. `initial` or `20px`)
 @mixin padding-bottom($p) {
@@ -115,7 +115,7 @@
 ///   .padding-left-element {
 ///     padding-left: 5px;
 ///   }
-/// @alias {mixin} padding-direction
+/// @see {mixin} padding-direction
 /// @access public
 /// @param {string | length} $p - the padding value (e.g. `initial` or `20px`)
 @mixin padding-left($p) {

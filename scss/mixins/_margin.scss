@@ -67,7 +67,7 @@ $margin-modes: array-concat((auto), $css-default-modes);
 ///   .margin-top-element {
 ///     margin-top: 5px;
 ///   }
-/// @alias {mixin} margin-direction
+/// @see {mixin} margin-direction
 /// @access public
 /// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
 @mixin margin-top($m) {
@@ -85,7 +85,7 @@ $margin-modes: array-concat((auto), $css-default-modes);
 ///   .margin-right-element {
 ///     margin-right: 5px;
 ///   }
-/// @alias {mixin} margin-direction
+/// @see {mixin} margin-direction
 /// @access public
 /// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
 @mixin margin-right($m) {
@@ -103,7 +103,7 @@ $margin-modes: array-concat((auto), $css-default-modes);
 ///   .margin-bottom-element {
 ///     margin-bottom: 5px;
 ///   }
-/// @alias {mixin} margin-direction
+/// @see {mixin} margin-direction
 /// @access public
 /// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
 @mixin margin-bottom($m) {
@@ -121,7 +121,7 @@ $margin-modes: array-concat((auto), $css-default-modes);
 ///   .margin-left-element {
 ///     margin-left: 5px;
 ///   }
-/// @alias {mixin} margin-direction
+/// @see {mixin} margin-direction
 /// @access public
 /// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
 @mixin margin-left($m) {
