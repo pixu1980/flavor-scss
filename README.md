@@ -4,14 +4,17 @@
 Black Mirror
 
 ## Version
-v1.0.0
+v1.0.1
 
 ## Badges
 
 [![NPM](https://nodei.co/npm/flavor-scss.png)](https://nodei.co/npm/flavor-scss/)
 
 [![NPM downloads/month](https://img.shields.io/npm/dm/flavor-scss.svg)](hhttps://img.shields.io/npm/dm/flavor-scss.svg)
-[![GitHub stars](https://img.shields.io/github/stars/blackmirror1980/flavor-scss.svg?style=plastic)](https://github.com/blackmirror1980/flavor-scss/stargazers) [![GitHub forks](https://img.shields.io/github/forks/blackmirror1980/flavor-scss.svg?style=plastic)](https://github.com/blackmirror1980/flavor-scss/network) [![GitHub issues](https://img.shields.io/github/issues/blackmirror1980/flavor-scss.svg?style=plastic)](https://github.com/blackmirror1980/flavor-scss/issues) [![GitHub license](https://img.shields.io/github/license/blackmirror1980/flavor-scss.svg?style=plastic)](https://github.com/blackmirror1980/flavor-scss/blob/master/LICENSE) [![Build Status](https://travis-ci.org/blackmirror1980/flavor-scss.svg?branch=master)](https://travis-ci.org/blackmirror1980/flavor-scss) [![Coverage Status](https://coveralls.io/repos/github/blackmirror1980/flavor-scss/badge.svg?branch=master)](https://coveralls.io/github/blackmirror1980/flavor-scss?branch=master)
+
+[![GitHub stars](https://img.shields.io/github/stars/blackmirror1980/flavor-scss.svg?style=plastic)](https://github.com/blackmirror1980/flavor-scss/stargazers) [![GitHub forks](https://img.shields.io/github/forks/blackmirror1980/flavor-scss.svg?style=plastic)](https://github.com/blackmirror1980/flavor-scss/network) [![GitHub issues](https://img.shields.io/github/issues/blackmirror1980/flavor-scss.svg?style=plastic)](https://github.com/blackmirror1980/flavor-scss/issues) [![GitHub license](https://img.shields.io/github/license/blackmirror1980/flavor-scss.svg?style=plastic)](https://github.com/blackmirror1980/flavor-scss/blob/master/LICENSE) 
+
+[![Build Status](https://travis-ci.org/blackmirror1980/flavor-scss.svg?branch=master)](https://travis-ci.org/blackmirror1980/flavor-scss) [![Coverage Status](https://coveralls.io/repos/github/blackmirror1980/flavor-scss/badge.svg?branch=master)](https://coveralls.io/github/blackmirror1980/flavor-scss?branch=master)
 
 ## Documentation
 Check out the [Latest Documentation](https://blackmirror1980.github.io/flavor-scss/index.html) here
