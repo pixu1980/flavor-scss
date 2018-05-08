@@ -6,9 +6,17 @@
 /// @author blackmirror1980
 ////
 
-// generic transform
+/// Transform function names
+///
+/// @type list
+/// @access private
 $transform-functions-names: (matrix, matrix3d, translate, translate3d, translateX, translateY, translateZ, scale, scale3d, scaleX, scaleY, scaleZ, rotate, rotate3d, rotateX, rotateY, rotateZ, skew, skewX, skewY, perspective);
 
+/// Extracts transform function name from a transform value
+///
+/// @access public
+/// @param {string} $t - the transform value (e.g. `scale(2)` or `rotate(10deg)`)
+/// @return {boolean}
 @function get-transform-function-name($t) {
   @if(string-contains($t, '(') and string-contains($t, ')')) {
     @return string-slice($t, 1, string-index($t, '(') - 1);
@@ -17,39 +25,112 @@ $transform-functions-names: (matrix, matrix3d, translate, translate3d, translate
   @return null;
 }
 
+/// Checks if something is a transform function value
+///
+/// @access public
+/// @param {string} $tf - the transform function value (e.g. `scale(2)` or `rotate(10deg)`)
+/// @return {boolean}
 @function is-transform-function($tf) {
   $transform-function-name: get-transform-function-name($tf);
 
   @return is-defined($transform-function-name) and array-contains($transform-functions-names, $transform-function-name);
 }
 
+/// Transform modes
+///
+/// @type list
+/// @access private
 $transform-modes: array-concat((none), $css-default-modes);
 
-@function is-transform-mode-or-function($transform) {
-  @return is-defined($transform) and (array-contains($transform-modes, $transform) or is-transform-function($transform));
+/// Checks if something is a transform value
+///
+/// @access public
+/// @param {string} $t - the transform value (e.g. `none` or `scale(2)` or `rotate(10deg)`)
+/// @return {boolean}
+@function is-transform($t) {
+  @return is-defined($t) and (array-contains($transform-modes, $t) or is-transform-function($t));
 }
 
-@function is-transforms-mode-or-function($transforms) {
-  $is-transforms-valid: true;
+/// Checks if a space separated list is a transforms values list
+///
+/// @access public
+/// @param {string | array | list} $ts - the transforms value (e.g. `scale(2) rotate(-45deg)`)
+/// @return {boolean}
+@function is-transforms($ts) {
+  $is-valid: true;
 
-  @each $transform in $transforms {
-    @if $is-transforms-valid {
-      $is-transforms-valid: is-transform-mode-or-function(to-string($transform));
+  @each $t in $ts {
+    @if $is-valid {
+      $is-valid: is-transform(to-string($t));
     }
   }
 
-  @return $is-transforms-valid;
+  @return $is-valid;
 }
 
-@mixin transform($transforms) {
-  @if is-transforms-mode-or-function($transforms) {
-    @include prefixer(transform, $transforms);
+/// Transform mixin
+///
+/// @param {string | array | list} $ts - the transforms list (e.g. `skew(10deg, 3deg)` or `scale(2.2) rotate(-90deg)`)
+/// @example scss - Usage - single transform
+///   .transform-element {
+///     @include transform(skew(10deg, 3deg));
+///   }
+///
+/// @example css - Output - single transform
+///   .transform-element {
+///     -webkit-transform: skew(10deg, 3deg);
+///     -moz-transform: skew(10deg, 3deg);
+///     -ms-transform: skew(10deg, 3deg);
+///     -o-transform: skew(10deg, 3deg);
+///     transform: skew(10deg, 3deg);
+///   }
+///
+/// @example scss - Usage - multiple transforms
+///   .transform-element {
+///     @include transform(scale(2.2) rotate(-90deg));
+///   }
+///
+/// @example css - Output - multiple transforms
+///   .transform-element {
+///     -webkit-transform: scale(2.2) rotate(-90deg);
+///     -moz-transform: scale(2.2) rotate(-90deg);
+///     -ms-transform: scale(2.2) rotate(-90deg);
+///     -o-transform: scale(2.2) rotate(-90deg);
+///     transform: scale(2.2) rotate(-90deg);
+///   }
+@mixin transform($ts) {
+  @if is-transforms($ts) {
+    @include prefixer(transform, $ts);
   }
   @else {
     @warn '`transform: #{$transforms}` is not a valid transform value';
   }
 }
 
+/// Matrix transform mixin
+///
+/// @param {number} $a - the a value for the linear transformation
+/// @param {number} $b - the b value for the linear transformation
+/// @param {number} $c - the c value for the linear transformation
+/// @param {number} $d - the d value for the linear transformation
+/// @param {number} $tx - the horizontal translation to apply
+/// @param {number} $ty - the vertical translation to apply
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/matrix MDN transform matrix docs
+/// @link https://dev.opera.com/articles/understanding-the-css-transforms-matrix/ Dev.Opera understanding the CSS Transform Matrix
+/// @alias {mixin} transform
+/// @example scss - Usage
+///   .matrix-transform-element {
+///     @include matrix(1, 2, -1, 1, 80, 80);
+///   }
+///
+/// @example css - Output
+///   .matrix-transform-element {
+///     -webkit-transform: matrix(1, 2, -1, 1, 80, 80);
+///     -moz-transform: matrix(1, 2, -1, 1, 80, 80);
+///     -ms-transform: matrix(1, 2, -1, 1, 80, 80);
+///     -o-transform: matrix(1, 2, -1, 1, 80, 80);
+///     transform: matrix(1, 2, -1, 1, 80, 80);
+///   }
 @mixin matrix($a, $b, $c, $d, $tx, $ty) {
   @if (is-number($a) and is-number($b) and is-number($c) and is-number($d) and is-number($tx) and is-number($ty)) {
     @include transform(matrix($a, $b, $c, $d, $tx, $ty));
@@ -59,6 +140,40 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// Matrix transform mixin
+///
+/// @param {number} $a1 - the a1 value for the linear transformation
+/// @param {number} $b1 - the b1 value for the linear transformation
+/// @param {number} $c1 - the c1 value for the linear transformation
+/// @param {number} $d1 - the d1 value for the linear transformation
+/// @param {number} $a2 - the a2 value for the linear transformation
+/// @param {number} $b2 - the b2 value for the linear transformation
+/// @param {number} $c2 - the c2 value for the linear transformation
+/// @param {number} $d2 - the d2 value for the linear transformation
+/// @param {number} $a3 - the a3 value for the linear transformation
+/// @param {number} $b3 - the b3 value for the linear transformation
+/// @param {number} $c3 - the c3 value for the linear transformation
+/// @param {number} $d3 - the d3 value for the linear transformation
+/// @param {number} $a4 - the a4 value for the translation to apply
+/// @param {number} $b4 - the b4 value for the translation to apply
+/// @param {number} $c4 - the c4 value for the translation to apply
+/// @param {number} $d4 - the d4 value for the linear transformation
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/matrix3d MDN transform matrix docs
+/// @link https://dev.opera.com/articles/understanding-the-css-transforms-matrix/ Dev.Opera understanding the CSS Transform Matrix
+/// @alias {mixin} transform
+/// @example scss - Usage
+///   .matrix3d-transform-element {
+///     @include matrix3d(0.515078, -0.199333, 0, 0.00021, 0.502268, 0.802615, 0, 0.00008, 0, 0, 1, 0, 438, 240, 0, 1);
+///   }
+///
+/// @example css - Output
+///   .matrix-transform-element {
+///     -webkit-transform: matrix3d(0.515078, -0.199333, 0, 0.00021, 0.502268, 0.802615, 0, 0.00008, 0, 0, 1, 0, 438, 240, 0, 1);
+///     -moz-transform: matrix3d(0.515078, -0.199333, 0, 0.00021, 0.502268, 0.802615, 0, 0.00008, 0, 0, 1, 0, 438, 240, 0, 1);
+///     -ms-transform: matrix3d(0.515078, -0.199333, 0, 0.00021, 0.502268, 0.802615, 0, 0.00008, 0, 0, 1, 0, 438, 240, 0, 1);
+///     -o-transform: matrix3d(0.515078, -0.199333, 0, 0.00021, 0.502268, 0.802615, 0, 0.00008, 0, 0, 1, 0, 438, 240, 0, 1);
+///     transform: matrix3d(0.515078, -0.199333, 0, 0.00021, 0.502268, 0.802615, 0, 0.00008, 0, 0, 1, 0, 438, 240, 0, 1);
+///   }
 @mixin matrix3d($a1, $b1, $c1, $d1, $a2, $b2, $c2, $d2, $a3, $b3, $c3, $d3, $a4, $b4, $c4, $d4) {
   @if (is-number($a1) and is-number($b1) and is-number($c1) and is-number($d1) and is-number($a2) and is-number($b2) and is-number($c2) and is-number($d2) and is-number($a3) and is-number($b3) and is-number($c3) and is-number($d3) and is-number($a4) and is-number($b4) and is-number($c4) and is-number($d4)) {
     @include transform(matrix3d($a1, $b1, $c1, $d1, $a2, $b2, $c2, $d2, $a3, $b3, $c3, $d3, $a4, $b4, $c4, $d4));
@@ -68,6 +183,23 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// Perspective transform  mixin
+///
+/// @param {length | size} $p - the perspective value (e.g. `0` or `100px`)
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/perspective MDN transform perspective docs
+/// @example scss - Usage
+///   .perspective-element {
+///     @include perspective(1000px);
+///   }
+///
+/// @example css - Output
+///   .perspective-element {
+///     -webkit-transform: perspective(1000px);
+///     -moz-transform: perspective(1000px);
+///     -ms-transform: perspective(1000px);
+///     -o-transform: perspective(1000px);
+///     transform: perspective(1000px);
+///   }
 @mixin perspective($p) {
   @if (is-size($p)) {
     @include transform(perspective($p));
@@ -77,7 +209,24 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
-// rotate
+/// Rotate transform  mixin
+/// <br><b>Note:</b> - this is equivalent to rotateZ($a) or rotate3d(0, 0, 1, $a)
+///
+/// @param {angle} $a - the rotate angle (e.g. `30deg` or `-10rad`)
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/rotate MDN transform rotate docs
+/// @example scss - Usage
+///   .rotate-element {
+///     @include rotate(10deg);
+///   }
+///
+/// @example css - Output
+///   .rotate-element {
+///     -webkit-transform: rotate(10deg);
+///     -moz-transform: rotate(10deg);
+///     -ms-transform: rotate(10deg);
+///     -o-transform: rotate(10deg);
+///     transform: rotate(10deg);
+///   }
 @mixin rotate($a) {
   @if (is-angle($a)) {
     @include transform(rotate($a));
@@ -87,6 +236,26 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// Rotate 3d transform  mixin
+///
+/// @param {float} $x - the x-coordinate of the vector denoting the axis of rotation which could between 0 and 1 (e.g. `.75`)
+/// @param {float} $y - the y-coordinate of the vector denoting the axis of rotation which could between 0 and 1 (e.g. `.75`)
+/// @param {float} $z - the z-coordinate of the vector denoting the axis of rotation which could between 0 and 1 (e.g. `.75`)
+/// @param {angle} $a - the rotate angle (e.g. `30deg` or `-10rad`)
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/rotate3d MDN transform rotate3d docs
+/// @example scss - Usage
+///   .rotate3d-element {
+///     @include rotate3d(.3, .5, .75, -10turn);
+///   }
+///
+/// @example css - Output
+///   .rotate3d-element {
+///     -webkit-transform: rotate3d(.3, .5, .75, -10turn);
+///     -moz-transform: rotate3d(.3, .5, .75, -10turn);
+///     -ms-transform: rotate3d(.3, .5, .75, -10turn);
+///     -o-transform: rotate3d(.3, .5, .75, -10turn);
+///     transform: rotate3d(.3, .5, .75, -10turn);
+///   }
 @mixin rotate3d($x, $y, $z, $a) {
   @if (is-percentage-number($x) and is-percentage-number($y) and is-percentage-number($z) and is-angle($a)) {
     @include transform(rotate3d($x, $y, $z, $a));
@@ -96,6 +265,24 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// RotateX transform  mixin
+/// <br><b>Note:</b> - this is equivalent to rotate3d(1, 0, 0, $a)
+///
+/// @param {angle} $a - the rotateX angle (e.g. `30deg` or `-10rad`)
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/rotateX MDN transform rotateX docs
+/// @example scss - Usage
+///   .rotate-x-element {
+///     @include rotateX(10deg);
+///   }
+///
+/// @example css - Output
+///   .rotate-x-element {
+///     -webkit-transform: rotateX(10deg);
+///     -moz-transform: rotateX(10deg);
+///     -ms-transform: rotateX(10deg);
+///     -o-transform: rotateX(10deg);
+///     transform: rotateX(10deg);
+///   }
 @mixin rotateX($x) {
   @if (is-angle($x)) {
     @include transform(rotateX($x));
@@ -105,6 +292,24 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// RotateY transform  mixin
+/// <br><b>Note:</b> - this is equivalent to rotate3d(0, 1, 0, $a)
+///
+/// @param {angle} $a - the rotateY angle (e.g. `30deg` or `-10rad`)
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/rotateY MDN transform rotateY docs
+/// @example scss - Usage
+///   .rotate-y-element {
+///     @include rotateY(10deg);
+///   }
+///
+/// @example css - Output
+///   .rotate-y-element {
+///     -webkit-transform: rotateY(10deg);
+///     -moz-transform: rotateY(10deg);
+///     -ms-transform: rotateY(10deg);
+///     -o-transform: rotateY(10deg);
+///     transform: rotateY(10deg);
+///   }
 @mixin rotateY($y) {
   @if (is-angle($y)) {
     @include transform(rotateY($y));
@@ -114,6 +319,24 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// RotateZ transform  mixin
+/// <br><b>Note:</b> - this is equivalent to rotate($a) or rotate3d(0, 0, 1, $a)
+///
+/// @param {angle} $a - the rotateZ angle (e.g. `30deg` or `-10rad`)
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/rotateZ MDN transform rotateZ docs
+/// @example scss - Usage
+///   .rotate-z-element {
+///     @include rotateZ(10deg);
+///   }
+///
+/// @example css - Output
+///   .rotate-z-element {
+///     -webkit-transform: rotateZ(10deg);
+///     -moz-transform: rotateZ(10deg);
+///     -ms-transform: rotateZ(10deg);
+///     -o-transform: rotateZ(10deg);
+///     transform: rotateZ(10deg);
+///   }
 @mixin rotateZ($z) {
   @if (is-angle($z)) {
     @include transform(rotateZ($z));
@@ -123,18 +346,71 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
-// scale
-@mixin scale($s) {
-  @if (is-number($s) and ($s >=0)) {
-    @include transform(scale($s, $s));
+/// Scale transform  mixin
+/// <br><b>Note:</b> - this is equivalent to `scaleX($sx) scaleY($sy)` or `scale3d($sx, $sy, 1)`
+///
+/// @param {float} $sx - the abscissa of the scaling vector (e.g. `-.1` or `3.2`)
+/// @param {float} $sy [$sx] - the ordinate of the scaling vector (e.g. `-.1` or `3.2`)
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/scale MDN transform scale docs
+/// @example scss - Usage - single value
+///   .scale-element {
+///     @include scale(3.2);
+///   }
+///
+/// @example css - Output - single value
+///   .scale-element {
+///     -webkit-transform: scale(3.2, 3.2);
+///     -moz-transform: scale(3.2, 3.2);
+///     -ms-transform: scale(3.2, 3.2);
+///     -o-transform: scale(3.2, 3.2);
+///     transform: scale(3.2, 3.2);
+///   }
+///
+/// @example scss - Usage - two values
+///   .scale-element {
+///     @include scale(3.2, 2.5);
+///   }
+///
+/// @example css - Output - two values
+///   .scale-element {
+///     -webkit-transform: scale(3.2, 2.5);
+///     -moz-transform: scale(3.2, 2.5);
+///     -ms-transform: scale(3.2, 2.5);
+///     -o-transform: scale(3.2, 2.5);
+///     transform: scale(3.2, 2.5);
+///   }
+@mixin scale($sx, $sy: null) {
+  $sy: if(is-defined($sy), $sy, $sx);
+
+  @if is-number($sx) and is-number($sy) {
+    @include transform(scale($sx, $sy));
   }
   @else {
-    @warn '`transform: scale(#{$s})` is not valid transform:scale factor value';
+    @warn '`transform: scale(#{$sx}, #{$sy})` is not valid transform:scale factor value';
   }
 }
 
+/// Scale 3d transform  mixin
+///
+/// @param {float} $sx - the abscissa of the scaling vector (e.g. `-.1` or `3.2`)
+/// @param {float} $sy - the ordinate of the scaling vector (e.g. `-.1` or `3.2`)
+/// @param {float} $sz - the z-component of the scaling vector (e.g. `-.1` or `3.2`)
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/scale3d MDN transform scale3d docs
+/// @example scss - Usage
+///   .scale3d-element {
+///     @include scale3d(-1.4, 0.4, 0.7);
+///   }
+///
+/// @example css - Output
+///   .scale3d-element {
+///     -webkit-transform: scale3d(-1.4, 0.4, 0.7);
+///     -moz-transform: scale3d(-1.4, 0.4, 0.7);
+///     -ms-transform: scale3d(-1.4, 0.4, 0.7);
+///     -o-transform: scale3d(-1.4, 0.4, 0.7);
+///     transform: scale3d(-1.4, 0.4, 0.7);
+///   }
 @mixin scale3d($sx, $sy, $sz) {
-  @if (is-number($sx) and is-number($sy) and is-number($sz)) {
+  @if is-number($sx) and is-number($sy) and is-number($sz) {
     @include transform(scale3d($sx, $sy, $sz));
   }
   @else {
@@ -142,8 +418,26 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// ScaleX transform  mixin
+/// <br><b>Note:</b> - this is equivalent to `scale($sx, 1)` or `scale3d($sx, 1, 1)`
+///
+/// @param {float} $sx - the scaling factor to apply on the abscissa of each point of the element (e.g. `-.1` or `3.2`)
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/scaleX MDN transform scaleX docs
+/// @example scss - Usage
+///   .scale-x-element {
+///     @include scaleX(3.2);
+///   }
+///
+/// @example css - Output
+///   .scale-x-element {
+///     -webkit-transform: scaleX(3.2);
+///     -moz-transform: scaleX(3.2);
+///     -ms-transform: scaleX(3.2);
+///     -o-transform: scaleX(3.2);
+///     transform: scaleX(3.2);
+///   }
 @mixin scaleX($sx) {
-  @if (is-number($sx) and ($sx>=0)) {
+  @if is-number($sx) {
     @include transform(scaleX($sx));
   }
   @else {
@@ -151,8 +445,26 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// ScaleY transform  mixin
+/// <br><b>Note:</b> - this is equivalent to `scale(1, $sy)` or `scale3d(1, $sy, 1)`
+///
+/// @param {float} $sy - the scaling factor to apply on the ordinate of each point of the element (e.g. `-.1` or `3.2`)
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/scaleY MDN transform scaleY docs
+/// @example scss - Usage
+///   .scale-y-element {
+///     @include scaleY(3.2);
+///   }
+///
+/// @example css - Output
+///   .scale-y-element {
+///     -webkit-transform: scaleY(3.2);
+///     -moz-transform: scaleY(3.2);
+///     -ms-transform: scaleY(3.2);
+///     -o-transform: scaleY(3.2);
+///     transform: scaleY(3.2);
+///   }
 @mixin scaleY($sy) {
-  @if (is-number($sy) and ($sy >=0)) {
+  @if is-number($sy) {
     @include transform(scaleY($sy));
   }
   @else {
@@ -160,8 +472,26 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// ScaleZ transform  mixin
+/// <br><b>Note:</b> - this is equivalent to `scale3d(1, 1, $sz)`
+///
+/// @param {float} $sz - the scaling factor to apply on the z-coordinate of each point of the element (e.g. `-.1` or `3.2`)
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/scaleZ MDN transform scaleZ docs
+/// @example scss - Usage
+///   .scale-z-element {
+///     @include scaleZ(3.2);
+///   }
+///
+/// @example css - Output
+///   .scale-z-element {
+///     -webkit-transform: scaleZ(3.2);
+///     -moz-transform: scaleZ(3.2);
+///     -ms-transform: scaleZ(3.2);
+///     -o-transform: scaleZ(3.2);
+///     transform: scaleZ(3.2);
+///   }
 @mixin scaleZ($sz) {
-  @if (is-number($sz) and ($sz >=0)) {
+  @if is-number($sz) {
     @include transform(scaleZ($sz));
   }
   @else {
@@ -169,8 +499,40 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
-// skew
-@mixin skew($ax, $ay) {
+/// Skew transform  mixin
+/// <br><b>Note:</b> - this is equivalent to `skewX($ax)` (in single value usage) or `skewX($ax) skewY($ay)` (in two values usage)
+///
+/// @param {angle} $ax - the angle to use to distort the element along the abscissa (e.g. `-1.2rad` or `30deg`)
+/// @param {angle} $ay [0deg] - the angle to use to distort the element along the ordinate (e.g. `-1.2rad` or `30deg`)
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/skew MDN transform skew docs
+/// @example scss - Usage - single value
+///   .skew-element {
+///     @include skew(50deg);
+///   }
+///
+/// @example css - Output - single value
+///   .skew-element {
+///     -webkit-transform: skew(50deg, 0deg);
+///     -moz-transform: skew(50deg, 0deg);
+///     -ms-transform: skew(50deg, 0deg);
+///     -o-transform: skew(50deg, 0deg);
+///     transform: skew(50deg, 0deg);
+///   }
+///
+/// @example scss - Usage - two values
+///   .skew-element {
+///     @include skew(15deg, -50rad);
+///   }
+///
+/// @example css - Output - two values
+///   .skew-element {
+///     -webkit-transform: skew(15deg, -50rad);
+///     -moz-transform: skew(15deg, -50rad);
+///     -ms-transform: skew(15deg, -50rad);
+///     -o-transform: skew(15deg, -50rad);
+///     transform: skew(15deg, -50rad);
+///   }
+@mixin skew($ax, $ay: 0deg) {
   @if(is-angle($ax) and is-angle($ay)) {
     @include transform(skew($ax, $ay));
   }
@@ -179,6 +541,24 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// SkewX transform  mixin
+/// <br><b>Note:</b> - this is equivalent to `skew($ax)`
+///
+/// @param {angle} $ax - the angle to use to distort the element along the abscissa (e.g. `-1.2rad` or `30deg`)
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/skewX MDN transform skewX docs
+/// @example scss - Usage
+///   .skew-x-element {
+///     @include skewX(50deg);
+///   }
+///
+/// @example css - Output
+///   .skew-x-element {
+///     -webkit-transform: skewX(50deg);
+///     -moz-transform: skewX(50deg);
+///     -ms-transform: skewX(50deg);
+///     -o-transform: skewX(50deg);
+///     transform: skewX(50deg);
+///   }
 @mixin skewX($ax) {
   @if(is-angle($ax)) {
     @include transform(skewX($ax));
@@ -188,6 +568,24 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// SkewY transform  mixin
+/// <br><b>Note:</b> - this is equivalent to `skew(0deg, $ay)`
+///
+/// @param {angle} $ay - the angle to use to distort the element along the ordinate (e.g. `-1.2rad` or `30deg`)
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/skewY MDN transform skewY docs
+/// @example scss - Usage
+///   .skew-y-element {
+///     @include skewY(-10deg);
+///   }
+///
+/// @example css - Output
+///   .skew-y-element {
+///     -webkit-transform: skewY(-10deg);
+///     -moz-transform: skewY(-10deg);
+///     -ms-transform: skewY(-10deg);
+///     -o-transform: skewY(-10deg);
+///     transform: skewY(-10deg);
+///   }
 @mixin skewY($ay) {
   @if(is-angle($ay)) {
     @include transform(skewY($ay));
@@ -197,9 +595,41 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
-// translate
-@mixin translate($tx, $ty) {
-  @if (is-size($tx) and is-size($ty)) {
+/// Translate transform  mixin
+/// <br><b>Note:</b> - this is equivalent to `translateX($tx)` or `translate3d($tx, 0, 0)` (in single value usage) or `translateX($tx) translateY($ty)` or `translate3d($tx, $ty, 0)` (in two values usage)
+///
+/// @param {size | length} $tx [0] - the abscissa (x-coordinate) of the translating vector (e.g. `10px` or `30rem`)
+/// @param {size | length} $ty [0] - the ordinate (y-coordinate) of the translating vector (e.g. `10px` or `30rem`)
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/translate MDN transform translate docs
+/// @example scss - Usage - single value
+///   .translate-element {
+///     @include translate(10px);
+///   }
+///
+/// @example css - Output - single value
+///   .translate-element {
+///     -webkit-transform: translate(10px);
+///     -moz-transform: translate(10px);
+///     -ms-transform: translate(10px);
+///     -o-transform: translate(10px);
+///     transform: translate(10px);
+///   }
+///
+/// @example scss - Usage - two values
+///   .translate-element {
+///     @include translate(20px, 15rem);
+///   }
+///
+/// @example css - Output - two values
+///   .translate-element {
+///     -webkit-transform: translate(20px, 15rem);
+///     -moz-transform: translate(20px, 15rem);
+///     -ms-transform: translate(20px, 15rem);
+///     -o-transform: translate(20px, 15rem);
+///     transform: translate(20px, 15rem);
+///   }
+@mixin translate($tx, $ty: 0) {
+  @if is-size($tx) and is-size($ty) {
     @include transform(translate($tx, $ty));
   }
   @else {
@@ -207,8 +637,27 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// Translate 3d transform  mixin
+///
+/// @param {size | length} $tx - the abscissa (x-coordinate) of the translating vector (e.g. `10px` or `30rem` or `20%`)
+/// @param {size | length} $ty - the ordinate (y-coordinate) of the translating vector (e.g. `10px` or `30rem` or `20%`)
+/// @param {size | length} $tz - the z component of the translating vector (e.g. `10px` or `30rem`) - <b>Note:</b> it can't be a <percentage> value
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/translate3d MDN transform translate3d docs
+/// @example scss - Usage
+///   .translate3d-element {
+///     @include translate3d(30px, 20%, 10rem);
+///   }
+///
+/// @example css - Output
+///   .translate3d-element {
+///     -webkit-transform: translate3d(30px, 20%, 10rem);
+///     -moz-transform: translate3d(30px, 20%, 10rem);
+///     -ms-transform: translate3d(30px, 20%, 10rem);
+///     -o-transform: translate3d(30px, 20%, 10rem);
+///     transform: translate3d(30px, 20%, 10rem);
+///   }
 @mixin translate3d($tx, $ty, $tz) {
-  @if (is-size($tx) and is-size($ty) and is-size($tz)) {
+  @if is-size($tx) and is-size($ty) and (is-size($tz) and not is-percentage($tz)) {
     @include transform(translate3d($tx, $ty, $tz));
   }
   @else {
@@ -216,6 +665,24 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// TranslateX transform  mixin
+/// <br><b>Note:</b> - this is equivalent to `translate($tx, 0)` or `translate3d($tx, 0, 0)`
+///
+/// @param {size | length} $tx - the abscissa (x-coordinate) of the translating vector (e.g. `10px` or `30rem`)
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/translateX MDN transform translateX docs
+/// @example scss - Usage
+///   .translate-x-element {
+///     @include translateX(10px);
+///   }
+///
+/// @example css - Output
+///   .translate-x-element {
+///     -webkit-transform: translateX(10px);
+///     -moz-transform: translateX(10px);
+///     -ms-transform: translateX(10px);
+///     -o-transform: translateX(10px);
+///     transform: translateX(10px);
+///   }
 @mixin translateX($tx) {
   @if (is-size($tx)) {
     @include transform(translateX($tx));
@@ -225,6 +692,24 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// TranslateY transform  mixin
+/// <br><b>Note:</b> - this is equivalent to `translate(0, $ty)` or `translate3d(0, $ty, 0)`
+///
+/// @param {size | length} $ty - the ordinate (y-coordinate) of the translating vector (e.g. `10px` or `30rem`)
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/translateY MDN transform translateY docs
+/// @example scss - Usage
+///   .translate-y-element {
+///     @include translateY(10px);
+///   }
+///
+/// @example css - Output
+///   .translate-y-element {
+///     -webkit-transform: translateY(10px);
+///     -moz-transform: translateY(10px);
+///     -ms-transform: translateY(10px);
+///     -o-transform: translateY(10px);
+///     transform: translateY(10px);
+///   }
 @mixin translateY($ty) {
   @if (is-size($ty)) {
     @include transform(translateY($ty));
@@ -234,6 +719,24 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// TranslateZ transform  mixin
+/// <br><b>Note:</b> - this is equivalent to `translate3d(0, 0, $tz)`
+///
+/// @param {size | length} $tz - the z component of the translating vector (e.g. `10px` or `30rem`) - <b>Note:</b> it can't be a <percentage> value
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/translateZ MDN transform translateZ docs
+/// @example scss - Usage
+///   .translate-z-element {
+///     @include translateZ(10px);
+///   }
+///
+/// @example css - Output
+///   .translate-z-element {
+///     -webkit-transform: translateZ(10px);
+///     -moz-transform: translateZ(10px);
+///     -ms-transform: translateZ(10px);
+///     -o-transform: translateZ(10px);
+///     transform: translateZ(10px);
+///   }
 @mixin translateZ($tz) {
   @if (is-size($tz)) {
     @include transform(translateZ($tz));
@@ -243,14 +746,61 @@ $transform-modes: array-concat((none), $css-default-modes);
   }
 }
 
+/// Transform origin x axis modes
+///
+/// @type list
+/// @access private
 $transform-origin-x-axis-modes: (left, right, center);
+
+/// Transform origin y axis modes
+///
+/// @type list
+/// @access private
 $transform-origin-y-axis-modes: (top, center, bottom);
 
-@function is-transform-origin-axis-value($to-axis, $to-axis-modes: ()) {
-  @return is-defined($to-axis) and (is-size($to-axis) or is-percentage($to-axis) or if(length($to-axis-modes) > 0, array-contains($to-axis-modes, $to)));
+/// Checks if something is a transform-origin value
+///
+/// @access public
+/// @param {string | size | length} $to - the transform-origin value (e.g. `auto` or `20px`) - <b>Note:</b> for the z-axis can be only a length (e.g. no percentage)
+/// @param {array | list} $to-axis-modes - can be empty list or $transform-origin-x-axis-modes or $transform-origin-y-axis-modes
+/// @return {boolean}
+@function is-transform-origin($to, $to-axis-modes: ()) {
+  @return is-defined($to) and (is-size($to) or if(length($to-axis-modes) > 0, array-contains($to-axis-modes, $to) or is-percentage($to)));
 }
 
-//transform origin
+/// Transform origin mixin
+///
+/// @param {string | array | list} $to - the transform origin options (e.g. `40% 20rem 0` or `right bottom 0` or `initial`)
+/// @param {size | length} $to.x [50%] - the x-axis value for transform origin
+/// @param {size | length} $to.y [50%] - the y-axis value for transform origin
+/// @param {size | length} $to.z [0] - the z-axis value for transform origin - <b>Note:</b> for the z-axis can be only a length (e.g. no percentage)
+/// @example scss - Usage
+///   .transform-origin-element {
+///     @include transform-origin(25.5% 30px 0);
+///   }
+///
+/// @example css - Output
+///   .transform-origin-element {
+///     -webkit-transform-origin: 25.5% 30px 0;
+///     -moz-transform-origin: 25.5% 30px 0;
+///     -ms-transform-origin: 25.5% 30px 0;
+///     -o-transform-origin: 25.5% 30px 0;
+///     transform-origin: 25.5% 30px 0;
+///   }
+///
+/// @example scss - Usage - with css default value
+///   .transform-origin-element {
+///     @include transform-origin(inherit);
+///   }
+///
+/// @example css - Output - with css default value
+///   .transform-origin-element {
+///     -webkit-transform-origin: inherit;
+///     -moz-transform-origin: inherit;
+///     -ms-transform-origin: inherit;
+///     -o-transform-origin: inherit;
+///     transform-origin: inherit;
+///   }
 @mixin transform-origin($to) {
   @if is-css-default($to) {
     @include prefixer(transform-origin, $to);
@@ -260,7 +810,7 @@ $transform-origin-y-axis-modes: (top, center, bottom);
 
     $x-axis: nth-value($to, 1, 50%);
 
-    @if is-transform-origin-axis-value($x-axis, $transform-origin-x-axis-modes) {
+    @if is-transform-origin($x-axis, $transform-origin-x-axis-modes) {
       $transform-origin: append($transform-origin, $x-axis);
     }
     @else {
@@ -269,7 +819,7 @@ $transform-origin-y-axis-modes: (top, center, bottom);
 
     $y-axis: nth-value($to, 2, 50%);
 
-    @if is-transform-origin-axis-value($y-axis, $transform-origin-y-axis-modes) {
+    @if is-transform-origin($y-axis, $transform-origin-y-axis-modes) {
       $transform-origin: append($transform-origin, $y-axis);
     }
     @else {
@@ -278,25 +828,50 @@ $transform-origin-y-axis-modes: (top, center, bottom);
 
     $z-axis: nth-value($to, 3, 0);
 
-    @if is-transform-origin-axis-value($x-axis) {
-      $transform-origin: append($transform-origin, $x-axis);
+    @if is-transform-origin($z-axis) {
+      $transform-origin: append($transform-origin, $z-axis);
     }
     @else {
-      @warn '`transform-origin z-axis: #{$z-axis}` is not a valid z axis transform origin value';
+      @warn '`transform-origin z-axis: #{$z-axis}` is not a valid z-axis transform origin value';
     }
 
     @include prefixer(transform-origin, $transform-origin);
   }
 }
 
+/// Transform style modes
+///
+/// @type list
+/// @access private
 $transform-style-modes: array-concat((flat, preserve-3d), $css-default-modes);
 
-@function is-transform-style-mode($ts) {
+/// Checks if something is a transform-style value
+///
+/// @access public
+/// @param {string} $ts - the transform-style value (e.g. `preserve-3d` or `initial`)
+/// @return {boolean}
+@function is-transform-style($ts) {
   @return is-defined($ts) and array-contains($transform-style-modes, $ts);
 }
 
+/// Transform style mixin
+///
+/// @param {string} $ts - the transform-style value (e.g. `preserve-3d` or `initial`)
+/// @example scss - Usage
+///   .transform-style-element {
+///     @include transform-style(preserve-3d);
+///   }
+///
+/// @example css - Output
+///   .transform-style-element {
+///     -webkit-transform-style: preserve-3d;
+///     -moz-transform-style: preserve-3d;
+///     -ms-transform-style: preserve-3d;
+///     -o-transform-style: preserve-3d;
+///     transform-style: preserve-3d;
+///   }
 @mixin transform-style($ts) {
-  @if is-defined($ts) and is-transform-style-mode($ts) {
+  @if is-defined($ts) and is-transform-style($ts) {
     @include prefixer(transform-style, $ts);
   }
   @else {
