@@ -849,6 +849,7 @@ $transform-style-modes: array-concat((flat, preserve-3d), $css-default-modes);
 ///
 /// @access public
 /// @param {string} $ts - the transform-style value (e.g. `preserve-3d` or `initial`)
+/// @link https://www.w3schools.com/cssref/css3_pr_transform-style.asp W3Schools transform-style docs
 /// @return {boolean}
 @function is-transform-style($ts) {
   @return is-defined($ts) and array-contains($transform-style-modes, $ts);
