@@ -1,3 +1,11 @@
+## [Version 0.9.3](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.9.3) (2018-5-8)
+
+### Bug fixes
+
+- started grid system docs: [`dac699f`](https://github.com/blackmirror1980/flavor-scss/commit/dac699f)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.9.2...v0.9.3)
+
 ## [Version 0.9.2](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.9.2) (2018-5-8)
 
 ### Bug fixes
