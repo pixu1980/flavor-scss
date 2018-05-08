@@ -1,3 +1,16 @@
+## [Version 0.9.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.9.1) (2018-5-8)
+
+### New features
+
+- mixins & types documentation completed: [`fb396c5`](https://github.com/blackmirror1980/flavor-scss/commit/fb396c5)
+
+### Bug fixes
+
+- added margin, padding & transform mixins documentation: [`a584db2`](https://github.com/blackmirror1980/flavor-scss/commit/a584db2)
+- updated transform docs: [`8e06428`](https://github.com/blackmirror1980/flavor-scss/commit/8e06428)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v0.9.0...v0.9.1)
+
 ## [Version 0.9.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v0.9.0) (2018-5-7)
 
 ### Breaking changes
