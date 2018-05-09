@@ -78,3 +78,32 @@ $filter-modes: array-concat((none), $css-default-modes);
     @warn '`filter: #{$filter}` is not a valid filter value';
   }
 }
+
+/// Opacity mixin
+/// <br>cross-browser with fallbacks for ie old browsers opacity mixin
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_opacity.asp W3Schools opacity docs
+/// @example scss - Usage
+///   .opacity-element {
+///     @include opacity(.3);
+///   }
+///
+/// @example css - Output
+///   .opacity-element {
+///     filter: alpha(opacity=(30));
+///     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+///     opacity: .3;
+///   }
+/// @access public
+/// @param {float} $o - the opacity value (e.g. `.3` or `1`)
+@mixin opacity($o) {
+  @if is-percentage-number($o) {
+    // fallbacks for ie old browsers
+    filter: alpha(opacity=(#{$o * 100}));
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$o * 100})";
+    opacity: $o;
+  }
+  @else {
+    @warn '`opacity: #{$opacity}` is not a valid opacity value';
+  }
+}

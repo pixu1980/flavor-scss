@@ -33,11 +33,52 @@ $cursor-modes: array-concat((alias, all-scroll, auto, cell, context-menu, col-re
 ///   .cursor-element {
 ///     cursor: pointer;
 ///   }
+///
+/// @example scss - Usage - force mode
+///   .cursor-element {
+///     @include cursor(pointer, true);
+///   }
+///
+/// @example css - Output - force mode
+///   .cursor-element {
+///     cursor: pointer;
+///   }
+///
+///   .cursor-element:before,
+///   .cursor-element:after {
+///     cursor: pointer;
+///   }
+///
+///   .cursor-element * {
+///     cursor: pointer;
+///   }
+///
+///   .cursor-element *:before,
+///   .cursor-element *:after {
+///     cursor: pointer;
+///   }
 /// @access public
-/// @param {string} $c - the cursor mode
-@mixin cursor($c: default) {
+/// @param {string} $c [default] - the cursor mode
+/// @param {boolean} $force [false] - if true forces the cursor mode for all the child elements and before, after pseudo selectors
+@mixin cursor($c: default, $force: false) {
   @if is-cursor-mode($c) {
     cursor: $c;
+
+    @if $force {
+      &:before,
+      &:after {
+        cursor: $c;
+      }
+
+      * {
+        cursor: $c;
+
+        &:before,
+        &:after {
+          cursor: $c;
+        }
+      }
+    }
   }
   @else {
     @warn '`cursor: #{$c}` is not a valid cursor value';
@@ -72,7 +113,7 @@ $pointer-events-modes: array-concat((all, auto, bounding-box, fill, none, painte
 ///     pointer-events: none;
 ///   }
 /// @access public
-/// @param {string} $pe - the pointer events mode
+/// @param {string} $pe [auto] - the pointer events mode
 @mixin pointer-events($pe: auto) {
   @if is-pointer-events-mode($pe) {
     pointer-events: $pe;

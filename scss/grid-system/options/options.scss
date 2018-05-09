@@ -19,17 +19,17 @@ $first-column-breakpoint-default: 32rem !default; //first column breakpoint used
 
 $columns-breakpoints: map-merge((
   sp: $first-column-breakpoint-default, // common smartphones
-  ip: 37.5rem, // iphone (since iphone5)
-  ipp: 41.4rem, // iphone plus (since iphone5)
+  ip: 37.5rem, // iphone (iphone5 and above)
+  ipp: 41.4rem, // iphone plus (iphone5 plus and above)
   xs: 57.6rem // extra small devices
 ), $common-breakpoints) !default; // columns-breakpoints used for media queries and column classes sizes & positions
 
 $gutter: $gutter-default;
 
-$margin-left: ($gutter / -2) !default;
-$margin-right: ($gutter / -2) !default;
+$gutter-margin-left: ($gutter / -2) !default;
+$gutter-margin-right: ($gutter / -2) !default;
 
-$padding-left: ($gutter / 2) !default;
-$padding-right: ($gutter / 2) !default;
+$gutter-padding-left: ($gutter / 2) !default;
+$gutter-padding-right: ($gutter / 2) !default;
 
 @import 'typography';

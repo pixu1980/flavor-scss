@@ -12,22 +12,34 @@
 @import 'rows';
 @import 'columns';
 
+/// Grid system mixin
+/// <br>entry point of flavor-scss grid system
+///
+/// @access public
+/// @param {integer} $columns [$columns-default] - the columns number
+/// @param {size | length} $gutter [$gutter-default] - the gutter value
+/// @param {boolean} $reboot [true] - if true a reboot/reset/normalize will be prepended to the grid system
 @mixin grid-system($columns: $columns-default, $gutter: $gutter-default, $reboot: true) {
-  @if $reboot {
-    @include reboot;
+  @if is-integer($columns) and is-length($gutter) {
+    @if $reboot {
+      @include reboot;
+    }
+    @else {
+      html,
+      body {
+        @include font($font-size-base $line-height-base $font-family-base $font-weight-base);
+      }
+    }
+
+    @include helpers;
+
+    // Grid system
+    // --------------------------------------------------
+    @include containers($gutter);
+    @include rows($gutter);
+    @include columns($columns, $gutter);
   }
   @else {
-    html,
-    body {
-      @include font($font-size-base $line-height-base $font-family-base $font-weight-base);
-    }
+    @error 'columns: #{$columns}, gutter: #{$gutter} are not valid options for the grid-system mixin';
   }
-
-  @include helpers;
-
-  // Grid system
-  // --------------------------------------------------
-  @include containers($gutter);
-  @include rows($gutter);
-  @include columns($columns, $gutter);
 }

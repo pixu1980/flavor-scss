@@ -205,7 +205,7 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
       $settings: extend($settings, (max-width: $max-width));
     }
 
-    $max-height: nth-value($options, 3);
+    $max-height: nth-value($options, 4);
 
     @if is-defined($max-height) {
       $settings: extend($settings, (max-height: $max-height));

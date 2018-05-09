@@ -6,30 +6,30 @@
   @for $i from 0 through $columns {
     @if ($i==0) {
       .col-#{$key}-push-0 {
-        left: auto;
+        @include left(auto);
       }
 
       .col-#{$key}-pull-0 {
-        right: auto;
+        @include right(auto);
       }
     }
     @else {
       $col-percentage: percentage($i / $columns);
 
       .col-#{$key}-#{$i} {
-        width: calc(#{$col-percentage} - #{$gutter-threshold});
+        @include box-size(calc(#{$col-percentage} - #{$gutter-threshold}), false);
       }
 
       .col-#{$key}-push-#{$i} {
-        left: calc(#{$col-percentage} - #{$gutter-threshold});
+        @include left(calc(#{$col-percentage} - #{$gutter-threshold}));
       }
 
       .col-#{$key}-pull-#{$i} {
-        right: calc(#{$col-percentage} - #{$gutter-threshold});
+        @include right(calc(#{$col-percentage} - #{$gutter-threshold}));
       }
 
       .col-#{$key}-offset-#{$i} {
-        margin-left: calc(#{$col-percentage} - #{$gutter-threshold});
+        @include margin-left(calc(#{$col-percentage} - #{$gutter-threshold}));
       }
     }
   }
@@ -50,21 +50,30 @@
   }
 }
 
+/// Columns mixin
+///
+/// @access public
+/// @param {integer} $columns [$columns-default] - the columns number
+/// @param {size | length} $gutter [$gutter-default] - the gutter value
 @mixin columns($columns: $columns-default, $gutter: $gutter-default) {
-  // Columns
-  // --------------------------------------------------
-  // Common styles for small and large grid columns
-  $padding: ($gutter / 2);
+  @if is-integer($columns) and is-length($gutter) {
+    // Columns
+    // --------------------------------------------------
+    // Common styles for small and large grid columns
+    $padding: ($gutter / 2);
 
-  [class*='col-'] {
-    @include position(relative);
-    @include display(inline-block);
-    @include padding(null $padding);
-    @include content-align(left top);
+    [class*='col-'] {
+      @include position(relative);
+      @include display(inline-block);
+      @include padding(null $padding);
+      @include content-align(left top);
+      @include box-bounds(null 1px); // Prevent columns from collapsing when empty
+    }
 
-    min-height: 1px; // Prevent columns from collapsing when empty
+    @include columns-breakpoints($columns-breakpoints, $columns, $gutter, $first-column-breakpoint-default);
   }
-
-  @include columns-breakpoints($columns-breakpoints, $columns, $gutter, $first-column-breakpoint-default);
+  @else {
+    @error 'columns: #{$columns}, gutter: #{$gutter} are not valid options for the grid-system columns mixin';
+  }
 }
 

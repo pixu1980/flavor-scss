@@ -5,7 +5,6 @@
 /// @group mixins-utils
 /// @author blackmirror1980
 ////
-
 /// Convert pixels to rems
 /// <br>eg. for a relational value of 12px write rem(12)
 /// <br>Assumes $base is the font-size of <html>
@@ -37,7 +36,7 @@ $prefixes-available: (webkit, moz, ms, o, spec);
 ///
 /// @example scss - Usage
 ///   .element {
-///     @include prefixer(border-radius, 10px, webkit ms spec);
+///     @include prefixer(border-radius, 10px, webkit moz spec);
 ///   }
 ///
 /// @example css - Output
@@ -55,7 +54,7 @@ $prefixes-available: (webkit, moz, ms, o, spec);
 
   @each $prefix in $prefixes {
     @if is-prefix-available($prefix) {
-      $prefix-selector: if($prefix != spec, '-#{$prefix}-', '');
+      $prefix-selector: if($prefix !=spec, '-#{$prefix}-', '');
 
       #{$prefix-selector}#{$property}: $values;
     }
@@ -65,12 +64,27 @@ $prefixes-available: (webkit, moz, ms, o, spec);
   }
 }
 
-@mixin overflow-hidden-animated {
-  @include backface-visibility(hidden);
-  @include transform(translate3d(0, 0, 0), webkit moz);
-  @include overflow(hidden);
-}
-
+/// Disable mixin
+/// <br>it forces the cursor to default and pointer-evento to none for an element and all of his children
+/// <br>it's compatible with IE11+
+///
+/// @link https://caniuse.com/#search=pointer-events caniuse.com i use pointer-events
+/// @example scss - Usage
+///   .disable-element {
+///     @include disable;
+///   }
+///
+/// @example css - Output
+///   .disable-element {
+///     cursor: default;
+///     pointer-events: none;
+///   }
+///
+///   .disable-element * {
+///     cursor: default;
+///     pointer-events: none;
+///   }
+/// @access public
 @mixin disable {
   @include cursor(default);
   @include pointer-events(none);
@@ -81,6 +95,27 @@ $prefixes-available: (webkit, moz, ms, o, spec);
   }
 }
 
+/// Hidden mixin
+/// <br>visually hides an element without touching display or visibility selectors
+///
+/// @example scss - Usage
+///   .hidden-element {
+///     @include hidden;
+///   }
+///
+/// @example css - Output
+///   .hidden-element {
+///     position: absolute;
+///     width: 1px;
+///     height: 1px;
+///     padding: 0;
+///     border: 0;
+///     overflow: hidden;
+///     white-space: nowrap;
+///     clip: rect(1px, 1px, 1px, 1px);
+///     clip-path: inset(100%);
+///   }
+/// @access public
 @mixin hidden {
   @include position(absolute);
   @include box-size(1px);
@@ -91,24 +126,4 @@ $prefixes-available: (webkit, moz, ms, o, spec);
 
   clip: rect(1px, 1px, 1px, 1px);
   clip-path: inset(100%);
-}
-
-@mixin opacity($o) {
-  // fallbacks for ie old browsers
-  filter: alpha(opacity=(#{$o * 100}));
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$o * 100})";
-
-  @include prefixer(opacity, $o);
-}
-
-@mixin force-cursor($c) {
-  @include cursor($c);
-
-  * {
-    @include cursor($c);
-
-    &:before {
-      @include cursor($c);
-    }
-  }
 }
