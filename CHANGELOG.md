@@ -1,3 +1,11 @@
+## [Version 1.0.3](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.0.3) (2018-5-9)
+
+### Bug fixes
+
+- bug fix for reboot: [`84ff769`](https://github.com/blackmirror1980/flavor-scss/commit/84ff769)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.0.2...v1.0.3)
+
 ## [Version 1.0.2](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.0.2) (2018-5-9)
 
 ### Bug fixes
