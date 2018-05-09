@@ -1,3 +1,11 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Grid-system Rows
+/// @group grid-system-rows
+/// @author blackmirror1980
+////
+
 @mixin rows($gutter: $gutter-default) {
   // Rows
   // --------------------------------------------------

@@ -16,6 +16,7 @@ groups:
   grid-system-reboot: Grid System - Reboot
   grid-system-rows: Grid System - Rows
   grid-system-options: Grid System - Options
+  grid-system-options-typography: Grid System - Options Typography
   grid-system: Grid System
   mixins-animation: Mixins - Animation
   mixins-appearance: Mixins - Appearance
@@ -29,6 +30,7 @@ groups:
   mixins-outline: Mixins - Outline
   mixins-overflow: Mixins - Overflow
   mixins-padding: Mixins - Padding
+  mixins-position: Mixins - Position
   mixins-text: Mixins - Text
   mixins-transform: Mixins - Transform
   mixins-transition: Mixins - Transition

@@ -1,3 +1,11 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Grid-system Helpers
+/// @group grid-system-helpers
+/// @author blackmirror1980
+////
+
 @mixin helpers {
   [class*='content-'] {
     &[class*='-left'] {

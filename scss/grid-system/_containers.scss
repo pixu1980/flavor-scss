@@ -1,3 +1,11 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Grid-system Containers
+/// @group grid-system-containers
+/// @author blackmirror1980
+////
+
 @mixin container-breakpoints($breakpoints: $common-breakpoints, $gutter: $gutter-default) {
   // Containers Breakpoints
   // --------------------------------------------------

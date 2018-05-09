@@ -1,3 +1,11 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Grid-system Columns
+/// @group grid-system-columns
+/// @author blackmirror1980
+////
+
 @mixin columns-sizes($columns: $columns-default, $gutter: $gutter-default, $key: '') {
   // Columns Sizes
   // --------------------------------------------------
