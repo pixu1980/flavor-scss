@@ -31,7 +31,6 @@
     @include cursor(default);
     @include user-select(none);
 
-    all: initial;
     text-rendering: optimizeLegibility;
 
     &:before,

@@ -77,7 +77,7 @@ $display-modes: array-concat((none, inline, block, inline-block, flex, inline-fl
 ///   }
 /// @access public
 /// @param {string} $dm - the display mode
-/// @param {string} $auto-reset-inline-block [false] - the display mode
+/// @param {boolean} $auto-reset-inline-block [false] - auto resets inline block
 @mixin display($dm, $auto-reset-inline-block: false) {
   @if is-display-mode($dm) {
     display: $dm;
