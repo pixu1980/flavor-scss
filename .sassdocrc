@@ -7,6 +7,12 @@ description: |
     * [Hugo Giraudel](https://hugogiraudel.com) for his knowledge
     * [Bootstrap](https://getbootstrap.com) for the grid system idea
     * [normalize.css](https://github.com/necolas/normalize.css) for the reboot idea
+display:
+  alias: true
+sort:
+  - group<
+  - access<
+  - line<
 groups:
   undefined: Core
   core: Core
