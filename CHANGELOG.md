@@ -1,3 +1,12 @@
+## [Version 1.0.6](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.0.6) (2018-5-16)
+
+### Bug fixes
+
+- sassdoc configuration sorting updated: [`50b6330`](https://github.com/blackmirror1980/flavor-scss/commit/50b6330)
+- bugfix box-shadow type checking various improvements on grid system: [`f3d7f95`](https://github.com/blackmirror1980/flavor-scss/commit/f3d7f95)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.0.5...v1.0.6)
+
 ## [Version 1.0.5](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.0.5) (2018-5-9)
 
 ### Bug fixes
