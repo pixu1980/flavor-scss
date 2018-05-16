@@ -1,3 +1,11 @@
+## [Version 1.0.8](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.0.8) (2018-5-16)
+
+### Bug fixes
+
+- bugfix reboot: [`2320fad`](https://github.com/blackmirror1980/flavor-scss/commit/2320fad)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.0.7...v1.0.8)
+
 ## [Version 1.0.7](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.0.7) (2018-5-16)
 
 ### Bug fixes
