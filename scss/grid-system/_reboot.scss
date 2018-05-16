@@ -45,19 +45,16 @@
   }
 
   html {
+    @include text-size-adjust(100%, webkit ms);
     -ms-overflow-style: scrollbar;
-    -ms-text-size-adjust: 100%;
     -webkit-tap-highlight-color: $webkit-tap-highlight-color;
-    -webkit-text-size-adjust: 100%;
 
-    font-family: sans-serif;
-    font-size: 10px;
-    line-height: 1.15;
+    @include font(10px 1.15 sans-serif);
   }
 
   // IE10+ doesn't honor `<meta name='viewport'>` in some cases.
   @at-root {
-    @-ms-viewport {
+    @include prefixer-selector(viewport, ms) {
       width: device-width;
     }
   }

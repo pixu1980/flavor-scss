@@ -83,12 +83,22 @@ $filter-modes: array-concat((none), $css-default-modes);
 /// <br>cross-browser with fallbacks for ie old browsers opacity mixin
 ///
 /// @link https://www.w3schools.com/cssref/css3_pr_opacity.asp W3Schools opacity docs
-/// @example scss - Usage
+/// @example scss - Usage - default
 ///   .opacity-element {
 ///     @include opacity(.3);
 ///   }
 ///
-/// @example css - Output
+/// @example css - Output - default
+///   .opacity-element {
+///     opacity: .3;
+///   }
+///
+/// @example scss - Usage - with fallbacks
+///   .opacity-element {
+///     @include opacity(.3, true);
+///   }
+///
+/// @example css - Output - with fallbacks
 ///   .opacity-element {
 ///     filter: alpha(opacity=(30));
 ///     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
@@ -96,11 +106,15 @@ $filter-modes: array-concat((none), $css-default-modes);
 ///   }
 /// @access public
 /// @param {float} $o - the opacity value (e.g. `.3` or `1`)
-@mixin opacity($o) {
+/// @param {boolean} $fallbacks [false] - if true add fallbacksa for ie old browsers
+@mixin opacity($o, $fallbacks: false) {
   @if is-percentage-number($o) {
-    // fallbacks for ie old browsers
-    filter: alpha(opacity=(#{$o * 100}));
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$o * 100})";
+    @if $fallbacks {
+      // fallbacks for ie old browsers
+      filter: alpha(opacity=(#{$o * 100}));
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$o * 100})";
+    }
+
     opacity: $o;
   }
   @else {

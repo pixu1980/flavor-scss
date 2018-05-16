@@ -595,15 +595,17 @@ $box-shadow-modes: array-concat((none), $css-default-modes);
 /// @access public
 /// @param {array | list} $box-shadows - the box shadows list
 /// @return {boolean}
-@function is-box-shadows($box-shadows-list...) {
-  @if is-defined($box-shadows-list) {
+@function is-box-shadows($box-shadows) {
+  @if is-defined($box-shadows) {
+    @if list-separator($box-shadows) != comma {
+      $box-shadows: ($box-shadows,);
+    }
+
     $is-box-shadows-valid: true;
 
-    @each $box-shadows in $box-shadows-list {
-      @each $box-shadow in $box-shadows {
-        @if $is-box-shadows-valid {
-          $is-box-shadows-valid: is-box-shadow($box-shadow);
-        }
+    @each $box-shadow in $box-shadows {
+      @if $is-box-shadows-valid {
+        $is-box-shadows-valid: is-box-shadow($box-shadow);
       }
     }
 
@@ -631,10 +633,6 @@ $box-shadow-modes: array-concat((none), $css-default-modes);
 /// @access public
 /// @param {shadow} $box-shadows... - the box shadows list
 @mixin box-shadow($box-shadows...) {
-  @if list-separator($box-shadows...) != comma {
-    $box-shadows: $box-shadows, ;
-  }
-
   @if is-box-shadows($box-shadows...) {
     @include prefixer(box-shadow, $box-shadows);
   }

@@ -12,7 +12,7 @@
   $gutter-threshold: $gutter / 100 * 11.46666666666667;
 
   @for $i from 0 through $columns {
-    @if ($i==0) {
+    @if $i == 0 {
       .col-#{$key}-push-0 {
         @include left(auto);
       }
@@ -47,7 +47,7 @@
   // Columns Breakpoints
   // --------------------------------------------------
   @each $key, $breakpoint in $breakpoints {
-    @if ($breakpoint==$first-breakpoint) {
+    @if $breakpoint == $first-breakpoint {
       @include columns-sizes($columns, $gutter, $key);
     }
     @else {

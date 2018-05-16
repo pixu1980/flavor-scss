@@ -25,10 +25,11 @@
   @return ($px / $base) * 1rem;
 }
 
-$prefixes-available: (webkit, moz, ms, o, spec);
+$prefixes: webkit moz ms o spec;
+$prefixes-default: $prefixes;
 
-@function is-prefix-available($p) {
-  @return is-defined($p) and array-contains($prefixes-available, $p);
+@function is-prefix($p) {
+  @return is-defined($p) and array-contains($prefixes, $p);
 }
 
 /// Prefixer mixin
@@ -49,14 +50,42 @@ $prefixes-available: (webkit, moz, ms, o, spec);
 /// @param {string} $property - the property to prefix
 /// @param {any} $values - the values list to use
 /// @param {array | list} $prefixes - space separated list
-@mixin prefixer($property, $values, $prefixes: webkit moz ms o spec) {
-  $prefix-selector: '';
-
+@mixin prefixer($property, $values, $prefixes: $prefixes-default) {
   @each $prefix in $prefixes {
-    @if is-prefix-available($prefix) {
-      $prefix-selector: if($prefix !=spec, '-#{$prefix}-', '');
+    @if is-prefix($prefix) {
+      #{if($prefix != spec, '-#{$prefix}-', '') + $property}: $values;
+    }
+    @else {
+      @warn 'Unrecognized prefix: #{$prefix}';
+    }
+  }
+}
 
-      #{$prefix-selector}#{$property}: $values;
+/// Prefixer @Selector mixin
+/// <br>for generating vendor prefixes on non-standardized properties.
+///
+/// @example scss - Usage
+///   @include prefixer-content(viewport, ms spec) {
+///     width: devide-width;
+///   };
+///
+/// @example css - Output
+///   @-ms-viewport {
+///     width: devide-width;
+///   }
+///
+///   @viewport {
+///     width: devide-width;
+///   }
+/// @access public
+/// @param {string} $selector - the selector to prefix
+/// @param {array | list} $prefixes - space separated list
+@mixin prefixer-selector($property, $prefixes: $prefixes-default) {
+  @each $prefix in $prefixes {
+    @if is-prefix($prefix) {
+      #{'@' + if($prefix != spec, '-#{$prefix}-', '') + $property} {
+        @content;
+      };
     }
     @else {
       @warn 'Unrecognized prefix: #{$prefix}';

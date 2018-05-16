@@ -737,6 +737,26 @@ $word-wrap-modes: array-concat((normal, break-word), $css-default-modes);
   }
 }
 
+/// Word Wrap Force mixin
+///
+/// @example scss - Usage - single line
+///   .word-wrap-force-element {
+///     @include word-wrap-force;
+///   }
+///
+/// @example css - Output - single line
+///   .word-wrap-force-element {
+///     hyphens: auto;
+///     word-break: break-all;
+///     word-wrap: break-word;
+///   }
+/// @access public
+@mixin word-wrap-force {
+  @include hyphens(auto);
+  @include word-break(break-all);
+  @include word-wrap(break-word);
+}
+
 /// Text size adjust modes
 ///
 /// @access private
@@ -826,45 +846,27 @@ $text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
 /// @param {string} $text-overflow [ellipsis] - the text to use for overflowing
 @mixin ellipsis($multiline: false, $width: 100%, $font-size: $font-size-base, $line-height: $line-height-base, $lines-to-show: 3, $text-overflow: ellipsis) {
   @if $multiline {
+    $height: $font-size * $line-height * $lines-to-show; // Fallback for non-webkit
+    $max-width: $width;
+    $min-height: $font-size * $line-height * $lines-to-show; // Fallback for non-webkit
+
     @include display(block); // Fallback for non-webkit
+    @include box-size(null $height null $min-height $max-width);
     @include margin(0 auto);
     @include font($font-size $line-height);
 
+
     display: -webkit-box;
-    max-width: $width;
-    height: $font-size * $line-height * $lines-to-show; // Fallback for non-webkit
-    min-height: $font-size * $line-height * $lines-to-show; // Fallback for non-webkit
     -webkit-line-clamp: $lines-to-show;
     -webkit-box-orient: vertical;
   }
   @else {
     @include display(inline-block);
+    @include box-bounds(null null $width null);
     @include white-space(nowrap);
     @include word-wrap(normal);
-
-    max-width: $width;
   }
 
   @include overflow(hidden);
   @include text-overflow($text-overflow);
-}
-
-/// Word Wrap Force mixin
-///
-/// @example scss - Usage - single line
-///   .word-wrap-force-element {
-///     @include word-wrap-force;
-///   }
-///
-/// @example css - Output - single line
-///   .word-wrap-force-element {
-///     hyphens: auto;
-///     word-break: break-all;
-///     word-wrap: break-word;
-///   }
-/// @access public
-@mixin word-wrap-force {
-  @include hyphens(auto);
-  @include word-break(break-all);
-  @include word-wrap(break-word);
 }
