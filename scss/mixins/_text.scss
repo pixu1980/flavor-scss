@@ -790,9 +790,9 @@ $text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
 ///   }
 /// @access public
 /// @param {string} $tsa - the text-size-adjust value
-@mixin text-size-adjust($tsa) {
+@mixin text-size-adjust($tsa, $prefixes: $prefixes-default) {
   @if(is-text-size-adjust($tsa)) {
-    @include prefixer(text-size-adjust, $tsa);
+    @include prefixer(text-size-adjust, $tsa, $prefixes);
   }
   @else {
     @warn '`text-size-adjust: #{$tsa}` is not a valid text-size-adjust value';
