@@ -54,7 +54,7 @@
 
   // IE10+ doesn't honor `<meta name='viewport'>` in some cases.
   @at-root {
-    @include prefixer-selector(viewport, ms) {
+    @-ms-viewport {
       width: device-width;
     }
   }
