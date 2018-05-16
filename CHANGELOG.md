@@ -1,3 +1,11 @@
+## [Version 1.0.7](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.0.7) (2018-5-16)
+
+### Bug fixes
+
+- bugfix text-size-adjust prefixes: [`db8a82e`](https://github.com/blackmirror1980/flavor-scss/commit/db8a82e)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.0.6...v1.0.7)
+
 ## [Version 1.0.6](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.0.6) (2018-5-16)
 
 ### Bug fixes
