@@ -12,13 +12,22 @@
 /// @type list
 $background-image-modes: array-concat((none), $css-default-modes);
 
+/// Checks if something is background image mode (none, initial, inherit)
+///
+/// @access public
+/// @param {string} $bi - the background image
+/// @return {boolean}
+@function is-background-image-mode($bi) {
+  @return is-defined($bi) and array-contains($background-image-modes, $bi);
+}
+
 /// Checks if something is background image (url, none, initial, inherit)
 ///
 /// @access public
 /// @param {string} $bi - the background image
 /// @return {boolean}
 @function is-background-image($bi) {
-  @return is-url($bi) or array-contains($background-image-modes, $bi);
+  @return is-defined($bi) and (is-background-image-mode($bi) or is-url($bi));
 }
 
 /// Background position horizontal modes
@@ -275,7 +284,9 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
     $background-image: map-get($settings, image);
 
     @if is-background-image($background-image) {
-      $background-image: inspect-url($background-image);
+      @if not is-background-image-mode($background-image) {
+        $background-image: inspect-url($background-image);
+      }
 
       @if $shorthand==true {
         $background: append($background, $background-image);
