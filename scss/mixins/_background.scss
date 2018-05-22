@@ -270,7 +270,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
     $background-color: map-get($settings, color);
 
     @if is-css-color($background-color) {
-      @if $shorthand==true {
+      @if $shorthand == true {
         $background: append($background, $background-color);
       }
       @else {
@@ -288,7 +288,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
         $background-image: inspect-url($background-image);
       }
 
-      @if $shorthand==true {
+      @if $shorthand == true {
         $background: append($background, $background-image);
       }
       @else {
@@ -303,7 +303,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
     $background-size: map-get($settings, size);
 
     @if is-background-position($background-position) and is-background-size($background-size) {
-      @if $shorthand==true {
+      @if $shorthand == true {
         $background: append($background, $background-position + '/' + $background-size);
       }
       @else {
@@ -319,7 +319,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
     $background-repeat: map-get($settings, repeat);
 
     @if is-background-repeat($background-repeat) {
-      @if $shorthand==true {
+      @if $shorthand == true {
         $background: append($background, $background-repeat);
       }
       @else {
@@ -333,7 +333,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
     $background-origin: map-get($settings, origin);
 
     @if is-background-origin-clip($background-origin) {
-      @if $shorthand==true {
+      @if $shorthand == true {
         $background: append($background, $background-origin);
       }
       @else {
@@ -347,7 +347,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
     $background-clip: map-get($settings, clip);
 
     @if is-background-origin-clip($background-clip) {
-      @if $shorthand==true {
+      @if $shorthand == true {
         $background: append($background, $background-clip);
       }
       @else {
@@ -361,7 +361,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
     $background-attachment: map-get($settings, attachment);
 
     @if is-background-attachment($background-attachment) {
-      @if $shorthand==true {
+      @if $shorthand == true {
         $background: append($background, $background-attachment);
       }
       @else {
@@ -372,7 +372,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
       @warn '`background-attachment: #{$background-attachment}` is not a valid background-attachment value';
     }
 
-    @if $shorthand==true {
+    @if $shorthand == true {
       background: $background;
     }
   }
