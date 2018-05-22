@@ -1,3 +1,11 @@
+## [Version 1.0.9](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.0.9) (2018-5-22)
+
+### Bug fixes
+
+- bugfix background mixin (when using none): [`b3d9cee`](https://github.com/blackmirror1980/flavor-scss/commit/b3d9cee)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.0.8...v1.0.9)
+
 ## [Version 1.0.8](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.0.8) (2018-5-16)
 
 ### Bug fixes
