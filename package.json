@@ -31,9 +31,10 @@
   "homepage": "https://blackmirror1980.github.io/flavor-scss",
   "documentation": "https://blackmirror1980.github.io/flavor-scss/index.html",
   "devDependencies": {
+    "minimatch": "^3.0.4",
+    "pkg-2-readme": "0.0.6",
     "sass-lint": "^1.12.1",
     "sassdoc": "^2.5.0",
-    "sassdoc-theme-flippant": "^0.1.0",
-    "pkg-2-readme": "0.0.6"
+    "sassdoc-theme-flippant": "^0.1.0"
   }
 }
