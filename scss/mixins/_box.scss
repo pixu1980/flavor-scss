@@ -15,7 +15,7 @@
 
   text-rendering: optimizeSpeed;
 
-  * {
+  > * {
     @include letter-spacing(initial);
     @include line-height(initial);
   }
@@ -70,7 +70,7 @@ $display-modes: array-concat((none, inline, block, inline-block, flex, inline-fl
 ///     line-height: 0;
 ///     text-rendering: optimizeSpeed;
 ///
-///     * {
+///     > * {
 ///       letter-spacing: initial;
 ///       line-height: initial;
 ///     }
