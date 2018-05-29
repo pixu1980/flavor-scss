@@ -1,3 +1,12 @@
+## [Version 1.0.11](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.0.11) (2018-5-29)
+
+### Bug fixes
+
+- updated package json: [`d65b8bd`](https://github.com/blackmirror1980/flavor-scss/commit/d65b8bd)
+- bug fix reset-inline-block: [`912038e`](https://github.com/blackmirror1980/flavor-scss/commit/912038e)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.0.10...v1.0.11)
+
 ## [Version 1.0.10](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.0.10) (2018-5-22)
 
 ### Bug fixes
