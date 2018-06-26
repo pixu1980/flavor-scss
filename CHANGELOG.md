@@ -1,3 +1,11 @@
+## [Version 1.1.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.1.1) (2018-6-26)
+
+### Bug fixes
+
+- bugfix for will-change: [`8be62d7`](https://github.com/blackmirror1980/flavor-scss/commit/8be62d7)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.1.0...v1.1.1)
+
 ## [Version 2.0.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v2.0.0) (2018-6-26)
 
 ### Breaking changes
