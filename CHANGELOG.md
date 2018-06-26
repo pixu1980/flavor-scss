@@ -1,3 +1,11 @@
+## [Version 2.0.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v2.0.0) (2018-6-26)
+
+### Breaking changes
+
+- added will change support: [`bb18f4c`](https://github.com/blackmirror1980/flavor-scss/commit/bb18f4c)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.0.11...v2.0.0)
+
 ## [Version 1.0.11](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.0.11) (2018-5-29)
 
 ### Bug fixes
