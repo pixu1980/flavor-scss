@@ -29,6 +29,7 @@ groups:
   mixins-background: Mixins - Background
   mixins-border: Mixins - Border
   mixins-box: Mixins - Box
+  mixins-common: Mixins - Common
   mixins-cursor: Mixins - Cursor
   mixins-filter: Mixins - Filter
   mixins-margin: Mixins - Margin
@@ -40,7 +41,7 @@ groups:
   mixins-text: Mixins - Text
   mixins-transform: Mixins - Transform
   mixins-transition: Mixins - Transition
-  mixins-utils: Mixins - Utils
+  mixins-will-change: Mixins - Will Change
   mixins: Mixins
   types-angle: Types - Angle
   types-array: Types - Array

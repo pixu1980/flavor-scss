@@ -6,7 +6,7 @@
 /// @author blackmirror1980
 ////
 
-@import 'utils';
+@import 'common';
 @import 'cursor';
 @import 'position';
 @import 'box';
@@ -20,6 +20,7 @@
 @import 'overflow';
 @import 'transform';
 @import 'transition';
+@import 'will-change';
 @import 'filter';
 @import 'animation';
 @import 'appearance';

@@ -1,0 +1,86 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Will Change
+/// @group mixins-will-change
+/// @author blackmirror1980
+////
+
+/// Checks if something is a will-change animateable list
+///
+/// @access public
+/// @param {list} $wcl - the will-change list of animateable values (e.g. `left, top`)
+/// @return {boolean}
+@function is-will-change-animateable($wcl) {
+  @if is-array($wcal) {
+    $is-valid: true;
+
+    @each $will-change-animateable-prop in $wcal {
+      @if $is-valid {
+        $is-valid: array-contains($animateable-properties, $will-change-animateable-prop);
+      }
+    }
+
+    @return $is-valid;
+  }
+
+  @return false;
+}
+
+/// Will Change modes
+///
+/// @access private
+/// @type list
+$will-change-modes: array-concat((auto, scroll-position, contents, transform, opacity, unset), $css-default-modes);
+
+/// Checks if something is a will-change value
+///
+/// @access public
+/// @param {string | list} $wc - the will-change value (e.g. `auto` or `left, top`)
+/// @return {boolean}
+@function is-will-change($wc) {
+  @if is-defined($wc) {
+    @if is-array($wc) {
+      @return is-will-change-animateable($wc);
+    }
+
+    @return array-contains($will-change-modes, $wc);
+  }
+
+  @return false;
+}
+
+/// Will Change
+///
+/// @example scss - Usage
+///   .will-change-element {
+///     @include will-change(scroll-position);
+///   }
+///
+/// @example css - Output
+///   .will-change-element {
+///     will-change: scroll-position;
+///   }
+///
+/// @example scss - Usage
+///   .will-change-element {
+///     @include will-change(left, top);
+///   }
+///
+/// @example css - Output
+///   .will-change-element {
+///     will-change: left, top;
+///   }
+///
+/// @access public
+/// @param {string | array | list} $wc - the will-change value (e.g. `auto` or `left, top`)
+@mixin will-change($wc) {
+  @if is-defined($wc) {
+    @if is-will-change($wc) {
+      will-change: $wc;
+    }
+    @else {
+      @warn '`will-change: #{$wc}` is not a valid will-change value';
+    }
+  }
+}
