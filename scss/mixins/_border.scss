@@ -15,8 +15,8 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
 /// Checks if something is border style mode
 ///
 /// @access public
-/// @param {string} $bs - the border style mode
-/// @return {boolean}
+/// @param {string} $bs - the border-style mode
+/// @return {boolean} - true if is border-style value
 @function is-border-style($bs) {
   @return is-defined($bs) and array-contains($border-styles, $bs);
 }
@@ -24,9 +24,9 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
 /// Checks if something is border radius value
 ///
 /// @access public
-/// @param {string} $br - the border radius value
-/// @return {boolean}
-@function is-border-radius-value($br) {
+/// @param {string} $br - the border-radius value
+/// @return {boolean} - true if is border-radius value
+@function is-border-radius($br) {
   @return is-defined($br) and (is-size($br) or is-percentage($br) or array-contains($css-default-modes, $br));
 }
 
@@ -96,7 +96,7 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
 ///   }
 /// @todo manage fractions (e.g. 2em 1em 4em / 0.5em 0.2em)
 /// @requires {function} is-defined
-/// @requires {function} is-border-radius-value
+/// @requires {function} is-border-radius
 /// @requires {function} nth-value
 /// @requires {mixin} prefixer
 /// @access public
@@ -107,7 +107,7 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
   $border-top-left-radius: nth-value($br, 1, 0);
 
   @if is-defined($border-top-left-radius) {
-    @if is-border-radius-value($border-top-left-radius) {
+    @if is-border-radius($border-top-left-radius) {
       @if $shorthand==true {
         $border-radius: append($border-radius, $border-top-left-radius);
       }
@@ -123,7 +123,7 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
   $border-top-right-radius: nth-value($br, 2, $border-top-left-radius);
 
   @if is-defined($border-top-right-radius) {
-    @if is-border-radius-value($border-top-right-radius) {
+    @if is-border-radius($border-top-right-radius) {
       @if $shorthand==true {
         $border-radius: append($border-radius, $border-top-right-radius);
       }
@@ -139,7 +139,7 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
   $border-bottom-right-radius: nth-value($br, 3, $border-top-left-radius);
 
   @if is-defined($border-bottom-right-radius) {
-    @if is-border-radius-value($border-bottom-right-radius) {
+    @if is-border-radius($border-bottom-right-radius) {
       @if $shorthand==true {
         $border-radius: append($border-radius, $border-bottom-right-radius);
       }
@@ -155,7 +155,7 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
   $border-bottom-left-radius: nth-value($br, 4, $border-top-right-radius);
 
   @if is-defined($border-bottom-left-radius) {
-    @if is-border-radius-value($border-bottom-left-radius) {
+    @if is-border-radius($border-bottom-left-radius) {
       @if $shorthand==true {
         $border-radius: append($border-radius, $border-bottom-left-radius);
       }
@@ -255,11 +255,11 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
 /// @type list
 $border-modes: array-concat((none), $css-default-modes);
 
-/// Checks if something is border mode value (none, initial, inherit)
+/// Checks if something is border mode (none, initial, inherit)
 ///
 /// @access public
-/// @param {string} $bm - the border mode value
-/// @return {boolean}
+/// @param {string} $bm - the border mode
+/// @return {boolean} - true if is border mode
 @function is-border-mode($bm) {
   @return is-defined($bm) and array-contains($border-modes, $bm);
 }

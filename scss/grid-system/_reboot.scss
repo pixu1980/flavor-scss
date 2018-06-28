@@ -50,14 +50,15 @@
     -webkit-tap-highlight-color: $webkit-tap-highlight-color;
 
     @include font(10px 1.15 sans-serif);
+
   }
 
   // IE10+ doesn't honor `<meta name='viewport'>` in some cases.
-  @at-root {
-    @-ms-viewport {
-      width: device-width;
-    }
-  }
+  // @at-root {
+  //   @-ms-viewport {
+  //     width: device-width;
+  //   }
+  // }
 
   // stylelint-disable selector-list-comma-newline-after
   // Shim for 'new' HTML5 structural elements to display correctly (IE10, older browsers)

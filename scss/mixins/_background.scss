@@ -15,8 +15,8 @@ $background-image-modes: array-concat((none), $css-default-modes);
 /// Checks if something is background image mode (none, initial, inherit)
 ///
 /// @access public
-/// @param {string} $bi - the background image
-/// @return {boolean}
+/// @param {string} $bi - the background-image mode
+/// @return {boolean} - true if is background-image mode
 @function is-background-image-mode($bi) {
   @return is-defined($bi) and array-contains($background-image-modes, $bi);
 }
@@ -24,8 +24,8 @@ $background-image-modes: array-concat((none), $css-default-modes);
 /// Checks if something is background image (url, none, initial, inherit)
 ///
 /// @access public
-/// @param {string} $bi - the background image
-/// @return {boolean}
+/// @param {string} $bi - the background-image value
+/// @return {boolean} - true if is background-image value
 @function is-background-image($bi) {
   @return is-defined($bi) and (is-background-image-mode($bi) or is-url($bi));
 }
@@ -52,8 +52,8 @@ $background-position-vertical-modes: array-concat((top, center, bottom), $css-de
 /// @requires {variable} background-position-horizontal-modes
 /// @requires {variable} background-position-vertical-modes
 /// @access public
-/// @param {string | array} $bp - the background position value/values
-/// @return {boolean}
+/// @param {string | array} $bp - the background-position value/values
+/// @return {boolean} - true if is background-position value/values
 @function is-background-position($bp) {
   @if is-defined($bp) {
     @if is-array($bp) {
@@ -89,8 +89,8 @@ $background-size-modes: array-concat((auto, cover, contain), $css-default-modes)
 /// @requires {function} nth-value
 /// @requires {variable} background-size-modes
 /// @access public
-/// @param {string | array} $bs - the background size value/values
-/// @return {boolean}
+/// @param {string | array} $bs - the background-size value/values
+/// @return {boolean} - true if is background-size value/values
 @function is-background-size($bs) {
   @if is-defined($bs) {
     @if is-array($bs) {
@@ -118,8 +118,8 @@ $background-repeat-modes: array-concat((repeat, repeat-x, repeat-y, no-repeat), 
 ///
 /// @link https://www.w3schools.com/cssref/pr_background-repeat.asp W3Schools background-repeat docs
 /// @access public
-/// @param {string} $br - the background repeat value
-/// @return {boolean}
+/// @param {string} $br - the background-repeat value
+/// @return {boolean} - true if is background-repeat value
 @function is-background-repeat($br) {
   @return is-defined($br) and array-contains($background-repeat-modes, $br);
 }
@@ -136,8 +136,8 @@ $background-origin-clip-modes: array-concat((border-box, padding-box, content-bo
 /// @link https://www.w3schools.com/cssref/css3_pr_background-clip.asp W3Schools background-clip docs
 /// @link https://www.w3schools.com/cssref/css3_pr_background-origin.asp W3Schools background-origin docs
 /// @access public
-/// @param {string} $boc - the background origin/clip value
-/// @return {boolean}
+/// @param {string} $boc - the background-origin or background-clip value
+/// @return {boolean} - true if is background-origin or background-clip value
 @function is-background-origin-clip($boc) {
   @return is-defined($boc) and array-contains($background-origin-clip-modes, $boc);
 }
@@ -152,8 +152,8 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
 ///
 /// @link https://www.w3schools.com/cssref/pr_background-attachment.asp W3Schools background-attachment docs
 /// @access public
-/// @param {string} $ba - the background attachment value
-/// @return {boolean}
+/// @param {string} $ba - the background-attachment mode
+/// @return {boolean} - true if is background-attachment mode
 @function is-background-attachment($ba) {
   @return array-contains($background-attachment-modes, $ba);
 }

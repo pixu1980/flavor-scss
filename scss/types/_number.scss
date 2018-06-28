@@ -10,7 +10,7 @@
 ///
 /// @access public
 /// @param {any} $n - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is a number
 @function is-number($n) {
   @return is-defined($n) and type-of($n)==number;
 }
@@ -19,7 +19,7 @@
 ///
 /// @access public
 /// @param {any} $i - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is an integer number
 @function is-integer($i) {
   @return is-number($i) and round($i)==$i;
 }
@@ -28,7 +28,7 @@
 ///
 /// @access public
 /// @param {any} $f - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is a float number
 @function is-float($f) {
   @return is-number($f) and floor($f)!=$f;
 }
@@ -40,7 +40,7 @@
 /// @param {number} $f - the from value
 /// @param {number} $t - the to value
 /// @param {boolean} $include-bounds [true] - specifies to execute either >= & =< or > & <
-/// @return {boolean}
+/// @return {boolean} - true if the number is inside the bounds
 @function is-number-between($n, $from, $to, $include-bounds: true) {
   @if (is-number($n) and is-number($from) and is-number($to)) {
     @return if($include-bounds, ($n >=$from) and ($n <=$to), ($n > $from) and ($n < $to));
@@ -50,11 +50,11 @@
   @return false;
 }
 
-/// Checks if something is a percentage
+/// Checks if something is a percentage number
 ///
 /// @access public
 /// @param {any} $p - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is percentage number
 @function is-percentage($p) {
   @return is-number($p) and unit($p)=='%';
 }
@@ -63,7 +63,7 @@
 ///
 /// @access public
 /// @param {any} $pn - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is percentage floating number
 @function is-percentage-number($pn) {
   @return is-float($pn) and unitless($pn)==$pn and is-number-between($pn, 0, 1);
 }

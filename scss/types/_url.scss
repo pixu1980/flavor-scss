@@ -10,10 +10,10 @@
 ///
 /// @access public
 /// @param {any} $u - the value to check
-/// @return {boolean}
 /// @requires {function} is-string
 /// @requires {function} string-starts-with
 /// @requires {function} string-ends-with
+/// @return {boolean} - true if the url value has the url function inside
 @function has-url-function($u) {
   @if is-string($u) {
     $url: $u;
@@ -32,12 +32,12 @@
 ///
 /// @access public
 /// @param {any} $u - the value to check
-/// @return {boolean}
 /// @requires {function} is-string
 /// @requires {function} has-url-function
 /// @requires {function} string-slice
 /// @requires {function} string-length
 /// @requires {function} string-starts-with
+/// @return {boolean} - true if is an url
 @function is-url($u) {
   @if is-string($u) {
     $url: $u;
@@ -59,7 +59,7 @@
 ///
 /// @access public
 /// @param {any} $u - the value to check
-/// @return {boolean}
+/// @return {boolean} - the fixed url string value
 @function inspect-url($u) {
   @if is-url($u) {
     $url: $u;

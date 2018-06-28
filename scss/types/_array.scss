@@ -10,7 +10,7 @@
 ///
 /// @access public
 /// @param {list | array} $a - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is an array value
 @function is-array($a) {
   @return is-defined($a) and type-of($a)==list;
 }
@@ -22,7 +22,7 @@
 /// @param {any} $i - the item
 /// @requires {function} is-array
 /// @requires {function} is-defined
-/// @return {boolean}
+/// @return {boolean} - true if is the array contains the value
 @function array-contains($a, $i) {
   @if is-array($a) and is-defined($i) {
     $index-of: index($a, $i);
@@ -38,7 +38,7 @@
 ///
 /// @access public
 /// @param {list | array} $lists... - the arrays/lists
-/// @return {list | array}
+/// @return {list | array} - the concatenated array/list
 @function array-concat($lists...) {
   $concat-list: ();
 
@@ -61,7 +61,7 @@
 /// @access public
 /// @param {list | array} $a - the array/list
 /// @param {string} $sep [','] - the sparator
-/// @return {string}
+/// @return {string} - the joined string
 @function array-join($a, $sep: ', ') {
   $join-string: '';
 

@@ -10,7 +10,7 @@
 ///
 /// @access public
 /// @param {string | length} $p - the padding value (e.g. `initial` or `20px`)
-/// @return {boolean}
+/// @return {boolean} - true if is padding value
 @function is-padding($p) {
   @return is-defined($p) and (array-contains($css-default-modes, $p) or is-length($p));
 }

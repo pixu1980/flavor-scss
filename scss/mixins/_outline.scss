@@ -15,8 +15,8 @@ $outline-width-modes: array-concat((medium, thin, thick), $css-default-modes);
 /// Checks if something is a supported outline width value
 ///
 /// @access public
-/// @param {string} $ow - the outline width value
-/// @return {boolean}
+/// @param {string} $ow - the outline-width value
+/// @return {boolean} - true if is outline-width value
 @function is-outline-width($ow) {
   @return is-defined($ow) and (is-length($ow) or array-contains($overflow-width-modes, $ow));
 }
@@ -53,8 +53,8 @@ $outline-style-modes: array-concat((none, hidden, dotted, dashed, solid, double,
 /// Checks if something is a supported outline style value
 ///
 /// @access public
-/// @param {string} $os - the outline style value
-/// @return {boolean}
+/// @param {string} $os - the outline-style value
+/// @return {boolean} - true if is outline-style value
 @function is-outline-style($os) {
   @return is-defined($os) and array-contains($overflow-style-modes, $os);
 }
@@ -91,8 +91,8 @@ $outline-color-modes: array-concat((invert), $css-default-modes);
 /// Checks if something is a supported outline color value
 ///
 /// @access public
-/// @param {string} $oc - the outline color value
-/// @return {boolean}
+/// @param {string} $oc - the outline-color value
+/// @return {boolean} - true if is outline-color value
 @function is-outline-color($oc) {
   @return is-defined($oc) and (is-color($oc) or array-contains($overflow-color-modes, $oc));
 }
@@ -123,8 +123,8 @@ $outline-color-modes: array-concat((invert), $css-default-modes);
 /// Checks if something is a supported outline offset value
 ///
 /// @access public
-/// @param {string} $oo - the outline offset value
-/// @return {boolean}
+/// @param {string} $oo - the outline-offset value
+/// @return {boolean} - true if is outline-offset value
 @function is-outline-offset($oo) {
   @return is-defined($oo) and (is-length($oo) or array-contains($css-default-modes, $oo));
 }

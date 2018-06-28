@@ -16,7 +16,7 @@ $frequency-units: (Hz, kHz);
 ///
 /// @access public
 /// @param {any} $f - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is a frequency value
 @function is-frequency($f) {
   @return is-number($f) and array-contains($frequency-units, unit($f));
 }

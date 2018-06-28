@@ -10,7 +10,7 @@
 ///
 /// @access public
 /// @param {any} $f - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is a function
 @function is-function($f) {
   @return is-defined($f) and type-of($f)==function;
 }

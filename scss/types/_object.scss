@@ -10,7 +10,7 @@
 ///
 /// @access public
 /// @param {any} $o - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is an object
 @function is-object($o) {
   @return is-defined($o) and type-of($o)==map;
 }
@@ -34,7 +34,7 @@
 ///
 /// @example scss - Result
 ///   $p: get($o, 'prop1.subprop2'); // #444
-/// @return {any}
+/// @return {any} - the value found at the path or null
 @function get($o, $p) {
   $keys: $p;
 
@@ -103,7 +103,7 @@
 ///     prop3: (),
 ///   )
 ///
-/// @return {any}
+/// @return {any} - the object with the new value set at the specified path
 @function set($o, $p, $v) {
   $keys: $p;
 
@@ -202,7 +202,7 @@
 ///     ),
 ///   )
 ///
-/// @return {any}
+/// @return {any} - the new extended object
 @function extend($o, $objects...) {
   $max: length($objects); // Loop through all maps in $objects...
 

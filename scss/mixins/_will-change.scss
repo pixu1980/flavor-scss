@@ -16,7 +16,7 @@ $will-change-modes: array-concat((auto, scroll-position, contents, transform, op
 ///
 /// @access public
 /// @param {string | list} $wc - the will-change value (e.g. `auto` or `left, top`)
-/// @return {boolean}
+/// @return {boolean} - true if is a will-change value
 @function is-will-change($wc) {
   @if is-defined($wc) {
     @if list-separator($wc) != comma {

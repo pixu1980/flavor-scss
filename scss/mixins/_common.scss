@@ -12,7 +12,7 @@
 /// @access public
 /// @param {size} $px - pixels size you want to convert
 /// @param {size} $base [$font-size-base] - html font-size base
-/// @return {size}
+/// @return {size} - the size converted in rem based on html font-size
 @function rem($px, $base: $font-size-base) {
   @if not unitless($px) {
     $px: strip-units($px);

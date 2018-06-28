@@ -18,7 +18,7 @@ $font-size-modes: array-concat((medium, xx-small, x-small, small, large, x-large
 /// @link https://www.w3schools.com/cssref/pr_font_font-size.asp - W3Schools font-size docs
 /// @access public
 /// @param {size | percentage | font-size-mode} $fs - the font-size value
-/// @return {boolean}
+/// @return {boolean} - true if is font-size value
 @function is-font-size($fs) {
   @return is-defined($fs) and (is-size($fs) or is-percentage($fs) or array-contains($font-size-modes, $fs));
 }
@@ -56,7 +56,7 @@ $line-height-modes: array-concat((normal), $css-default-modes);
 /// @link https://www.w3schools.com/cssref/pr_dim_line-height.asp - W3Schools line-height docs
 /// @access public
 /// @param {size | percentage | line-height-mode} $lh - the line-height value
-/// @return {boolean}
+/// @return {boolean} - true if is line-height value
 @function is-line-height($lh) {
   @return is-defined($lh) and (is-size($lh) or is-percentage($lh) or array-contains($line-height-modes, $lh));
 }
@@ -88,7 +88,7 @@ $line-height-modes: array-concat((normal), $css-default-modes);
 /// @link https://www.w3schools.com/cssref/pr_font_font-family.asp - W3Schools font-family docs
 /// @access public
 /// @param {string | array | list} $ff - the font-family value
-/// @return {boolean}
+/// @return {boolean} - true if is font-family value
 @function is-font-family($ff) {
   @return is-defined($ff) and (is-string($ff) or is-array($ff));
 }
@@ -136,7 +136,7 @@ $font-weight-modes: array-concat((normal, bold, bolder, lighter, 100, 200, 300, 
 /// @link https://www.w3schools.com/cssref/pr_font_weight.asp - W3Schools font-weight docs
 /// @access public
 /// @param {string | integer} $fw - the font-weight value
-/// @return {boolean}
+/// @return {boolean} - true if is font-weight value
 @function is-font-weight($fw) {
   @return is-defined($fw) and array-contains($font-weight-modes, $fw);
 }
@@ -272,7 +272,7 @@ $text-align-modes: array-concat((left, center, right, justify), $css-default-mod
 /// @link https://www.w3schools.com/cssref/pr_text_text-align.asp - W3Schools text-align docs
 /// @access public
 /// @param {string} $ta - the text-align value
-/// @return {boolean}
+/// @return {boolean} - true if is text-align value
 @function is-text-align($ta) {
   @return is-defined($ta) and array-contains($text-align-modes, $ta);
 }
@@ -310,7 +310,7 @@ $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle
 /// @link https://www.w3schools.com/cssref/pr_pos_vertical-align.asp - W3Schools vertical-align docs
 /// @access public
 /// @param {string} $va - the vertical-align value
-/// @return {boolean}
+/// @return {boolean} - true if is vertical-align value
 @function is-vertical-align($va) {
   @return is-defined($va) and (is-size($va) or array-contains($vertical-align-modes, $va));
 }
@@ -386,19 +386,57 @@ $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle
   }
 }
 
+/// Text transform modes
+///
+/// @access private
+/// @type list
+$text-transform-modes: array-concat((none, capitalize, uppercase, lowercase), $css-default-modes);
+
+/// Checks if something is a supported text-transform value
+///
+/// @link https://www.w3schools.com/cssref/pr_text_text-transform.asp - W3Schools text-transform docs
+/// @access public
+/// @param {string} $tt - the text-transform value
+/// @return {boolean} - true if is text-transform value
+@function is-text-transform($tt) {
+  @return is-defined($tt) and array-contains($text-transform-modes, $tt);
+}
+
+/// Text transform mixin
+///
+/// @example scss - Usage
+///   .text-transform-element {
+///     @include text-transform(uppercase);
+///   }
+///
+/// @example css - Output
+///   .text-transform-element {
+///     text-transform: uppercase;
+///   }
+/// @access public
+/// @param {string} $tt - the text-transform value
+@mixin text-transform($tt) {
+  @if is-text-transform($tt) {
+    text-transform: $tt;
+  }
+  @else {
+    @warn '`text-transform: #{$tt}` is not a valid text-transform value';
+  }
+}
+
 /// Text overflow modes
 ///
 /// @access private
 /// @type list
 $text-overflow-modes: array-concat((clip, ellipsis), $css-default-modes);
 
-/// Checks if something is a supported text-overflow value
+/// Checks if something is a supported text-overflow mode
 ///
 /// @link https://www.w3schools.com/cssref/css3_pr_text-overflow.asp - W3Schools text-overflow docs
 /// @access public
-/// @param {string} $to - the text-overflow value
-/// @return {boolean}
-@function is-text-overflow-mode($to) {
+/// @param {string} $to - the text-overflow mode
+/// @return {boolean} - true if is text-overflow mode
+@function is-text-overflow($to) {
   @return is-defined($to) and (array-contains($text-overflow-modes, $to) or is-string($to));
 }
 
@@ -431,13 +469,13 @@ $text-overflow-modes: array-concat((clip, ellipsis), $css-default-modes);
 /// @type list
 $hyphens-modes: array-concat((none, manual, auto, unset), $css-default-modes);
 
-/// Checks if something is a supported hyphens value
+/// Checks if something is a supported hyphens mode
 ///
 /// @link https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens - MDN hyphens docs
 /// @access public
-/// @param {string} $h - the hyphens value
-/// @return {boolean}
-@function is-hyphens-mode($h) {
+/// @param {string} $h - the hyphens mode
+/// @return {boolean} - true if is hyphens mode
+@function is-hyphens($h) {
   @return is-defined($h) and array-contains($hyphens-modes, $h);
 }
 
@@ -478,8 +516,8 @@ $letter-spacing-modes: array-concat((normal), $css-default-modes);
 /// @link https://www.w3schools.com/cssref/pr_text_letter-spacing.asp - W3Schools letter-spacing docs
 /// @access public
 /// @param {size | string} $ls - the letter-spacing value
-/// @return {boolean}
-@function is-letter-spacing-mode($ls) {
+/// @return {boolean} - true if is letter-spacing value
+@function is-letter-spacing($ls) {
   @return is-defined($ls) and (array-contains($letter-spacing-modes, $ls) or is-size($ls));
 }
 
@@ -516,8 +554,8 @@ $word-spacing-modes: array-concat((normal), $css-default-modes);
 /// @link https://www.w3schools.com/cssref/pr_text_word-spacing.asp - W3Schools word-spacing docs
 /// @access public
 /// @param {size | string} $ws - the word-spacing value
-/// @return {boolean}
-@function is-word-spacing-mode($ws) {
+/// @return {boolean} - true if is word-spacing value
+@function is-word-spacing($ws) {
   @return is-defined($ws) and (array-contains($word-spacing-modes, $ws) or is-size($ws));
 }
 
@@ -549,13 +587,13 @@ $word-spacing-modes: array-concat((normal), $css-default-modes);
 /// @type list
 $user-select-modes: (auto, none, text, all);
 
-/// Checks if something is a supported user-select value
+/// Checks if something is a supported user-select mode
 ///
 /// @link https://www.w3schools.com/cssref/css3_pr_user-select.asp - W3Schools user-select docs
 /// @access public
-/// @param {string} $us - the user-select value
-/// @return {boolean}
-@function is-user-select-mode($us) {
+/// @param {string} $us - the user-select mode
+/// @return {boolean} - true if is user-select mode
+@function is-user-select($us) {
   @return is-defined($us) and array-contains($user-select-modes, $us);
 }
 
@@ -591,13 +629,13 @@ $user-select-modes: (auto, none, text, all);
 /// @type list
 $direction-modes: array-concat((ltr, rtl), $css-default-modes);
 
-/// Checks if something is a supported direction value
+/// Checks if something is a supported direction mode
 ///
 /// @link https://www.w3schools.com/cssref/pr_text_direction.asp - W3Schools direction docs
 /// @access public
-/// @param {string} $d - the direction value
-/// @return {boolean}
-@function is-direction-mode($d) {
+/// @param {string} $d - the direction mode
+/// @return {boolean} - true if is direction mode
+@function is-direction($d) {
   @return is-defined($d) and array-contains($direction-modes, $d);
 }
 
@@ -629,13 +667,13 @@ $direction-modes: array-concat((ltr, rtl), $css-default-modes);
 /// @type list
 $white-space-modes: array-concat((normal, nowrap, pre, pre-line, pre-wrap), $css-default-modes);
 
-/// Checks if something is a supported white-space value
+/// Checks if something is a supported white-space mode
 ///
 /// @link https://www.w3schools.com/cssref/pr_text_white-space.asp - W3Schools white-space docs
 /// @access public
-/// @param {string} $ws - the white-space value
-/// @return {boolean}
-@function is-white-space-mode($ws) {
+/// @param {string} $ws - the white-space mode
+/// @return {boolean} - true if is white-space mode
+@function is-white-space($ws) {
   @return is-defined($ws) and array-contains($white-space-modes, $ws);
 }
 
@@ -667,13 +705,13 @@ $white-space-modes: array-concat((normal, nowrap, pre, pre-line, pre-wrap), $css
 /// @type list
 $word-break-modes: array-concat((normal, break-all, keep-all), $css-default-modes);
 
-/// Checks if something is a supported word-break value
+/// Checks if something is a supported word-break mode
 ///
 /// @link https://www.w3schools.com/cssref/css3_pr_word-break.asp - W3Schools word-break docs
 /// @access public
-/// @param {string} $wb - the word-break value
-/// @return {boolean}
-@function is-word-break-mode($wb) {
+/// @param {string} $wb - the word-break mode
+/// @return {boolean} - true if is word-break mode
+@function is-word-break($wb) {
   @return is-defined($wb) and array-contains($word-break-modes, $wb);
 }
 
@@ -705,13 +743,13 @@ $word-break-modes: array-concat((normal, break-all, keep-all), $css-default-mode
 /// @type list
 $word-wrap-modes: array-concat((normal, break-word), $css-default-modes);
 
-/// Checks if something is a supported word-wrap value
+/// Checks if something is a supported word-wrap mode
 ///
 /// @link https://www.w3schools.com/cssref/css3_pr_word-wrap.asp - W3Schools word-wrap docs
 /// @access public
-/// @param {string} $ww - the word-wrap value
-/// @return {boolean}
-@function is-word-wrap-mode($ww) {
+/// @param {string} $ww - the word-wrap mode
+/// @return {boolean} - true if is word-wrap mode
+@function is-word-wrap($ww) {
   @return is-defined($ww) and array-contains($word-wrap-modes, $ww);
 }
 
@@ -768,7 +806,7 @@ $text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
 /// @link https://developer.mozilla.org/it/docs/Web/CSS/text-size-adjust - MDN text-size-adjust docs
 /// @access public
 /// @param {percentage | string} $tsa - the text-size-adjust value
-/// @return {boolean}
+/// @return {boolean} - true if is text-size-adjust value
 @function is-text-size-adjust($tsa) {
   @return is-defined($tsa) and (is-percentage($tsa) or array-contains($text-size-adjust-modes, $tsa));
 }
@@ -791,7 +829,7 @@ $text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
 /// @access public
 /// @param {string} $tsa - the text-size-adjust value
 @mixin text-size-adjust($tsa, $prefixes: $prefixes-default) {
-  @if(is-text-size-adjust($tsa)) {
+  @if is-text-size-adjust($tsa) {
     @include prefixer(text-size-adjust, $tsa, $prefixes);
   }
   @else {

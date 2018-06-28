@@ -16,7 +16,7 @@ $position-modes: array-concat((static, absolute, fixed, relative, sticky), $css-
 ///
 /// @access public
 /// @param {string} $pm - the position mode
-/// @return {boolean}
+/// @return {boolean} - true if is position mode
 @function is-position($pm) {
   @return is-defined($pm) and array-contains($position-modes, $pm);
 }
@@ -31,7 +31,7 @@ $position-point-modes: array-concat((auto), $css-default-modes);
 ///
 /// @access public
 /// @param {string | length} $ppv - the position point value
-/// @return {boolean}
+/// @return {boolean} - true if is position point value value
 @function is-position-point-value($ppv) {
   @return is-defined($ppv) and (is-length($ppv) or array-contains($position-point-modes, $ppv));
 }
@@ -46,7 +46,7 @@ $position-points: (top, right, bottom, left);
 ///
 /// @access public
 /// @param {string} $pp - the position point
-/// @return {boolean}
+/// @return {boolean} - true if is position point
 @function is-position-point($pp) {
   @return is-defined($pp) and array-contains($position-points, $pp);
 }

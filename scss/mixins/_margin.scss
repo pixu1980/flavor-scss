@@ -16,7 +16,7 @@ $margin-modes: array-concat((auto), $css-default-modes);
 ///
 /// @access public
 /// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
-/// @return {boolean}
+/// @return {boolean} - true if is margin value
 @function is-margin($m) {
   @return is-defined($m) and (array-contains($margin-modes, $m) or is-length($m));
 }
