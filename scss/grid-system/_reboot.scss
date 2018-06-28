@@ -343,7 +343,7 @@
 
   button,
   select {
-    text-transform: none; // Remove the inheritance of text transform in Firefox
+    @include text-transform(none); // Remove the inheritance of text transform in Firefox
   }
 
   input {
