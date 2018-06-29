@@ -15,7 +15,7 @@
 
   text-rendering: optimizeSpeed;
 
-  * {
+  > * {
     @include letter-spacing(initial);
     @include line-height(initial);
   }
@@ -27,12 +27,12 @@
 /// @type list
 $display-modes: array-concat((none, inline, block, inline-block, flex, inline-flex, table, inline-table, table-caption, table-header-group, table-row-group, table-column-group, table-footer-group, table-row, table-column, table-cell, list-item, run-in), $css-default-modes);
 
-/// Checks if something is a correct display mode value
+/// Checks if something is a correct display mode
 ///
 /// @access public
 /// @param {string} $dm - the display mode
-/// @return {boolean}
-@function is-display-mode($dm) {
+/// @return {boolean} - true if is display mode
+@function is-display($dm) {
   @return is-defined($dm) and array-contains($display-modes, $dm);
 }
 
@@ -70,7 +70,7 @@ $display-modes: array-concat((none, inline, block, inline-block, flex, inline-fl
 ///     line-height: 0;
 ///     text-rendering: optimizeSpeed;
 ///
-///     * {
+///     > * {
 ///       letter-spacing: initial;
 ///       line-height: initial;
 ///     }
@@ -79,7 +79,7 @@ $display-modes: array-concat((none, inline, block, inline-block, flex, inline-fl
 /// @param {string} $dm - the display mode
 /// @param {boolean} $auto-reset-inline-block [false] - auto resets inline block
 @mixin display($dm, $auto-reset-inline-block: false) {
-  @if is-display-mode($dm) {
+  @if is-display($dm) {
     display: $dm;
 
     @if $dm==inline-block and $auto-reset-inline-block==true {
@@ -100,9 +100,9 @@ $box-sizing-modes: array-concat((content-box, border-box), $css-default-modes);
 /// Checks if something is box sizing mode
 ///
 /// @access public
-/// @param {string} $bs - the box sizing mode
-/// @return {boolean}
-@function is-box-sizing-mode($bs) {
+/// @param {string} $bs - the box-sizing mode
+/// @return {boolean} - true if is box-sizing mode
+@function is-box-sizing($bs) {
   @return is-defined($bs) and array-contains($box-sizing-modes, $bs);
 }
 
@@ -120,7 +120,7 @@ $box-sizing-modes: array-concat((content-box, border-box), $css-default-modes);
 /// @access public
 /// @param {string} $bs - the box sizing mode
 @mixin box-sizing($bs) {
-  @if is-box-sizing-mode($bs) {
+  @if is-box-sizing($bs) {
     box-sizing: $bs;
   }
   @else {
@@ -137,8 +137,8 @@ $box-size-modes: array-concat((auto), $css-default-modes);
 /// Checks if something is box size
 ///
 /// @access public
-/// @param {size | string} $s - the box size
-/// @return {boolean}
+/// @param {size | string} $s - the box size value
+/// @return {boolean} - true if is box size value
 @function is-box-size($s) {
   @return is-defined($s) and (is-size($s) or array-contains($box-size-modes, $s));
 }
@@ -152,8 +152,8 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 /// Checks if something is box bound size
 ///
 /// @access public
-/// @param {size | string} $s - the box size
-/// @return {boolean}
+/// @param {size | string} $s - the box bound size value
+/// @return {boolean} - true if is box bound size value
 @function is-box-bound-size($s) {
   @return is-defined($s) and (is-size($s) or array-contains($box-bound-size-modes, $s));
 }
@@ -466,17 +466,17 @@ $box-shadow-modes: array-concat((none), $css-default-modes);
 /// Checks if something is box shadow mode
 ///
 /// @access public
-/// @param {string} $bsm - the box shadow mode
-/// @return {boolean}
+/// @param {string} $bsm - the box-shadow mode
+/// @return {boolean} - true if is box-shadow mode
 @function is-box-shadow-mode($bsm) {
   @return is-defined($bsm) and array-contains($box-shadow-modes, $bsm);
 }
 
-/// Checks if something is box shadow
+/// Checks if something is box shadow value
 ///
 /// @access public
-/// @param {any} $box-shadow - the box shadow
-/// @return {boolean}
+/// @param {any} $box-shadow - the box-shadow value
+/// @return {boolean} - true if is box-shadow value
 @function is-box-shadow($box-shadow) {
   @if is-defined($box-shadow) {
     @if is-box-shadow-mode($box-shadow) {
@@ -590,11 +590,11 @@ $box-shadow-modes: array-concat((none), $css-default-modes);
   @return false;
 }
 
-/// Checks if a list is a box-shadow list (e.g. `0 2px 0 0 #dcffa6 inset, 0 2px 5px 0 #000`)
+/// Checks if a list is a box-shadow values list (e.g. `0 2px 0 0 #dcffa6 inset, 0 2px 5px 0 #000`)
 ///
 /// @access public
-/// @param {array | list} $box-shadows - the box shadows list
-/// @return {boolean}
+/// @param {array | list} $box-shadows - the box-shadow values list
+/// @return {boolean} - true if is box-shadow values list
 @function is-box-shadows($box-shadows) {
   @if is-defined($box-shadows) {
     @if list-separator($box-shadows) != comma {
@@ -651,7 +651,7 @@ $z-index-modes: array-concat((auto), $css-default-modes);
 ///
 /// @access public
 /// @param {integer | string} $zi - the z-index value
-/// @return {boolean}
+/// @return {boolean} - true if is z-index value
 @function is-z-index($zi) {
   @return is-defined($zi) and (is-integer($zi) or array-contains($z-index-modes, $zi));
 }
@@ -684,12 +684,12 @@ $z-index-modes: array-concat((auto), $css-default-modes);
 /// @type list
 $visibility-modes: array-concat((visible, hidden, collapse), $css-default-modes);
 
-/// Checks if something is suppoerted visibility mode
+/// Checks if something is supported visibility mode
 ///
 /// @access public
 /// @param {string} $vm - the visibility mode
-/// @return {boolean}
-@function is-visibility-mode($vm) {
+/// @return {boolean} - true if is visibility mode
+@function is-visibility($vm) {
   @return is-defined($vm) and array-contains($visibility-modes, $vm);
 }
 
@@ -707,7 +707,7 @@ $visibility-modes: array-concat((visible, hidden, collapse), $css-default-modes)
 /// @access public
 /// @param {string} $v - the visibility
 @mixin visibility($v) {
-  @if(is-visibility-mode($v)) {
+  @if(is-visibility($v)) {
     visibility: $v;
   }
   @else {
@@ -721,12 +721,12 @@ $visibility-modes: array-concat((visible, hidden, collapse), $css-default-modes)
 /// @type list
 $backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
 
-/// Checks if something is suppoerted backface-visibility mode
+/// Checks if something is supported backface-visibility mode
 ///
 /// @access public
 /// @param {string} $bv - the backface-visibility mode
-/// @return {boolean}
-@function is-backface-visibility-mode($bv) {
+/// @return {boolean} - true if is backface-visibility mode
+@function is-backface-visibility($bv) {
   @return is-defined($bv) and array-contains($backface-visibility-modes, $bv);
 }
 

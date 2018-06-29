@@ -16,7 +16,7 @@ $css-default-modes: (initial, inherit);
 ///
 /// @access public
 /// @param {any} $cd - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is a css default value
 @function is-css-default($cd) {
   @return is-defined($cd) and array-contains($css-default-modes, $cd);
 }
@@ -25,7 +25,7 @@ $css-default-modes: (initial, inherit);
 ///
 /// @access public
 /// @param {any} $cl - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is a calc length value
 @function is-calc-length($cl) {
   @return is-defined($cl) and string-starts-with($cl + '', 'calc(') and string-ends-with($cl + '', ')');
 }
@@ -35,7 +35,7 @@ $css-default-modes: (initial, inherit);
 /// @access public
 /// @param {any} $cl - the value to check
 /// @requires {function} string-replace
-/// @return {css-expression}
+/// @return {css-expression} - the fixed css calc expression
 @function get-calc-length-expression($cl) {
   @if is-calc-length($cl) {
     @return string-replace(string-replace($cl, 'calc(', ''), ')', '');
@@ -53,7 +53,7 @@ $length-modes: array-concat((auto), $css-default-modes);
 ///
 /// @access public
 /// @param {any} $lm - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is a length mode
 @function is-length-mode($lm) {
   @return is-defined($lm) and array-contains($length-modes, $lm);
 }
@@ -64,11 +64,11 @@ $length-modes: array-concat((auto), $css-default-modes);
 /// @access private
 $relative-length-units: (em, ex, ch, rem, vw, vh, vmin, vmax);
 
-/// Checks if a length value has a relative length unit
+/// Checks if a length value has a relative length unit (em, ex, ch, rem, vw, vh, vmin, vmax)
 ///
 /// @access public
 /// @param {any} $l - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is a relative length
 @function is-relative-length($l) {
   @return is-number($l) and ($l==0 or (not(unitless($l) and (array-contains($relative-length-units, unit($l)) or is-percentage($l)))));
 }
@@ -79,11 +79,11 @@ $relative-length-units: (em, ex, ch, rem, vw, vh, vmin, vmax);
 /// @access private
 $absolute-length-units: (cm, mm, in, px, pt, pc);
 
-/// Checks if a length value has an absolute length unit
+/// Checks if a length value has an absolute length unit (cm, mm, in, px, pt, pc)
 ///
 /// @access public
 /// @param {any} $l - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is a absolute length
 @function is-absolute-length($l) {
   @return is-number($l) and ($l==0 or (not(unitless($l) and (array-contains($absolute-length-units, unit($l))))));
 }
@@ -92,8 +92,8 @@ $absolute-length-units: (cm, mm, in, px, pt, pc);
 /// <br>Relative, Absolute, Percentage, Calc or Length Mode
 ///
 /// @access public
-/// @param {any} $l
-/// @return {boolean}
+/// @param {any} $l - true if is a relative length
+/// @return {boolean} - true if is a length
 @function is-length($l) {
   @return is-defined($l) and (is-relative-length($l) or is-absolute-length($l) or is-calc-length($l) or is-percentage($l) or is-length-mode($l));
 }
@@ -108,7 +108,7 @@ $css-size-modes: array-concat((auto, fill, fill-available, available, fit-conten
 /// Checks if a value is a CSS size.
 ///
 /// @param {any} $s
-/// @return {boolean}
+/// @return {boolean} - true if is a size
 @function is-size($s) {
   @return is-defined($s) and (is-length($s) or array-contains($css-size-modes, $s));
 }
@@ -116,7 +116,7 @@ $css-size-modes: array-concat((auto, fill, fill-available, available, fit-conten
 /// Strips the unit from a value.
 ///
 /// @argument {number} $v
-/// @return {number (unitless)}
+/// @return {number (unitless)} - the unitless value
 /// @example scss - Usage
 ///   $dimension: strip-unit(10em);
 ///

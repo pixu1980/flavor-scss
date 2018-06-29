@@ -16,7 +16,7 @@ $transform-functions-names: (matrix, matrix3d, translate, translate3d, translate
 ///
 /// @access public
 /// @param {string} $t - the transform value (e.g. `scale(2)` or `rotate(10deg)`)
-/// @return {boolean}
+/// @return {string | null} - the transform function name or null
 @function get-transform-function-name($t) {
   @if(string-contains($t, '(') and string-contains($t, ')')) {
     @return string-slice($t, 1, string-index($t, '(') - 1);
@@ -29,7 +29,7 @@ $transform-functions-names: (matrix, matrix3d, translate, translate3d, translate
 ///
 /// @access public
 /// @param {string} $tf - the transform function value (e.g. `scale(2)` or `rotate(10deg)`)
-/// @return {boolean}
+/// @return {boolean} - true if is a transform function value
 @function is-transform-function($tf) {
   $transform-function-name: get-transform-function-name($tf);
 
@@ -46,7 +46,7 @@ $transform-modes: array-concat((none), $css-default-modes);
 ///
 /// @access public
 /// @param {string} $t - the transform value (e.g. `none` or `scale(2)` or `rotate(10deg)`)
-/// @return {boolean}
+/// @return {boolean} - true if is a transform value
 @function is-transform($t) {
   @return is-defined($t) and (array-contains($transform-modes, $t) or is-transform-function($t));
 }
@@ -54,8 +54,8 @@ $transform-modes: array-concat((none), $css-default-modes);
 /// Checks if a space separated list is a transforms values list
 ///
 /// @access public
-/// @param {string | array | list} $ts - the transforms value (e.g. `scale(2) rotate(-45deg)`)
-/// @return {boolean}
+/// @param {string | array | list} $ts - the transforms values list (e.g. `scale(2) rotate(-45deg)`)
+/// @return {boolean} - true if is a transform values list
 @function is-transforms($ts) {
   $is-valid: true;
 
@@ -785,7 +785,7 @@ $transform-origin-y-axis-modes: (top, center, bottom);
 /// @access public
 /// @param {string | size | length} $to - the transform-origin value (e.g. `auto` or `20px`) - <b>Note:</b> for the z-axis can be only a length (e.g. no percentage)
 /// @param {array | list} $to-axis-modes - can be empty list or $transform-origin-x-axis-modes or $transform-origin-y-axis-modes
-/// @return {boolean}
+/// @return {boolean} - true if is a transform-origin value
 @function is-transform-origin($to, $to-axis-modes: ()) {
   @return is-defined($to) and (is-size($to) or if(length($to-axis-modes) > 0, array-contains($to-axis-modes, $to) or is-percentage($to)));
 }
@@ -868,12 +868,12 @@ $transform-origin-y-axis-modes: (top, center, bottom);
 /// @type list
 $transform-style-modes: array-concat((flat, preserve-3d), $css-default-modes);
 
-/// Checks if something is a transform-style value
+/// Checks if something is a transform-style mode
 ///
 /// @link https://www.w3schools.com/cssref/css3_pr_transform-style.asp W3Schools transform-style docs
 /// @access public
-/// @param {string} $ts - the transform-style value (e.g. `preserve-3d` or `initial`)
-/// @return {boolean}
+/// @param {string} $ts - the transform-style mode (e.g. `preserve-3d` or `initial`)
+/// @return {boolean} - true if is a transform-style mode
 @function is-transform-style($ts) {
   @return is-defined($ts) and array-contains($transform-style-modes, $ts);
 }

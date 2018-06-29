@@ -10,7 +10,7 @@
 ///
 /// @access public
 /// @param {string | time} $tt - the transition time value (e.g. `initial` or `20ms`)
-/// @return {boolean}
+/// @return {boolean} - true if is a transform time value
 @function is-transition-time($tt) {
   @return is-defined($tt) and (is-time($tt) or is-css-default($tt));
 }
@@ -69,23 +69,17 @@
   }
 }
 
-/// Transitionable properties
-///
-/// @access private
-/// @type list
-$transitionable-properties: (background, background-color, background-position, background-size, border, border-bottom, border-bottom-color, border-bottom-left-radius, border-bottom-right-radius, border-bottom-width, border-color, border-left, border-left-color, border-left-width, border-right, border-right-color, border-right-width, border-spacing, border-top, border-top-color, border-top-left-radius, border-top-right-radius, border-top-width, bottom, box-shadow, clip, color, column-count, column-gap, column-rule, column-rule-color, column-rule-width, column-width, columns, filter, flex, flex-basis, flex-grow, flex-shrink, font, font-size, font-size-adjust font-stretch font-weight, height, left, letter-spacing, line-height, margin, margin-bottom, margin-left, margin-right, margin-top, max-height, max-width, min-height, min-width, opacity, order, outline, outline-color, outline-offset, outline-width, padding, padding-bottom, padding-left, padding-right, padding-top, perspective, perspective-origin, right, text-decoration-color, text-indent, text-shadow, top, transform, transform-origin, vertical-align, visibility width, word-spacing, z-index);
-
 /// Transition property modes
 ///
 /// @access private
 /// @type list
-$transition-property-modes: array-concat((none, all), $transitionable-properties, $css-default-modes);
+$transition-property-modes: array-concat((none, all), $animateable-properties, $css-default-modes);
 
 /// Checks if something is a transition property value
 ///
 /// @access public
-/// @param {string} $tp - the transform property value (e.g. `none` or `all` or `initial`)
-/// @return {boolean}
+/// @param {string} $tp - the transform property value (e.g. `none`, `all`, `transform` or `initial` )
+/// @return {boolean} - true if is a transform property value
 @function is-transition-property($tp) {
   @return is-defined($tp) and array-contains($transition-property-modes, $tp);
 }
@@ -123,11 +117,11 @@ $transition-property-modes: array-concat((none, all), $transitionable-properties
 /// @type list
 $transition-timing-functions-names: (steps, cubic-bezier);
 
-/// Extracts transition function name from a transition value
+/// Extracts transition function name from a transform-timing-function value
 ///
 /// @access public
-/// @param {string} $t - the transition value (e.g. `cubic-bezier(0,0,1,1)`)
-/// @return {boolean}
+/// @param {string} $t - the transform-timing-function value (e.g. `cubic-bezier(0,0,1,1)`)
+/// @return {string | null} - the transform-timing-function name or null
 @function get-transition-timing-function-name($t) {
   @if(string-contains($t, '(') and string-contains($t, ')')) {
     @return str-slice($t, 1, str-index($t, '(') - 1);
@@ -140,7 +134,7 @@ $transition-timing-functions-names: (steps, cubic-bezier);
 ///
 /// @access public
 /// @param {string} $t - the transition value (e.g. `cubic-bezier(0,0,1,1)`)
-/// @return {boolean}
+/// @return {boolean} - true if is a transform-timing-function value
 @function is-transition-timing-function($t) {
   $transition-timing-function-name: get-transition-timing-function-name($t);
 
@@ -153,11 +147,11 @@ $transition-timing-functions-names: (steps, cubic-bezier);
 /// @type list
 $transition-timing-modes: array-concat((linear, ease, ease-in, ease-out, ease-in-out, step-start, step-end), $css-default-modes);
 
-/// Checks if something is a transition timing mode or function value
+/// Checks if something is a transition-timing-function value
 ///
 /// @access public
-/// @param {string} $ttf - the transition timing function value (e.g. `cubic-bezier(0,0,1,1)` or `ease-in-out`)
-/// @return {boolean}
+/// @param {string} $ttf - the transition-timing-function value (e.g. `cubic-bezier(0,0,1,1)` or `ease-in-out`)
+/// @return {boolean} - true if is a transition-timing-function value
 @function is-transition-timing-mode-or-function($ttf) {
   @return is-defined($ttf) and (array-contains($transition-timing-modes, $ttf) or is-transition-timing-function($ttf));
 }
@@ -193,7 +187,7 @@ $transition-timing-modes: array-concat((linear, ease, ease-in, ease-out, ease-in
 ///
 /// @access public
 /// @param {string} $transition - the transition value (e.g. `background .3s linear 0`)
-/// @return {boolean}
+/// @return {boolean} - true if is a transition value
 @function is-transition($transition) {
   $defaults: (property: all, duration: 0s, timing: ease, delay: 0s);
 
@@ -268,11 +262,11 @@ $transition-timing-modes: array-concat((linear, ease, ease-in, ease-out, ease-in
   @return $is-transition-valid;
 }
 
-/// Checks if a comma separated list is a transitions values list
+/// Checks if a comma separated list is a transition values list
 ///
 /// @access public
-/// @param {string | array | list} $transitions - the transitions list (e.g. `background .3s linear 0, top .2s ease-in-out 1s`)
-/// @return {boolean}
+/// @param {string | array | list} $transitions - the transition values list (e.g. `background .3s linear 0, top .2s ease-in-out 1s`)
+/// @return {boolean} - true if is a transition values list
 @function is-transitions($transitions...) {
   $is-transitions-valid: true;
 

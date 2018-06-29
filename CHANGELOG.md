@@ -1,3 +1,36 @@
+## [Version 1.1.2](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.1.2) (2018-6-28)
+
+### Bug fixes
+
+- fixed the documentation: [`35a48a8`](https://github.com/blackmirror1980/flavor-scss/commit/35a48a8)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.1.1...v1.1.2)
+
+## [Version 1.1.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.1.1) (2018-6-26)
+
+### Bug fixes
+
+- bugfix for will-change: [`8be62d7`](https://github.com/blackmirror1980/flavor-scss/commit/8be62d7)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.1.0...v1.1.1)
+
+## [Version 2.0.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v2.0.0) (2018-6-26)
+
+### Breaking changes
+
+- added will change support: [`bb18f4c`](https://github.com/blackmirror1980/flavor-scss/commit/bb18f4c)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.0.11...v2.0.0)
+
+## [Version 1.0.11](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.0.11) (2018-5-29)
+
+### Bug fixes
+
+- updated package json: [`d65b8bd`](https://github.com/blackmirror1980/flavor-scss/commit/d65b8bd)
+- bug fix reset-inline-block: [`912038e`](https://github.com/blackmirror1980/flavor-scss/commit/912038e)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.0.10...v1.0.11)
+
 ## [Version 1.0.10](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.0.10) (2018-5-22)
 
 ### Bug fixes

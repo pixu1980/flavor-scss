@@ -16,7 +16,7 @@ $angle-units: (deg, rad, grad, turn);
 ///
 /// @access public
 /// @param {number (with unit)} $a - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is a corrent angle value
 /// @example scss - Usage
 ///   .element {
 ///     $a: 30deg;

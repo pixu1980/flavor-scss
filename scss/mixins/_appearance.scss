@@ -17,7 +17,7 @@ $appearance-modes: (none, button, button-arrow-down, button-arrow-next, button-a
 /// @link https://developer.mozilla.org/en-US/docs/Web/CSS/-moz-appearance MDN web docs for appearance
 /// @access public
 /// @param {string} $a - the appearance mode
-/// @return {boolean}
+/// @return {boolean} - true if is appearance mode
 @function is-appearance-mode($am) {
   @return is-defined($am) and array-contains($appearance-modes, $am);
 }

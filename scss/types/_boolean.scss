@@ -10,7 +10,7 @@
 ///
 /// @access public
 /// @param {boolean} $b - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is a boolean value
 @function is-boolean($b) {
   @return is-defined($b) and type-of($b)==bool;
 }

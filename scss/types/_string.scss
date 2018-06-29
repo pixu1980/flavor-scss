@@ -10,7 +10,7 @@
 ///
 /// @access public
 /// @param {string} $s - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is a string
 @function is-string($s) {
   @return is-defined($s) and type-of($s)==string;
 }
@@ -19,7 +19,7 @@
 ///
 /// @access public
 /// @param {any} $a - the value to convert
-/// @return {string}
+/// @return {string} - the converted string
 @function to-string($a) {
   @return inspect($a);
 }
@@ -30,7 +30,7 @@
 /// @link https://sass-lang.com/documentation/Sass/Script/Functions.html#str_length-instance_method SassLang str-length docs
 /// @access public
 /// @param {string} $s - the string to count
-/// @return {number}
+/// @return {integer} - the string length
 @function string-length($s) {
   @return str-length($s);
 }
@@ -42,7 +42,7 @@
 /// @access public
 /// @param {string} $h - the haystack
 /// @param {string} $n - the needle
-/// @return {number}
+/// @return {integer} - the string index position of the needle
 @function string-index($h, $n) {
   @return str-index($h, $n);
 }
@@ -55,7 +55,7 @@
 /// @param {string} $s - the string to modify
 /// @param {string} $i - the string to insert into
 /// @param {number} $p - the position index to use for insertion
-/// @return {string}
+/// @return {string} - the new string
 @function string-insert($s, $i, $p) {
   @return str-insert($s, $i, $p);
 }
@@ -67,9 +67,9 @@
 /// @link https://sass-lang.com/documentation/Sass/Script/Functions.html#str_slice-instance_method SassLang str-slice docs
 /// @access public
 /// @param {string} $s - the string
-/// @param {string} $from [1] - the needle
-/// @param {string} $to [-1] - the needle
-/// @return {number}
+/// @param {string} $from [1] - the from position index
+/// @param {string} $to [-1] - the to position index
+/// @return {string} - the sub string needle
 @function string-slice($s, $from: 1, $to: -1) {
   @return str-slice($s, $from, $to);
 }
@@ -82,7 +82,7 @@
 /// @requires {function} is-string
 /// @requires {function} string-length
 /// @requires {function} string-slice
-/// @return {boolean}
+/// @return {boolean} - true if the string starts with the needle
 @function string-starts-with($h, $n) {
   @if is-string($h) and is-string($n) {
     @return string-slice($h, 1, string-length($n))==$n;
@@ -99,7 +99,7 @@
 /// @param {string} $n - the needle
 /// @requires {function} is-string
 /// @requires {function} string-index
-/// @return {boolean}
+/// @return {boolean} - true if the string contains the needle
 @function string-contains($h, $n) {
   @if is-string($h) and is-string($n) {
     @return string-index($h, $n) > 0;
@@ -117,7 +117,7 @@
 /// @requires {function} is-string
 /// @requires {function} string-length
 /// @requires {function} string-slice
-/// @return {boolean}
+/// @return {boolean} - true if the string ends with the needle
 @function string-ends-with($h, $n) {
   @if is-string($h) and is-string($n) {
     $h-length: string-length($h);
@@ -138,7 +138,7 @@
 /// @requires {function} array-concat
 /// @requires {function} string-index
 /// @requires {function} string-slice
-/// @return {list | array}
+/// @return {list | array} - the splitted array
 @function string-split($s, $sep: '.') {
   $split: ();
 

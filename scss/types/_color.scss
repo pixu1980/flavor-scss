@@ -10,7 +10,7 @@
 ///
 /// @access public
 /// @param {color} $c - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is a color value
 @function is-color($c) {
   @return is-defined($c) and type-of($c)==color;
 }
@@ -25,7 +25,7 @@ $color-modes: array-concat((transparent), $css-default-modes);
 ///
 /// @access public
 /// @param {color} $c - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is a css color value
 @function is-css-color($c) {
   @return is-defined($c) and (is-color($c) or array-contains($color-modes, $c));
 }

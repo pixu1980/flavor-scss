@@ -10,7 +10,7 @@
 ///
 /// @access public
 /// @param {any} $n - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is null
 @function is-null($n) {
   @return type-of($n)==null;
 }
@@ -19,7 +19,7 @@
 ///
 /// @access public
 /// @param {any} $d - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is defined
 @function is-defined($d) {
   @return $d and not is-null($d);
 }
@@ -30,7 +30,7 @@
 /// @param {array | list} $list - the haystack list to check
 /// @param {integer} $index - the needle index
 /// @param {any} $default [null] - the default value to fallback
-/// @return {any}
+/// @return {any} - the nth-value
 @function nth-value($list, $index, $default: null) {
   @return if(length($list) >= $index, nth($list, $index), $default);
 }

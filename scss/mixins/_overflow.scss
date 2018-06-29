@@ -16,8 +16,8 @@ $overflow-modes: array-concat((visible, hidden, scroll, overlay, unset, auto), $
 ///
 /// @access public
 /// @param {string} $o - the overflow mode
-/// @return {boolean}
-@function is-overflow-mode($o) {
+/// @return {boolean} - true if is overflow mode
+@function is-overflow($o) {
   @return is-defined($o) and array-contains($overflow-modes, $o);
 }
 
@@ -50,7 +50,7 @@ $overflow-modes: array-concat((visible, hidden, scroll, overlay, unset, auto), $
 @mixin overflow($o) {
   $overflow-x: nth-value($o, 1);
 
-  @if is-overflow-mode($overflow-x) {
+  @if is-overflow($overflow-x) {
     overflow-x: $overflow-x;
   }
   @else {
@@ -59,7 +59,7 @@ $overflow-modes: array-concat((visible, hidden, scroll, overlay, unset, auto), $
 
   $overflow-y: nth-value($o, 2, $overflow-x);
 
-  @if is-overflow-mode($overflow-y) {
+  @if is-overflow($overflow-y) {
     overflow-y: $overflow-y;
   }
   @else {

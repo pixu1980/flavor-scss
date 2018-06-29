@@ -17,7 +17,7 @@ $filter-functions-names: (blur, brightness, contrast, drop-shadow, grayscale, hu
 /// @requires {function} string-contains
 /// @access public
 /// @param {string} $ff - the filter string (e.g. `blur(5px)`)
-/// @return {string | null} (e.g. `blur`)
+/// @return {string | null} - the filter function name or null
 @function get-filter-function-name($ff) {
   @if(string-contains($ff, '(') and string-contains($ff, ')')) {
     @return string-slice($ff, 1, string-index($ff, '(') - 1);
@@ -30,7 +30,7 @@ $filter-functions-names: (blur, brightness, contrast, drop-shadow, grayscale, hu
 ///
 /// @access public
 /// @param {string} $ff - the filter string (e.g. `blur(5px)`)
-/// @return {boolean}
+/// @return {boolean} - true if is filter function value
 @function is-filter-function($ff) {
   $filter-function-name: get-filter-function-name($ff);
 
@@ -47,8 +47,8 @@ $filter-modes: array-concat((none), $css-default-modes);
 ///
 /// @access public
 /// @param {string} $filter - the filter string (e.g. `blur(5px)` or `'none`)
-/// @return {boolean}
-@function is-filter-mode-or-function($filter) {
+/// @return {boolean} - true if is filter mode or filter function value
+@function is-filter($filter) {
   @return is-defined($filter) and (array-contains($filter-modes, $filter) or is-filter-function($filter));
 }
 
@@ -71,7 +71,7 @@ $filter-modes: array-concat((none), $css-default-modes);
 /// @access public
 /// @param {string} $filter - the filter string (e.g. `blur(5px)` or `none`)
 @mixin filter($filter) {
-  @if is-filter-mode-or-function($filter) {
+  @if is-filter($filter) {
     @include prefixer(filter, $filter);
   }
   @else {

@@ -16,7 +16,7 @@ $time-units: (s, ms);
 ///
 /// @access public
 /// @param {any} $t - the value to check
-/// @return {boolean}
+/// @return {boolean} - true if is a time value
 @function is-time($t) {
   @return is-number($t) and array-contains($time-units, unit($t));
 }
