@@ -1,3 +1,15 @@
+## [Version 1.2.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.2.0) (2018-7-2)
+
+### New features
+
+- - bug fix for box shadows mixing    - not you can use your own box-shadows comma separated list variable    - and call the mixin spreading the variable: [`879960e`](https://github.com/blackmirror1980/flavor-scss/commit/879960e)
+
+### Bug fixes
+
+- added font-style mixin & improved the font mixin: [`2e3587e`](https://github.com/blackmirror1980/flavor-scss/commit/2e3587e)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.1.2...v1.2.0)
+
 ## [Version 1.1.3](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.1.3) (2018-6-29)
 
 ### Bug fixes
