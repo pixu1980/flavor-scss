@@ -890,6 +890,192 @@ $text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
   }
 }
 
+/// Box shadow modes
+///
+/// @access private
+/// @type list
+$text-shadow-modes: array-concat((none), $css-default-modes);
+
+/// Checks if something is text shadow mode
+///
+/// @access public
+/// @param {string} $tsm - the text-shadow mode
+/// @return {boolean} - true if is text-shadow mode
+@function is-text-shadow-mode($tsm) {
+  @return is-defined($tsm) and array-contains($text-shadow-modes, $tsm);
+}
+
+/// Checks if something is text shadow value
+///
+/// @access public
+/// @param {any} $text-shadow - the text-shadow value
+/// @return {boolean} - true if is text-shadow value
+@function is-text-shadow($text-shadow) {
+  @if is-defined($text-shadow) {
+    @if is-text-shadow-mode($text-shadow) {
+      @return true;
+    }
+    @else {
+      // $defaults: (h-offset: 0, v-offset: 0, blur: 0, spread: 0, color: transparent, inset: null); // TODO: add spread & inset support when available
+      $defaults: (h-offset: 0, v-offset: 0, blur: 0, color: transparent);
+
+      @if is-object($text-shadow) {
+        $text-shadow: extend($defaults, $text-shadow);
+      }
+      @else {
+        $text-shadow-h-offset: nth-value($text-shadow, 1);
+        $text-shadow-v-offset: nth-value($text-shadow, 2);
+        $text-shadow-blur: nth-value($text-shadow, 3);
+        $text-shadow-color: nth-value($text-shadow, 4);
+        // $text-shadow-spread: nth-value($text-shadow, 4);
+        // $text-shadow-color: nth-value($text-shadow, 5);
+        // $text-shadow-inset: nth-value($text-shadow, 6);
+
+        $text-shadow: extend($defaults, ());
+
+        @if is-defined($text-shadow-h-offset) {
+          $text-shadow: extend($text-shadow, (h-offset: $text-shadow-h-offset));
+        }
+
+        @if is-defined($text-shadow-v-offset) {
+          $text-shadow: extend($text-shadow, (v-offset: $text-shadow-v-offset));
+        }
+
+        @if is-defined($text-shadow-blur) {
+          $text-shadow: extend($text-shadow, (blur: $text-shadow-blur));
+        }
+
+        // @if is-defined($text-shadow-spread) {
+        //   $text-shadow: extend($text-shadow, (spread: $text-shadow-spread));
+        // }
+
+        @if is-defined($text-shadow-color) {
+          $text-shadow: extend($text-shadow, (color: $text-shadow-color));
+        }
+
+        // @if is-defined($text-shadow-inset) {
+        //   $text-shadow: extend($text-shadow, (inset: $text-shadow-inset));
+        // }
+      }
+
+      $is-text-shadow-valid: true;
+
+      $text-shadow-h-offset: get($text-shadow, h-offset);
+
+      @if not is-length($text-shadow-h-offset) {
+        $is-text-shadow-valid: false;
+
+        @warn '`text-shadow h-offset: #{$text-shadow-h-offset}` is not a valid css length value';
+      }
+
+      $text-shadow-v-offset: get($text-shadow, v-offset);
+
+      @if $is-text-shadow-valid {
+        @if not is-length($text-shadow-v-offset) {
+          $is-text-shadow-valid: false;
+
+          @warn '`text-shadow v-offset: #{$text-shadow-v-offset}` is not a valid css length value';
+        }
+      }
+
+      $text-shadow-blur: get($text-shadow, blur);
+
+      @if $is-text-shadow-valid {
+        @if not is-length($text-shadow-blur) {
+          $is-text-shadow-valid: false;
+
+          @warn '`text-shadow blur: #{$text-shadow-blur}` is not a valid css length value';
+        }
+      }
+
+      // $text-shadow-spread: get($text-shadow, spread);
+
+      // @if $is-text-shadow-valid {
+      //   @if not is-length($text-shadow-spread) {
+      //     $is-text-shadow-valid: false;
+
+      //     @warn '`text-shadow spread: #{$text-shadow-spread}` is not a valid css length value';
+      //   }
+      // }
+
+      $text-shadow-color: get($text-shadow, color);
+
+      @if $is-text-shadow-valid {
+        @if not is-css-color($text-shadow-color) {
+          $is-text-shadow-valid: false;
+
+          @warn '`text-shadow color: #{$text-shadow-color}` is not a valid css color value';
+        }
+      }
+
+      // $text-shadow-inset: get($text-shadow, inset);
+
+      // @if $is-text-shadow-valid {
+      //   @if is-string($text-shadow-inset) and $text-shadow-inset !=inset {
+      //     $is-text-shadow-valid: false;
+
+      //     @warn '`text-shadow inset: #{$text-shadow-inset}` is not a valid css inset value';
+      //   }
+      // }
+
+      @return $is-text-shadow-valid;
+    }
+  }
+
+  @return false;
+}
+
+/// Checks if a list is a text-shadow values list (e.g. `0 2px 0 0 #dcffa6 inset, 0 2px 5px 0 #000`)
+///
+/// @access public
+/// @param {array | list} $text-shadows - the text-shadow values list
+/// @return {boolean} - true if is text-shadow values list
+@function is-text-shadows($text-shadows) {
+  @if is-defined($text-shadows) {
+    $is-text-shadows-valid: true;
+
+    @each $text-shadow in $text-shadows {
+      @if $is-text-shadows-valid {
+        $is-text-shadows-valid: is-text-shadow($text-shadow);
+      }
+    }
+
+    @return $is-text-shadows-valid;
+  }
+
+  @return false;
+}
+
+/// Box shadow mixin
+///
+/// @example scss - Usage
+///   .text-shadow-element {
+///     @include text-shadow(0 2px 0 #dcffa6, 0 2px 5px 0 #000);
+///   }
+///
+/// @example css - Output
+///   .text-shadow-element {
+///     -webkit-text-shadow: 0 2px 0 #dcffa6, 0 2px 5px 0 #000;
+///     -moz-text-shadow: 0 2px 0 #dcffa6, 0 2px 5px 0 #000;
+///     -ms-text-shadow: 0 2px 0 #dcffa6, 0 2px 5px 0 #000;
+///     -o-text-shadow: 0 2px 0 #dcffa6, 0 2px 5px 0 #000;
+///     text-shadow: 0 2px 0 #dcffa6, 0 2px 5px 0 #000;
+///   }
+/// @access public
+/// @param {shadow} $text-shadows... - the text shadows list
+@mixin text-shadow($text-shadows...) {
+  @if list-separator($text-shadows) != comma {
+    $text-shadows: ($text-shadows,);
+  }
+
+  @if is-text-shadows($text-shadows) {
+    @include prefixer(text-shadow, $text-shadows);
+  }
+  @else {
+    @warn '`text-shadow: #{$text-shadows}` one or more are not valid css text-shadow values';
+  }
+}
+
 /// Ellipsis mixin
 /// <br>useful to ellipse text containers also in multiline mode
 ///
