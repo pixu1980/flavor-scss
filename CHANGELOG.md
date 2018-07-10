@@ -1,3 +1,11 @@
+## [Version 1.2.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.2.1) (2018-7-10)
+
+### Bug fixes
+
+- added text-shadow support: [`9ec0f99`](https://github.com/blackmirror1980/flavor-scss/commit/9ec0f99)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.2.0...v1.2.1)
+
 ## [Version 1.2.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.2.0) (2018-7-2)
 
 ### New features
