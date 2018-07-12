@@ -890,7 +890,7 @@ $text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
   }
 }
 
-/// Box shadow modes
+/// Text shadow modes
 ///
 /// @access private
 /// @type list
@@ -916,7 +916,8 @@ $text-shadow-modes: array-concat((none), $css-default-modes);
       @return true;
     }
     @else {
-      // $defaults: (h-offset: 0, v-offset: 0, blur: 0, spread: 0, color: transparent, inset: null); // TODO: add spread & inset support when available
+      // $defaults: (h-offset: 0, v-offset: 0, blur: 0, spread: 0, color: transparent, inset: null);
+      // TODO: add spread & inset support when available
       $defaults: (h-offset: 0, v-offset: 0, blur: 0, color: transparent);
 
       @if is-object($text-shadow) {
@@ -1025,7 +1026,7 @@ $text-shadow-modes: array-concat((none), $css-default-modes);
   @return false;
 }
 
-/// Checks if a list is a text-shadow values list (e.g. `0 2px 0 0 #dcffa6 inset, 0 2px 5px 0 #000`)
+/// Checks if a list is a text-shadow values list (e.g. `0 2px 0 #dcffa6, 0 2px 5px #000`)
 ///
 /// @access public
 /// @param {array | list} $text-shadows - the text-shadow values list
@@ -1046,20 +1047,20 @@ $text-shadow-modes: array-concat((none), $css-default-modes);
   @return false;
 }
 
-/// Box shadow mixin
+/// Text shadow mixin
 ///
 /// @example scss - Usage
 ///   .text-shadow-element {
-///     @include text-shadow(0 2px 0 #dcffa6, 0 2px 5px 0 #000);
+///     @include text-shadow(0 2px 0 #dcffa6, 0 2px 5px #000);
 ///   }
 ///
 /// @example css - Output
 ///   .text-shadow-element {
-///     -webkit-text-shadow: 0 2px 0 #dcffa6, 0 2px 5px 0 #000;
-///     -moz-text-shadow: 0 2px 0 #dcffa6, 0 2px 5px 0 #000;
-///     -ms-text-shadow: 0 2px 0 #dcffa6, 0 2px 5px 0 #000;
-///     -o-text-shadow: 0 2px 0 #dcffa6, 0 2px 5px 0 #000;
-///     text-shadow: 0 2px 0 #dcffa6, 0 2px 5px 0 #000;
+///     -webkit-text-shadow: 0 2px 0 #dcffa6, 0 2px 5px #000;
+///     -moz-text-shadow: 0 2px 0 #dcffa6, 0 2px 5px #000;
+///     -ms-text-shadow: 0 2px 0 #dcffa6, 0 2px 5px #000;
+///     -o-text-shadow: 0 2px 0 #dcffa6, 0 2px 5px #000;
+///     text-shadow: 0 2px 0 #dcffa6, 0 2px 5px #000;
 ///   }
 /// @access public
 /// @param {shadow} $text-shadows... - the text shadows list

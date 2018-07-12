@@ -4,9 +4,10 @@
   "description": "Flavor SCSS - Advanced type checking Sass/SCSS Framework with Mixins & Helpers and a fully customizable Grid System",
   "main": "scss/flavor.scss",
   "scripts": {
-    "git-prepare": "changelog && echo 'CHANGELOG.md file built' && npm run readme && npm run docs",
-    "docs": "sassdoc scss && echo 'docs built' || echo 'docs building error'",
+    "changelog": "changelog && echo 'CHANGELOG.md file built' || echo 'CHANGELOG.md building error'",
     "readme": "pkg-2-readme package.json > README.md -t \"./pkg-2-readme.template.md\" && echo 'README.md file built' || echo 'README.md building error'",
+    "docs": "sassdoc scss && echo 'docs built' || echo 'docs building error'",
+    "git-prepare": "npm run changelog && npm run readme && npm run docs",
     "test": "sass-lint -c scss-lint.yml -v -q && echo 'scss lint ok' || echo 'scss lint error'"
   },
   "repository": {
