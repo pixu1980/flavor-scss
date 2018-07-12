@@ -33,6 +33,19 @@
   @return is-number($f) and floor($f)!=$f;
 }
 
+/// Removes the unit of something
+///
+/// @access public
+/// @param {number} $n - the something ;-)
+/// @return {number} - the something unitstripped ;-)
+@function unitstrip($n) {
+  @if is-number($n) == 'number' and not unitless($n) {
+    @return $n / ($n * 0 + 1);
+  }
+
+  @return $n;
+}
+
 /// Checks if a number is between two numbers, with an include bounds options defaulted to true
 ///
 /// @access public
@@ -65,5 +78,5 @@
 /// @param {any} $pn - the value to check
 /// @return {boolean} - true if is percentage floating number
 @function is-percentage-number($pn) {
-  @return is-number($pn) and unitless($pn)==$pn and is-number-between($pn, 0, 1);
+  @return is-number($pn) and is-number-between(unitstrip($pn), 0, 1);
 }
