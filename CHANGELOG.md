@@ -1,3 +1,11 @@
+## [Version 1.2.3](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.2.3) (2018-7-12)
+
+### Bug fixes
+
+- hotfix filter: [`b9c42a0`](https://github.com/blackmirror1980/flavor-scss/commit/b9c42a0)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.2.2...v1.2.3)
+
 ## [Version 1.2.2](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.2.2) (2018-7-12)
 
 ### Bug fixes
