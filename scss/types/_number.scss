@@ -39,7 +39,7 @@
 /// @param {number} $n - the something ;-)
 /// @return {number} - the something unitstripped ;-)
 @function unitstrip($n) {
-  @if is-number($n) == 'number' and not unitless($n) {
+  @if is-number($n) and not unitless($n) {
     @return $n / ($n * 0 + 1);
   }
 
