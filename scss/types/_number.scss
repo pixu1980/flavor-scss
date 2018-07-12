@@ -65,5 +65,5 @@
 /// @param {any} $pn - the value to check
 /// @return {boolean} - true if is percentage floating number
 @function is-percentage-number($pn) {
-  @return is-float($pn) and unitless($pn)==$pn and is-number-between($pn, 0, 1);
+  @return is-number($pn) and unitless($pn)==$pn and is-number-between($pn, 0, 1);
 }
