@@ -1,3 +1,11 @@
+## [Version 1.2.5](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.2.5) (2018-7-12)
+
+### Bug fixes
+
+- unitstrip hotfix: [`865c5e3`](https://github.com/blackmirror1980/flavor-scss/commit/865c5e3)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.2.4...v1.2.5)
+
 ## [Version 1.2.4](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.2.4) (2018-7-12)
 
 ### Bug fixes
