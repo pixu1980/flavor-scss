@@ -2,7 +2,7 @@
 
 ### Bug fixes
 
-- fiex is-percentage-number: [`b45ae43`](https://github.com/blackmirror1980/flavor-scss/commit/b45ae43)
+- fix is-percentage-number: [`b45ae43`](https://github.com/blackmirror1980/flavor-scss/commit/b45ae43)
 
 [...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.2.1...v1.2.2)
 
