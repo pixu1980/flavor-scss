@@ -1,3 +1,11 @@
+## [Version 1.2.2](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.2.2) (2018-7-12)
+
+### Bug fixes
+
+- fiex is-percentage-number: [`b45ae43`](https://github.com/blackmirror1980/flavor-scss/commit/b45ae43)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.2.1...v1.2.2)
+
 ## [Version 1.2.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.2.1) (2018-7-10)
 
 ### Bug fixes
