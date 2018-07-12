@@ -1,3 +1,11 @@
+## [Version 1.2.4](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.2.4) (2018-7-12)
+
+### Bug fixes
+
+- added unitstrip function is-percentage-number hotfix: [`0b9e012`](https://github.com/blackmirror1980/flavor-scss/commit/0b9e012)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.2.3...v1.2.4)
+
 ## [Version 1.2.3](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.2.3) (2018-7-12)
 
 ### Bug fixes
