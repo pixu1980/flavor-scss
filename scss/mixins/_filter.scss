@@ -118,6 +118,6 @@ $filter-modes: array-concat((none), $css-default-modes);
     opacity: $o;
   }
   @else {
-    @warn '`opacity: #{$opacity}` is not a valid opacity value';
+    @warn '`opacity: #{$o}` is not a valid opacity value';
   }
 }
