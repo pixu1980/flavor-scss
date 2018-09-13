@@ -1124,19 +1124,25 @@ $text-shadow-modes: array-concat((none), $css-default-modes);
 /// @param {string} $text-overflow [ellipsis] - the text to use for overflowing
 @mixin ellipsis($multiline: false, $width: 100%, $font-size: $font-size-base, $line-height: $line-height-base, $lines-to-show: 3, $text-overflow: ellipsis) {
   @if $multiline {
-    $height: $font-size * $line-height * $lines-to-show; // Fallback for non-webkit
     $max-width: $width;
-    $min-height: $font-size * $line-height * $lines-to-show; // Fallback for non-webkit
+    $height: $line-height * $lines-to-show; // fallback for non-webkit
+    $min-height: $height; // fallback for non-webkit
 
-    @include display(block); // Fallback for non-webkit
-    @include box-size(null $height null $min-height $max-width);
     @include margin(0 auto);
     @include font($font-size $line-height);
 
+    @supports (display: -webkit-box) and (-webkit-line-clamp: $lines-to-show) and (-webkit-box-orient: vertical) {
+      display: -webkit-box;
+      -webkit-line-clamp: $lines-to-show;
+      -webkit-box-orient: vertical;
 
-    display: -webkit-box;
-    -webkit-line-clamp: $lines-to-show;
-    -webkit-box-orient: vertical;
+      @include box-size(null null null null $max-width);
+    }
+
+    @supports (not ((display: -webkit-box) and (-webkit-line-clamp: $lines-to-show) and (-webkit-box-orient: vertical))) {
+      @include display(block); // fallback for non-webkit
+      @include box-size(null $height null $min-height $max-width);
+    }
   }
   @else {
     @include display(inline-block);
