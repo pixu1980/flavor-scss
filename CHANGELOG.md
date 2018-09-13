@@ -1,3 +1,11 @@
+## [Version 1.2.6](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.2.6) (2018-9-13)
+
+### Bug fixes
+
+- updated ellipsis multiline mixin: [`84677b5`](https://github.com/blackmirror1980/flavor-scss/commit/84677b5)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.2.5...v1.2.6)
+
 ## [Version 1.2.5](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.2.5) (2018-7-12)
 
 ### Bug fixes
