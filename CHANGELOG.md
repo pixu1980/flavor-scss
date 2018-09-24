@@ -1,3 +1,11 @@
+## [Version 1.3.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.3.0) (2018-9-24)
+
+### New features
+
+- added text-stroke mixin and support: [`8069f3e`](https://github.com/blackmirror1980/flavor-scss/commit/8069f3e)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.2.6...v1.3.0)
+
 ## [Version 1.2.6](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.2.6) (2018-9-13)
 
 ### Bug fixes
