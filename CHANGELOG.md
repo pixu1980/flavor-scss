@@ -1,3 +1,11 @@
+## [Version 1.4.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.4.0) (2018-9-25)
+
+### New features
+
+- added linear and repeating-linear gradient mixins: [`960fe89`](https://github.com/blackmirror1980/flavor-scss/commit/960fe89)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.3.0...v1.4.0)
+
 ## [Version 1.3.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.3.0) (2018-9-24)
 
 ### New features
