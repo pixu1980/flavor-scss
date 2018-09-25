@@ -71,5 +71,27 @@
 
   $join-string: str-slice($join-string, str-length($sep) + 1);
 
-  @return $join-string
+  @return $join-string;
+}
+
+@function array-remove-nth($list, $index) {
+  $result: ();
+
+  @each $item in $list {
+    $index-of: index($list, $item);
+
+    @if $index-of != $index {
+      $result: append($result, $item, list-separator($list));
+    }
+  }
+
+  @return $result;
+}
+
+@function array-head($list) {
+  @return nth-value($list, 1);
+}
+
+@function array-tail($list) {
+  @return array-remove-nth($list, 1);
 }

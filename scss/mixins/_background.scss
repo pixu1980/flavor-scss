@@ -377,3 +377,118 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
     }
   }
 }
+
+@function is-gradient-color-stop($color-stop) {
+  @if list-separator($color-stop) == space {
+    $color: nth-value($color-stop, 1);
+
+    @if length($color-stop) > 1 {
+      $stop: nth-value($color-stop, 2);
+
+      @return is-color($color) and (is-relative-length($stop) or is-absolute-length($stop));
+    }
+    @else {
+      @return is-color($color);
+    }
+  }
+
+  @return is-color($color-stop);
+}
+
+@function is-gradient-color-stops($color-stops...) {
+  @if list-separator($color-stops) == comma {
+    $is-valid: true;
+
+    @each $color-stop in $color-stops {
+      @if $is-valid {
+        $is-valid: is-gradient-color-stop($color-stop);
+      }
+    }
+
+    @return $is-valid;
+  }
+
+  @return false;
+}
+
+$linear-gradient-directions: (to top, to top right, to right top, to right, to bottom right, to right bottom, to bottom, to bottom left, to left bottom, to left, to left top, to top left);
+
+@function is-linear-gradient-direction($gdir) {
+  @return is-defined($gdir) and array-contains($linear-gradient-directions, $gdir);
+}
+
+@function is-linear-gradient-definition($gdef) {
+  @return is-defined($gdef) and (is-linear-gradient-direction($gdef) or is-angle($gdef));
+}
+
+@function is-linear-gradient-options($options...) {
+  @if list-separator($options) == comma {
+    $definition: array-head($options);
+    $color-stops: $options;
+
+    @if is-linear-gradient-definition($definition) {
+      $color-stops: array-tail($options);
+    }
+    @else {
+      $definition: to bottom;
+    }
+
+    @return is-linear-gradient-definition($definition) and is-gradient-color-stops($color-stops...);
+  }
+
+  @return false;
+}
+
+@mixin linear-gradient-base($function: linear-gradient, $options...) {
+  @if is-linear-gradient-options($options...) {
+    $definition: array-head($options);
+    $color-stops: $options;
+
+    @if is-linear-gradient-definition($definition) {
+      $color-stops: array-tail($options);
+    }
+    @else {
+      $definition: to bottom;
+    }
+
+    $linear-gradient-function-call: $function + '(' + $definition + ',' + $color-stops + ')';
+
+    background-image: #{$linear-gradient-function-call};
+  }
+}
+
+@mixin linear-gradient($options...) {
+  @include linear-gradient-base(linear-gradient, $options...);
+}
+
+@mixin repeating-linear-gradient($options...) {
+  @include linear-gradient-base(repeating-linear-gradient, $options...);
+}
+
+// $radial-gradient-shapes: (circle, ellipse);
+
+// @function is-radial-gradient-shape($gs) {
+//   @return is-defined($gs) and array-contains($radial-gradient-shapes, $gs);
+// }
+
+// $radial-gradient-extent-modes: (closest-side, closest-corner, farthest-side, farthest-corner, cover, contain);
+
+// @function is-radial-gradient-extent($ge) {
+//   @return is-defined($ge) and array-contains($radial-gradient-extent-modes, $ge);
+// }
+
+// @function is-radial-gradient-position($gp) {
+//   @return is-background-position($gp);
+// }
+
+// @function is-radial-gradient-definition($gd) {
+//   @if is-array($gd) and list-separator($gd) == space {
+//     $gradient-definition: string-split($gd, ' at ');
+
+//     @warn($gradient-definition);
+//     @return true;
+//   }
+
+//   @return false;
+// }
+
