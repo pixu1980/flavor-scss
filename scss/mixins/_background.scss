@@ -60,7 +60,7 @@ $background-position-vertical-modes: array-concat((top, center, bottom), $css-de
       $h: nth-value($bp, 1);
       $h-valid: is-size($h) or is-percentage($h) or array-contains($background-position-horizontal-modes, $h);
 
-      $v: nth-value($bp, 2);
+      $v: if(length($bp) > 1, nth-value($bp, 2), center);
       $v-valid: is-size($v) or is-percentage($v) or array-contains($background-position-vertical-modes, $v);
 
       @return $h-valid and $v-valid;
@@ -465,30 +465,187 @@ $linear-gradient-directions: (to top, to top right, to right top, to right, to b
   @include linear-gradient-base(repeating-linear-gradient, $options...);
 }
 
-// $radial-gradient-shapes: (circle, ellipse);
+@function is-radial-gradient-size($gp) {
+  @return is-background-position($gp);
+}
 
-// @function is-radial-gradient-shape($gs) {
-//   @return is-defined($gs) and array-contains($radial-gradient-shapes, $gs);
-// }
+$radial-gradient-shapes: (circle, ellipse);
 
-// $radial-gradient-extent-modes: (closest-side, closest-corner, farthest-side, farthest-corner, cover, contain);
+@function is-radial-gradient-shape($gs) {
+  @return is-defined($gs) and array-contains($radial-gradient-shapes, $gs);
+}
 
-// @function is-radial-gradient-extent($ge) {
-//   @return is-defined($ge) and array-contains($radial-gradient-extent-modes, $ge);
-// }
+$radial-gradient-extent-keywords: (closest-side, closest-corner, farthest-side, farthest-corner, cover, contain);
 
-// @function is-radial-gradient-position($gp) {
-//   @return is-background-position($gp);
-// }
+@function is-radial-gradient-extent-keyword($gek) {
+  @return is-defined($gek) and array-contains($radial-gradient-extent-keywords, $gek);
+}
 
-// @function is-radial-gradient-definition($gd) {
-//   @if is-array($gd) and list-separator($gd) == space {
-//     $gradient-definition: string-split($gd, ' at ');
+@function is-radial-gradient-position($gp) {
+  @return is-background-position($gp);
+}
 
-//     @warn($gradient-definition);
-//     @return true;
-//   }
+@function get-radial-gradient-definition($gd) {
+  $gradient-definition-split: string-split(inspect($gd), ' at ');
+  $gradient-definition: string-split(nth-value($gradient-definition-split, 1), ' ');
+  $gradient-position: center;
 
-//   @return false;
-// }
+  @if length($gradient-definition-split) > 1 {
+    $gradient-position: string-split(nth-value($gradient-definition-split, 2), ' ');
+  }
 
+  // $gradient-shape-width: null;
+  // $gradient-shape-height: null;
+  $gradient-shape: ellipse;
+  $gradient-extend-keyword: farthest-corner;
+
+  @each $gradient-definition-item in $gradient-definition {
+    $gradient-definition-item-index: index($gradient-definition, $gradient-definition-item);
+
+    // @if is-number-between($gradient-definition-item-index, 1, 2) {
+    //   $gradient-definition-item-number: to-number($gradient-definition-item);
+    //   @if is-relative-length($gradient-definition-item-number) or is-absolute-length($gradient-definition-item-number) {
+    //     @if $gradient-definition-item-index = 1 {
+    //       $gradient-shape-width: $gradient-definition-item-number;
+    //     }
+
+    //     @if $gradient-definition-item-index = 2 {
+    //       $gradient-shape-height: $gradient-definition-item-number;
+    //     }
+    //   }
+    // }
+
+    @if is-radial-gradient-shape($gradient-definition-item) {
+      $gradient-shape: $gradient-definition-item;
+    }
+    @else if is-radial-gradient-extent-keyword($gradient-definition-item) {
+      $gradient-extend-keyword: $gradient-definition-item;
+    }
+  }
+
+  // @if is-defined($gradient-shape-width) and is-null($gradient-shape-height) {
+  //   $gradient-shape-height: $gradient-shape-width;
+  // }
+
+  @if not is-radial-gradient-position($gradient-position) {
+    $gradient-position: center;
+  }
+
+  $radial-gradient-definition: (
+    shape: $gradient-shape,
+    extent-keyword: $gradient-extend-keyword,
+    position: $gradient-position
+  );
+
+  // @if is-defined($gradient-shape-width) and is-defined($gradient-shape-height) {
+  //   $radial-gradient-definition: extend($radial-gradient-definition, (
+  //     size: $gradient-shape-width $gradient-shape-height
+  //   ));
+  // }
+
+  @return $radial-gradient-definition;
+}
+
+@function is-radial-gradient-definition($gd) {
+  $gradient-definition-valid: false;
+
+  @if list-separator($gd) == space {
+    // $gradient-definition-size: get($gd, 'size');
+    $gradient-definition-shape: get($gd, 'shape');
+    $gradient-definition-extent-keyword: get($gd, 'extent-keyword');
+    $gradient-definition-position: get($gd, 'position');
+
+    $gradient-definition-valid: true;
+
+    // @if is-defined($gradient-definition-size) {
+    //   $gradient-definition-valid: is-radial-gradient-size($gradient-definition-size);
+    // }
+
+    // @if $gradient-definition-valid and is-defined($gradient-definition-shape) {
+    @if is-defined($gradient-definition-shape) {
+      $gradient-definition-valid: is-radial-gradient-shape($gradient-definition-shape);
+    }
+
+    @if $gradient-definition-valid and is-defined($gradient-definition-extent-keyword) {
+      $gradient-definition-valid: is-radial-gradient-extent-keyword($gradient-definition-extent-keyword);
+    }
+
+    @if $gradient-definition-valid and is-defined($gradient-definition-position) {
+      $gradient-definition-valid: is-radial-gradient-position($gradient-definition-position);
+    }
+  }
+
+  @return $gradient-definition-valid;
+}
+
+@function is-radial-gradient-options($options...) {
+  @if list-separator($options) == comma {
+    $definition: array-head($options);
+    $color-stops: $options;
+
+    @if not is-gradient-color-stop($definition) {
+      $color-stops: array-tail($options);
+    }
+    @else {
+      $definition: ellipse farthest-corner at center;
+    }
+
+    $definition: get-radial-gradient-definition($definition);
+
+    @return is-radial-gradient-definition($definition) and is-gradient-color-stops($color-stops...);
+  }
+
+  @return false;
+}
+
+@mixin radial-gradient-base($function: radial-gradient, $options...) {
+  @if is-radial-gradient-options($options...) {
+    $definition: array-head($options);
+    $color-stops: $options;
+
+    @if not is-gradient-color-stop($definition) {
+      $color-stops: array-tail($options);
+    }
+    @else {
+      $definition: ellipse farthest-corner at center;
+    }
+
+    $definition: get-radial-gradient-definition($definition);
+
+    $radial-gradient-definition: '';
+
+    // $radial-gradient-definition-size: get($definition, 'size');
+
+    $radial-gradient-definition-shape: get($definition, 'shape');
+    $radial-gradient-definition-extent-keyword: get($definition, 'extent-keyword');
+    $radial-gradient-definition-position: get($definition, 'position');
+
+    // @if is-defined($radial-gradient-definition-size) {
+    //   $radial-gradient-definition: $radial-gradient-definition-size;
+    // }
+
+    @if is-defined($radial-gradient-definition-shape) {
+      $radial-gradient-definition: $radial-gradient-definition-shape;
+    }
+
+    @if is-defined($radial-gradient-definition-extent-keyword) {
+      $radial-gradient-definition: $radial-gradient-definition + ' ' + $radial-gradient-definition-extent-keyword;
+    }
+
+    @if is-defined($radial-gradient-definition-position) {
+      $radial-gradient-definition: $radial-gradient-definition + ' at ' + $radial-gradient-definition-position;
+    }
+
+    $radial-gradient-function-call: $function + '(' + $radial-gradient-definition + ',' + $color-stops + ')';
+
+    background-image: #{$radial-gradient-function-call};
+  }
+}
+
+@mixin radial-gradient($options...) {
+  @include radial-gradient-base(radial-gradient, $options...);
+}
+
+@mixin repeating-radial-gradient($options...) {
+  @include radial-gradient-base(repeating-radial-gradient, $options...);
+}

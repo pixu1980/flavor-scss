@@ -74,6 +74,18 @@
   @return $join-string;
 }
 
+@function array-remove($list, $value) {
+  $result: ();
+
+  @each $item in $list {
+    @if $item != $value {
+      $result: append($result, $item, list-separator($list));
+    }
+  }
+
+  @return $result;
+}
+
 @function array-remove-nth($list, $index) {
   $result: ();
 

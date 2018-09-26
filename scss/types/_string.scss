@@ -147,7 +147,7 @@
   @while $i!=null {
     $item: string-slice($s, 1, $i - 1);
     $split: array-concat($split, $item);
-    $s: string-slice($s, $i + 1);
+    $s: string-slice($s, $i + string-length($sep));
     $i: string-index($s, $sep);
   }
 
