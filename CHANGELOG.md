@@ -1,3 +1,11 @@
+## [Version 1.4.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.4.1) (2018-9-26)
+
+### Bug fixes
+
+- added radial gradient support: [`b14bb51`](https://github.com/blackmirror1980/flavor-scss/commit/b14bb51)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.4.0...v1.4.1)
+
 ## [Version 1.4.0](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.4.0) (2018-9-25)
 
 ### New features
