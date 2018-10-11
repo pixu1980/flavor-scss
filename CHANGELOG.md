@@ -1,3 +1,11 @@
+## [Version 1.4.2](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.4.2) (2018-10-11)
+
+### Bug fixes
+
+- small review for gridsystem: [`6b83ea5`](https://github.com/blackmirror1980/flavor-scss/commit/6b83ea5)
+
+[...full changes](https://github.com/blackmirror1980/flavor-scss/compare/v1.4.1...v1.4.2)
+
 ## [Version 1.4.1](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.4.1) (2018-9-26)
 
 ### Bug fixes
