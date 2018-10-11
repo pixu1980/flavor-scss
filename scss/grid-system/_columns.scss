@@ -9,7 +9,7 @@
 @mixin columns-sizes($columns: $columns-default, $gutter: $gutter-default, $key: '') {
   // Columns Sizes
   // --------------------------------------------------
-  $gutter-threshold: $gutter / 100 * 11.46666666666667;
+  // $gutter-threshold: $gutter / 100 * 11.46666666666667;
 
   @for $i from 0 through $columns {
     @if $i == 0 {
@@ -25,19 +25,23 @@
       $col-percentage: percentage($i / $columns);
 
       .col-#{$key}-#{$i} {
-        @include box-size(calc(#{$col-percentage} - #{$gutter-threshold}), false);
+        // @include box-size(calc(#{$col-percentage} - #{$gutter-threshold}), false);
+        @include box-size($col-percentage, false);
       }
 
       .col-#{$key}-push-#{$i} {
-        @include left(calc(#{$col-percentage} - #{$gutter-threshold}));
+        // @include left(calc(#{$col-percentage} - #{$gutter-threshold}));
+        @include left($col-percentage);
       }
 
       .col-#{$key}-pull-#{$i} {
-        @include right(calc(#{$col-percentage} - #{$gutter-threshold}));
+        // @include right(calc(#{$col-percentage} - #{$gutter-threshold}));
+        @include right($col-percentage);
       }
 
       .col-#{$key}-offset-#{$i} {
-        @include margin-left(calc(#{$col-percentage} - #{$gutter-threshold}));
+        // @include margin-left(calc(#{$col-percentage} - #{$gutter-threshold}));
+        @include margin-left($col-percentage);
       }
     }
   }
@@ -72,7 +76,7 @@
 
     [class*='col-'] {
       @include position(relative);
-      @include display(inline-block);
+      @include display(inline-block, true);
       @include padding(null $padding);
       @include content-align(left top);
       @include box-bounds(null 1px); // Prevent columns from collapsing when empty
