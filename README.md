@@ -47,6 +47,7 @@ None
 
 ## Dev Dependencies
 
+- [merge](https://ghub.io/merge): Merge multiple objects into one, optionally creating a new cloned object. Similar to the jQuery.extend but more flexible. Works in Node.js and the browser.
 - [minimatch](https://ghub.io/minimatch): a glob matcher in javascript
 - [pkg-2-readme](https://ghub.io/pkg-2-readme): Generate a README.md from package.json contents
 - [sass-lint](https://ghub.io/sass-lint): All Node Sass linter!
