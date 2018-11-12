@@ -1,3 +1,11 @@
+## [Version 1.4.3](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.4.3) (2018-11-12)
+
+### Bug fixes
+
+- updated merge dependency: [`589e742`](https://github.com/:blackmirror1980/flavor-scss/commit/589e742)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.4.2...v1.4.3)
+
 ## [Version 1.4.2](https://github.com/blackmirror1980/flavor-scss/releases/tag/v1.4.2) (2018-10-11)
 
 ### Bug fixes
