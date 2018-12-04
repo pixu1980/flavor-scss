@@ -1,3 +1,11 @@
+## [Version 1.5.0](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.5.0) (2018-12-4)
+
+### New features
+
+- - added support for border-width, border-style and border-color   - and relative directional selectors: [`35f69b8`](https://github.com/:blackmirror1980/flavor-scss/commit/35f69b8)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.4.3...v1.5.0)
+
 ## [Version 1.4.3](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.4.3) (2018-11-12)
 
 ### Bug fixes
