@@ -1,0 +1,115 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Border
+/// @group mixins-border
+/// @author blackmirror1980
+////
+
+/// Border style modes
+///
+/// @access private
+/// @type list
+$border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset), $css-default-modes);
+
+/// Checks if something is border style mode
+///
+/// @access public
+/// @param {string} $bs - the border-style mode
+/// @return {boolean} - true if is border-style value
+@function is-border-style($bs) {
+  @return is-defined($bs) and array-contains($border-styles, $bs);
+}
+
+/// Border style mixin
+///
+/// @link https://www.w3schools.com/cssref/pr_border-style.asp W3Schools border style docs
+/// @example scss - Usage
+///   .border-style-element {
+///     @include border-style(dashed);
+///   }
+///
+/// @example css - Output
+///   .border-style-element {
+///     border-style: dashed;
+///   }
+/// @access public
+/// @param {string} $style [solid] - border-style
+@mixin border-style($style: solid, $border-selector: border) {
+  $border-style: $style;
+
+  @if is-border-style($border-style) {
+    #{$border-selector}-style: $border-style;
+  }
+  @else {
+    @warn '`border-style: #{$border-style}` is not a valid border-style value';
+  }
+}
+
+/// Border top style mixin
+///
+/// @example scss - Usage
+///   .border-top-style-element {
+///     @include border-top-style(dashed);
+///   }
+///
+/// @example css - Output
+///   .border-top-style-element {
+///     border-top-style: dashed;
+///   }
+/// @see {mixin} border-style
+/// @access public
+@mixin border-top-style($style) {
+  @include border-style($style, border-top);
+}
+
+/// Border right style mixin
+///
+/// @example scss - Usage
+///   .border-right-style-element {
+///     @include border-right-style(dashed);
+///   }
+///
+/// @example css - Output
+///   .border-right-style-element {
+///     border-right-style: dashed;
+///   }
+/// @see {mixin} border-style
+/// @access public
+@mixin border-right-style($style) {
+  @include border-style($style, border-right);
+}
+
+/// Border bottom style mixin
+///
+/// @example scss - Usage
+///   .border-bottom-style-element {
+///     @include border-bottom-style(dashed);
+///   }
+///
+/// @example css - Output
+///   .border-bottom-style-element {
+///     border-bottom-style: dashed;
+///   }
+/// @see {mixin} border-style
+/// @access public
+@mixin border-bottom-style($style) {
+  @include border-style($style, border-bottom);
+}
+
+/// Border left style mixin
+///
+/// @example scss - Usage
+///   .border-left-style-element {
+///     @include border-left-style(dashed);
+///   }
+///
+/// @example css - Output
+///   .border-left-style-element {
+///     border-left-style: dashed;
+///   }
+/// @see {mixin} border-style
+/// @access public
+@mixin border-left-style($style) {
+  @include border-style($style, border-left);
+}

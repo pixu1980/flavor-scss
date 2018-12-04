@@ -1,0 +1,103 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Border
+/// @group mixins-border
+/// @author blackmirror1980
+////
+
+@import 'style';
+@import 'radius';
+
+/// Border width mixin
+///
+/// @link https://www.w3schools.com/cssref/pr_border-width.asp W3Schools border width docs
+/// @example scss - Usage
+///   .border-width-element {
+///     @include border-width(1px);
+///   }
+///
+/// @example css - Output
+///   .border-width-element {
+///     border-width: 1px;
+///   }
+/// @access public
+/// @param {size} $width [0] - border-width
+@mixin border-width($width: 0, $border-selector: border) {
+  $border-width: $width;
+
+  @if is-size($border-width) {
+    #{$border-selector}-width: $border-width;
+  }
+  @else {
+    @warn '`border-width: #{$border-width}` is not a valid size';
+  }
+}
+
+/// Border top width mixin
+///
+/// @example scss - Usage
+///   .border-top-width-element {
+///     @include border-top-width(1px);
+///   }
+///
+/// @example css - Output
+///   .border-top-width-element {
+///     border-top-width: 1px;
+///   }
+/// @see {mixin} border-width
+/// @access public
+@mixin border-top-width($width) {
+  @include border-width($width, border-top);
+}
+
+/// Border right width mixin
+///
+/// @example scss - Usage
+///   .border-right-width-element {
+///     @include border-right-width(1px);
+///   }
+///
+/// @example css - Output
+///   .border-right-width-element {
+///     border-right-width: 1px;
+///   }
+/// @see {mixin} border-width
+/// @access public
+@mixin border-right-width($width) {
+  @include border-width($width, border-right);
+}
+
+/// Border bottom width mixin
+///
+/// @example scss - Usage
+///   .border-bottom-width-element {
+///     @include border-bottom-width(1px);
+///   }
+///
+/// @example css - Output
+///   .border-bottom-width-element {
+///     border-bottom-width: 1px;
+///   }
+/// @see {mixin} border-width
+/// @access public
+@mixin border-bottom-width($width) {
+  @include border-width($width, border-bottom);
+}
+
+/// Border left width mixin
+///
+/// @example scss - Usage
+///   .border-left-width-element {
+///     @include border-left-width(1px);
+///   }
+///
+/// @example css - Output
+///   .border-left-width-element {
+///     border-left-width: 1px;
+///   }
+/// @see {mixin} border-width
+/// @access public
+@mixin border-left-width($width) {
+  @include border-width($width, border-left);
+}

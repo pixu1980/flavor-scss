@@ -1,0 +1,100 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Border
+/// @group mixins-border
+/// @author blackmirror1980
+////
+
+/// Border color mixin
+///
+/// @link https://www.w3schools.com/cssref/pr_border-color.asp W3Schools border color docs
+/// @example scss - Usage
+///   .border-color-element {
+///     @include border-color(red);
+///   }
+///
+/// @example css - Output
+///   .border-color-element {
+///     border-color: red;
+///   }
+/// @access public
+/// @param {color} $color [transparent] - border-color
+@mixin border-color($color: transparent, $border-selector: border) {
+  $border-color: $color;
+
+  @if is-css-color($border-color) {
+    #{$border-selector}-color: $border-color;
+  }
+  @else {
+    @warn '`border-color: #{$border-color}` is not a valid css color';
+  }
+}
+
+/// Border top color mixin
+///
+/// @example scss - Usage
+///   .border-top-color-element {
+///     @include border-top-color(red);
+///   }
+///
+/// @example css - Output
+///   .border-top-color-element {
+///     border-top-color: red;
+///   }
+/// @see {mixin} border-color
+/// @access public
+@mixin border-top-color($color) {
+  @include border-color($color, border-top);
+}
+
+/// Border right color mixin
+///
+/// @example scss - Usage
+///   .border-right-color-element {
+///     @include border-right-color(red);
+///   }
+///
+/// @example css - Output
+///   .border-right-color-element {
+///     border-right-color: red;
+///   }
+/// @see {mixin} border-color
+/// @access public
+@mixin border-right-color($color) {
+  @include border-color($color, border-right);
+}
+
+/// Border bottom color mixin
+///
+/// @example scss - Usage
+///   .border-bottom-color-element {
+///     @include border-bottom-color(red);
+///   }
+///
+/// @example css - Output
+///   .border-bottom-color-element {
+///     border-bottom-color: red;
+///   }
+/// @see {mixin} border-color
+/// @access public
+@mixin border-bottom-color($color) {
+  @include border-color($color, border-bottom);
+}
+
+/// Border left color mixin
+///
+/// @example scss - Usage
+///   .border-left-color-element {
+///     @include border-left-color(red);
+///   }
+///
+/// @example css - Output
+///   .border-left-color-element {
+///     border-left-color: red;
+///   }
+/// @see {mixin} border-color
+/// @access public
+@mixin border-left-color($color) {
+  @include border-color($color, border-left);
+}
