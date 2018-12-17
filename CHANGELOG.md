@@ -1,3 +1,11 @@
+## [Version 1.6.0](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.6.0) (2018-12-17)
+
+### New features
+
+- added important support wherever possible: [`ad5a611`](https://github.com/:blackmirror1980/flavor-scss/commit/ad5a611)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.5.0...v1.6.0)
+
 ## [Version 1.5.0](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.5.0) (2018-12-4)
 
 ### New features
