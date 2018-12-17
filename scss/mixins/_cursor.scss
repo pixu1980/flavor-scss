@@ -60,22 +60,23 @@ $cursor-modes: array-concat((alias, all-scroll, auto, cell, context-menu, col-re
 /// @access public
 /// @param {string} $c [default] - the cursor mode
 /// @param {boolean} $force [false] - if true forces the cursor mode for all the child elements and before, after pseudo selectors
-@mixin cursor($c: default, $force: false) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin cursor($c: default, $force: false, $important: false) {
   @if is-cursor($c) {
-    cursor: $c;
+    cursor: $c important($important);
 
     @if $force {
       &:before,
       &:after {
-        cursor: $c;
+        cursor: $c important($important);
       }
 
       * {
-        cursor: $c;
+        cursor: $c important($important);
 
         &:before,
         &:after {
-          cursor: $c;
+          cursor: $c important($important);
         }
       }
     }
@@ -114,9 +115,10 @@ $pointer-events-modes: array-concat((all, auto, bounding-box, fill, none, painte
 ///   }
 /// @access public
 /// @param {string} $pe [auto] - the pointer events mode
-@mixin pointer-events($pe: auto) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin pointer-events($pe: auto, $important: false) {
   @if is-pointer-events($pe) {
-    pointer-events: $pe;
+    pointer-events: $pe important($important);
   }
   @else {
     @warn '`pointer-events: #{$pe}` is not a valid pointer-events value';

@@ -70,9 +70,10 @@ $filter-modes: array-concat((none), $css-default-modes);
 ///   }
 /// @access public
 /// @param {string} $filter - the filter string (e.g. `blur(5px)` or `none`)
-@mixin filter($filter) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin filter($filter, $important: false) {
   @if is-filter($filter) {
-    @include prefixer(filter, $filter);
+    @include prefixer(filter, $filter, null, $important);
   }
   @else {
     @warn '`filter: #{$filter}` is not a valid filter value';
@@ -107,15 +108,16 @@ $filter-modes: array-concat((none), $css-default-modes);
 /// @access public
 /// @param {float} $o - the opacity value (e.g. `.3` or `1`)
 /// @param {boolean} $fallbacks [false] - if true add fallbacksa for ie old browsers
-@mixin opacity($o, $fallbacks: false) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin opacity($o, $fallbacks: false, $important: false) {
   @if is-percentage-number($o) {
     @if $fallbacks {
       // fallbacks for ie old browsers
-      filter: alpha(opacity=(#{$o * 100}));
-      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$o * 100})";
+      filter: alpha(opacity=(#{$o * 100})) important($important);
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$o * 100})" important($important);
     }
 
-    opacity: $o;
+    opacity: $o important($important);
   }
   @else {
     @warn '`opacity: #{$o}` is not a valid opacity value';

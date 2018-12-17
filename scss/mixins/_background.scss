@@ -205,9 +205,10 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
 /// @param {string} $options.clip [border-box] - background clip
 /// @param {string} $options.attachment [scroll] - background attachment
 /// @param {boolean} $shorthand [false] - specifies if shorthand selector will be used or not
-@mixin background($options, $shorthand: false) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin background($options, $shorthand: false, $important: false) {
   @if is-css-default($options) {
-    background: $options;
+    background: $options important($important);
   }
   @else {
     $settings: (color: transparent, image: none, position: 0 0, size: auto, repeat: repeat, origin: padding-box, clip: border-box, attachment: scroll);
@@ -274,7 +275,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
         $background: append($background, $background-color);
       }
       @else {
-        background-color: $background-color;
+        background-color: $background-color important($important);
       }
     }
     @else {
@@ -292,7 +293,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
         $background: append($background, $background-image);
       }
       @else {
-        background-image: $background-image;
+        background-image: $background-image important($important);
       }
     }
     @else {
@@ -307,8 +308,8 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
         $background: append($background, $background-position + '/' + $background-size);
       }
       @else {
-        background-position: $background-position;
-        background-size: $background-size;
+        background-position: $background-position important($important);
+        background-size: $background-size important($important);
       }
     }
     @else {
@@ -323,7 +324,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
         $background: append($background, $background-repeat);
       }
       @else {
-        background-repeat: $background-repeat;
+        background-repeat: $background-repeat important($important);
       }
     }
     @else {
@@ -337,7 +338,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
         $background: append($background, $background-origin);
       }
       @else {
-        background-origin: $background-origin;
+        background-origin: $background-origin important($important);
       }
     }
     @else {
@@ -351,7 +352,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
         $background: append($background, $background-clip);
       }
       @else {
-        background-clip: $background-clip;
+        background-clip: $background-clip important($important);
       }
     }
     @else {
@@ -365,7 +366,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
         $background: append($background, $background-attachment);
       }
       @else {
-        background-attachment: $background-attachment;
+        background-attachment: $background-attachment important($important);
       }
     }
     @else {
@@ -373,7 +374,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
     }
 
     @if $shorthand == true {
-      background: $background;
+      background: $background important($important);
     }
   }
 }

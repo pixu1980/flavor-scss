@@ -116,12 +116,12 @@ $css-size-modes: array-concat((auto, fill, fill-available, available, fit-conten
 /// Strips the unit from a value.
 ///
 /// @argument {number} $v
-/// @return {number (unitless)} - the unitless value
 /// @example scss - Usage
 ///   $dimension: strip-unit(10em);
 ///
 /// @example scss - Result
 ///   $dimension: 10;
+/// @return {number (unitless)} - the unitless value
 @function strip-unit($v) {
   @return ($v / ($v * 0 + 1));
 }

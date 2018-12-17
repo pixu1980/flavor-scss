@@ -5,6 +5,11 @@
 /// @group mixins-common
 /// @author blackmirror1980
 ////
+
+@function important($important: false) {
+  @return if($important, !important, null);
+}
+
 /// Convert pixels to rems
 /// <br>eg. for a relational value of 12px write rem(12)
 /// <br>Assumes $base is the font-size of <html>
@@ -49,11 +54,16 @@ $prefixes-default: $prefixes;
 /// @access public
 /// @param {string} $property - the property to prefix
 /// @param {any} $values - the values list to use
-/// @param {array | list} $prefixes - space separated list
-@mixin prefixer($property, $values, $prefixes: $prefixes-default) {
+/// @param {array | list} $prefixes [$prefixes-default] - space separated list
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin prefixer($property, $values, $prefixes: $prefixes-default, $important: false) {
+  @if not $prefixes or is-null($prefixes) {
+    $prefixes: $prefixes-default;
+  }
+
   @each $prefix in $prefixes {
     @if is-prefix($prefix) {
-      #{if($prefix != spec, '-#{$prefix}-', '') + $property}: $values;
+      #{if($prefix != spec, '-#{$prefix}-', '') + $property}: $values important($important);
     }
     @else {
       @warn 'Unrecognized prefix: #{$prefix}';
@@ -65,25 +75,30 @@ $prefixes-default: $prefixes;
 /// <br>for generating vendor prefixes on non-standardized properties.
 ///
 /// @example scss - Usage
-///   @include prefixer-content(viewport, ms spec) {
-///     width: devide-width;
+///   @include prefixer-at-rule(viewport, null, ms spec) {
+///     width: device-width;
 ///   };
 ///
 /// @example css - Output
 ///   @-ms-viewport {
-///     width: devide-width;
+///     width: device-width;
 ///   }
 ///
 ///   @viewport {
-///     width: devide-width;
+///     width: device-width;
 ///   }
 /// @access public
-/// @param {string} $selector - the selector to prefix
+/// @param {string} $at-rule - the at rule to prefix
+/// @param {string} $at-rule-suffix [null] - the suffix to add after the at-rule (eg. animation keyframes)
 /// @param {array | list} $prefixes - space separated list
-@mixin prefixer-selector($property, $prefixes: $prefixes-default) {
+@mixin prefixer-at-rule($at-rule, $at-rule-suffix: null, $prefixes: $prefixes-default) {
   @each $prefix in $prefixes {
     @if is-prefix($prefix) {
-      #{'@' + if($prefix != spec, '-#{$prefix}-', '') + $property} {
+      $at-rule-selector: #{'@' + if($prefix != spec, '-' + $prefix + '-', '') + $at-rule + if($at-rule-suffix, ' ' + $at-rule-suffix, '')};
+
+      @debug $at-rule-selector;
+
+      #{$at-rule-selector} {
         @content;
       };
     }
@@ -114,13 +129,17 @@ $prefixes-default: $prefixes;
 ///     pointer-events: none;
 ///   }
 /// @access public
-@mixin disable {
-  @include cursor(default);
-  @include pointer-events(none);
+/// @param {boolean} $force [true] - if true, forces the disable for all children
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin disable($force: true, $important: false) {
+  @include cursor(default, $important);
+  @include pointer-events(none, $important);
 
-  * {
-    @include cursor(default);
-    @include pointer-events(none);
+  @if $force == true {
+    * {
+      @include cursor(default, $important);
+      @include pointer-events(none, $important);
+    }
   }
 }
 
@@ -145,16 +164,17 @@ $prefixes-default: $prefixes;
 ///     clip-path: inset(100%);
 ///   }
 /// @access public
-@mixin hidden {
-  @include position(absolute);
-  @include box-size(1px);
-  @include padding(0);
-  @include border(0);
-  @include overflow(hidden);
-  @include white-space(nowrap);
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin hidden($important: false) {
+  @include position(absolute, $important);
+  @include box-size(1px, true, $important);
+  @include padding(0, $important);
+  @include border(0, $important);
+  @include overflow(hidden, $important);
+  @include white-space(nowrap, $important);
 
-  clip: rect(1px, 1px, 1px, 1px);
-  clip-path: inset(100%);
+  clip: rect(1px, 1px, 1px, 1px) important($important);
+  clip-path: inset(100%) important($important);
 }
 
 /// Animateable properties

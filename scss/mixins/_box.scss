@@ -78,11 +78,12 @@ $display-modes: array-concat((none, inline, block, inline-block, flex, inline-fl
 /// @access public
 /// @param {string} $dm - the display mode
 /// @param {boolean} $auto-reset-inline-block [false] - auto resets inline block
-@mixin display($dm, $auto-reset-inline-block: false) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin display($dm, $auto-reset-inline-block: false, $important: false) {
   @if is-display($dm) {
-    display: $dm;
+    display: $dm important($important);
 
-    @if $dm==inline-block and $auto-reset-inline-block==true {
+    @if $dm == inline-block and $auto-reset-inline-block == true {
       @include reset-inline-block;
     }
   }
@@ -119,9 +120,10 @@ $box-sizing-modes: array-concat((content-box, border-box), $css-default-modes);
 ///   }
 /// @access public
 /// @param {string} $bs - the box sizing mode
-@mixin box-sizing($bs) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin box-sizing($bs, $important: false) {
   @if is-box-sizing($bs) {
-    box-sizing: $bs;
+    box-sizing: $bs important($important);
   }
   @else {
     @warn '`box-sizing: #{$bs}` is not a valid box-sizing mode';
@@ -180,7 +182,8 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 /// @param {size | percentage} $options.min-height [null] - the min height bound
 /// @param {size | percentage} $options.max-width [null] - the max width bound
 /// @param {size | percentage} $options.max-height [null] - the max height bound
-@mixin box-bounds($options) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin box-bounds($options, $important: false) {
   $settings: (min-width: null, min-height: null, max-width: null, max-height: null);
 
   @if is-object($options) {
@@ -216,7 +219,7 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 
   @if is-defined($min-width) {
     @if is-box-bound-size($min-width) {
-      min-width: $min-width;
+      min-width: $min-width important($important);
     }
     @else {
       @warn '`min-width: #{$min-width}` is not a valid size';
@@ -227,7 +230,7 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 
   @if is-defined($min-height) {
     @if is-box-bound-size($min-height) {
-      min-height: $min-height;
+      min-height: $min-height important($important);
     }
     @else {
       @warn '`min-height: #{$min-height}` is not a valid size';
@@ -238,7 +241,7 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 
   @if is-defined($max-width) {
     @if is-box-bound-size($max-width) {
-      max-width: $max-width;
+      max-width: $max-width important($important);
     }
     @else {
       @warn '`max-width: #{$max-width}` is not a valid size';
@@ -249,7 +252,7 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 
   @if is-defined($max-height) {
     @if is-box-bound-size($max-height) {
-      max-height: $max-height;
+      max-height: $max-height important($important);
     }
     @else {
       @warn '`max-height: #{$max-height}` is not a valid size';
@@ -320,7 +323,8 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 /// @param {size | percentage} $options.max-width [null] - the max width bound
 /// @param {size | percentage} $options.max-height [null] - the max height bound
 /// @param {boolean} $height-fallback [true] - falls back the height value to the width value, if height is not specified (useful for square sizes)
-@mixin box-size($options, $height-fallback: true) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin box-size($options, $height-fallback: true, $important: false) {
   $settings: (width: null, height: null, min-width: null, min-height: null, max-width: null, max-height: null);
 
   @if is-object($options) {
@@ -368,7 +372,7 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 
   @if is-defined($width) {
     @if is-box-size($width) {
-      width: $width;
+      width: $width important($important);
     }
     @else {
       @warn '`width: #{$width}` is not a valid size';
@@ -383,7 +387,7 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 
   @if is-defined($height) {
     @if is-box-size($height) {
-      height: $height;
+      height: $height important($important);
     }
     @else {
       @warn '`height: #{$height}` is not a valid size';
@@ -418,7 +422,8 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 /// @param {object | map} $options - the box color options
 /// @param {color} $options.color [inherit] - the color
 /// @param {color} $options.bgcolor [inherit] - the background color
-@mixin box-color($options) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin box-color($options, $important: false) {
   $settings: (color: inherit, bgcolor: inherit);
 
   @if is-object($options) {
@@ -441,7 +446,7 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
   $color: map-get($settings, color);
 
   @if is-css-color($color) {
-    color: $color;
+    color: $color important($important);
   }
   @else {
     @warn '`color: #{$color}` is not a valid css color';
@@ -450,7 +455,7 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
   $bgcolor: map-get($settings, bgcolor);
 
   @if is-css-color($bgcolor) {
-    background-color: $bgcolor;
+    background-color: $bgcolor important($important);
   }
   @else {
     @warn '`background-color: #{$bgcolor}` is not a valid css color';
@@ -669,9 +674,10 @@ $z-index-modes: array-concat((auto), $css-default-modes);
 ///   }
 /// @access public
 /// @param {integer | string} $zi - the z-index
-@mixin z-index($zi) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin z-index($zi, $important: false) {
   @if(is-z-index($zi)) {
-    z-index: $zi;
+    z-index: $zi important($important);
   }
   @else {
     @warn '`z-index: #{$zi}` is not a valid z-index value';
@@ -706,9 +712,10 @@ $visibility-modes: array-concat((visible, hidden, collapse), $css-default-modes)
 ///   }
 /// @access public
 /// @param {string} $v - the visibility
-@mixin visibility($v) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin visibility($v, $important: false) {
   @if(is-visibility($v)) {
-    visibility: $v;
+    visibility: $v important($important);
   }
   @else {
     @warn '`visibility: #{$zi}` is not a valid visibility value';
@@ -747,9 +754,10 @@ $backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
 ///   }
 /// @access public
 /// @param {string} $bv - the backface visibility
-@mixin backface-visibility($bv) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin backface-visibility($bv, $important: false) {
   @if is-backface-visibility($bv) {
-    @include prefixer(backface-visibility, $bv);
+    @include prefixer(backface-visibility, $bv, null, $important);
   }
   @else {
     @warn '`backface-visibility: #{$bv}` is not a valid backface-visibility value';

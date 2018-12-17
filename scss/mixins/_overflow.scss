@@ -47,11 +47,12 @@ $overflow-modes: array-concat((visible, hidden, scroll, overlay, unset, auto), $
 /// @requires {function} nth-value
 /// @access public
 /// @param {string} $o - the overflow mode
-@mixin overflow($o) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin overflow($o, $important: false) {
   $overflow-x: nth-value($o, 1);
 
   @if is-overflow($overflow-x) {
-    overflow-x: $overflow-x;
+    overflow-x: $overflow-x important($important);
   }
   @else {
     @warn '`overflow-x: #{$o}` is not a valid overflow value';
@@ -60,7 +61,7 @@ $overflow-modes: array-concat((visible, hidden, scroll, overlay, unset, auto), $
   $overflow-y: nth-value($o, 2, $overflow-x);
 
   @if is-overflow($overflow-y) {
-    overflow-y: $overflow-y;
+    overflow-y: $overflow-y important($important);
   }
   @else {
     @warn '`overflow-y: #{$o}` is not a valid overflow value';

@@ -20,11 +20,13 @@
 ///   }
 /// @access public
 /// @param {color} $color [transparent] - border-color
-@mixin border-color($color: transparent, $border-selector: border) {
+/// @param {string} $border-selector [border] - border selector to use
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-color($color: transparent, $border-selector: border, $important: false) {
   $border-color: $color;
 
   @if is-css-color($border-color) {
-    #{$border-selector}-color: $border-color;
+    #{$border-selector}-color: $border-color important($important);
   }
   @else {
     @warn '`border-color: #{$border-color}` is not a valid css color';
@@ -44,8 +46,8 @@
 ///   }
 /// @see {mixin} border-color
 /// @access public
-@mixin border-top-color($color) {
-  @include border-color($color, border-top);
+@mixin border-top-color($color, $important: false) {
+  @include border-color($color, border-top, $important);
 }
 
 /// Border right color mixin
@@ -61,8 +63,8 @@
 ///   }
 /// @see {mixin} border-color
 /// @access public
-@mixin border-right-color($color) {
-  @include border-color($color, border-right);
+@mixin border-right-color($color, $important: false) {
+  @include border-color($color, border-right, $important);
 }
 
 /// Border bottom color mixin
@@ -78,8 +80,8 @@
 ///   }
 /// @see {mixin} border-color
 /// @access public
-@mixin border-bottom-color($color) {
-  @include border-color($color, border-bottom);
+@mixin border-bottom-color($color, $important: false) {
+  @include border-color($color, border-bottom, $important);
 }
 
 /// Border left color mixin
@@ -95,6 +97,6 @@
 ///   }
 /// @see {mixin} border-color
 /// @access public
-@mixin border-left-color($color) {
-  @include border-color($color, border-left);
+@mixin border-left-color($color, $important: false) {
+  @include border-color($color, border-left, $important);
 }

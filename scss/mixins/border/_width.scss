@@ -23,11 +23,13 @@
 ///   }
 /// @access public
 /// @param {size} $width [0] - border-width
-@mixin border-width($width: 0, $border-selector: border) {
+/// @param {string} $border-selector [border] - border-selector will be used as property name
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-width($width: 0, $border-selector: border, $important: false) {
   $border-width: $width;
 
   @if is-size($border-width) {
-    #{$border-selector}-width: $border-width;
+    #{$border-selector}-width: $border-width important($important);
   }
   @else {
     @warn '`border-width: #{$border-width}` is not a valid size';
@@ -47,8 +49,10 @@
 ///   }
 /// @see {mixin} border-width
 /// @access public
-@mixin border-top-width($width) {
-  @include border-width($width, border-top);
+/// @param {size} $width [0] - border-width
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-top-width($width: 0, $important: false) {
+  @include border-width($width, border-top, $important);
 }
 
 /// Border right width mixin
@@ -64,8 +68,10 @@
 ///   }
 /// @see {mixin} border-width
 /// @access public
-@mixin border-right-width($width) {
-  @include border-width($width, border-right);
+/// @param {size} $width [0] - border-width
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-right-width($width: 0, $important: false) {
+  @include border-width($width, border-right, $important);
 }
 
 /// Border bottom width mixin
@@ -81,8 +87,10 @@
 ///   }
 /// @see {mixin} border-width
 /// @access public
-@mixin border-bottom-width($width) {
-  @include border-width($width, border-bottom);
+/// @param {size} $width [0] - border-width
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-bottom-width($width: 0, $important: false) {
+  @include border-width($width, border-bottom, $important);
 }
 
 /// Border left width mixin
@@ -98,6 +106,8 @@
 ///   }
 /// @see {mixin} border-width
 /// @access public
-@mixin border-left-width($width) {
-  @include border-width($width, border-left);
+/// @param {size} $width [0] - border-width
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-left-width($width: 0, $important: false) {
+  @include border-width($width, border-left, $important);
 }

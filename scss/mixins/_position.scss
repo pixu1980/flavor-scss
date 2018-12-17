@@ -65,9 +65,10 @@ $position-points: (top, right, bottom, left);
 /// @access public
 /// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
 /// @param {string} $p - the point (top, right, bottom, left)
-@mixin position-point($v: auto, $p: null) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin position-point($v: auto, $p: null, $important: false) {
   @if is-position-point-value($v) and is-position-point($p) {
-    #{$p}: $v;
+    #{$p}: $v important($important);
   }
   @else {
     @warn '`#{$p}: #{$v}` is not a valid position point value';
@@ -88,8 +89,9 @@ $position-points: (top, right, bottom, left);
 /// @see {mixin} position-point
 /// @access public
 /// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
-@mixin top($v: auto) {
-  @include position-point($v, top);
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin top($v: auto, $important: false) {
+  @include position-point($v, top, $important);
 }
 
 /// Right mixin
@@ -106,8 +108,9 @@ $position-points: (top, right, bottom, left);
 /// @see {mixin} position-point
 /// @access public
 /// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
-@mixin right($v: auto) {
-  @include position-point($v, right);
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin right($v: auto, $important: false) {
+  @include position-point($v, right, $important);
 }
 
 /// Bottom mixin
@@ -124,8 +127,9 @@ $position-points: (top, right, bottom, left);
 /// @see {mixin} position-point
 /// @access public
 /// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
-@mixin bottom($v: auto) {
-  @include position-point($v, bottom);
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin bottom($v: auto, $important: false) {
+  @include position-point($v, bottom, $important);
 }
 
 /// Left mixin
@@ -142,8 +146,9 @@ $position-points: (top, right, bottom, left);
 /// @see {mixin} position-point
 /// @access public
 /// @param {string | length} $v - the point value (eg. 1px, 20%, auto, etc...)
-@mixin left($v: auto) {
-  @include position-point($v, left);
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin left($v: auto, $important: false) {
+  @include position-point($v, left, $important);
 }
 
 /// Position mixin
@@ -183,7 +188,8 @@ $position-points: (top, right, bottom, left);
 /// @param {length} $options.right - the right
 /// @param {length} $options.bottom - the bottom
 /// @param {length} $options.left - the left
-@mixin position($options) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin position($options, $important: false) {
   $settings: (position: static, top: null, right: null, bottom: null, left: null);
 
   @if is-object($options) {
@@ -226,10 +232,10 @@ $position-points: (top, right, bottom, left);
   @if is-defined($position) {
     @if is-position($position) {
       @if $position == sticky {
-        position: -webkit-sticky;
+        position: -webkit-sticky important($important);
       }
 
-      position: $position;
+      position: $position important($important);
     }
     @else {
       @warn '`position: #{$position}` is not a valid position mode';
@@ -239,24 +245,24 @@ $position-points: (top, right, bottom, left);
   $top: get($settings, top);
 
   @if is-defined($top) {
-    @include top($top);
+    @include top($top, $important);
   }
 
   $right: get($settings, right);
 
   @if is-defined($right) {
-    @include right($right);
+    @include right($right, $important);
   }
 
   $bottom: get($settings, bottom);
 
   @if is-defined($bottom) {
-    @include bottom($bottom);
+    @include bottom($bottom, $important);
   }
 
   $left: get($settings, left);
 
   @if is-defined($left) {
-    @include left($left);
+    @include left($left, $important);
   }
 }

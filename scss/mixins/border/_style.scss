@@ -35,11 +35,13 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
 ///   }
 /// @access public
 /// @param {string} $style [solid] - border-style
-@mixin border-style($style: solid, $border-selector: border) {
+/// @param {string} $border-selector [border] - border-selector, will be used as selector
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-style($style: solid, $border-selector: border, $important: false) {
   $border-style: $style;
 
   @if is-border-style($border-style) {
-    #{$border-selector}-style: $border-style;
+    #{$border-selector}-style: $border-style important($important);
   }
   @else {
     @warn '`border-style: #{$border-style}` is not a valid border-style value';
@@ -59,8 +61,10 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
 ///   }
 /// @see {mixin} border-style
 /// @access public
-@mixin border-top-style($style) {
-  @include border-style($style, border-top);
+/// @param {string} $style [solid] - border-style
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-top-style($style: solid, $important: false) {
+  @include border-style($style, border-top, $important);
 }
 
 /// Border right style mixin
@@ -76,8 +80,10 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
 ///   }
 /// @see {mixin} border-style
 /// @access public
-@mixin border-right-style($style) {
-  @include border-style($style, border-right);
+/// @param {string} $style [solid] - border-style
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-right-style($style: solid, $important: false) {
+  @include border-style($style, border-right, $important);
 }
 
 /// Border bottom style mixin
@@ -93,8 +99,10 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
 ///   }
 /// @see {mixin} border-style
 /// @access public
-@mixin border-bottom-style($style) {
-  @include border-style($style, border-bottom);
+/// @param {string} $style [solid] - border-style
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-bottom-style($style: solid, $important: false) {
+  @include border-style($style, border-bottom, $important);
 }
 
 /// Border left style mixin
@@ -110,6 +118,8 @@ $border-styles: array-concat((none, hidden, dotted, dashed, solid, double, groov
 ///   }
 /// @see {mixin} border-style
 /// @access public
-@mixin border-left-style($style) {
-  @include border-style($style, border-left);
+/// @param {string} $style [solid] - border-style
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-left-style($style: solid, $important: false) {
+  @include border-style($style, border-left, $important);
 }

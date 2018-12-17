@@ -119,7 +119,7 @@ $animation-play-state-modes: array-concat((paused, running), $css-default-modes)
 /// Keyframe Mixin
 ///
 /// @example scss - Usage - Fade Out
-///   @include keyframe(fade-out) {
+///   @include keyframes(fade-out) {
 ///     0% {
 ///       opacity: 1;
 ///     }
@@ -129,42 +129,6 @@ $animation-play-state-modes: array-concat((paused, running), $css-default-modes)
 ///   }
 ///
 /// @example css - Output - Fade Out
-///   @-webkit-keyframes fade-out {
-///     0% {
-///       opacity: 1;
-///     }
-///     100% {
-///       opacity: 0;
-///     }
-///   }
-///
-///   @-moz-keyframes fade-out {
-///     0% {
-///       opacity: 1;
-///     }
-///     100% {
-///       opacity: 0;
-///     }
-///   }
-///
-///   @-ms-keyframes fade-out {
-///     0% {
-///       opacity: 1;
-///     }
-///     100% {
-///       opacity: 0;
-///     }
-///   }
-///
-///   @-o-keyframes fade-out {
-///     0% {
-///       opacity: 1;
-///     }
-///     100% {
-///       opacity: 0;
-///     }
-///   }
-///
 ///   @keyframes fade-out {
 ///     0% {
 ///       opacity: 1;
@@ -175,7 +139,7 @@ $animation-play-state-modes: array-concat((paused, running), $css-default-modes)
 ///   }
 ///
 /// @example scss - Usage - Change Color
-///   @include keyframe(change-color) {
+///   @include keyframes(change-color) {
 ///     0% {
 ///       color: #000;
 ///     }
@@ -185,42 +149,6 @@ $animation-play-state-modes: array-concat((paused, running), $css-default-modes)
 ///   }
 ///
 /// @example css - Output - Change Color
-///   @-webkit-keyframes change-color {
-///     0% {
-///       color: #000;
-///     }
-///     100% {
-///       color: #FFF;
-///     }
-///   }
-///
-///   @-moz-keyframes change-color {
-///     0% {
-///       color: #000;
-///     }
-///     100% {
-///       color: #FFF;
-///     }
-///   }
-///
-///   @-ms-keyframes change-color {
-///     0% {
-///       color: #000;
-///     }
-///     100% {
-///       color: #FFF;
-///     }
-///   }
-///
-///   @-o-keyframes change-color {
-///     0% {
-///       color: #000;
-///     }
-///     100% {
-///       color: #FFF;
-///     }
-///   }
-///
 ///   @keyframes change-color {
 ///     0% {
 ///       color: #000;
@@ -231,23 +159,7 @@ $animation-play-state-modes: array-concat((paused, running), $css-default-modes)
 ///   }
 /// @access public
 /// @param {string} $animation-name - the animation name
-@mixin keyframe($animation-name) {
-  @-webkit-keyframes #{$animation-name} {
-    @content;
-  }
-
-  @-moz-keyframes #{$animation-name} {
-    @content;
-  }
-
-  @-ms-keyframes #{$animation-name} {
-    @content;
-  }
-
-  @-o-keyframes #{$animation-name} {
-    @content;
-  }
-
+@mixin keyframes($animation-name) {
   @keyframes #{$animation-name} {
     @content;
   }
@@ -326,9 +238,10 @@ $animation-play-state-modes: array-concat((paused, running), $css-default-modes)
 /// @param {string} $options.timing-function [ease] - animation timing function (easing)
 /// @param {string} $options.fill-mode [forwards] - animation fill mode
 /// @param {string} $options.play-state [initial] - animation play state
-@mixin animation($options) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin animation($options, $important: false) {
   @if is-css-default($options) {
-    @include prefixer(animation, $options);
+    @include prefixer(animation, $options, null, $important);
   }
   @else {
     $settings: (name: none, duration: 0s, delay: 0s, direction: normal, iteration-count: 0, timing-function: ease, fill-mode: forwards, play-state: initial);
@@ -391,7 +304,7 @@ $animation-play-state-modes: array-concat((paused, running), $css-default-modes)
     $animation-name: map-get($settings, name);
 
     @if is-animation-name($animation-name) {
-      @include prefixer(animation-name, $animation-name);
+      @include prefixer(animation-name, $animation-name, null, $important);
     }
     @else {
       @error '`animation-name: #{$animation-name}` is mandatory parameter';
@@ -400,7 +313,7 @@ $animation-play-state-modes: array-concat((paused, running), $css-default-modes)
     $animation-duration: map-get($settings, duration);
 
     @if is-animation-time($animation-duration) {
-      @include prefixer(animation-duration, $animation-duration);
+      @include prefixer(animation-duration, $animation-duration, null, $important);
     }
     @else {
       @warn '`animation-duration: #{$animation-duration}` is not a valid animation time value (only time & css defaults are allowed)';
@@ -409,7 +322,7 @@ $animation-play-state-modes: array-concat((paused, running), $css-default-modes)
     $animation-delay: map-get($settings, delay);
 
     @if is-animation-time($animation-delay) {
-      @include prefixer(animation-delay, $animation-delay);
+      @include prefixer(animation-delay, $animation-delay, null, $important);
     }
     @else {
       @warn '`animation-delay: #{$animation-delay}` is not a valid animation time value (only time & css defaults are allowed)';
@@ -418,7 +331,7 @@ $animation-play-state-modes: array-concat((paused, running), $css-default-modes)
     $animation-direction: map-get($settings, direction);
 
     @if is-animation-direction($animation-direction) {
-      @include prefixer(animation-direction, $animation-direction);
+      @include prefixer(animation-direction, $animation-direction, null, $important);
     }
     @else {
       @warn '`animation-direction: #{$animation-direction}` is not a valid animation direction value';
@@ -427,7 +340,7 @@ $animation-play-state-modes: array-concat((paused, running), $css-default-modes)
     $animation-iteration-count: map-get($settings, iteration-count);
 
     @if is-animation-iteration-count($animation-iteration-count) {
-      @include prefixer(animation-iteration-count, $animation-iteration-count);
+      @include prefixer(animation-iteration-count, $animation-iteration-count, null, $important);
     }
     @else {
       @warn '`animation-iteration-count: #{$animation-iteration-count}` is not a valid animation iteration count value';
@@ -436,7 +349,7 @@ $animation-play-state-modes: array-concat((paused, running), $css-default-modes)
     $animation-timing-function: map-get($settings, timing-function);
 
     @if is-animation-timing-function($animation-timing-function) {
-      @include prefixer(animation-timing-function, $animation-timing-function);
+      @include prefixer(animation-timing-function, $animation-timing-function, null, $important);
     }
     @else {
       @warn '`animation-timing-function: #{$animation-timing-function}` is not a valid animation timing function value';
@@ -445,7 +358,7 @@ $animation-play-state-modes: array-concat((paused, running), $css-default-modes)
     $animation-fill-mode: map-get($settings, fill-mode);
 
     @if is-animation-fill($animation-fill-mode) {
-      @include prefixer(animation-fill-mode, $animation-fill-mode);
+      @include prefixer(animation-fill-mode, $animation-fill-mode, null, $important);
     }
     @else {
       @warn '`animation-fill-mode: #{$animation-fill-mode}` is not a valid animation fill mode value';
@@ -454,7 +367,7 @@ $animation-play-state-modes: array-concat((paused, running), $css-default-modes)
     $animation-play-state: map-get($settings, play-state);
 
     @if is-animation-direction($animation-play-state) {
-      @include prefixer(animation-play-state, $animation-play-state);
+      @include prefixer(animation-play-state, $animation-play-state, null, $important);
     }
     @else {
       @warn '`animation-play-state: #{$animation-play-state}` is not a valid animation play state value';

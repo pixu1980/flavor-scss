@@ -86,7 +86,9 @@
 /// @requires {mixin} prefixer
 /// @access public
 /// @param {size | array | list} $br [0] - the border radius
-@mixin border-radius($br: 0, $shorthand: false) {
+/// @param {boolean} $shorthand [false] - if true, uses the shorthand selector
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-radius($br: 0, $shorthand: false, $important: false) {
   $border-radius: ();
 
   $border-top-left-radius: nth-value($br, 1, 0);
@@ -97,7 +99,7 @@
         $border-radius: append($border-radius, $border-top-left-radius);
       }
       @else {
-        @include prefixer(border-top-left-radius, $border-top-left-radius);
+        @include prefixer(border-top-left-radius, $border-top-left-radius, null, $important);
       }
     }
     @else {
@@ -113,7 +115,7 @@
         $border-radius: append($border-radius, $border-top-right-radius);
       }
       @else {
-        @include prefixer(border-top-right-radius, $border-top-right-radius);
+        @include prefixer(border-top-right-radius, $border-top-right-radius, null, $important);
       }
     }
     @else {
@@ -129,7 +131,7 @@
         $border-radius: append($border-radius, $border-bottom-right-radius);
       }
       @else {
-        @include prefixer(border-bottom-right-radius, $border-bottom-right-radius);
+        @include prefixer(border-bottom-right-radius, $border-bottom-right-radius, null, $important);
       }
     }
     @else {
@@ -145,7 +147,7 @@
         $border-radius: append($border-radius, $border-bottom-left-radius);
       }
       @else {
-        @include prefixer(border-bottom-left-radius, $border-bottom-left-radius);
+        @include prefixer(border-bottom-left-radius, $border-bottom-left-radius, null, $important);
       }
     }
     @else {
@@ -154,7 +156,7 @@
   }
 
   @if $shorthand==true {
-    @include prefixer(border-radius, $border-radius);
+    @include prefixer(border-radius, $border-radius, null, $important);
   }
 }
 
@@ -173,8 +175,9 @@
 ///   }
 /// @access public
 /// @param {size} $br [0] - the border radius
-@mixin border-top-radius($br: 0) {
-  @include border-radius($br $br null null);
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-top-radius($br: 0, $important: false) {
+  @include border-radius($br $br null null, false, $important);
 }
 
 /// Border right radius mixin
@@ -192,8 +195,9 @@
 ///   }
 /// @access public
 /// @param {size} $br [0] - the border radius
-@mixin border-right-radius($br: 0) {
-  @include border-radius(null $br null $br);
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-right-radius($br: 0, $important: false) {
+  @include border-radius(null $br null $br, false, $important);
 }
 
 /// Border bottom radius mixin
@@ -211,8 +215,9 @@
 ///   }
 /// @access public
 /// @param {size} $br [0] - the border radius
-@mixin border-bottom-radius($br: 0) {
-  @include border-radius(null null $br $br);
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-bottom-radius($br: 0, $important: false) {
+  @include border-radius(null null $br $br, false, $important);
 }
 
 /// Border left radius mixin
@@ -230,6 +235,7 @@
 ///   }
 /// @access public
 /// @param {size} $br [0] - the border radius
-@mixin border-left-radius($br: 0) {
-  @include border-radius($br null null $br);
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-left-radius($br: 0, $important: false) {
+  @include border-radius($br null null $br, false, $important);
 }

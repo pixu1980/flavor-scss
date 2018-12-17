@@ -37,6 +37,7 @@ $appearance-modes: (none, button, button-arrow-down, button-arrow-next, button-a
 ///   }
 /// @access public
 /// @param {appearance-mode} $a - the appearance mode
-@mixin appearance ($a) {
-  @include prefixer(appearance, $a, webkit moz spec);
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin appearance ($a, $important: false) {
+  @include prefixer(appearance, $a, webkit moz spec, $important);
 }

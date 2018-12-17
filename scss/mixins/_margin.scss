@@ -45,10 +45,11 @@ $margin-modes: array-concat((auto), $css-default-modes);
 /// @access public
 /// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
 /// @param {string} $margin-direction-selector [margin] - the margin direction (e.g. `margin-top`)
-@mixin margin-direction($m, $margin-direction-selector: margin) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin margin-direction($m, $margin-direction-selector: margin, $important: false) {
   @if is-defined($m) {
     @if is-margin($m) {
-      #{$margin-direction-selector}: $m;
+      #{$margin-direction-selector}: $m important($important);
     }
     @else {
       @warn '`#{$margin-direction-selector}: #{$m}` is not a valid margin value';
@@ -70,8 +71,9 @@ $margin-modes: array-concat((auto), $css-default-modes);
 /// @see {mixin} margin-direction
 /// @access public
 /// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
-@mixin margin-top($m) {
-  @include margin-direction($m, margin-top);
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin margin-top($m, $important: false) {
+  @include margin-direction($m, margin-top, $important);
 }
 
 /// Margin right mixin
@@ -88,8 +90,9 @@ $margin-modes: array-concat((auto), $css-default-modes);
 /// @see {mixin} margin-direction
 /// @access public
 /// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
-@mixin margin-right($m) {
-  @include margin-direction($m, margin-right);
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin margin-right($m, $important: false) {
+  @include margin-direction($m, margin-right, $important);
 }
 
 /// Margin bottom mixin
@@ -106,8 +109,9 @@ $margin-modes: array-concat((auto), $css-default-modes);
 /// @see {mixin} margin-direction
 /// @access public
 /// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
-@mixin margin-bottom($m) {
-  @include margin-direction($m, margin-bottom);
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin margin-bottom($m, $important: false) {
+  @include margin-direction($m, margin-bottom, $important);
 }
 
 /// Margin left mixin
@@ -124,8 +128,9 @@ $margin-modes: array-concat((auto), $css-default-modes);
 /// @see {mixin} margin-direction
 /// @access public
 /// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
-@mixin margin-left($m) {
-  @include margin-direction($m, margin-left);
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin margin-left($m, $important: false) {
+  @include margin-direction($m, margin-left, $important);
 }
 
 /// Margin mixin
@@ -194,14 +199,15 @@ $margin-modes: array-concat((auto), $css-default-modes);
 ///   }
 /// @access public
 /// @param {string | length} $m - the margin value (e.g. `auto` or `20px`)
-@mixin margin($m) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin margin($m, $important: false) {
   $margin-top: nth-value($m, 1, 0);
   $margin-right: nth-value($m, 2, $margin-top);
   $margin-bottom: nth-value($m, 3, $margin-top);
   $margin-left: nth-value($m, 4, $margin-right);
 
-  @include margin-top($margin-top);
-  @include margin-right($margin-right);
-  @include margin-bottom($margin-bottom);
-  @include margin-left($margin-left);
+  @include margin-top($margin-top, $important);
+  @include margin-right($margin-right, $important);
+  @include margin-bottom($margin-bottom, $important);
+  @include margin-left($margin-left, $important);
 }

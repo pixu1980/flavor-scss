@@ -64,7 +64,8 @@ $border-modes: array-concat((none), $css-default-modes);
 /// @param {size} $options.radius [null] - border-radius
 /// @param {string} $border-selector [border] - used for the border selector
 /// @param {boolean} $shorthand [true] - if true, renders the shorthand form of border selector
-@mixin border($options, $border-selector: border, $shorthand: true) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border($options, $border-selector: border, $shorthand: true, $important: false) {
   @if is-border-mode($options) {
     #{$border-selector}: $options;
   }
@@ -105,7 +106,7 @@ $border-modes: array-concat((none), $css-default-modes);
     $border-width: get($settings, size);
 
     @if $shorthand == false {
-      @include border-width($border-width, $border-selector);
+      @include border-width($border-width, $border-selector, $important);
     }
     @else {
       @if is-size($border-width) {
@@ -119,7 +120,7 @@ $border-modes: array-concat((none), $css-default-modes);
     $border-style: get($settings, style);
 
     @if $shorthand == false {
-      @include border-style($border-style);
+      @include border-style($border-style, $border-selector, $important);
     }
     @else {
       @if is-border-style($border-style) {
@@ -133,7 +134,7 @@ $border-modes: array-concat((none), $css-default-modes);
     $border-color: get($settings, color);
 
     @if $shorthand == false {
-      @include border-color($border-color);
+      @include border-color($border-color, $border-selector, $important);
     }
     @else {
       @if is-css-color($border-color) {
@@ -145,13 +146,13 @@ $border-modes: array-concat((none), $css-default-modes);
     }
 
     @if $shorthand == true {
-      #{$border-selector}: $border;
+      #{$border-selector}: $border important($important);
     }
 
     $border-radius: get($settings, radius);
 
     @if is-defined($border-radius) {
-      @include border-radius($border-radius);
+      @include border-radius($border-radius, false, $important);
     }
   }
 }
@@ -169,8 +170,10 @@ $border-modes: array-concat((none), $css-default-modes);
 ///   }
 /// @see {mixin} border
 /// @access public
-@mixin border-top($options) {
-  @include border($options, border-top);
+/// @param {string | object | map} $options - the border options
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-top($options, $important: false) {
+  @include border($options, border-top, $important);
 }
 
 /// Border right mixin
@@ -186,8 +189,10 @@ $border-modes: array-concat((none), $css-default-modes);
 ///   }
 /// @see {mixin} border
 /// @access public
-@mixin border-right($options) {
-  @include border($options, border-right);
+/// @param {string | object | map} $options - the border options
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-right($options, $important: false) {
+  @include border($options, border-right, $important);
 }
 
 /// Border bottom mixin
@@ -203,8 +208,10 @@ $border-modes: array-concat((none), $css-default-modes);
 ///   }
 /// @see {mixin} border
 /// @access public
-@mixin border-bottom($options) {
-  @include border($options, border-bottom);
+/// @param {string | object | map} $options - the border options
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-bottom($options, $important: false) {
+  @include border($options, border-bottom, $important);
 }
 
 /// Border left mixin
@@ -220,8 +227,10 @@ $border-modes: array-concat((none), $css-default-modes);
 ///   }
 /// @see {mixin} border
 /// @access public
-@mixin border-left($options) {
-  @include border($options, border-left);
+/// @param {string | object | map} $options - the border options
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin border-left($options, $important: false) {
+  @include border($options, border-left, $important);
 }
 
 

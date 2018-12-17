@@ -36,9 +36,10 @@ $font-size-modes: array-concat((medium, xx-small, x-small, small, large, x-large
 ///   }
 /// @access public
 /// @param {size | percentage | font-size-mode} $fs - the font-size value
-@mixin font-size($fs) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin font-size($fs, $important: false) {
   @if is-font-size($fs) {
-    font-size: $fs;
+    font-size: $fs important($important);
   }
   @else {
     @warn '`font-size: #{$fs}` is not a valid font-size value';
@@ -74,9 +75,10 @@ $line-height-modes: array-concat((normal), $css-default-modes);
 ///   }
 /// @access public
 /// @param {size | percentage | line-height-mode} $lh - the line-height value
-@mixin line-height($lh) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin line-height($lh, $important: false) {
   @if is-line-height($lh) {
-    line-height: $lh;
+    line-height: $lh important($important);
   }
   @else {
     @warn '`line-height: #{$lh}` is not a valid line-height value';
@@ -116,9 +118,10 @@ $line-height-modes: array-concat((normal), $css-default-modes);
 ///   }
 /// @access public
 /// @param {string | array | list} $ff - the font-family value
-@mixin font-family($ff) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin font-family($ff, $important: false) {
   @if is-font-family($ff) {
-    font-family: #{$ff};
+    font-family: #{$ff} important($important);
   }
   @else {
     @warn '`font-family: #{$ff}` is not a valid font-family value';
@@ -154,9 +157,10 @@ $font-weight-modes: array-concat((normal, bold, bolder, lighter, 100, 200, 300, 
 ///   }
 /// @access public
 /// @param {string | integer} $fw - the font-weight value
-@mixin font-weight($fw) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin font-weight($fw, $important: false) {
   @if is-font-weight($fw) {
-    font-weight: $fw;
+    font-weight: $fw important($important);
   }
   @else {
     @warn '`font-weight: #{$fw}` is not a valid font-weight';
@@ -175,7 +179,7 @@ $font-style-modes: array-concat((normal, italic, oblique), $css-default-modes);
 /// @link https://www.w3schools.com/cssref/pr_font_font-style.asp - W3Schools font-style docs
 /// @access public
 /// @param {font-style-mode} $fs - the font-style value
-/// @return {boolean}
+/// @return {boolean} - true, if it's actually a font style value
 @function is-font-style($fs) {
   @return is-defined($fs) and array-contains($font-style-modes, $fs);
 }
@@ -193,9 +197,10 @@ $font-style-modes: array-concat((normal, italic, oblique), $css-default-modes);
 ///   }
 /// @access public
 /// @param {font-style-mode} $fs - the font-style value
-@mixin font-style($fs) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin font-style($fs, $important: false) {
   @if is-font-style($fs) {
-    font-style: $fs;
+    font-style: $fs important($important);
   }
   @else {
     @warn '`font-style: #{$fs}` is not a valid font-style value';
@@ -233,7 +238,8 @@ $font-style-modes: array-concat((normal, italic, oblique), $css-default-modes);
 /// @param {string | integer} $options.weight [normal] - the font-weight value
 /// @param {font-style-mode} $options.style [normal] - the font-style value
 /// @param {color} $options.color [null] - the color value
-@mixin font($options) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin font($options, $important: false) {
   $settings: (size: 1rem, height: 1rem, family: null, weight: normal, style: normal, color: null);
 
   @if is-object($options) {
@@ -280,37 +286,37 @@ $font-style-modes: array-concat((normal, italic, oblique), $css-default-modes);
   $font-size: map-get($settings, size);
 
   @if is-defined($font-size) {
-    @include font-size($font-size);
+    @include font-size($font-size, $important);
   }
 
   $line-height: map-get($settings, height);
 
   @if is-defined($line-height) {
-    @include line-height($line-height);
+    @include line-height($line-height, $important);
   }
 
   $font-family: map-get($settings, family);
 
   @if is-defined($font-family) {
-    @include font-family($font-family);
+    @include font-family($font-family, $important);
   }
 
   $font-weight: map-get($settings, weight);
 
   @if is-defined($font-weight) {
-    @include font-weight($font-weight);
+    @include font-weight($font-weight, $important);
   }
 
   $font-style: map-get($settings, style);
 
   @if is-defined($font-style) {
-    @include font-style($font-style);
+    @include font-style($font-style, $important);
   }
 
   $font-color: map-get($settings, color);
 
   @if is-defined($font-color) {
-    @include box-color($font-color null);
+    @include box-color($font-color null, $important);
   }
 }
 
@@ -343,9 +349,10 @@ $text-align-modes: array-concat((left, center, right, justify), $css-default-mod
 ///   }
 /// @access public
 /// @param {string} $ta - the text-align value
-@mixin text-align($ta) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-align($ta, $important: false) {
   @if(is-text-align($ta)) {
-    text-align: $ta;
+    text-align: $ta important($important);
   }
   @else {
     @warn '`text-align: #{$ta}` is not a valid text-align value';
@@ -381,9 +388,10 @@ $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle
 ///   }
 /// @access public
 /// @param {string} $va - the vertical-align value
-@mixin vertical-align($va) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin vertical-align($va, $important: false) {
   @if(is-vertical-align($va)) {
-    vertical-align: $va;
+    vertical-align: $va important($important);
   }
   @else {
     @warn '`vertical-align: #{$va}` is not a valid vertical-align value';
@@ -406,7 +414,8 @@ $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle
 /// @param {object | map} $options - the content-align options value
 /// @param {string} $options.h [inherit] - the text-align value
 /// @param {string} $options.v [inherit] - the vertical-align value
-@mixin content-align($options) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin content-align($options, $important: false) {
   $settings: (h: inherit, v: inherit);
 
   @if is-object($options) {
@@ -429,13 +438,13 @@ $vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle
   $h: get($settings, h);
 
   @if is-defined($h) {
-    @include text-align($h);
+    @include text-align($h, $important);
   }
 
   $v: get($settings, v);
 
   @if is-defined($v) {
-    @include vertical-align($v);
+    @include vertical-align($v, $important);
   }
 }
 
@@ -468,9 +477,10 @@ $text-transform-modes: array-concat((none, capitalize, uppercase, lowercase), $c
 ///   }
 /// @access public
 /// @param {string} $tt - the text-transform value
-@mixin text-transform($tt) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-transform($tt, $important: false) {
   @if is-text-transform($tt) {
-    text-transform: $tt;
+    text-transform: $tt important($important);
   }
   @else {
     @warn '`text-transform: #{$tt}` is not a valid text-transform value';
@@ -507,9 +517,10 @@ $text-overflow-modes: array-concat((clip, ellipsis), $css-default-modes);
 ///   }
 /// @access public
 /// @param {string} $to - the text-overflow value
-@mixin text-overflow($to) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-overflow($to, $important: false) {
   @if is-text-overflow($to) {
-    @include prefixer(text-overflow, $to, o spec);
+    @include prefixer(text-overflow, $to, o spec, $important);
   }
   @else {
     @warn '`text-overflow: #{$to}` is not a valid text-overflow value';
@@ -549,9 +560,10 @@ $hyphens-modes: array-concat((none, manual, auto, unset), $css-default-modes);
 ///   }
 /// @access public
 /// @param {string} $h - the hyphens value
-@mixin hyphens($h) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin hyphens($h, $important: false) {
   @if is-hyphens($h) {
-    @include prefixer(hyphens, $h);
+    @include prefixer(hyphens, $h, null, $important);
   }
   @else {
     @warn '`hyphens: #{$h}` is not a valid hyphens value';
@@ -587,9 +599,10 @@ $letter-spacing-modes: array-concat((normal), $css-default-modes);
 ///   }
 /// @access public
 /// @param {size | string} $ls - the letter-spacing value
-@mixin letter-spacing($ls) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin letter-spacing($ls, $important: false) {
   @if is-letter-spacing($ls) {
-    letter-spacing: $ls;
+    letter-spacing: $ls important($important);
   }
   @else {
     @warn '`letter-spacing: #{$ls}` is not a valid letter-spacing value';
@@ -625,9 +638,10 @@ $word-spacing-modes: array-concat((normal), $css-default-modes);
 ///   }
 /// @access public
 /// @param {size | string} $ws - the word-spacing value
-@mixin word-spacing($ws) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin word-spacing($ws, $important: false) {
   @if is-word-spacing($ws) {
-    word-spacing: $ws;
+    word-spacing: $ws important($important);
   }
   @else {
     @warn '`word-spacing: #{$ws}` is not a valid word-spacing value';
@@ -667,9 +681,10 @@ $user-select-modes: (auto, none, text, all);
 ///   }
 /// @access public
 /// @param {string} $us - the user-select value
-@mixin user-select($us) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin user-select($us, $important: false) {
   @if is-user-select($us) {
-    @include prefixer(user-select, $us);
+    @include prefixer(user-select, $us, null, $important);
   }
   @else {
     @warn '`user-select: #{$us}` is not a valid user-select value';
@@ -705,9 +720,10 @@ $direction-modes: array-concat((ltr, rtl), $css-default-modes);
 ///   }
 /// @access public
 /// @param {string} $d - the direction value
-@mixin direction($d) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin direction($d, $important: false) {
   @if is-direction($d) {
-    direction: $d;
+    direction: $d important($important);
   }
   @else {
     @warn '`direction: #{$d}` is not a valid direction value';
@@ -743,9 +759,10 @@ $white-space-modes: array-concat((normal, nowrap, pre, pre-line, pre-wrap), $css
 ///   }
 /// @access public
 /// @param {string} $ws - the white-space value
-@mixin white-space($ws) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin white-space($ws, $important: false) {
   @if is-white-space($ws) {
-    white-space: $ws;
+    white-space: $ws important($important);
   }
   @else {
     @warn '`white-space: #{$ws}` is not a valid white-space value';
@@ -781,9 +798,10 @@ $word-break-modes: array-concat((normal, break-all, keep-all), $css-default-mode
 ///   }
 /// @access public
 /// @param {string} $wb - the word-break value
-@mixin word-break($wb) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin word-break($wb, $important: false) {
   @if is-word-break($wb) {
-    word-break: $wb;
+    word-break: $wb important($important);
   }
   @else {
     @warn '`word-break: #{$wb}` is not a valid word-break value';
@@ -819,9 +837,11 @@ $word-wrap-modes: array-concat((normal, break-word), $css-default-modes);
 ///   }
 /// @access public
 /// @param {string} $ww - the word-wrap value
-@mixin word-wrap($ww) {
+/// @param {boolean} $force [false] - if true, will do proper hacks to force word-wrap
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin word-wrap($ww, $force: false, $important: false) {
   @if is-word-wrap($ww) {
-    word-wrap: $ww;
+    word-wrap: $ww important($important);
   }
   @else {
     @warn '`word-wrap: #{$ww}` is not a valid word-wrap value';
@@ -881,9 +901,11 @@ $text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
 ///   }
 /// @access public
 /// @param {string} $tsa - the text-size-adjust value
-@mixin text-size-adjust($tsa, $prefixes: $prefixes-default) {
+/// @param {array | list} $prefixes [$prefixes-default] - if true, will render the important rule
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-size-adjust($tsa, $prefixes: $prefixes-default, $important: false) {
   @if is-text-size-adjust($tsa) {
-    @include prefixer(text-size-adjust, $tsa, $prefixes);
+    @include prefixer(text-size-adjust, $tsa, $prefixes, $important);
   }
   @else {
     @warn '`text-size-adjust: #{$tsa}` is not a valid text-size-adjust value';
@@ -1108,9 +1130,10 @@ $text-stroke-width-modes: array-concat((thin, medium, thick), $css-default-modes
 /// @link https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-text-stroke-width - MDN text-stroke-width docs
 /// @access public
 /// @param {size | text-stroke-width-mode} $tsw - the text-stroke-width value
-@mixin text-stroke-width($tsw) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-stroke-width($tsw, $important: false) {
   @if(is-text-stroke-width($tsw)) {
-    @include prefixer(text-stroke-width, $tsw, webkit spec);
+    @include prefixer(text-stroke-width, $tsw, webkit spec, $important);
   }
   @else {
     @warn '`text-stroke-width: #{$tsw}` is not a valid text-stroke-width value';
@@ -1131,9 +1154,10 @@ $text-stroke-width-modes: array-concat((thin, medium, thick), $css-default-modes
 ///   }
 /// @link https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-text-stroke-color - MDN text-stroke-color docs
 /// @param {color} $tsc - the text-stroke-color value
-@mixin text-stroke-color($tsc) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-stroke-color($tsc, $important: false) {
   @if(is-text-stroke-color($tsc)) {
-    @include prefixer(text-stroke-color, $tsc, webkit spec);
+    @include prefixer(text-stroke-color, $tsc, webkit spec, $important);
   }
   @else {
     @warn '`text-stroke-color: #{$tsc}` is not a valid text-stroke-color value';
@@ -1169,7 +1193,8 @@ $text-stroke-width-modes: array-concat((thin, medium, thick), $css-default-modes
 /// @param {object | map} $options - the options
 /// @param {size | text-stroke-width-mode} $options.width [1rem] - the text-stroke-width value
 /// @param {color} $options.color [#fff] - the text-stroke-color value
-@mixin text-stroke($options) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-stroke($options, $important: false) {
   $settings: (width: 1rem, color: #fff);
 
   @if is-object($options) {
@@ -1194,8 +1219,8 @@ $text-stroke-width-modes: array-concat((thin, medium, thick), $css-default-modes
 
   @if is-defined($text-stroke-width) and is-defined($text-stroke-color) {
     @supports ((text-stroke-width: $text-stroke-width) and (text-stroke-color: $text-stroke-color)) or ((-webkit-text-stroke-width: $text-stroke-width) and (-webkit-text-stroke-color: $text-stroke-color)) {
-      @include text-stroke-width($text-stroke-width);
-      @include text-stroke-color($text-stroke-color);
+      @include text-stroke-width($text-stroke-width, $important);
+      @include text-stroke-color($text-stroke-color, $important);
     }
 
     @supports (not (((text-stroke-width: $text-stroke-width) and (text-stroke-color: $text-stroke-color)) or ((-webkit-text-stroke-width: $text-stroke-width) and (-webkit-text-stroke-color: $text-stroke-color)))) {

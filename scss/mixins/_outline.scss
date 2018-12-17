@@ -35,9 +35,10 @@ $outline-width-modes: array-concat((medium, thin, thick), $css-default-modes);
 ///   }
 /// @access public
 /// @param {string | size | length} $ow [medium] - the outline-width value
-@mixin outline-width($ow: medium) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin outline-width($ow: medium, $important: false) {
     @if is-outline-width($ow) {
-      outline-width: $ow;
+      outline-width: $ow important($important);
     }
     @else {
       @warn '`outline-width: #{$ow}` is not a valid outline-width value';
@@ -73,9 +74,10 @@ $outline-style-modes: array-concat((none, hidden, dotted, dashed, solid, double,
 ///   }
 /// @access public
 /// @param {string} $os [none] - the outline-style value
-@mixin outline-style($os: none) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin outline-style($os: none, $important: false) {
     @if is-outline-style($os) {
-      outline-style: $os;
+      outline-style: $os important($important);
     }
     @else {
       @warn '`outline-style: #{$os}` is not a valid outline-style value';
@@ -111,9 +113,10 @@ $outline-color-modes: array-concat((invert), $css-default-modes);
 ///   }
 /// @access public
 /// @param {string | color} $oc [invert] - the outline-color value
-@mixin outline-color($oc: invert) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin outline-color($oc: invert, $important: false) {
     @if is-outline-color($oc) {
-      outline-color: $oc;
+      outline-color: $oc important($important);
     }
     @else {
       @warn '`outline-color: #{$oc}` is not a valid outline-color value';
@@ -143,9 +146,10 @@ $outline-color-modes: array-concat((invert), $css-default-modes);
 ///   }
 /// @access public
 /// @param {string | size | length} $oo [0] - the outline-offset value
-@mixin outline-offset($oo: 0) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin outline-offset($oo: 0, $important: false) {
     @if is-outline-offset($oo) {
-      outline-offset: $oo;
+      outline-offset: $oo important($important);
     }
     @else {
       @warn '`outline-offset: #{$oo}` is not a valid outline-offset value';
@@ -172,9 +176,10 @@ $outline-color-modes: array-concat((invert), $css-default-modes);
 /// @param {string} $options.style [none] - the outline-style value
 /// @param {string | color} $options.color [invert] - the outline-color value
 /// @param {string | size | length} $options.offset [null] - the outline-offset value
-@mixin outline($options) {
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin outline($options, $important: false) {
   @if is-outline-mode($options) {
-    outline: $options;
+    outline: $options important($important);
   }
   @else {
     $settings: (size: medium, style: none, color: invert, offset: null);
@@ -211,25 +216,25 @@ $outline-color-modes: array-concat((invert), $css-default-modes);
     $outline-width: get($settings, size);
 
     @if is-defined($outline-width) {
-      @include outline-width($outline-width);
+      @include outline-width($outline-width, $important);
     }
 
     $outline-style: get($settings, style);
 
     @if is-defined($outline-style) {
-      @include outline-style($outline-style);
+      @include outline-style($outline-style, $important);
     }
 
     $outline-color: get($settings, color);
 
     @if is-defined($outline-color) {
-      @include outline-color($outline-color);
+      @include outline-color($outline-color, $important);
     }
 
     $outline-offset: get($settings, offset);
 
     @if is-defined($outline-offset) {
-      @include outline-offset($outline-offset);
+      @include outline-offset($outline-offset, $important);
     }
   }
 }
@@ -260,11 +265,12 @@ $outline-color-modes: array-concat((invert), $css-default-modes);
 /// @param {string} $options.style [none] - the outline-style value
 /// @param {string | color} $options.color [invert] - the outline-color value
 /// @param {string | size | length} $options.offset [null] - the outline-offset value
-@mixin outline-force($o) {
-  @include outline($o);
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin outline-force($o, $important: false) {
+  @include outline($o, $important);
 
   &:active,
   &:focus {
-    @include outline($o);
+    @include outline($o, $important);
   }
 }
