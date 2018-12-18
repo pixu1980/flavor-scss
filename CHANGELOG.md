@@ -1,3 +1,13 @@
+## [Version 1.6.1](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.6.1) (2018-12-18)
+
+### Bug fixes
+
+- added text-decoration support: [`398f545`](https://github.com/:blackmirror1980/flavor-scss/commit/398f545)
+- added extended support to text decoration properties: [`af2d9dd`](https://github.com/:blackmirror1980/flavor-scss/commit/af2d9dd)
+- bugfix: [`1beef66`](https://github.com/:blackmirror1980/flavor-scss/commit/1beef66)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.6.0...v1.6.1)
+
 ## [Version 1.6.0](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.6.0) (2018-12-17)
 
 ### New features
