@@ -165,7 +165,7 @@ $text-decoration-modes: array-concat((none), $css-default-modes);
     text-decoration: $options important($important);
   }
   @else {
-    $settings: (line: none, style: solid, color: transparent);
+    $settings: (line: none, style: null, color: null);
 
     @if is-object($options) {
       $settings: extend($settings, $options);
@@ -262,7 +262,7 @@ $text-decoration-skip-modes: array-concat((none, objects, spaces, ink, edges, bo
 ///     -webkit-text-decoration-skip: objects;
 ///     text-decoration-skip: objects;
 ///   }
-/// @link https://www.quackit.com/css/css3/properties/css_text-decoration-skip.cfm - Quackit text-decoration-skip docs
+/// @link https://www.w3schools.com/cssref/css3_pr_text-decoration-skip.asp - W3Schools text-decoration-skip docs
 /// @access public
 /// @param {text-decoration-skip-mode} $tds - the text-decoration-skip value
 /// @param {boolean} $important [false] - if true, will render the important rule
@@ -303,7 +303,7 @@ $text-underline-position-modes: array-concat((auto, left, right, under, unset), 
 ///     -webkit-text-underline-position: under;
 ///     text-underline-position: under;
 ///   }
-/// @link https://www.quackit.com/css/css3/properties/css_text-underline-position.cfm - Quackit text-underline-position docs
+/// @link https://www.w3schools.com/cssref/css3_pr_text-underline-position.asp - W3Schools text-underline-position docs
 /// @access public
 /// @param {text-underline-position-mode} $tup - the text-underline-position value
 /// @param {boolean} $important [false] - if true, will render the important rule
