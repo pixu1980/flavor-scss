@@ -18,8 +18,8 @@ $text-decoration-line-modes: array-concat((none, underline, overline, line-throu
 /// @access public
 /// @param {text-decoration-line-mode} $tdlm - the text-decoration-line mode
 /// @return {boolean} - true if is text-decoration-line mode
-@function is-text-decoration-line-mode($tdlm) {
-  @return is-defined($tdlm) and array-contains($text-decoration-modes, $tdlm);
+@function is-text-decoration-line($tdlm) {
+  @return is-defined($tdlm) and array-contains($text-decoration-line-modes, $tdlm);
 }
 
 /// Text decoration line mixin
@@ -40,7 +40,7 @@ $text-decoration-line-modes: array-concat((none, underline, overline, line-throu
 /// @param {text-decoration-line-mode} $tdlm - the text-decoration-line value
 /// @param {boolean} $important [false] - if true, will render the important rule
 @mixin text-decoration-line($tdlm, $important: false) {
-  @if(is-text-decoration-line-mode($tdlm)) {
+  @if(is-text-decoration-line($tdlm)) {
     @include prefixer(text-decoration-line, $tdlm, webkit moz spec, $important);
   }
   @else {
@@ -60,8 +60,8 @@ $text-decoration-style-modes: array-concat((solid, double, dotted, dashed, wavy)
 /// @access public
 /// @param {text-decoration-style-mode} $tdsm - the text-decoration-style mode
 /// @return {boolean} - true if is text-decoration-style mode
-@function is-text-decoration-style-mode($tdsm) {
-  @return is-defined($tdsm) and array-contains($text-decoration-modes, $tdsm);
+@function is-text-decoration-style($tdsm) {
+  @return is-defined($tdsm) and array-contains($text-decoration-style-modes, $tdsm);
 }
 
 /// Text decoration style mixin
@@ -81,7 +81,7 @@ $text-decoration-style-modes: array-concat((solid, double, dotted, dashed, wavy)
 /// @param {text-decoration-style-mode} $tdsm - the text-decoration-style value
 /// @param {boolean} $important [false] - if true, will render the important rule
 @mixin text-decoration-style($tdsm, $important: false) {
-  @if(is-text-decoration-style-mode($tdsm)) {
+  @if(is-text-decoration-style($tdsm)) {
     @include prefixer(text-decoration-style, $tdsm, moz spec, $important);
   }
   @else {
@@ -197,7 +197,7 @@ $text-decoration-modes: array-concat((none), $css-default-modes);
     @if $shorthand == false {
       @include text-decoration-line($text-decoration-line, $important);
     }
-    @else if is-text-decoration-line-mode($text-decoration-line) {
+    @else if is-text-decoration-line($text-decoration-line) {
       $text-decoration: append($text-decoration, $text-decoration-line);
     }
     @else {
@@ -207,7 +207,7 @@ $text-decoration-modes: array-concat((none), $css-default-modes);
     $text-decoration-style: get($settings, style);
 
     @if $shorthand == false {
-      @include text-decoration-style($text-decoration-style, $text-decoration-selector, $important);
+      @include text-decoration-style($text-decoration-style, $important);
     }
     @else if is-text-decoration-style($text-decoration-style) {
       $text-decoration: append($text-decoration, $text-decoration-style);
@@ -219,9 +219,9 @@ $text-decoration-modes: array-concat((none), $css-default-modes);
     $text-decoration-color: get($settings, color);
 
     @if $shorthand == false {
-      @include text-decoration-color($text-decoration-color, $text-decoration-selector, $important);
+      @include text-decoration-color($text-decoration-color, $important);
     }
-    @else if is-css-color($text-decoration-color) {
+    @else if is-text-decoration-color($text-decoration-color) {
       $text-decoration: append($text-decoration, $text-decoration-color);
     }
     @else {
@@ -231,5 +231,87 @@ $text-decoration-modes: array-concat((none), $css-default-modes);
     @if $shorthand == true {
       text-decoration: $text-decoration important($important);
     }
+  }
+}
+
+/// Text decoration skip modes
+///
+/// @access private
+/// @requires {function} array-concat
+/// @type list
+$text-decoration-skip-modes: array-concat((none, objects, spaces, ink, edges, box-decoration, unset), $css-default-modes);
+
+/// Checks if something is a supported text-decoration-skip mode
+///
+/// @access public
+/// @param {text-decoration-skip-mode} $tds - the text-decoration-skip mode
+/// @return {boolean} - true if is text-decoration-skip mode
+@function is-text-decoration-skip($tds) {
+  @return is-defined($tds) and array-contains($text-decoration-skip-modes, $tds);
+}
+
+/// Text decoration skip mixin
+///
+/// @example scss - Usage
+///   .text-decoration-skip-element {
+///     @include text-decoration-skip(objects);
+///   }
+///
+/// @example css - Output
+///   .text-decoration-skip-element {
+///     -webkit-text-decoration-skip: objects;
+///     text-decoration-skip: objects;
+///   }
+/// @link https://www.quackit.com/css/css3/properties/css_text-decoration-skip.cfm - Quackit text-decoration-skip docs
+/// @access public
+/// @param {text-decoration-skip-mode} $tds - the text-decoration-skip value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-decoration-skip($tds, $important: false) {
+  @if(is-text-decoration-skip($tds)) {
+    @include prefixer(text-decoration-skip, $tds, webkit spec, $important);
+  }
+  @else {
+    @warn '`text-decoration-skip: #{$tds}` is not a valid text-decoration-skip value';
+  }
+}
+
+/// Text underline position modes
+///
+/// @access private
+/// @requires {function} array-concat
+/// @type list
+$text-underline-position-modes: array-concat((auto, left, right, under, unset), $css-default-modes);
+
+/// Checks if something is a supported text-underline-position mode
+///
+/// @access public
+/// @param {text-underline-position-mode} $tup - the text-underline-position mode
+/// @return {boolean} - true if is text-underline-position mode
+@function is-text-underline-position($tup) {
+  @return is-defined($tup) and array-contains($text-underline-position-modes, $tup);
+}
+
+/// Text underline position mixin
+///
+/// @example scss - Usage
+///   .text-underline-position-element {
+///     @include text-underline-position(under);
+///   }
+///
+/// @example css - Output
+///   .text-underline-position-element {
+///     -webkit-text-underline-position: under;
+///     text-underline-position: under;
+///   }
+/// @link https://www.quackit.com/css/css3/properties/css_text-underline-position.cfm - Quackit text-underline-position docs
+/// @access public
+/// @param {text-underline-position-mode} $tup - the text-underline-position value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-underline-position($tup, $important: false) {
+  @if(is-text-underline-position($tup)) {
+    @include prefixer(text-underline-position, $tup, webkit spec, $important);
+  }
+  @else {
+    @warn '`text-underline-position: #{$tup}` is not a valid text-underline-position value';
   }
 }
