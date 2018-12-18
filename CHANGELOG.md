@@ -1,3 +1,11 @@
+## [Version 1.6.2](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.6.2) (2018-12-18)
+
+### Bug fixes
+
+- checked if defined text-decoration properties: [`68cc8c6`](https://github.com/:blackmirror1980/flavor-scss/commit/68cc8c6)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.6.1...v1.6.2)
+
 ## [Version 1.6.1](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.6.1) (2018-12-18)
 
 ### Bug fixes
