@@ -1,0 +1,46 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Direction modes
+///
+/// @access private
+/// @type list
+$direction-modes: array-concat((ltr, rtl), $css-default-modes);
+
+/// Checks if something is a supported direction mode
+///
+/// @link https://www.w3schools.com/cssref/pr_text_direction.asp - W3Schools direction docs
+/// @access public
+/// @param {string} $d - the direction mode
+/// @return {boolean} - true if is direction mode
+@function is-direction($d) {
+  @return is-defined($d) and array-contains($direction-modes, $d);
+}
+
+/// Direction mixin
+///
+/// @example scss - Usage
+///   .direction-element {
+///     @include direction(rtl);
+///   }
+///
+/// @example css - Output
+///   .direction-element {
+///     direction: rtl;
+///   }
+/// @access public
+/// @param {string} $d - the direction value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin direction($d, $important: false) {
+  @if is-direction($d) {
+    direction: $d important($important);
+  }
+  @else {
+    @warn '`direction: #{$d}` is not a valid direction value';
+  }
+}

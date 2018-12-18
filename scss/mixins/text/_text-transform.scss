@@ -1,0 +1,46 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Text transform modes
+///
+/// @access private
+/// @type list
+$text-transform-modes: array-concat((none, capitalize, uppercase, lowercase), $css-default-modes);
+
+/// Checks if something is a supported text-transform value
+///
+/// @link https://www.w3schools.com/cssref/pr_text_text-transform.asp - W3Schools text-transform docs
+/// @access public
+/// @param {string} $tt - the text-transform value
+/// @return {boolean} - true if is text-transform value
+@function is-text-transform($tt) {
+  @return is-defined($tt) and array-contains($text-transform-modes, $tt);
+}
+
+/// Text transform mixin
+///
+/// @example scss - Usage
+///   .text-transform-element {
+///     @include text-transform(uppercase);
+///   }
+///
+/// @example css - Output
+///   .text-transform-element {
+///     text-transform: uppercase;
+///   }
+/// @access public
+/// @param {string} $tt - the text-transform value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-transform($tt, $important: false) {
+  @if is-text-transform($tt) {
+    text-transform: $tt important($important);
+  }
+  @else {
+    @warn '`text-transform: #{$tt}` is not a valid text-transform value';
+  }
+}

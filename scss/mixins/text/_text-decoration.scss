@@ -1,0 +1,235 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Text decoration line modes
+///
+/// @access private
+/// @requires {function} array-concat
+/// @type list
+$text-decoration-line-modes: array-concat((none, underline, overline, line-through), $css-default-modes);
+
+/// Checks if something is a supported text-decoration-line mode
+///
+/// @access public
+/// @param {text-decoration-line-mode} $tdlm - the text-decoration-line mode
+/// @return {boolean} - true if is text-decoration-line mode
+@function is-text-decoration-line-mode($tdlm) {
+  @return is-defined($tdlm) and array-contains($text-decoration-modes, $tdlm);
+}
+
+/// Text decoration line mixin
+///
+/// @example scss - Usage
+///   .text-decoration-line-element {
+///     @include text-decoration-line(overline);
+///   }
+///
+/// @example css - Output
+///   .text-decoration-line-element {
+///     -webkit-text-decoration-line: overline;
+///     -moz-decoration-line: overline;
+///     text-decoration-line: overline;
+///   }
+/// @link https://www.w3schools.com/cssref/css3_pr_text-decoration-line.asp - W3Schools text-decoration-line docs
+/// @access public
+/// @param {text-decoration-line-mode} $tdlm - the text-decoration-line value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-decoration-line($tdlm, $important: false) {
+  @if(is-text-decoration-line-mode($tdlm)) {
+    @include prefixer(text-decoration-line, $tdlm, webkit moz spec, $important);
+  }
+  @else {
+    @warn '`text-decoration-line: #{$tdlm}` is not a valid text-decoration-line value';
+  }
+}
+
+/// Text decoration style modes
+///
+/// @access private
+/// @requires {function} array-concat
+/// @type list
+$text-decoration-style-modes: array-concat((solid, double, dotted, dashed, wavy), $css-default-modes);
+
+/// Checks if something is a supported text-decoration-style mode
+///
+/// @access public
+/// @param {text-decoration-style-mode} $tdsm - the text-decoration-style mode
+/// @return {boolean} - true if is text-decoration-style mode
+@function is-text-decoration-style-mode($tdsm) {
+  @return is-defined($tdsm) and array-contains($text-decoration-modes, $tdsm);
+}
+
+/// Text decoration style mixin
+///
+/// @example scss - Usage
+///   .text-decoration-style-element {
+///     @include text-decoration-style(wavy);
+///   }
+///
+/// @example css - Output
+///   .text-decoration-style-element {
+///     -moz-text-decoration-style: wavy;
+///     text-decoration-style: wavy;
+///   }
+/// @link https://www.w3schools.com/cssref/css3_pr_text-decoration-style.asp - W3Schools text-decoration-style docs
+/// @access public
+/// @param {text-decoration-style-mode} $tdsm - the text-decoration-style value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-decoration-style($tdsm, $important: false) {
+  @if(is-text-decoration-style-mode($tdsm)) {
+    @include prefixer(text-decoration-style, $tdsm, moz spec, $important);
+  }
+  @else {
+    @warn '`text-decoration-style: #{$tdsm}` is not a valid text-decoration-style value';
+  }
+}
+
+/// Checks if something is a supported text-decoration-color mode
+///
+/// @access public
+/// @param {text-decoration-color} $tdc - the text-decoration-color value
+/// @return {boolean} - true if is text-decoration-color value
+@function is-text-decoration-color($tdc) {
+  @return is-defined($tdc) and (is-color($tdc) or array-contains($css-default-modes, $tdc));
+}
+
+/// Text decoration color mixin
+///
+/// @example scss - Usage
+///   .text-decoration-color-element {
+///     @include text-decoration-color(red);
+///   }
+///
+/// @example css - Output
+///   .text-decoration-color-element {
+///     -webkit-text-decoration-color: red;
+///     -moz-decoration-color: red;
+///     text-decoration-color: red;
+///   }
+/// @link https://www.w3schools.com/cssref/css3_pr_text-decoration-color.asp - W3Schools text-decoration-color docs
+/// @access public
+/// @param {text-decoration-color-mode} $tdc - the text-decoration-color value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-decoration-color($tdc, $important: false) {
+  @if(is-text-decoration-color($tdc)) {
+    @include prefixer(text-decoration-color, $tdc, webkit moz spec, $important);
+  }
+  @else {
+    @warn '`text-decoration-color: #{$tdc}` is not a valid text-decoration-color value';
+  }
+}
+
+/// Text decoration modes
+///
+/// @access private
+/// @requires {function} array-concat
+/// @type list
+$text-decoration-modes: array-concat((none), $css-default-modes);
+
+/// Checks if something is a supported text-decoration mode
+///
+/// @access public
+/// @param {text-decoration-mode} $tdm - the text-decoration mode
+/// @return {boolean} - true if is text-decoration mode
+@function is-text-decoration-mode($tdm) {
+  @return is-defined($tdm) and (array-contains($text-decoration-modes, $tdm));
+}
+
+/// Text decoration mixin
+///
+/// @example scss - Usage
+///   .text-decoration-element {
+///     @include text-decoration(none);
+///   }
+///
+/// @example css - Output
+///   .text-decoration {
+///     text-decoration: none;
+///   }
+/// @todo Add support to multiple text-decoration-line options
+/// @link https://www.w3schools.com/cssref/pr_text_text-decoration.asp - W3Schools text-decoration docs
+/// @access public
+/// @param {string | object | map} $options - the text-decoration options
+/// @param {text-decoration-line} $options.line [none] - text-decoration-line
+/// @param {text-decoration-style} $options.style [solid] - text-decoration-style
+/// @param {text-decoration-color} $options.color [transparent] - text-decoration-color
+/// @param {boolean} $shorthand [false] - if true, will render the shorthand form of text-decoration property
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-decoration($options, $shorthand: false, $important: false) {
+  @if(is-text-decoration-mode($options)) {
+    text-decoration: $options important($important);
+  }
+  @else {
+    $settings: (line: none, style: solid, color: transparent);
+
+    @if is-object($options) {
+      $settings: extend($settings, $options);
+    }
+    @else {
+      $line: nth-value($options, 1);
+
+      @if is-defined($line) {
+        $settings: extend($settings, (line: $line));
+      }
+
+      $style: nth-value($options, 2);
+
+      @if is-defined($style) {
+        $settings: extend($settings, (style: $style));
+      }
+
+      $color: nth-value($options, 3);
+
+      @if is-defined($color) {
+        $settings: extend($settings, (color: $color));
+      }
+    }
+
+    $text-decoration: ();
+
+    $text-decoration-line: get($settings, line);
+
+    @if $shorthand == false {
+      @include text-decoration-line($text-decoration-line, $important);
+    }
+    @else if is-text-decoration-line-mode($text-decoration-line) {
+      $text-decoration: append($text-decoration, $text-decoration-line);
+    }
+    @else {
+      @warn '`text-decoration-line: #{$text-decoration-line}` is not a valid text-decoration-line value';
+    }
+
+    $text-decoration-style: get($settings, style);
+
+    @if $shorthand == false {
+      @include text-decoration-style($text-decoration-style, $text-decoration-selector, $important);
+    }
+    @else if is-text-decoration-style($text-decoration-style) {
+      $text-decoration: append($text-decoration, $text-decoration-style);
+    }
+    @else {
+      @warn '`text-decoration-style: #{$text-decoration-style}` is not a valid text-decoration-style value';
+    }
+
+    $text-decoration-color: get($settings, color);
+
+    @if $shorthand == false {
+      @include text-decoration-color($text-decoration-color, $text-decoration-selector, $important);
+    }
+    @else if is-css-color($text-decoration-color) {
+      $text-decoration: append($text-decoration, $text-decoration-color);
+    }
+    @else {
+      @warn '`text-decoration-color: #{$text-decoration-color}` is not a valid css color';
+    }
+
+    @if $shorthand == true {
+      text-decoration: $text-decoration important($important);
+    }
+  }
+}

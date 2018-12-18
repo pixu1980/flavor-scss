@@ -1,0 +1,46 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Font weight modes
+///
+/// @access private
+/// @type list
+$font-weight-modes: array-concat((normal, bold, bolder, lighter, 100, 200, 300, 400, 500, 600, 700, 800, 900), $css-default-modes);
+
+/// Checks if something is a supported font-weight value
+///
+/// @link https://www.w3schools.com/cssref/pr_font_weight.asp - W3Schools font-weight docs
+/// @access public
+/// @param {string | integer} $fw - the font-weight value
+/// @return {boolean} - true if is font-weight value
+@function is-font-weight($fw) {
+  @return is-defined($fw) and array-contains($font-weight-modes, $fw);
+}
+
+/// Font weight mixin
+///
+/// @example scss - Usage
+///   .font-weight-element {
+///     @include font-weight(bold);
+///   }
+///
+/// @example css - Output
+///   .font-weight-element {
+///     font-weight: bold;
+///   }
+/// @access public
+/// @param {string | integer} $fw - the font-weight value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin font-weight($fw, $important: false) {
+  @if is-font-weight($fw) {
+    font-weight: $fw important($important);
+  }
+  @else {
+    @warn '`font-weight: #{$fw}` is not a valid font-weight';
+  }
+}

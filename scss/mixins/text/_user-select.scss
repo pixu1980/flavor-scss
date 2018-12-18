@@ -1,0 +1,50 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// User select modes
+///
+/// @access private
+/// @type list
+$user-select-modes: (auto, none, text, all);
+
+/// Checks if something is a supported user-select mode
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_user-select.asp - W3Schools user-select docs
+/// @access public
+/// @param {string} $us - the user-select mode
+/// @return {boolean} - true if is user-select mode
+@function is-user-select($us) {
+  @return is-defined($us) and array-contains($user-select-modes, $us);
+}
+
+/// User select mixin
+///
+/// @example scss - Usage
+///   .user-select-element {
+///     @include user-select(none);
+///   }
+///
+/// @example css - Output
+///   .user-select-element {
+///     -webkit-user-select: none;
+///     -moz-user-select: none;
+///     -ms-user-select: none;
+///     -o-user-select: none;
+///     user-select: none;
+///   }
+/// @access public
+/// @param {string} $us - the user-select value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin user-select($us, $important: false) {
+  @if is-user-select($us) {
+    @include prefixer(user-select, $us, null, $important);
+  }
+  @else {
+    @warn '`user-select: #{$us}` is not a valid user-select value';
+  }
+}

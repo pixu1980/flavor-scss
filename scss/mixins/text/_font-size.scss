@@ -1,0 +1,47 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Font size modes
+///
+/// @access private
+/// @requires {function} array-concat
+/// @type list
+$font-size-modes: array-concat((medium, xx-small, x-small, small, large, x-large, xx-large, smaller, larger), $css-default-modes);
+
+/// Checks if something is a supported font-size value
+///
+/// @link https://www.w3schools.com/cssref/pr_font_font-size.asp - W3Schools font-size docs
+/// @access public
+/// @param {size | percentage | font-size-mode} $fs - the font-size value
+/// @return {boolean} - true if is font-size value
+@function is-font-size($fs) {
+  @return is-defined($fs) and (is-size($fs) or is-percentage($fs) or array-contains($font-size-modes, $fs));
+}
+
+/// Font size mixin
+///
+/// @example scss - Usage
+///   .font-size-element {
+///     @include font-size(1.8rem);
+///   }
+///
+/// @example css - Output
+///   .font-size-element {
+///     font-size: 1.8rem;
+///   }
+/// @access public
+/// @param {size | percentage | font-size-mode} $fs - the font-size value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin font-size($fs, $important: false) {
+  @if is-font-size($fs) {
+    font-size: $fs important($important);
+  }
+  @else {
+    @warn '`font-size: #{$fs}` is not a valid font-size value';
+  }
+}

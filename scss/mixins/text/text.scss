@@ -1,0 +1,272 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+@import 'font-size';
+@import 'line-height';
+@import 'font-family';
+@import 'font-weight';
+@import 'font-style';
+
+@import 'text-align';
+@import 'vertical-align';
+
+@import 'direction';
+
+@import 'text-decoration';
+@import 'text-overflow';
+@import 'text-transform';
+
+@import 'letter-spacing';
+@import 'word-spacing';
+
+@import 'word-wrap';
+
+@import 'white-space';
+
+@import 'user-select';
+
+/// Font mixin
+///
+/// @example scss - Usage
+///
+///   $font-family: OpenSans, Verdana, sans-serif;
+///
+///   .font-element {
+///     @include font(1.5rem 2.5rem $font-family bold italic white);
+///   }
+///
+/// @example css - Output
+///   .font-element {
+///     font-size: 1.5rem;
+///     line-height: 2.5rem;
+///     font-family: OpenSans, Verdana, sans-serif;
+///     font-weight: bold;
+///     font-style: italic;
+///     color: white;
+///   }
+/// @requires {function} extend
+/// @requires {function} is-defined
+/// @requires {function} is-object
+/// @requires {function} nth-value
+/// @access public
+/// @param {object | map} $options - the options
+/// @param {size | percentage | font-size-mode} $options.size [1rem] - the font-size value
+/// @param {size | percentage | line-height-mode} $options.height [1rem] - the line-height value
+/// @param {string | array | list} $options.family [null] - the font-family value
+/// @param {string | integer} $options.weight [normal] - the font-weight value
+/// @param {font-style-mode} $options.style [normal] - the font-style value
+/// @param {color} $options.color [null] - the color value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin font($options, $important: false) {
+  $settings: (size: 1rem, height: 1rem, family: null, weight: normal, style: normal, color: null);
+
+  @if is-object($options) {
+    $settings: extend($settings, $options);
+  }
+  @else {
+    $size: nth-value($options, 1);
+
+    @if is-defined($size) {
+      $settings: extend($settings, (size: $size));
+    }
+
+    $height: nth-value($options, 2);
+
+    @if is-defined($height) {
+      $settings: extend($settings, (height: $height));
+    }
+
+    $family: nth-value($options, 3);
+
+    @if is-defined($family) {
+      $settings: extend($settings, (family: $family));
+    }
+
+    $weight: nth-value($options, 4);
+
+    @if is-defined($weight) {
+      $settings: extend($settings, (weight: $weight));
+    }
+
+    $style: nth-value($options, 5);
+
+    @if is-defined($style) {
+      $settings: extend($settings, (style: $style));
+    }
+
+    $color: nth-value($options, 6);
+
+    @if is-defined($color) {
+      $settings: extend($settings, (color: $color));
+    }
+  }
+
+  $font-size: map-get($settings, size);
+
+  @if is-defined($font-size) {
+    @include font-size($font-size, $important);
+  }
+
+  $line-height: map-get($settings, height);
+
+  @if is-defined($line-height) {
+    @include line-height($line-height, $important);
+  }
+
+  $font-family: map-get($settings, family);
+
+  @if is-defined($font-family) {
+    @include font-family($font-family, $important);
+  }
+
+  $font-weight: map-get($settings, weight);
+
+  @if is-defined($font-weight) {
+    @include font-weight($font-weight, $important);
+  }
+
+  $font-style: map-get($settings, style);
+
+  @if is-defined($font-style) {
+    @include font-style($font-style, $important);
+  }
+
+  $font-color: map-get($settings, color);
+
+  @if is-defined($font-color) {
+    @include box-color($font-color null, $important);
+  }
+}
+
+/// Content align mixin
+///
+/// @example scss - Usage
+///   .content-align-element {
+///     @include content-align(center middle);
+///   }
+///
+/// @example css - Output
+///   .content-align-element {
+///     text-align: center;
+///     vertical-align: middle;
+///   }
+/// @access public
+/// @param {object | map} $options - the content-align options value
+/// @param {string} $options.h [inherit] - the text-align value
+/// @param {string} $options.v [inherit] - the vertical-align value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin content-align($options, $important: false) {
+  $settings: (h: inherit, v: inherit);
+
+  @if is-object($options) {
+    $settings: extend($settings, $options);
+  }
+  @else {
+    $h: nth-value($options, 1);
+
+    @if is-defined($h) {
+      $settings: extend($settings, (h: $h));
+    }
+
+    $v: nth-value($options, 2);
+
+    @if is-defined($v) {
+      $settings: extend($settings, (v: $v));
+    }
+  }
+
+  $h: get($settings, h);
+
+  @if is-defined($h) {
+    @include text-align($h, $important);
+  }
+
+  $v: get($settings, v);
+
+  @if is-defined($v) {
+    @include vertical-align($v, $important);
+  }
+}
+
+/// Ellipsis mixin
+/// <br>useful to ellipse text containers also in multiline mode
+///
+/// @example scss - Usage - single line
+///   .ellipsis-element {
+///     @include ellipsis;
+///   }
+///
+/// @example css - Output - single line
+///   .ellipsis-element {
+///     display: inline-block;
+///     white-space: nowrap;
+///     word-wrap: normal;
+///     max-width: 100%;
+///     overflow: hidden;
+///     text-overflow: ellipsis;
+///   }
+///
+/// @example scss - Usage - multi line
+///   .ellipsis-element {
+///     @include ellipsis(true);
+///   }
+///
+/// @example css - Output - multi line
+///   .ellipsis-element {
+///     display: block;
+///     display: -webkit-box;
+///     margin: 0 auto;
+///     font-size: 10px;
+///     line-height: 1.5;
+///     max-width: 100%;
+///     height: 45px;
+///     min-height: 45px;
+///     -webkit-line-clamp: 3;
+///     -webkit-box-orient: vertical;
+///     overflow: hidden;
+///     text-overflow: ellipsis;
+///   }
+/// @access public
+/// @param {boolean} $multiline [false] - the multiline mode
+/// @param {size | length | percentage} $width [100%] - the width to use
+/// @param {size | length | percentage} $font-size [$font-size-base] - the font-size
+/// @param {size | length | percentage} $line-height [$line-height-base] - the line-height
+/// @param {integer} $lines-to-show [3] - the lines to show before ellipsis
+/// @param {string} $text-overflow [ellipsis] - the text to use for overflowing
+@mixin ellipsis($multiline: false, $width: 100%, $font-size: $font-size-base, $line-height: $line-height-base, $lines-to-show: 3, $text-overflow: ellipsis) {
+  @if $multiline {
+    $max-width: $width;
+    $height: $line-height * $lines-to-show; // fallback for non-webkit
+    $min-height: $height; // fallback for non-webkit
+
+    @include margin(0 auto);
+    @include font($font-size $line-height);
+
+    @supports (display: -webkit-box) and (-webkit-line-clamp: $lines-to-show) and (-webkit-box-orient: vertical) {
+      display: -webkit-box;
+      -webkit-line-clamp: $lines-to-show;
+      -webkit-box-orient: vertical;
+
+      @include box-size(null null null null $max-width);
+    }
+
+    @supports (not ((display: -webkit-box) and (-webkit-line-clamp: $lines-to-show) and (-webkit-box-orient: vertical))) {
+      @include display(block); // fallback for non-webkit
+      @include box-size(null $height null $min-height $max-width);
+    }
+  }
+  @else {
+    @include display(inline-block);
+    @include box-bounds(null null $width null);
+    @include white-space(nowrap);
+    @include word-wrap(normal);
+  }
+
+  @include overflow(hidden);
+  @include text-overflow($text-overflow);
+}

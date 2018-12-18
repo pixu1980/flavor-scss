@@ -1,0 +1,137 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Text stroke width modes
+///
+/// @access private
+/// @requires {function} array-concat
+/// @type list
+$text-stroke-width-modes: array-concat((thin, medium, thick), $css-default-modes);
+
+/// Checks if something is a supported text-stroke-width value
+///
+/// @access public
+/// @param {size | text-stroke-width-mode} $tsw - the text-stroke-width value
+/// @return {boolean} - true if is text-stroke-width value
+@function is-text-stroke-width($tsw) {
+  @return is-defined($tsw) and (is-size($tsw) or array-contains($text-stroke-width-modes, $tsw));
+}
+
+/// Text stroke width mixin
+///
+/// @example scss - Usage
+///   .text-stroke-width-element {
+///     @include text-stroke-width(2rem);
+///   }
+///
+/// @example css - Output
+///   .text-stroke-width {
+///     -webkit-text-stroke-width: 2rem;
+///     text-stroke-width: 2rem;
+///   }
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-text-stroke-width - MDN text-stroke-width docs
+/// @access public
+/// @param {size | text-stroke-width-mode} $tsw - the text-stroke-width value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-stroke-width($tsw, $important: false) {
+  @if(is-text-stroke-width($tsw)) {
+    @include prefixer(text-stroke-width, $tsw, webkit spec, $important);
+  }
+  @else {
+    @warn '`text-stroke-width: #{$tsw}` is not a valid text-stroke-width value';
+  }
+}
+
+/// Text stroke color mixin
+///
+/// @example scss - Usage
+///   .text-stroke-color-element {
+///     @include text-stroke-color(red);
+///   }
+///
+/// @example css - Output
+///   .text-stroke-color {
+///     -webkit-text-stroke-color: red;
+///     text-stroke-color: red;
+///   }
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-text-stroke-color - MDN text-stroke-color docs
+/// @param {color} $tsc - the text-stroke-color value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-stroke-color($tsc, $important: false) {
+  @if(is-text-stroke-color($tsc)) {
+    @include prefixer(text-stroke-color, $tsc, webkit spec, $important);
+  }
+  @else {
+    @warn '`text-stroke-color: #{$tsc}` is not a valid text-stroke-color value';
+  }
+}
+
+/// Text stroke mixin, with fallbacks for older browsers
+///
+/// @example scss - Usage
+///
+///   .text-stroke-element {
+///     @include text-stroke(2rem red);
+///   }
+///
+/// @example css - Output
+///   .text-stroke-element {
+///     // if text-stroke is supported
+///     -webkit-text-stroke: 2rem red;
+///     text-stroke: 2rem red;
+///
+///     // if text-stroke is not supported
+///     -webkit-text-shadow: .1rem .1rem 2rem red, .1rem -.1rem 2rem red, -.1rem .1rem 2rem red, -.1rem -.1rem 2rem red;
+///     -moz-text-shadow: .1rem .1rem 2rem red, .1rem -.1rem 2rem red, -.1rem .1rem 2rem red, -.1rem -.1rem 2rem red;
+///     -ms-text-shadow: .1rem .1rem 2rem red, .1rem -.1rem 2rem red, -.1rem .1rem 2rem red, -.1rem -.1rem 2rem red;
+///     -o-text-shadow: .1rem .1rem 2rem red, .1rem -.1rem 2rem red, -.1rem .1rem 2rem red, -.1rem -.1rem 2rem red;
+///     text-shadow: .1rem .1rem 2rem red, .1rem -.1rem 2rem red, -.1rem .1rem 2rem red, -.1rem -.1rem 2rem red;
+///   }
+/// @requires {function} extend
+/// @requires {function} is-defined
+/// @requires {function} is-object
+/// @requires {function} nth-value
+/// @access public
+/// @param {object | map} $options - the options
+/// @param {size | text-stroke-width-mode} $options.width [1rem] - the text-stroke-width value
+/// @param {color} $options.color [#fff] - the text-stroke-color value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-stroke($options, $important: false) {
+  $settings: (width: 1rem, color: #fff);
+
+  @if is-object($options) {
+    $settings: extend($settings, $options);
+  }
+  @else {
+    $width: nth-value($options, 1);
+
+    @if is-defined($width) {
+      $settings: extend($settings, (width: $width));
+    }
+
+    $color: nth-value($options, 6);
+
+    @if is-defined($color) {
+      $settings: extend($settings, (color: $color));
+    }
+  }
+
+  $text-stroke-width: map-get($settings, width);
+  $text-stroke-color: map-get($settings, color);
+
+  @if is-defined($text-stroke-width) and is-defined($text-stroke-color) {
+    @supports ((text-stroke-width: $text-stroke-width) and (text-stroke-color: $text-stroke-color)) or ((-webkit-text-stroke-width: $text-stroke-width) and (-webkit-text-stroke-color: $text-stroke-color)) {
+      @include text-stroke-width($text-stroke-width, $important);
+      @include text-stroke-color($text-stroke-color, $important);
+    }
+
+    @supports (not (((text-stroke-width: $text-stroke-width) and (text-stroke-color: $text-stroke-color)) or ((-webkit-text-stroke-width: $text-stroke-width) and (-webkit-text-stroke-color: $text-stroke-color)))) {
+      @include text-shadow(.1rem .1rem $text-stroke-width $text-stroke-color, .1rem -.1rem  $text-stroke-width $text-stroke-color, -.1rem .1rem  $text-stroke-width $text-stroke-color, -.1rem -.1rem  $text-stroke-width $text-stroke-color);
+    }
+  }
+}

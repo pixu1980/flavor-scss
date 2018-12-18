@@ -1,0 +1,47 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Text align modes
+///
+/// @access private
+/// @type list
+$text-align-modes: array-concat((left, center, right, justify), $css-default-modes);
+
+/// Checks if something is a supported text-align value
+///
+/// @link https://www.w3schools.com/cssref/pr_text_text-align.asp - W3Schools text-align docs
+/// @access public
+/// @param {string} $ta - the text-align value
+/// @return {boolean} - true if is text-align value
+@function is-text-align($ta) {
+  @return is-defined($ta) and array-contains($text-align-modes, $ta);
+}
+
+/// Text align mixin
+///
+/// @example scss - Usage
+///   .text-align-element {
+///     @include text-align(center);
+///   }
+///
+/// @example css - Output
+///   .text-align-element {
+///     text-align: center;
+///   }
+/// @access public
+/// @param {string} $ta - the text-align value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-align($ta, $important: false) {
+  @if(is-text-align($ta)) {
+    text-align: $ta important($important);
+  }
+  @else {
+    @warn '`text-align: #{$ta}` is not a valid text-align value';
+  }
+}
+

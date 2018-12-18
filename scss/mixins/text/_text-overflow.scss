@@ -1,0 +1,47 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Text overflow modes
+///
+/// @access private
+/// @type list
+$text-overflow-modes: array-concat((clip, ellipsis), $css-default-modes);
+
+/// Checks if something is a supported text-overflow mode
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_text-overflow.asp - W3Schools text-overflow docs
+/// @access public
+/// @param {string} $to - the text-overflow mode
+/// @return {boolean} - true if is text-overflow mode
+@function is-text-overflow($to) {
+  @return is-defined($to) and (array-contains($text-overflow-modes, $to) or is-string($to));
+}
+
+/// Text overflow mixin
+///
+/// @example scss - Usage
+///   .text-overflow-element {
+///     @include text-overflow(ellipsis);
+///   }
+///
+/// @example css - Output
+///   .text-overflow-element {
+///     -o-overflow: ellipsis;
+///     text-overflow: ellipsis;
+///   }
+/// @access public
+/// @param {string} $to - the text-overflow value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-overflow($to, $important: false) {
+  @if is-text-overflow($to) {
+    @include prefixer(text-overflow, $to, o spec, $important);
+  }
+  @else {
+    @warn '`text-overflow: #{$to}` is not a valid text-overflow value';
+  }
+}

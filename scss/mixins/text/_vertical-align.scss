@@ -1,0 +1,46 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Vertical align modes
+///
+/// @access private
+/// @type list
+$vertical-align-modes: array-concat((baseline, sub, super, top, text-top, middle, bottom, text-bottom), $css-default-modes);
+
+/// Checks if something is a supported vertical-align value
+///
+/// @link https://www.w3schools.com/cssref/pr_pos_vertical-align.asp - W3Schools vertical-align docs
+/// @access public
+/// @param {string} $va - the vertical-align value
+/// @return {boolean} - true if is vertical-align value
+@function is-vertical-align($va) {
+  @return is-defined($va) and (is-size($va) or array-contains($vertical-align-modes, $va));
+}
+
+/// Vertical align mixin
+///
+/// @example scss - Usage
+///   .vertical-align-element {
+///     @include vertical-align(top);
+///   }
+///
+/// @example css - Output
+///   .vertical-align-element {
+///     vertical-align: top;
+///   }
+/// @access public
+/// @param {string} $va - the vertical-align value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin vertical-align($va, $important: false) {
+  @if(is-vertical-align($va)) {
+    vertical-align: $va important($important);
+  }
+  @else {
+    @warn '`vertical-align: #{$va}` is not a valid vertical-align value';
+  }
+}

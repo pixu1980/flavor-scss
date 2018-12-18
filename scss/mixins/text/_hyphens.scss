@@ -1,0 +1,50 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Hyphens modes
+///
+/// @access private
+/// @type list
+$hyphens-modes: array-concat((none, manual, auto, unset), $css-default-modes);
+
+/// Checks if something is a supported hyphens mode
+///
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens - MDN hyphens docs
+/// @access public
+/// @param {string} $h - the hyphens mode
+/// @return {boolean} - true if is hyphens mode
+@function is-hyphens($h) {
+  @return is-defined($h) and array-contains($hyphens-modes, $h);
+}
+
+/// Hyphens mixin
+///
+/// @example scss - Usage
+///   .hyphens-element {
+///     @include hyphens(manual);
+///   }
+///
+/// @example css - Output
+///   .hyphens-element {
+///     -webkit-overflow: manual;
+///     -moz-overflow: manual;
+///     -ms-overflow: manual;
+///     -o-overflow: manual;
+///     hyphens: manual;
+///   }
+/// @access public
+/// @param {string} $h - the hyphens value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin hyphens($h, $important: false) {
+  @if is-hyphens($h) {
+    @include prefixer(hyphens, $h, null, $important);
+  }
+  @else {
+    @warn '`hyphens: #{$h}` is not a valid hyphens value';
+  }
+}

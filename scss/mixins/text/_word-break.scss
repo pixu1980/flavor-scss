@@ -1,0 +1,46 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Word break modes
+///
+/// @access private
+/// @type list
+$word-break-modes: array-concat((normal, break-all, keep-all), $css-default-modes);
+
+/// Checks if something is a supported word-break mode
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_word-break.asp - W3Schools word-break docs
+/// @access public
+/// @param {string} $wb - the word-break mode
+/// @return {boolean} - true if is word-break mode
+@function is-word-break($wb) {
+  @return is-defined($wb) and array-contains($word-break-modes, $wb);
+}
+
+/// Word break mixin
+///
+/// @example scss - Usage
+///   .word-break-element {
+///     @include word-break(break-all);
+///   }
+///
+/// @example css - Output
+///   .word-break-element {
+///     word-break: break-all;
+///   }
+/// @access public
+/// @param {string} $wb - the word-break value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin word-break($wb, $important: false) {
+  @if is-word-break($wb) {
+    word-break: $wb important($important);
+  }
+  @else {
+    @warn '`word-break: #{$wb}` is not a valid word-break value';
+  }
+}

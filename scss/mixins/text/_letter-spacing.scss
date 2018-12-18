@@ -1,0 +1,46 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Letter spacing modes
+///
+/// @access private
+/// @type list
+$letter-spacing-modes: array-concat((normal), $css-default-modes);
+
+/// Checks if something is a supported letter-spacing value
+///
+/// @link https://www.w3schools.com/cssref/pr_text_letter-spacing.asp - W3Schools letter-spacing docs
+/// @access public
+/// @param {size | string} $ls - the letter-spacing value
+/// @return {boolean} - true if is letter-spacing value
+@function is-letter-spacing($ls) {
+  @return is-defined($ls) and (array-contains($letter-spacing-modes, $ls) or is-size($ls));
+}
+
+/// Letter spacing mixin
+///
+/// @example scss - Usage
+///   .letter-spacing-element {
+///     @include letter-spacing(3px);
+///   }
+///
+/// @example css - Output
+///   .letter-spacing-element {
+///     letter-spacing: 3px;
+///   }
+/// @access public
+/// @param {size | string} $ls - the letter-spacing value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin letter-spacing($ls, $important: false) {
+  @if is-letter-spacing($ls) {
+    letter-spacing: $ls important($important);
+  }
+  @else {
+    @warn '`letter-spacing: #{$ls}` is not a valid letter-spacing value';
+  }
+}

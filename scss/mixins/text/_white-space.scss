@@ -1,0 +1,46 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// White space modes
+///
+/// @access private
+/// @type list
+$white-space-modes: array-concat((normal, nowrap, pre, pre-line, pre-wrap), $css-default-modes);
+
+/// Checks if something is a supported white-space mode
+///
+/// @link https://www.w3schools.com/cssref/pr_text_white-space.asp - W3Schools white-space docs
+/// @access public
+/// @param {string} $ws - the white-space mode
+/// @return {boolean} - true if is white-space mode
+@function is-white-space($ws) {
+  @return is-defined($ws) and array-contains($white-space-modes, $ws);
+}
+
+/// White space mixin
+///
+/// @example scss - Usage
+///   .white-space-element {
+///     @include white-space(nowrap);
+///   }
+///
+/// @example css - Output
+///   .white-space-element {
+///     white-space: nowrap;
+///   }
+/// @access public
+/// @param {string} $ws - the white-space value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin white-space($ws, $important: false) {
+  @if is-white-space($ws) {
+    white-space: $ws important($important);
+  }
+  @else {
+    @warn '`white-space: #{$ws}` is not a valid white-space value';
+  }
+}

@@ -1,0 +1,50 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Checks if something is a supported font-family value
+///
+/// @link https://www.w3schools.com/cssref/pr_font_font-family.asp - W3Schools font-family docs
+/// @access public
+/// @param {string | array | list} $ff - the font-family value
+/// @return {boolean} - true if is font-family value
+@function is-font-family($ff) {
+  @return is-defined($ff) and (is-string($ff) or is-array($ff));
+}
+
+/// Font family mixin
+///
+/// @example scss - Usage
+///   .font-family-element {
+///     @include font-family('Source Sans Pro');
+///   }
+///
+/// @example css - Output
+///   .font-family-element {
+///     font-family: 'Source Sans Pro';
+///   }
+///
+/// @example scss - Usage
+///   .font-family-element {
+///     @include font-family('Source Sans Pro', Verdana, sans-serif);
+///   }
+///
+/// @example css - Output
+///   .font-family-element {
+///     font-family: 'Source Sans Pro', Verdana, sans-serif;
+///   }
+/// @access public
+/// @param {string | array | list} $ff - the font-family value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin font-family($ff, $important: false) {
+  @if is-font-family($ff) {
+    font-family: #{$ff} important($important);
+  }
+  @else {
+    @warn '`font-family: #{$ff}` is not a valid font-family value';
+  }
+}

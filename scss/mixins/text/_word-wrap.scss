@@ -1,0 +1,70 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+@import 'hyphens';
+@import 'word-break';
+
+/// Word wrap modes
+///
+/// @access private
+/// @type list
+$word-wrap-modes: array-concat((normal, break-word), $css-default-modes);
+
+/// Checks if something is a supported word-wrap mode
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_word-wrap.asp - W3Schools word-wrap docs
+/// @access public
+/// @param {string} $ww - the word-wrap mode
+/// @return {boolean} - true if is word-wrap mode
+@function is-word-wrap($ww) {
+  @return is-defined($ww) and array-contains($word-wrap-modes, $ww);
+}
+
+/// Word wrap mixin
+///
+/// @example scss - Usage
+///   .word-wrap-element {
+///     @include word-wrap(break-word);
+///   }
+///
+/// @example css - Output
+///   .word-wrap-element {
+///     word-wrap: break-word;
+///   }
+/// @access public
+/// @param {string} $ww - the word-wrap value
+/// @param {boolean} $force [false] - if true, will do proper hacks to force word-wrap
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin word-wrap($ww, $force: false, $important: false) {
+  @if is-word-wrap($ww) {
+    word-wrap: $ww important($important);
+  }
+  @else {
+    @warn '`word-wrap: #{$ww}` is not a valid word-wrap value';
+  }
+}
+
+/// Word Wrap Force mixin
+///
+/// @example scss - Usage - single line
+///   .word-wrap-force-element {
+///     @include word-wrap-force;
+///   }
+///
+/// @example css - Output - single line
+///   .word-wrap-force-element {
+///     hyphens: auto;
+///     word-break: break-all;
+///     word-wrap: break-word;
+///   }
+/// @access public
+@mixin word-wrap-force {
+  @include hyphens(auto);
+  @include word-break(break-all);
+  @include word-wrap(break-word);
+}

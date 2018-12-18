@@ -1,0 +1,47 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Font style modes
+///
+/// @access private
+/// @requires {function} array-concat
+/// @type list
+$font-style-modes: array-concat((normal, italic, oblique), $css-default-modes);
+
+/// Checks if something is a supported font-style value
+///
+/// @link https://www.w3schools.com/cssref/pr_font_font-style.asp - W3Schools font-style docs
+/// @access public
+/// @param {font-style-mode} $fs - the font-style value
+/// @return {boolean} - true, if it's actually a font style value
+@function is-font-style($fs) {
+  @return is-defined($fs) and array-contains($font-style-modes, $fs);
+}
+
+/// Font size mixin
+///
+/// @example scss - Usage
+///   .font-style-element {
+///     @include font-style(italic);
+///   }
+///
+/// @example css - Output
+///   .font-style-element {
+///     font-style: italic;
+///   }
+/// @access public
+/// @param {font-style-mode} $fs - the font-style value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin font-style($fs, $important: false) {
+  @if is-font-style($fs) {
+    font-style: $fs important($important);
+  }
+  @else {
+    @warn '`font-style: #{$fs}` is not a valid font-style value';
+  }
+}

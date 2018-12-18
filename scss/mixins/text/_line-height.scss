@@ -1,0 +1,46 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Line height modes
+///
+/// @access private
+/// @type list
+$line-height-modes: array-concat((normal), $css-default-modes);
+
+/// Checks if something is a supported line-height value
+///
+/// @link https://www.w3schools.com/cssref/pr_dim_line-height.asp - W3Schools line-height docs
+/// @access public
+/// @param {size | percentage | line-height-mode} $lh - the line-height value
+/// @return {boolean} - true if is line-height value
+@function is-line-height($lh) {
+  @return is-defined($lh) and (is-size($lh) or is-percentage($lh) or array-contains($line-height-modes, $lh));
+}
+
+/// Line height mixin
+///
+/// @example scss - Usage
+///   .line-height-element {
+///     @include line-height(2.5rem);
+///   }
+///
+/// @example css - Output
+///   .line-height-element {
+///     line-height: 2.5rem;
+///   }
+/// @access public
+/// @param {size | percentage | line-height-mode} $lh - the line-height value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin line-height($lh, $important: false) {
+  @if is-line-height($lh) {
+    line-height: $lh important($important);
+  }
+  @else {
+    @warn '`line-height: #{$lh}` is not a valid line-height value';
+  }
+}

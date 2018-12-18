@@ -1,0 +1,51 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Text size adjust modes
+///
+/// @access private
+/// @type list
+$text-size-adjust-modes: array-concat((none, auto, unset), $css-default-modes);
+
+/// Checks if something is a supported text-size-adjust value
+///
+/// @link https://developer.mozilla.org/it/docs/Web/CSS/text-size-adjust - MDN text-size-adjust docs
+/// @access public
+/// @param {percentage | string} $tsa - the text-size-adjust value
+/// @return {boolean} - true if is text-size-adjust value
+@function is-text-size-adjust($tsa) {
+  @return is-defined($tsa) and (is-percentage($tsa) or array-contains($text-size-adjust-modes, $tsa));
+}
+
+/// Text size adjust mixin
+///
+/// @example scss - Usage
+///   .text-size-adjust-element {
+///     @include text-size-adjust(67%);
+///   }
+///
+/// @example css - Output
+///   .text-size-adjust-element {
+///     -webkit-text-size-adjust: 67%;
+///     -moz-text-size-adjust: 67%;
+///     -ms-text-size-adjust: 67%;
+///     -o-text-size-adjust: 67%;
+///     text-size-adjust: 67%;
+///   }
+/// @access public
+/// @param {string} $tsa - the text-size-adjust value
+/// @param {array | list} $prefixes [$prefixes-default] - if true, will render the important rule
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-size-adjust($tsa, $prefixes: $prefixes-default, $important: false) {
+  @if is-text-size-adjust($tsa) {
+    @include prefixer(text-size-adjust, $tsa, $prefixes, $important);
+  }
+  @else {
+    @warn '`text-size-adjust: #{$tsa}` is not a valid text-size-adjust value';
+  }
+}

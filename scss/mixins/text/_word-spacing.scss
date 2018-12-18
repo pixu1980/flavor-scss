@@ -1,0 +1,46 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Word spacing modes
+///
+/// @access private
+/// @type list
+$word-spacing-modes: array-concat((normal), $css-default-modes);
+
+/// Checks if something is a supported word-spacing value
+///
+/// @link https://www.w3schools.com/cssref/pr_text_word-spacing.asp - W3Schools word-spacing docs
+/// @access public
+/// @param {size | string} $ws - the word-spacing value
+/// @return {boolean} - true if is word-spacing value
+@function is-word-spacing($ws) {
+  @return is-defined($ws) and (array-contains($word-spacing-modes, $ws) or is-size($ws));
+}
+
+/// Word spacing mixin
+///
+/// @example scss - Usage
+///   .word-spacing-element {
+///     @include word-spacing(1rem);
+///   }
+///
+/// @example css - Output
+///   .word-spacing-element {
+///     word-spacing: 1rem;
+///   }
+/// @access public
+/// @param {size | string} $ws - the word-spacing value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin word-spacing($ws, $important: false) {
+  @if is-word-spacing($ws) {
+    word-spacing: $ws important($important);
+  }
+  @else {
+    @warn '`word-spacing: #{$ws}` is not a valid word-spacing value';
+  }
+}
