@@ -194,38 +194,44 @@ $text-decoration-modes: array-concat((none), $css-default-modes);
 
     $text-decoration-line: get($settings, line);
 
-    @if $shorthand == false {
-      @include text-decoration-line($text-decoration-line, $important);
-    }
-    @else if is-text-decoration-line($text-decoration-line) {
-      $text-decoration: append($text-decoration, $text-decoration-line);
-    }
-    @else {
-      @warn '`text-decoration-line: #{$text-decoration-line}` is not a valid text-decoration-line value';
+    @if is-defined($text-decoration-line) {
+      @if $shorthand == false {
+        @include text-decoration-line($text-decoration-line, $important);
+      }
+      @else if is-text-decoration-line($text-decoration-line) {
+        $text-decoration: append($text-decoration, $text-decoration-line);
+      }
+      @else {
+        @warn '`text-decoration-line: #{$text-decoration-line}` is not a valid text-decoration-line value';
+      }
     }
 
     $text-decoration-style: get($settings, style);
 
-    @if $shorthand == false {
-      @include text-decoration-style($text-decoration-style, $important);
-    }
-    @else if is-text-decoration-style($text-decoration-style) {
-      $text-decoration: append($text-decoration, $text-decoration-style);
-    }
-    @else {
-      @warn '`text-decoration-style: #{$text-decoration-style}` is not a valid text-decoration-style value';
+    @if is-defined($text-decoration-style) {
+      @if $shorthand == false {
+        @include text-decoration-style($text-decoration-style, $important);
+      }
+      @else if is-text-decoration-style($text-decoration-style) {
+        $text-decoration: append($text-decoration, $text-decoration-style);
+      }
+      @else {
+        @warn '`text-decoration-style: #{$text-decoration-style}` is not a valid text-decoration-style value';
+      }
     }
 
     $text-decoration-color: get($settings, color);
 
-    @if $shorthand == false {
-      @include text-decoration-color($text-decoration-color, $important);
-    }
-    @else if is-text-decoration-color($text-decoration-color) {
-      $text-decoration: append($text-decoration, $text-decoration-color);
-    }
-    @else {
-      @warn '`text-decoration-color: #{$text-decoration-color}` is not a valid css color';
+    @if is-defined($text-decoration-color) {
+      @if $shorthand == false {
+        @include text-decoration-color($text-decoration-color, $important);
+      }
+      @else if is-text-decoration-color($text-decoration-color) {
+        $text-decoration: append($text-decoration, $text-decoration-color);
+      }
+      @else {
+        @warn '`text-decoration-color: #{$text-decoration-color}` is not a valid css color';
+      }
     }
 
     @if $shorthand == true {
