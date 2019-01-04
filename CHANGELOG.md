@@ -1,3 +1,11 @@
+## [Version 1.7.1](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.7.1) (2019-1-4)
+
+### Bug fixes
+
+- - bugfix grid-system-enable option flag: [`abad550`](https://github.com/:blackmirror1980/flavor-scss/commit/abad550)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.7.0...v1.7.1)
+
 ## [Version 1.7.0](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.7.0) (2019-1-4)
 
 ### New features
