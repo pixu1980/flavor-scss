@@ -107,3 +107,17 @@
 @function array-tail($list) {
   @return array-remove-nth($list, 1);
 }
+
+@function array-reverse($list) {
+  @if is-array($list) {
+    $list-reverse: ();
+
+    @for $i from (length($list) * -1) through -1 {
+      $list-reverse: append($list-reverse, nth($list, abs($i)), list-separator($list));
+    }
+
+    @return $list-reverse;
+  }
+
+  @return $list;
+}

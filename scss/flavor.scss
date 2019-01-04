@@ -3,4 +3,8 @@
 @import 'options';
 
 @import 'core';
-@import 'grid-system/grid-system';
+
+@if $grid-system-enable == true {
+  @import 'grid-system/grid-system';
+}
+

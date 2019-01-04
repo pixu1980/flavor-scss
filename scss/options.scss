@@ -1,4 +1,8 @@
 @charset 'UTF-8';
 
-@import 'grid-system/options/options';
+$grid-system-enable: true !default;
+
+@if $grid-system-enable == true {
+  @import 'grid-system/options/options';
+}
 
