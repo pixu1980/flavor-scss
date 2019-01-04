@@ -4,7 +4,5 @@
 
 @import 'core';
 
-@if $grid-system-enable == true {
-  @import 'grid-system/grid-system';
-}
+@import 'grid-system/grid-system';
 

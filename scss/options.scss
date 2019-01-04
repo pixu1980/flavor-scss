@@ -2,7 +2,5 @@
 
 $grid-system-enable: true !default;
 
-@if $grid-system-enable == true {
-  @import 'grid-system/options/options';
-}
+@import 'grid-system/options/options';
 

@@ -6,7 +6,6 @@
 /// @author blackmirror1980
 ////
 
-
 // sass-lint:disable indentation
 
 $columns-default: 12 !default; // grid-system columns default number
@@ -40,3 +39,4 @@ $gutter-padding-left: ($gutter / 2) !default;
 $gutter-padding-right: ($gutter / 2) !default;
 
 @import 'typography';
+
