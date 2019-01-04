@@ -1,3 +1,11 @@
+## [Version 1.7.0](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.7.0) (2019-1-4)
+
+### New features
+
+- - added array reverse function - added grid-system-enable option flag: [`01a8b50`](https://github.com/:blackmirror1980/flavor-scss/commit/01a8b50)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.6.2...v1.7.0)
+
 ## [Version 1.6.2](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.6.2) (2018-12-18)
 
 ### Bug fixes
