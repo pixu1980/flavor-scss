@@ -20,11 +20,11 @@
 /// @return {size} - the size converted in rem based on html font-size
 @function rem($px, $base: $font-size-base) {
   @if not unitless($px) {
-    $px: strip-units($px);
+    $px: strip-unit($px);
   }
 
   @if not unitless($base) {
-    $base: strip-units($base);
+    $base: strip-unit($base);
   }
 
   @return ($px / $base) * 1rem;
