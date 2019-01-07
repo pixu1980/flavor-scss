@@ -1,5 +1,5 @@
 dest: docs
-theme: flippant
+theme: default
 description: |
   ## Flavor SCSS - Advanced type checking Sass/SCSS Framework with Mixins & Helpers and a fully customizable Grid System
   ---

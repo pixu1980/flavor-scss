@@ -36,8 +36,7 @@
     "minimatch": "^3.0.4",
     "pkg-2-readme": "0.0.6",
     "sass-lint": "^1.12.1",
-    "sassdoc": "^2.5.1",
-    "sassdoc-theme-flippant": "^0.1.0"
+    "sassdoc": "^2.5.1"
   },
   "dependencies": {}
 }

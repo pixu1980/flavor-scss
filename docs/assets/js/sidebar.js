@@ -44,7 +44,7 @@
     $('<span />', {
       'class': 'layout-toggle',
       'html': '&times;',
-      'data-alt': '&#9776'
+      'data-alt': '&#8594;'
     }).appendTo( $('.header') );
 
     $('.layout-toggle').on('click', function () {
