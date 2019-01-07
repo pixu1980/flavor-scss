@@ -10,7 +10,7 @@
 ///
 /// @access public
 @mixin reset-inline-block {
-  @include letter-spacing(-.3rem);
+  @include letter-spacing(-.295rem);
   @include line-height(0);
 
   text-rendering: optimizeSpeed;

@@ -30,6 +30,19 @@
   @return ($px / $base) * 1rem;
 }
 
+@function px($rem, $base: rem($font-size-base)) {
+  @if not unitless($rem) {
+    $rem: strip-unit($rem);
+  }
+
+  @if not unitless($base) {
+    $base: strip-unit($base);
+  }
+
+  @return ($rem / 1rem) * $base;
+}
+
+
 $prefixes: webkit moz ms o spec;
 $prefixes-default: $prefixes;
 
