@@ -10,7 +10,7 @@
   // Containers Breakpoints
   // --------------------------------------------------
   @each $key, $breakpoint in $breakpoints {
-    @include media($breakpoint) {
+    @include media($min-width: $breakpoint) {
       @include box-size(($breakpoint - $gutter) auto);
     }
   }

@@ -55,7 +55,7 @@
       @include columns-sizes($columns, $gutter, $key);
     }
     @else {
-      @include media($breakpoint) {
+      @include media($min-width: $breakpoint) {
         @include columns-sizes($columns, $gutter, $key);
       }
     }
