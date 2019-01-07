@@ -1,3 +1,11 @@
+## [Version 1.7.2](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.7.2) (2019-1-7)
+
+### Bug fixes
+
+- test new media query mixin: [`93fbd0d`](https://github.com/:blackmirror1980/flavor-scss/commit/93fbd0d)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.7.1...v1.7.2)
+
 ## [Version 1.7.1](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.7.1) (2019-1-4)
 
 ### Bug fixes
