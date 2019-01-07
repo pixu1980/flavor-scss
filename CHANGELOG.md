@@ -1,3 +1,11 @@
+## [Version 1.7.4](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.7.4) (2019-1-7)
+
+### Bug fixes
+
+- fix rem to px function: [`23a413b`](https://github.com/:blackmirror1980/flavor-scss/commit/23a413b)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.7.3...v1.7.4)
+
 ## [Version 1.7.3](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.7.3) (2019-1-7)
 
 ### Bug fixes
