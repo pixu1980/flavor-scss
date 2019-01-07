@@ -1,3 +1,12 @@
+## [Version 1.7.3](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.7.3) (2019-1-7)
+
+### Bug fixes
+
+- fixed strip unit bug: [`f6194d9`](https://github.com/:blackmirror1980/flavor-scss/commit/f6194d9)
+- - added px to rem function - fixed letter-spacing in reset inline block: [`23f22df`](https://github.com/:blackmirror1980/flavor-scss/commit/23f22df)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.7.2...v1.7.3)
+
 ## [Version 1.7.2](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.7.2) (2019-1-7)
 
 ### Bug fixes
