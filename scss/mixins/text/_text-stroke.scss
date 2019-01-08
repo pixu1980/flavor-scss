@@ -114,7 +114,7 @@ $text-stroke-width-modes: array-concat((thin, medium, thick), $css-default-modes
       $settings: extend($settings, (width: $width));
     }
 
-    $color: nth-value($options, 6);
+    $color: nth-value($options, 2);
 
     @if is-defined($color) {
       $settings: extend($settings, (color: $color));
