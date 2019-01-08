@@ -1,3 +1,11 @@
+## [Version 1.7.5](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.7.5) (2019-1-8)
+
+### Bug fixes
+
+- text stroke color parameter bugfix: [`53c27b3`](https://github.com/:blackmirror1980/flavor-scss/commit/53c27b3)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.7.4...v1.7.5)
+
 ## [Version 1.7.4](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.7.4) (2019-1-7)
 
 ### Bug fixes
