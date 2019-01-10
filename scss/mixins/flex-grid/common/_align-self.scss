@@ -1,0 +1,47 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Common Flex-Grid properties
+/// @group mixins-flex-grid
+/// @author blackmirror1980
+////
+
+/// Align Self modes supported
+///
+/// @access private
+/// @type list
+$align-self-modes: array-concat((normal, auto, center, stretch, self-start, self-end, flex-start, flex-end), $css-default-modes);
+
+/// Checks if something is a support align-self mode (normal, auto, center, stretch, self-start, self-end, flex-start, flex-end, inherit, initial)
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_align-self.asp W3Schools align-self docs
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/align-self MDN align-self docs
+/// @access public
+/// @param {string} $as - the align-self value
+/// @return {boolean} - true if is align-self value
+@function is-align-self($as) {
+  @return is-defined($as) and array-contains($align-self-modes, $as);
+}
+
+/// Flex Align Self mixin
+///
+/// @example scss - Usage
+///   .align-self-element {
+///     @include align-self(auto);
+///   }
+///
+/// @example css - Output
+///   .align-self-element {
+///     align-self: auto;
+///   }
+/// @access public
+/// @param {string} $as - the align-self mode
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin align-self($as, $important: false) {
+  @if(is-align-self($as)) {
+    align-self: $as important($important);
+  }
+  @else {
+    @warn '`align-self: #{$as}` is not a valid align-self mode';
+  }
+}

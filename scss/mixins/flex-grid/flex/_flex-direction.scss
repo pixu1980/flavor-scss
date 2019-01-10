@@ -1,0 +1,47 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Flex
+/// @group mixins-flex
+/// @author blackmirror1980
+////
+
+/// Flex direction modes supported
+///
+/// @access private
+/// @type list
+$flex-direction-modes: array-concat((row, row-reverse, column, column-reverse), $css-default-modes);
+
+/// Checks if something is a support flex-direction mode (row, row-reverse, column, column-reverse, inherit, initial)
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_flex-direction.asp W3Schools flex-direction docs
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction MDN flex-direction docs
+/// @access public
+/// @param {string} $fd - the flex-direction value
+/// @return {boolean} - true if is flex-direction value
+@function is-flex-direction($fd) {
+  @return is-defined($fd) and array-contains($flex-direction-modes, $fd);
+}
+
+/// Flex direction mixin
+///
+/// @example scss - Usage
+///   .flex-direction-element {
+///     @include flex-direction(column);
+///   }
+///
+/// @example css - Output
+///   .flex-direction-element {
+///     flex-direction: column;
+///   }
+/// @access public
+/// @param {string} $fd - the flex-direction mode
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin flex-direction($fd, $important: false) {
+  @if(is-flex-direction($fd)) {
+    flex-direction: $fd important($important);
+  }
+  @else {
+    @warn '`flex-direction: #{$fd}` is not a valid flex-direction mode';
+  }
+}

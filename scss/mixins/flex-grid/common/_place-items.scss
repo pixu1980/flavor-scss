@@ -1,0 +1,89 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Common Flex-Grid properties
+/// @group mixins-flex-grid
+/// @author blackmirror1980
+////
+
+/// Place items mixin - shorthand for align-items and justify-items
+///
+/// @example scss - Usage
+///   .place-items-element {
+///     @include place-items(space-between stretch);
+///   }
+///
+/// @example css - Output
+///   .place-items-element {
+///     place-items: space-between stretch;
+///   }
+/// @requires {function} extend
+/// @requires {function} is-defined
+/// @requires {function} is-object
+/// @requires {function} nth-value
+/// @access public
+/// @param {object | map} $options - the options
+/// @param {string} $options.align-items [stretch] - the align-items value
+/// @param {string} $options.justify-items [flex-start] - the justify-items value
+/// @param {boolean} $shorthand [true] - if true, will render the place-items property instead of align-items and justify-items properties
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin place-items($options, $shorthand: true, $important: false) {
+  $settings: (align-items: stretch, justify-items: flex-start);
+
+  @if is-object($options) {
+    $settings: extend($settings, $options);
+  }
+  @else {
+    $align-items: nth-value($options, 1);
+
+    @if is-defined($align-items) {
+      $settings: extend($settings, (align-items: $align-items));
+    }
+
+    $justify-items: nth-value($options, 2);
+
+    @if is-defined($justify-items) {
+      $settings: extend($settings, (justify-items: $justify-items));
+    }
+  }
+
+
+  $place-items: ();
+
+  $align-items: map-get($settings, align-items);
+
+  @if is-defined($align-items) {
+    @if is-align-items($align-items) {
+      @if $shorthand == true {
+        $place-items: append($place-items, $align-items);
+      }
+      @else {
+        @include align-items($align-items, $important);
+      }
+    }
+    @else {
+      @warn '`align-items: #{$align-items}` is not a align-items value';
+    }
+  }
+
+  $justify-items: map-get($settings, justify-items);
+
+  @if is-defined($justify-items) {
+    @if is-justify-items($justify-items) {
+      @if $shorthand == true {
+        $place-items: append($place-items, $justify-items);
+      }
+      @else {
+        @include justify-items($justify-items, $important);
+      }
+    }
+    @else {
+      @warn '`justify-items: #{$justify-items}` is not a justify-items value';
+    }
+  }
+
+  @if $shorthand == true {
+    place-items: $place-items important($important);
+  }
+}
+

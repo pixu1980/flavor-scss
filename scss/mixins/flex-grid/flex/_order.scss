@@ -1,0 +1,41 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Flex
+/// @group mixins-flex
+/// @author blackmirror1980
+////
+
+/// Checks if something is a support order value (number, inherit, initial)
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_order.asp W3Schools order docs
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/order MDN order docs
+/// @access public
+/// @param {integer | css-default-mode} $o - the order value
+/// @return {boolean} - true if is order value
+@function is-order($o) {
+  @return is-defined($o) and (is-integer($o) or array-contains($css-default-modes, $o));
+}
+
+/// Flex grow mixin
+///
+/// @example scss - Usage
+///   .order-element {
+///     @include order(2);
+///   }
+///
+/// @example css - Output
+///   .order-element {
+///     order: 2;
+///   }
+/// @access public
+/// @param {integer | css-default-mode} $o - the order value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin order($o, $important: false) {
+  @if(is-order($o)) {
+    order: $o important($important);
+  }
+  @else {
+    @warn '`order: #{$o}` is not a valid order value';
+  }
+}

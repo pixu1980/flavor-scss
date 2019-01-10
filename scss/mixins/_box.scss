@@ -25,7 +25,7 @@
 ///
 /// @access private
 /// @type list
-$display-modes: array-concat((none, inline, block, inline-block, flex, inline-flex, table, inline-table, table-caption, table-header-group, table-row-group, table-column-group, table-footer-group, table-row, table-column, table-cell, list-item, run-in), $css-default-modes);
+$display-modes: array-concat((none, inline, block, inline-block, flex, inline-flex, grid, inline-grid, table, inline-table, table-caption, table-header-group, table-row-group, table-column-group, table-footer-group, table-row, table-column, table-cell, list-item, run-in, contents), $css-default-modes);
 
 /// Checks if something is a correct display mode
 ///
@@ -81,6 +81,28 @@ $display-modes: array-concat((none, inline, block, inline-block, flex, inline-fl
 /// @param {boolean} $important [false] - if true, will render the important rule
 @mixin display($dm, $auto-reset-inline-block: false, $important: false) {
   @if is-display($dm) {
+    @if $dm == flex {
+      display: -webkit-box important($important);
+      display: -webkit-flex important($important);
+      display: -moz-box important($important);
+      display: -ms-flexbox important($important);
+    }
+
+    @if $dm == inline-flex {
+      display: -webkit-inline-box important($important);
+      display: -webkit-inline-flex important($important);
+      display: -moz-inline-box important($important);
+      display: -ms-inline-flexbox important($important);
+    }
+
+    @if $dm == grid {
+      display: -ms-grid important($important);
+    }
+
+    @if $dm == inline-grid {
+      display: -ms-inline-grid important($important);
+    }
+
     display: $dm important($important);
 
     @if $dm == inline-block and $auto-reset-inline-block == true {

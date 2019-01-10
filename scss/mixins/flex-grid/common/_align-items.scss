@@ -1,0 +1,47 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Common Flex-Grid properties
+/// @group mixins-flex-grid
+/// @author blackmirror1980
+////
+
+/// Align Items modes supported
+///
+/// @access private
+/// @type list
+$align-items-modes: array-concat((normal, stretch, center, flex-start, flex-end, space-between, space-around, space-evenly), $css-default-modes);
+
+/// Checks if something is a support align-items mode (normal, stretch, center, flex-start, flex-end, space-between, space-around, space-evenly, inherit, initial)
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_align-items.asp W3Schools align-items docs
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/align-items MDN align-items docs
+/// @access public
+/// @param {string} $ai - the align-items value
+/// @return {boolean} - true if is align-items value
+@function is-align-items($ai) {
+  @return is-defined($ai) and array-contains($align-items-modes, $ai);
+}
+
+/// Align Items mixin
+///
+/// @example scss - Usage
+///   .align-items-element {
+///     @include align-items(stretch);
+///   }
+///
+/// @example css - Output
+///   .align-items-element {
+///     align-items: stretch;
+///   }
+/// @access public
+/// @param {string} $ai - the align-items mode
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin align-items($ai, $important: false) {
+  @if(is-align-items($ai)) {
+    align-items: $ai important($important);
+  }
+  @else {
+    @warn '`align-items: #{$ai}` is not a valid align-items mode';
+  }
+}
