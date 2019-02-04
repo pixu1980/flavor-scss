@@ -16,7 +16,7 @@
   text-rendering: optimizeSpeed;
 
   > * {
-    @include letter-spacing(initial);
+    @include letter-spacing(normal);
     @include line-height(initial);
   }
 }
