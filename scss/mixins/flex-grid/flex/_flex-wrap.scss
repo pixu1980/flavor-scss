@@ -1,0 +1,47 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Flex
+/// @group mixins-flex
+/// @author blackmirror1980
+////
+
+/// Flex wrap modes supported
+///
+/// @access private
+/// @type list
+$flex-wrap-modes: array-concat((nowrap, wrap, wrap-reverse), $css-default-modes);
+
+/// Checks if something is a support flex-wrap mode (nowrap, wrap, wrap-reverse, inherit, initial)
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_flex-wrap.asp W3Schools flex-wrap docs
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap MDN flex-wrap docs
+/// @access public
+/// @param {string} $fw - the flex-wrap mode
+/// @return {boolean} - true if is flex-wrap mode
+@function is-flex-wrap($fw) {
+  @return is-defined($fw) and array-contains($flex-wrap-modes, $fw);
+}
+
+/// Flex wrap mixin
+///
+/// @example scss - Usage
+///   .flex-wrap-element {
+///     @include flex-wrap(wrap);
+///   }
+///
+/// @example css - Output
+///   .flex-wrap-element {
+///     flex-wrap: wrap;
+///   }
+/// @access public
+/// @param {string} $fw - the flex-wrap mode
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin flex-wrap($fw, $important: false) {
+  @if(is-flex-wrap($fw)) {
+    flex-wrap: $fw important($important);
+  }
+  @else {
+    @warn '`flex-wrap: #{$fw}` is not a valid flex-wrap mode';
+  }
+}

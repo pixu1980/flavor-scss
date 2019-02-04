@@ -1,0 +1,47 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Common Flex-Grid properties
+/// @group mixins-flex-grid
+/// @author blackmirror1980
+////
+
+/// Justify Items modes supported
+///
+/// @access private
+/// @type list
+$justify-items-modes: array-concat((normal, stretch, center, flex-start, flex-end, space-between, space-around, space-evenly), $css-default-modes);
+
+/// Checks if something is a support justify-items mode (normal, stretch, center, flex-start, flex-end, space-between, space-around, space-evenly, inherit, initial)
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_justify-items.asp W3Schools justify-items docs
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items MDN justify-items docs
+/// @access public
+/// @param {string} $ji - the justify-items value
+/// @return {boolean} - true if is justify-items value
+@function is-justify-items($ji) {
+  @return is-defined($ji) and array-contains($justify-items-modes, $ji);
+}
+
+/// Justify Items mixin
+///
+/// @example scss - Usage
+///   .justify-items-element {
+///     @include justify-items(stretch);
+///   }
+///
+/// @example css - Output
+///   .justify-items-element {
+///     justify-items: stretch;
+///   }
+/// @access public
+/// @param {string} $ji - the justify-items mode
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin justify-items($ji, $important: false) {
+  @if(is-justify-items($ji)) {
+    justify-items: $ji important($important);
+  }
+  @else {
+    @warn '`justify-items: #{$ji}` is not a valid justify-items mode';
+  }
+}

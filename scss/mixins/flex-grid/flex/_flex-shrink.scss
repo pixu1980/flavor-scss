@@ -1,0 +1,41 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Flex
+/// @group mixins-flex
+/// @author blackmirror1980
+////
+
+/// Checks if something is a support flex-shrink value (number, inherit, initial)
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_flex-shrink.asp W3Schools flex-shrink docs
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink MDN flex-shrink docs
+/// @access public
+/// @param {number | css-default-mode} $fs - the flex-shrink value
+/// @return {boolean} - true if is flex-shrink value
+@function is-flex-shrink($fs) {
+  @return is-defined($fs) and (is-number($fs) or array-contains($css-default-modes, $fs));
+}
+
+/// Flex shrink mixin
+///
+/// @example scss - Usage
+///   .flex-shrink-element {
+///     @include flex-shrink(2);
+///   }
+///
+/// @example css - Output
+///   .flex-shrink-element {
+///     flex-shrink: 2;
+///   }
+/// @access public
+/// @param {number | css-default-mode} $fs - the flex-shrink value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin flex-shrink($fs, $important: false) {
+  @if(is-flex-shrink($fs)) {
+    flex-shrink: $fs important($important);
+  }
+  @else {
+    @warn '`flex-shrink: #{$fs}` is not a valid flex-shrink value';
+  }
+}

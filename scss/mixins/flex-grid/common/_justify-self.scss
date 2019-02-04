@@ -1,0 +1,47 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Common Flex-Grid properties
+/// @group mixins-flex-grid
+/// @author blackmirror1980
+////
+
+/// Justify Self modes supported
+///
+/// @access private
+/// @type list
+$justify-self-modes: array-concat((normal, auto, center, stretch, self-start, self-end, flex-start, flex-end), $css-default-modes);
+
+/// Checks if something is a support justify-self mode (normal, auto, center, stretch, self-start, self-end, flex-start, flex-end, inherit, initial)
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_justify-self.asp W3Schools justify-self docs
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/justify-self MDN justify-self docs
+/// @access public
+/// @param {string} $js - the justify-self value
+/// @return {boolean} - true if is justify-self value
+@function is-justify-self($js) {
+  @return is-defined($js) and array-contains($justify-self-modes, $js);
+}
+
+/// Flex Justify Self mixin
+///
+/// @example scss - Usage
+///   .justify-self-element {
+///     @include justify-self(auto);
+///   }
+///
+/// @example css - Output
+///   .justify-self-element {
+///     justify-self: auto;
+///   }
+/// @access public
+/// @param {string} $js - the justify-self mode
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin justify-self($js, $important: false) {
+  @if(is-justify-self($js)) {
+    justify-self: $js important($important);
+  }
+  @else {
+    @warn '`justify-self: #{$js}` is not a valid justify-self mode';
+  }
+}

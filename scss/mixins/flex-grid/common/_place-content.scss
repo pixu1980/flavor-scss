@@ -1,0 +1,89 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Common Flex-Grid properties
+/// @group mixins-flex-grid
+/// @author blackmirror1980
+////
+
+/// Place content mixin - shorthand for align-content and justify-content
+///
+/// @example scss - Usage
+///   .place-content-element {
+///     @include place-content(space-between stretch);
+///   }
+///
+/// @example css - Output
+///   .place-content-element {
+///     place-content: space-between stretch;
+///   }
+/// @requires {function} extend
+/// @requires {function} is-defined
+/// @requires {function} is-object
+/// @requires {function} nth-value
+/// @access public
+/// @param {object | map} $options - the options
+/// @param {string} $options.align-content [stretch] - the align-content value
+/// @param {string} $options.justify-content [flex-start] - the justify-content value
+/// @param {boolean} $shorthand [true] - if true, will render the place-content property instead of align-content and justify-content properties
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin place-content($options, $shorthand: true, $important: false) {
+  $settings: (align-content: stretch, justify-content: flex-start);
+
+  @if is-object($options) {
+    $settings: extend($settings, $options);
+  }
+  @else {
+    $align-content: nth-value($options, 1);
+
+    @if is-defined($align-content) {
+      $settings: extend($settings, (align-content: $align-content));
+    }
+
+    $justify-content: nth-value($options, 2);
+
+    @if is-defined($justify-content) {
+      $settings: extend($settings, (justify-content: $justify-content));
+    }
+  }
+
+
+  $place-content: ();
+
+  $align-content: map-get($settings, align-content);
+
+  @if is-defined($align-content) {
+    @if is-align-content($align-content) {
+      @if $shorthand == true {
+        $place-content: append($place-content, $align-content);
+      }
+      @else {
+        @include align-content($align-content, $important);
+      }
+    }
+    @else {
+      @warn '`align-content: #{$align-content}` is not a align-content value';
+    }
+  }
+
+  $justify-content: map-get($settings, justify-content);
+
+  @if is-defined($justify-content) {
+    @if is-justify-content($justify-content) {
+      @if $shorthand == true {
+        $place-content: append($place-content, $justify-content);
+      }
+      @else {
+        @include justify-content($justify-content, $important);
+      }
+    }
+    @else {
+      @warn '`justify-content: #{$justify-content}` is not a justify-content value';
+    }
+  }
+
+  @if $shorthand == true {
+    place-content: $place-content important($important);
+  }
+}
+

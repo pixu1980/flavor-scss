@@ -1,0 +1,47 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Common Flex-Grid properties
+/// @group mixins-flex-grid
+/// @author blackmirror1980
+////
+
+/// Justify Content modes supported
+///
+/// @access private
+/// @type list
+$justify-content-modes: array-concat((normal, stretch, center, flex-start, flex-end, space-between, space-around, space-evenly), $css-default-modes);
+
+/// Checks if something is a support justify-content mode (normal, stretch, center, flex-start, flex-end, space-between, space-around, space-evenly, inherit, initial)
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_justify-content.asp W3Schools justify-content docs
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content MDN justify-content docs
+/// @access public
+/// @param {string} $jc - the justify-content value
+/// @return {boolean} - true if is justify-content value
+@function is-justify-content($jc) {
+  @return is-defined($jc) and array-contains($justify-content-modes, $jc);
+}
+
+/// Justify Content mixin
+///
+/// @example scss - Usage
+///   .justify-content-element {
+///     @include justify-content(stretch);
+///   }
+///
+/// @example css - Output
+///   .justify-content-element {
+///     justify-content: stretch;
+///   }
+/// @access public
+/// @param {string} $jc - the justify-content mode
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin justify-content($jc, $important: false) {
+  @if(is-justify-content($jc)) {
+    justify-content: $jc important($important);
+  }
+  @else {
+    @warn '`justify-content: #{$jc}` is not a valid justify-content mode';
+  }
+}

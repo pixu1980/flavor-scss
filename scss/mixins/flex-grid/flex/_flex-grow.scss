@@ -1,0 +1,41 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Flex
+/// @group mixins-flex
+/// @author blackmirror1980
+////
+
+/// Checks if something is a support flex-grow value (number, inherit, initial)
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_flex-grow.asp W3Schools flex-grow docs
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow MDN flex-grow docs
+/// @access public
+/// @param {number | css-default-mode} $fg - the flex-grow value
+/// @return {boolean} - true if is flex-grow value
+@function is-flex-grow($fg) {
+  @return is-defined($fg) and (is-number($fg) or array-contains($css-default-modes, $fg));
+}
+
+/// Flex grow mixin
+///
+/// @example scss - Usage
+///   .flex-grow-element {
+///     @include flex-grow(2);
+///   }
+///
+/// @example css - Output
+///   .flex-grow-element {
+///     flex-grow: 2;
+///   }
+/// @access public
+/// @param {number | css-default-mode} $fg - the flex-grow value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin flex-grow($fg, $important: false) {
+  @if(is-flex-grow($fg)) {
+    flex-grow: $fg important($important);
+  }
+  @else {
+    @warn '`flex-grow: #{$fg}` is not a valid flex-grow value';
+  }
+}

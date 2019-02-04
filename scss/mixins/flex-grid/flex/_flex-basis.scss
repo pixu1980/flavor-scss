@@ -1,0 +1,47 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Flex
+/// @group mixins-flex
+/// @author blackmirror1980
+////
+
+/// Flex basis modes supported
+///
+/// @access private
+/// @type list
+$flex-basis-modes: array-concat((auto), $css-default-modes);
+
+/// Checks if something is a support flex-basis mode (auto, inherit, initial)
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_flex-basis.asp W3Schools flex-basis docs
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis MDN flex-basis docs
+/// @access public
+/// @param {string} $fb - the flex-basis value
+/// @return {boolean} - true if is flex-basis value
+@function is-flex-basis($fb) {
+  @return is-defined($fb) and (is-size($fb) or array-contains($flex-basis-modes, $fb));
+}
+
+/// Flex basis mixin
+///
+/// @example scss - Usage
+///   .flex-basis-element {
+///     @include flex-basis(200px);
+///   }
+///
+/// @example css - Output
+///   .flex-basis-element {
+///     flex-basis: 200px;
+///   }
+/// @access public
+/// @param {string} $fb - the flex-basis mode
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin flex-basis($fb, $important: false) {
+  @if(is-flex-basis($fb)) {
+    flex-basis: $fb important($important);
+  }
+  @else {
+    @warn '`flex-basis: #{$fb}` is not a valid flex-basis mode';
+  }
+}

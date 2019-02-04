@@ -1,0 +1,96 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Flex
+/// @group mixins-flex
+/// @author blackmirror1980
+////
+
+@import 'flex-basis';
+@import 'flex-direction';
+@import 'flex-grow';
+@import 'flex-shrink';
+@import 'flex-wrap';
+@import 'order';
+
+/// Flex flow mixin - shorthand for flex-direction and flex-wrap
+///
+/// @example scss - Usage
+///   .flex-flow-element {
+///     @include flex-flow(row-reverse wrap);
+///   }
+///
+/// @example css - Output
+///   .flex-flow-element {
+///     flex-flow: row-reverse wrap;
+///   }
+/// @requires {function} extend
+/// @requires {function} is-defined
+/// @requires {function} is-object
+/// @requires {function} nth-value
+/// @access public
+/// @param {object | map} $options - the options
+/// @param {string} $options.direction [row] - the flex-direction value
+/// @param {string} $options.wrap [nowrap] - the flex-wrap value
+/// @param {boolean} $shorthand [true] - if true, will render the flex-flow property instead of flex-direction and flex-wrap properties
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin flex-flow($options, $shorthand: true, $important: false) {
+  $settings: (direction: row, wrap: nowrap);
+
+  @if is-object($options) {
+    $settings: extend($settings, $options);
+  }
+  @else {
+    $direction: nth-value($options, 1);
+
+    @if is-defined($direction) {
+      $settings: extend($settings, (direction: $direction));
+    }
+
+    $wrap: nth-value($options, 2);
+
+    @if is-defined($wrap) {
+      $settings: extend($settings, (wrap: $wrap));
+    }
+  }
+
+
+  $flex-flow: ();
+
+  $flex-direction: map-get($settings, direction);
+
+  @if is-defined($flex-direction) {
+    @if is-flex-direction($flex-direction) {
+      @if $shorthand == true {
+        $flex-flow: append($flex-flow, $flex-direction);
+      }
+      @else {
+        @include flex-direction($flex-direction, $important);
+      }
+    }
+    @else {
+      @warn '`flex-direction: #{$flex-direction}` is not a flex-direction value';
+    }
+  }
+
+  $flex-wrap: map-get($settings, wrap);
+
+  @if is-defined($flex-wrap) {
+    @if is-flex-wrap($flex-wrap) {
+      @if $shorthand == true {
+        $flex-flow: append($flex-flow, $flex-wrap);
+      }
+      @else {
+        @include flex-wrap($flex-wrap, $important);
+      }
+    }
+    @else {
+      @warn '`flex-wrap: #{$flex-wrap}` is not a flex-wrap value';
+    }
+  }
+
+  @if $shorthand == true {
+    flex-flow: $flex-flow important($important);
+  }
+}
+
