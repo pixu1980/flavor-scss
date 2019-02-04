@@ -1,3 +1,17 @@
+## [Version 1.8.0](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.8.0) (2019-2-4)
+
+### New features
+
+- added flex support: [`40f0a9c`](https://github.com/:blackmirror1980/flavor-scss/commit/40f0a9c)
+- flex grid system: [`3e300d8`](https://github.com/:blackmirror1980/flavor-scss/commit/3e300d8)
+
+### Bug fixes
+
+- letter-spacing reset fix for IE: [`e8388a1`](https://github.com/:blackmirror1980/flavor-scss/commit/e8388a1)
+- fix letter-spacing issue for IE: [`f120a23`](https://github.com/:blackmirror1980/flavor-scss/commit/f120a23)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.7.5...v1.8.0)
+
 ## [Version 1.7.5](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.7.5) (2019-1-8)
 
 ### Bug fixes
