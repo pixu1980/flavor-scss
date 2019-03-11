@@ -786,6 +786,16 @@ $backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
   }
 }
 
+/// Returns the aspect-ratio-factor in percentage for the aspect-ratio padding-top
+///
+/// @access public
+/// @param {integer | size} $width [1] - desired width for aspect ratio calculation
+/// @param {integer | size} $height [1] - desired height for aspect ratio calculation
+/// @return {percentage} - the calculated percentage of the aspect-ratio-factor
+@function aspect-ratio-factor($width, $height) {
+  @return (strip-unit($height) / strip-unit($width)) * 100%;
+}
+
 /// Aspect ratio mixin
 ///
 /// @example scss - Usage
@@ -831,18 +841,18 @@ $backface-visibility-modes: array-concat((visible, hidden), $css-default-modes);
     &:before {
       @include display(inline-block);
       @include box-size(100%, false);
-      @include padding(((strip-unit($height) / strip-unit($width)) * 100%) null null null);
+      @include padding(aspect-ratio-factor($width, $height) null null null);
 
       content: '';
     }
 
     > #{$content-selector} {
-      @include position(absolute, 0 0 0 0);
+      @include position(absolute 0 0 0 0);
       @include display(inline-block);
       @include box-size(100%);
     }
   }
   @else {
-    @warn '`$width: #{$widgh}` and `$height: #{$height}` should have the same measure unit';
+    @warn '`$width: #{$width}` and `$height: #{$height}` should have the same measure unit';
   }
 }
