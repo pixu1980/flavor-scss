@@ -1,3 +1,11 @@
+## [Version 1.8.1](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.8.1) (2019-3-11)
+
+### Bug fixes
+
+- fixed the a/r mixin: [`1eb1966`](https://github.com/:blackmirror1980/flavor-scss/commit/1eb1966)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.8.0...v1.8.1)
+
 ## [Version 1.8.0](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.8.0) (2019-2-4)
 
 ### New features

@@ -1,6 +1,6 @@
 {
   "name": "flavor-scss",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "Flavor SCSS - Advanced type checking Sass/SCSS Framework with Mixins & Helpers and a fully customizable Grid System",
   "main": "scss/flavor.scss",
   "scripts": {
