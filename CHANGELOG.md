@@ -1,3 +1,11 @@
+## [Version 1.9.0](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.9.0) (2019-3-12)
+
+### New features
+
+- updated grid-system: [`b7701fc`](https://github.com/:blackmirror1980/flavor-scss/commit/b7701fc)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.8.1...v1.9.0)
+
 ## [Version 1.8.1](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.8.1) (2019-3-11)
 
 ### Bug fixes
