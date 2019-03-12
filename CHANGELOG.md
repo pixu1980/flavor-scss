@@ -1,3 +1,11 @@
+## [Version 1.9.2](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.9.2) (2019-3-12)
+
+### Bug fixes
+
+- bug fix grid-system, update of readme template: [`ff9b00f`](https://github.com/:blackmirror1980/flavor-scss/commit/ff9b00f)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.9.1...v1.9.2)
+
 ## [Version 1.9.1](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.9.1) (2019-3-12)
 
 ### Bug fixes
