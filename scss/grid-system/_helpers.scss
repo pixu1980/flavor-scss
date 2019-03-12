@@ -9,22 +9,22 @@
 @mixin helpers {
   [class*='content-'] {
     &[class*='-left'] {
-      @include content-align(left null);
+      @include text-align(left);
     }
     &[class*='-center'] {
-      @include content-align(center null);
+      @include text-align(center);
     }
     &[class*='-right'] {
-      @include content-align(right null);
+      @include text-align(right);
     }
     &[class*='-top'] {
-      @include content-align(null top);
+      @include vertical-align(top);
     }
     &[class*='-middle'] {
-      @include content-align(null middle);
+      @include vertical-align(middle);
     }
     &[class*='-bottom'] {
-      @include content-align(null bottom);
+      @include vertical-align(bottom);
     }
   }
 }

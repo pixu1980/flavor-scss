@@ -6,37 +6,94 @@
 /// @author blackmirror1980
 ////
 
-// sass-lint:disable indentation
+@function extend-breakpoints($breakpoints) {
+  $breakpoints-keys: map-keys($breakpoints);
+  $breakpoint-previous: null;
 
-$columns-default: 12 !default; // grid-system columns default number
-$gutter-default: 1.5rem !default; // grid-system grid gutter default number
+  @for $i from length($breakpoints-keys) * -1 through -1 {
+    $breakpoint-key: nth($breakpoints-keys, abs($i));
+
+    $breakpoint-actual: get($breakpoints, $breakpoint-key);
+
+    $max-viewport-width: null;
+
+    @if $breakpoint-previous != null {
+      $max-viewport-width: get($breakpoint-previous, 'min-viewport-width') - .01rem;
+    }
+
+    $breakpoints: extend($breakpoints, ($breakpoint-key: extend($breakpoint-actual, (
+      max-viewport-width: $max-viewport-width,
+    ))));
+
+    $breakpoint-previous: $breakpoint-actual;
+  }
+
+  @return $breakpoints;
+}
+
+// sass-lint:disable indentation
+$columns-default: 12; // grid-system columns default number
+$gutter-default: 1.5rem; // grid-system grid gutter default number
 
 $common-breakpoints: (
-  sm: 76.8rem, // small devices
-  md: 99.2rem, // medium devices
-  lg: 120rem, // large devices
-  xl: 160rem, // extra large devices
-  fhd: 192rem, // full HD devices
-  qhd: 256rem, // quad HD (2k) devices
-  uhd: 384rem // ultra HD (4k) devices
-) !default; // common-breakpoints used as default for container breakpoints
+  sm: ( // small devices
+    container-width: 72rem,
+    min-viewport-width: 76.8rem,
+  ),
+  md: ( // medium devices
+    container-width: 96rem,
+    min-viewport-width: 99.2rem,
+  ),
+  lg: ( // large devices
+    container-width: 114rem,
+    min-viewport-width: 120rem,
+  ),
+  xl: ( // extra large devices
+    container-width: 120rem,
+    min-viewport-width: 160rem,
+  ),
+  fhd: ( // full HD devices
+    container-width: 160rem,
+    min-viewport-width: 192rem,
+  ),
+  qhd: ( // quad HD (2k) devices
+    container-width: 192rem,
+    min-viewport-width: 256rem,
+  ),
+  uhd: ( // ultra HD (4k) devices
+    container-width: 256rem,
+    min-viewport-width: 384rem,
+  ),
+); // common-breakpoints used as default for container breakpoints
 
-$first-column-breakpoint-default: 32rem !default; //first column breakpoint used as default without media queries
+$common-breakpoints: extend-breakpoints($common-breakpoints);
 
-$columns-breakpoints: map-merge((
-  sp: $first-column-breakpoint-default, // common smartphones
-  ip: 37.5rem, // iphone (iphone5 and above)
-  ipp: 41.4rem, // iphone plus (iphone5 plus and above)
-  xs: 57.6rem // extra small devices
-), $common-breakpoints) !default; // columns-breakpoints used for media queries and column classes sizes & positions
+$first-breakpoint-default: ( //first column breakpoint used as default without media queries
+  container-width: 100%,
+  min-viewport-width: 32rem,
+);
+
+$columns-breakpoints: extend((
+  sp: $first-breakpoint-default, // common smartphones
+  ip: ( // iphone (iphone6 and above)
+    container-width: 32rem,
+    min-viewport-width: 37.5rem,
+  ),
+  ipp: ( // iphone plus (iphone6 plus and above)
+    container-width: 32rem,
+    min-viewport-width: 41.4rem,
+  ),
+  xs: ( // extra small devices
+    container-width: 48rem,
+    min-viewport-width: 57.6rem,
+  ),
+), $common-breakpoints); // columns-breakpoints used for media queries and column classes sizes & positions
+
+$breakpoints-default: extend-breakpoints($columns-breakpoints);
 
 $gutter: $gutter-default;
 
-$gutter-margin-left: ($gutter / -2) !default;
-$gutter-margin-right: ($gutter / -2) !default;
-
-$gutter-padding-left: ($gutter / 2) !default;
-$gutter-padding-right: ($gutter / 2) !default;
+$gutter-margin: ($gutter / -2);
+$gutter-padding: ($gutter / 2);
 
 @import 'typography';
-

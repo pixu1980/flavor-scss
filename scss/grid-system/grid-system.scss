@@ -19,29 +19,27 @@
 /// @param {integer} $columns [$columns-default] - the columns number
 /// @param {size | length} $gutter [$gutter-default] - the gutter value
 /// @param {boolean} $reboot [true] - if true a reboot/reset/normalize will be prepended to the grid system
-@mixin grid-system($columns: $columns-default, $gutter: $gutter-default, $reboot: true) {
-  @if $grid-system-enable == true {
-    @if is-integer($columns) and is-length($gutter) {
-      @if $reboot {
-        @include reboot;
-      }
-      @else {
-        html,
-        body {
-          @include font($font-size-base $line-height-base $font-family-base $font-weight-base);
-        }
-      }
-
-      @include helpers;
-
-      // Grid system
-      // --------------------------------------------------
-      @include containers($gutter);
-      @include rows($gutter);
-      @include columns($columns, $gutter);
+@mixin grid-system($columns: $columns-default, $gutter: $gutter-default, $first-breakpoint: $first-breakpoint-default, $breakpoints: $breakpoints-default, $reboot: true) {
+  @if is-integer($columns) and is-length($gutter) {
+    @if $reboot {
+      @include reboot;
     }
     @else {
-      @error 'columns: #{$columns}, gutter: #{$gutter} are not valid options for the grid-system mixin';
+      html,
+      body {
+        @include font($font-size-base $line-height-base $font-family-base $font-weight-base);
+      }
     }
+
+    @include helpers;
+
+    // Grid system
+    // --------------------------------------------------
+    @include containers($gutter, $breakpoints);
+    @include rows($gutter);
+    @include columns($columns, $gutter, $first-breakpoint, $breakpoints);
+  }
+  @else {
+    @error 'columns: #{$columns}, gutter: #{$gutter} are not valid options for the grid-system mixin';
   }
 }

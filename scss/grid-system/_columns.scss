@@ -9,10 +9,8 @@
 @mixin columns-sizes($columns: $columns-default, $gutter: $gutter-default, $key: '') {
   // Columns Sizes
   // --------------------------------------------------
-  // $gutter-threshold: $gutter / 100 * 11.46666666666667;
-
   @for $i from 0 through $columns {
-    @if $i == 0 {
+    @if $i==0 {
       .col-#{$key}-push-0 {
         @include left(auto);
       }
@@ -22,40 +20,42 @@
       }
     }
     @else {
-      $col-percentage: percentage($i / $columns);
+      $col-percentage: ceil(percentage($i / $columns) * 10000) / 10000;
 
       .col-#{$key}-#{$i} {
-        // @include box-size(calc(#{$col-percentage} - #{$gutter-threshold}), false);
         @include box-size($col-percentage, false);
       }
 
       .col-#{$key}-push-#{$i} {
-        // @include left(calc(#{$col-percentage} - #{$gutter-threshold}));
         @include left($col-percentage);
       }
 
       .col-#{$key}-pull-#{$i} {
-        // @include right(calc(#{$col-percentage} - #{$gutter-threshold}));
         @include right($col-percentage);
       }
 
       .col-#{$key}-offset-#{$i} {
-        // @include margin-left(calc(#{$col-percentage} - #{$gutter-threshold}));
         @include margin-left($col-percentage);
       }
     }
   }
 }
 
-@mixin columns-breakpoints($breakpoints: $columns-breakpoints, $columns: $columns-default, $gutter: $gutter-default, $first-breakpoint: $first-column-breakpoint-default) {
+@mixin columns-breakpoints($columns: $columns-default, $gutter: $gutter-default, $first-breakpoint: $first-breakpoint-default, $breakpoints: $breakpoints-default) {
   // Columns Breakpoints
   // --------------------------------------------------
   @each $key, $breakpoint in $breakpoints {
-    @if $breakpoint == $first-breakpoint {
+    $min-viewport-width: get($breakpoint, 'min-viewport-width');
+
+    @if is-defined($min-viewport-width) {
+      $min-viewport-width: px($min-viewport-width);
+    }
+
+    @if $breakpoint==$first-breakpoint {
       @include columns-sizes($columns, $gutter, $key);
     }
     @else {
-      @include media($min-width: $breakpoint) {
+      @include media($media-type: screen, $min-width: $min-viewport-width) {
         @include columns-sizes($columns, $gutter, $key);
       }
     }
@@ -67,7 +67,7 @@
 /// @access public
 /// @param {integer} $columns [$columns-default] - the columns number
 /// @param {size | length} $gutter [$gutter-default] - the gutter value
-@mixin columns($columns: $columns-default, $gutter: $gutter-default) {
+@mixin columns($columns: $columns-default, $gutter: $gutter-default, $first-breakpoint: $first-breakpoint-default, $breakpoints: $breakpoints-default) {
   @if is-integer($columns) and is-length($gutter) {
     // Columns
     // --------------------------------------------------
@@ -80,12 +80,16 @@
       @include padding(null $padding);
       @include content-align(left top);
       @include box-bounds(null 1px); // Prevent columns from collapsing when empty
+
+      > .row {
+        @include margin-top($gutter);
+        @include reset-inline-block;
+      }
     }
 
-    @include columns-breakpoints($columns-breakpoints, $columns, $gutter, $first-column-breakpoint-default);
+    @include columns-breakpoints($columns, $gutter, $first-breakpoint, $breakpoints);
   }
   @else {
     @error 'columns: #{$columns}, gutter: #{$gutter} are not valid options for the grid-system columns mixin';
   }
 }
-

@@ -452,6 +452,6 @@
   // Always hide an element with the `hidden` HTML attribute (from PureCSS).
   // Needed for proper display in IE 10-.
   [hidden] {
-    @include display(none);
+    @include display(none, true);
   }
 }

@@ -6,17 +6,29 @@
 /// @author blackmirror1980
 ////
 
-@mixin container-breakpoints($breakpoints: $common-breakpoints, $gutter: $gutter-default) {
+@mixin container-breakpoints($gutter: $gutter-default, $breakpoints: $breakpoints-default) {
   // Containers Breakpoints
   // --------------------------------------------------
   @each $key, $breakpoint in $breakpoints {
-    @include media($min-width: $breakpoint) {
-      @include box-size(($breakpoint - $gutter) auto);
+    $min-viewport-width: get($breakpoint, 'min-viewport-width');
+    $max-viewport-width: get($breakpoint, 'max-viewport-width');
+    $container-width: get($breakpoint, 'container-width');
+
+    @if is-defined($min-viewport-width) {
+      $min-viewport-width: px($min-viewport-width);
+    }
+
+    @if is-defined($max-viewport-width) {
+      $max-viewport-width: px($max-viewport-width);
+    }
+
+    @include media($media-type: screen, $min-width: $min-viewport-width, $max-width: $max-viewport-width) {
+      @include box-size($container-width auto);
     }
   }
 }
 
-@mixin containers($gutter: $gutter-default) {
+@mixin containers($gutter: $gutter-default, $breakpoints: $breakpoints-default) {
   // Containers
   // --------------------------------------------------
   %container-base {
@@ -41,7 +53,7 @@
   }
 
   .container {
-    @include container-breakpoints($common-breakpoints, $gutter);
+    @include container-breakpoints($gutter, $breakpoints);
   }
 }
 

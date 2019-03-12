@@ -6,6 +6,11 @@
 /// @author blackmirror1980
 ////
 
+/// Gets important attribute based on a boolean flag
+///
+/// @access public
+/// @param {boolean} $important [false] - important boolean flag
+/// @return {string} - the resulting string value
 @function important($important: false) {
   @return if($important, !important, null);
 }
@@ -30,6 +35,14 @@
   @return ($px / $base) * 1rem;
 }
 
+/// Convert rems to pixels
+/// <br>eg. for a relational value of 12px write px(1.2rem) base on $font-size-base (10px)
+/// <br>Assumes $base is the font-size of <html>
+///
+/// @access public
+/// @param {size} $px - pixels size you want to convert
+/// @param {size} $base [$font-size-base] - html font-size base
+/// @return {size} - the size converted in rem based on html font-size
 @function px($rem, $base: $font-size-base) {
   @if not unitless($rem) {
     $rem: strip-unit($rem);
@@ -37,7 +50,6 @@
 
   @return strip-unit($rem / 1rem) * $base;
 }
-
 
 $prefixes: webkit moz ms o spec;
 $prefixes-default: $prefixes;
