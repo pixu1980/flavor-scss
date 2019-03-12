@@ -4,7 +4,7 @@
 Black Mirror
 
 ## Version
-v1.9.0
+v1.9.1
 
 ## Badges
 
@@ -18,6 +18,15 @@ v1.9.0
 
 ## Documentation
 Check out the [Latest Documentation](https://blackmirror1980.github.io/flavor-scss/index.html) here
+
+if you want to add the grid-system please add this code after importing main flavor-scss code in you sass/scss codebase
+
+```scss
+@import 'grid-system/options/options';
+@import 'grid-system/grid-system';
+
+@include grid-system;
+```
 
 ## Changelog
 Check out the [Changelog](https://github.com/blackmirror1980/flavor-scss/blob/master/CHANGELOG.md)
