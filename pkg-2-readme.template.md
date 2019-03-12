@@ -23,12 +23,9 @@ v{{version}}
 ## Documentation
 Check out the [Latest Documentation]({{documentation}}) here
 
-if you want to add the grid-system please add this code after importing main flavor-scss code in you sass/scss codebase
-
+if you want to override the grid-system please add this code after importing main flavor-scss code in you sass/scss codebase
+after your modifications to grid-system variables if u want to use the default stuff, otherwise pass them as parameters
 ```scss
-@import 'grid-system/options/options';
-@import 'grid-system/grid-system';
-
 @include grid-system;
 ```
 

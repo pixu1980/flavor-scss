@@ -8,20 +8,21 @@
 
 @function extend-breakpoints($breakpoints) {
   $breakpoints-keys: map-keys($breakpoints);
+  $breakpoint-actual: null;
   $breakpoint-previous: null;
 
   @for $i from length($breakpoints-keys) * -1 through -1 {
     $breakpoint-key: nth($breakpoints-keys, abs($i));
 
-    $breakpoint-actual: get($breakpoints, $breakpoint-key);
+    $breakpoint-actual: map-get($breakpoints, $breakpoint-key);
 
     $max-viewport-width: null;
 
     @if $breakpoint-previous != null {
-      $max-viewport-width: get($breakpoint-previous, 'min-viewport-width') - .01rem;
+      $max-viewport-width: map-get($breakpoint-previous, 'min-viewport-width') - .01rem;
     }
 
-    $breakpoints: extend($breakpoints, ($breakpoint-key: extend($breakpoint-actual, (
+    $breakpoints: map-merge($breakpoints, ($breakpoint-key: map-merge($breakpoint-actual, (
       max-viewport-width: $max-viewport-width,
     ))));
 
@@ -66,14 +67,12 @@ $common-breakpoints: (
   ),
 ); // common-breakpoints used as default for container breakpoints
 
-$common-breakpoints: extend-breakpoints($common-breakpoints);
-
 $first-breakpoint-default: ( //first column breakpoint used as default without media queries
   container-width: 100%,
   min-viewport-width: 32rem,
 );
 
-$columns-breakpoints: extend((
+$columns-breakpoints: map-merge((
   sp: $first-breakpoint-default, // common smartphones
   ip: ( // iphone (iphone6 and above)
     container-width: 32rem,
