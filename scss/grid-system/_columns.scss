@@ -82,7 +82,6 @@
       @include box-bounds(null 1px); // Prevent columns from collapsing when empty
 
       > .row {
-        @include margin-top($gutter);
         @include reset-inline-block;
       }
     }
