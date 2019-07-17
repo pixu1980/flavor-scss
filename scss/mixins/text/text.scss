@@ -274,3 +274,31 @@
   @include overflow(hidden);
   @include text-overflow($text-overflow);
 }
+
+/// Content mixin
+/// <br>useful to set content
+///
+/// @example scss - Usage - empty
+///   .content-element {
+///     @include content;
+///   }
+///
+/// @example css - Output - empty
+///   .content-element {
+///     content: '';
+///   }
+///
+/// @example scss - Usage - with attr
+///   .content-element {
+///     @include content(attr(title));
+///   }
+///
+/// @example css - Output - with attr
+///   .ellipsis-element {
+///     content: attr(title);
+///   }
+/// @access public
+/// @param {string} $content ["''"]
+@mixin content($content: "''") {
+  content: $content;
+}
