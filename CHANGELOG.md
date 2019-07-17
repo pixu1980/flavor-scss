@@ -1,3 +1,11 @@
+## [Version 1.9.3](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.9.3) (2019-7-17)
+
+### Bug fixes
+
+- removed margin top for rows inside columns: [`9dfb7cc`](https://github.com/:blackmirror1980/flavor-scss/commit/9dfb7cc)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.9.2...v1.9.3)
+
 ## [Version 1.9.2](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.9.2) (2019-3-12)
 
 ### Bug fixes
