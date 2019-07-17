@@ -1,3 +1,11 @@
+## [Version 1.9.4](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.9.4) (2019-7-17)
+
+### Bug fixes
+
+- added content mixin: [`030982b`](https://github.com/:blackmirror1980/flavor-scss/commit/030982b)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.9.3...v1.9.4)
+
 ## [Version 1.9.3](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.9.3) (2019-7-17)
 
 ### Bug fixes
