@@ -1,0 +1,40 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Checks if something is a supported text-indent value
+///
+/// @link https://developer.mozilla.org/it/docs/Web/CSS/text-indent - MDN text-indent docs
+/// @access public
+/// @param {percentage | string} $ti - the text-indent value
+/// @return {boolean} - true if is text-indent value
+@function is-text-indent($ti) {
+  @return is-defined($ti) and (is-size($ti) or is-percentage($ti) or array-contains($css-default-modes, $ti));
+}
+
+/// Text indent mixin
+///
+/// @example scss - Usage
+///   .text-indent-element {
+///     @include text-indent(-9999px);
+///   }
+///
+/// @example css - Output
+///   .text-indent-element {
+///     text-indent: -9999px;
+///   }
+/// @access public
+/// @param {string} $ti - the text-indent value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin text-indent($ti, $important: false) {
+  @if is-text-indent($ti) {
+    text-indent: $ti important($important);
+  }
+  @else {
+    @warn '`text-indent: #{$ti}` is not a valid text-indent value';
+  }
+}
