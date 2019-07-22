@@ -1,3 +1,13 @@
+## [Version 1.9.5](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.9.5) (2019-7-22)
+
+### Bug fixes
+
+- - splitted background mixing - added support for inline data urls: [`a5f2c36`](https://github.com/:blackmirror1980/flavor-scss/commit/a5f2c36)
+- added text-indent support: [`c89537a`](https://github.com/:blackmirror1980/flavor-scss/commit/c89537a)
+- added color mixin: [`9842752`](https://github.com/:blackmirror1980/flavor-scss/commit/9842752)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.9.4...v1.9.5)
+
 ## [Version 1.9.4](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.9.4) (2019-7-17)
 
 ### Bug fixes
