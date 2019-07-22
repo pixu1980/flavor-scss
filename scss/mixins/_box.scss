@@ -428,12 +428,12 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
 /// <br>used to set color & background color in one shot
 ///
 /// @example scss - Usage
-///   .color-element {
+///   .box-color-element {
 ///     @include box-color(#ffa transparent);
 ///   }
 ///
 /// @example css - Output
-///   .color-element {
+///   .box-color-element {
 ///     color: #ffa;
 ///     background-color: transparent;
 ///   }
@@ -468,7 +468,7 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
   $color: map-get($settings, color);
 
   @if is-css-color($color) {
-    color: $color important($important);
+    @include color($color, $important);
   }
   @else {
     @warn '`color: #{$color}` is not a valid css color';
@@ -477,7 +477,7 @@ $box-bound-size-modes: array-concat((none), $css-default-modes);
   $bgcolor: map-get($settings, bgcolor);
 
   @if is-css-color($bgcolor) {
-    background-color: $bgcolor important($important);
+    @include background-color($bgcolor, $important);
   }
   @else {
     @warn '`background-color: #{$bgcolor}` is not a valid css color';

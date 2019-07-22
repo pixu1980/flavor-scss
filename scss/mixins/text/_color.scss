@@ -1,0 +1,35 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Text
+/// @group mixins-text
+/// @author blackmirror1980
+////
+
+/// Color mixin
+/// <br>used to foreground color
+///
+/// @example scss - Usage
+///   .color-element {
+///     @include box-color(#ffa);
+///   }
+///
+/// @example css - Output
+///   .color-element {
+///     color: #ffa;
+///   }
+/// @requires {function} extend
+/// @requires {function} is-defined
+/// @requires {function} nth-value
+/// @access public
+/// @param {object | map} $options - the box color options
+/// @param {color} $color [inherit] - the color
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin color($color, $important: false) {
+  @if is-css-color($color) {
+    color: $color important($important);
+  }
+  @else {
+    @warn '`color: #{$color}` is not a valid css color';
+  }
+}
