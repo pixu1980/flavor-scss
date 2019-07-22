@@ -1,0 +1,54 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Background
+/// @group mixins-background
+/// @author blackmirror1980
+////
+
+/// Background image modes
+///
+/// @access private
+/// @type list
+$background-image-modes: array-concat((none), $css-default-modes);
+
+/// Checks if something is background image mode (none, initial, inherit)
+///
+/// @access public
+/// @param {string} $bi - the background-image mode
+/// @return {boolean} - true if is background-image mode
+@function is-background-image-mode($bi) {
+  @return is-defined($bi) and array-contains($background-image-modes, $bi);
+}
+
+/// Checks if something is background image (url, none, initial, inherit)
+///
+/// @access public
+/// @param {string} $bi - the background-image value
+/// @return {boolean} - true if is background-image value
+@function is-background-image($bi) {
+  @return is-defined($bi) and (is-background-image-mode($bi) or is-url($bi));
+}
+
+/// Background image mixin
+///
+/// @example scss - Usage
+///   .background-image-element {
+///     @include background-image(url('http://www.......'));
+///   }
+///
+/// @example css - Output
+///   .background-image-element {
+///     background-image: url('http://www.......');
+///   }
+/// @access public
+/// @param {string} $bi - the background-image value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin background-image($bi, $important: false) {
+  @if(is-background-image($bi)) {
+    background-image: $bi important($important);
+  }
+  @else {
+    @warn '`background-image: #{$bi}` is not a valid background-image value';
+  }
+}

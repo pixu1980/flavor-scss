@@ -1,0 +1,46 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Background
+/// @group mixins-background
+/// @author blackmirror1980
+////
+
+/// Background attachment modes
+///
+/// @access private
+/// @type list
+$background-attachment-modes: array-concat((scroll, fixed, local), $css-default-modes);
+
+/// Checks if something is a background attachment mode
+///
+/// @link https://www.w3schools.com/cssref/pr_background-attachment.asp W3Schools background-attachment docs
+/// @access public
+/// @param {string} $ba - the background-attachment mode
+/// @return {boolean} - true if is background-attachment mode
+@function is-background-attachment($ba) {
+  @return array-contains($background-attachment-modes, $ba);
+}
+
+/// Background attachment mixin
+///
+/// @example scss - Usage
+///   .background-attachment-element {
+///     @include background-attachment(local);
+///   }
+///
+/// @example css - Output
+///   .background-attachment-element {
+///     background-attachment: local;
+///   }
+/// @access public
+/// @param {string} $ba - the background-attachment value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin background-attachment($ba, $important: false) {
+  @if(is-background-attachment($ba)) {
+    background-attachment: $ba important($important);
+  }
+  @else {
+    @warn '`background-attachment: #{$ba}` is not a valid background-attachment value';
+  }
+}

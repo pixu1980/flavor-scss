@@ -6,157 +6,13 @@
 /// @author blackmirror1980
 ////
 
-/// Background image modes
-///
-/// @access private
-/// @type list
-$background-image-modes: array-concat((none), $css-default-modes);
-
-/// Checks if something is background image mode (none, initial, inherit)
-///
-/// @access public
-/// @param {string} $bi - the background-image mode
-/// @return {boolean} - true if is background-image mode
-@function is-background-image-mode($bi) {
-  @return is-defined($bi) and array-contains($background-image-modes, $bi);
-}
-
-/// Checks if something is background image (url, none, initial, inherit)
-///
-/// @access public
-/// @param {string} $bi - the background-image value
-/// @return {boolean} - true if is background-image value
-@function is-background-image($bi) {
-  @return is-defined($bi) and (is-background-image-mode($bi) or is-url($bi));
-}
-
-/// Background position horizontal modes
-///
-/// @access private
-/// @type list
-$background-position-horizontal-modes: array-concat((left, center, right), $css-default-modes);
-
-/// Background position vertical modes
-///
-/// @access private
-/// @type list
-$background-position-vertical-modes: array-concat((top, center, bottom), $css-default-modes);
-
-/// Checks if something is a background position value
-///
-/// @link https://www.w3schools.com/cssref/pr_background-position.asp W3Schools background-position docs
-/// @requires {function} nth-value
-/// @requires {function} is-size
-/// @requires {function} is-percentage
-/// @requires {function} array-contains
-/// @requires {variable} background-position-horizontal-modes
-/// @requires {variable} background-position-vertical-modes
-/// @access public
-/// @param {string | array} $bp - the background-position value/values
-/// @return {boolean} - true if is background-position value/values
-@function is-background-position($bp) {
-  @if is-defined($bp) {
-    @if is-array($bp) {
-      $h: nth-value($bp, 1);
-      $h-valid: is-size($h) or is-percentage($h) or array-contains($background-position-horizontal-modes, $h);
-
-      $v: if(length($bp) > 1, nth-value($bp, 2), center);
-      $v-valid: is-size($v) or is-percentage($v) or array-contains($background-position-vertical-modes, $v);
-
-      @return $h-valid and $v-valid;
-    }
-
-    @return is-size($bp) or is-percentage($bp) or array-contains($background-position-horizontal-modes, $bp) or array-contains($background-position-vertical-modes, $bp);
-  }
-
-  @return false;
-}
-
-/// Background size modes
-///
-/// @access private
-/// @type list
-$background-size-modes: array-concat((auto, cover, contain), $css-default-modes);
-
-/// Checks if something is a background size value
-///
-/// @link https://www.w3schools.com/cssref/css3_pr_background-size.asp W3Schools background-size docs
-/// @requires {function} array-contains
-/// @requires {function} is-array
-/// @requires {function} is-defined
-/// @requires {function} is-size
-/// @requires {function} is-percentage
-/// @requires {function} nth-value
-/// @requires {variable} background-size-modes
-/// @access public
-/// @param {string | array} $bs - the background-size value/values
-/// @return {boolean} - true if is background-size value/values
-@function is-background-size($bs) {
-  @if is-defined($bs) {
-    @if is-array($bs) {
-      $w: nth-value($bs, 1);
-      $h: nth-value($bs, 2);
-
-      @if (is-size($w) or is-percentage($w)) and (is-size($h) and is-percentage($h)) {
-        @return true;
-      }
-    }
-
-    @return is-size($bs) or is-percentage($bs) or array-contains($background-size-modes, $bs);
-  }
-
-  @return false;
-}
-
-/// Background repeat modes
-///
-/// @access private
-/// @type list
-$background-repeat-modes: array-concat((repeat, repeat-x, repeat-y, no-repeat), $css-default-modes);
-
-/// Checks if something is a background repeat value
-///
-/// @link https://www.w3schools.com/cssref/pr_background-repeat.asp W3Schools background-repeat docs
-/// @access public
-/// @param {string} $br - the background-repeat value
-/// @return {boolean} - true if is background-repeat value
-@function is-background-repeat($br) {
-  @return is-defined($br) and array-contains($background-repeat-modes, $br);
-}
-
-/// Background origin and background clip modes
-///
-/// @access private
-/// @type list
-$background-origin-clip-modes: array-concat((border-box, padding-box, content-box), $css-default-modes);
-
-
-/// Checks if something is a background origin/clip mode
-///
-/// @link https://www.w3schools.com/cssref/css3_pr_background-clip.asp W3Schools background-clip docs
-/// @link https://www.w3schools.com/cssref/css3_pr_background-origin.asp W3Schools background-origin docs
-/// @access public
-/// @param {string} $boc - the background-origin or background-clip value
-/// @return {boolean} - true if is background-origin or background-clip value
-@function is-background-origin-clip($boc) {
-  @return is-defined($boc) and array-contains($background-origin-clip-modes, $boc);
-}
-
-/// Background attachment modes
-///
-/// @access private
-/// @type list
-$background-attachment-modes: array-concat((scroll, fixed, local), $css-default-modes);
-
-/// Checks if something is a background attachment mode
-///
-/// @link https://www.w3schools.com/cssref/pr_background-attachment.asp W3Schools background-attachment docs
-/// @access public
-/// @param {string} $ba - the background-attachment mode
-/// @return {boolean} - true if is background-attachment mode
-@function is-background-attachment($ba) {
-  @return array-contains($background-attachment-modes, $ba);
-}
+@import 'background-color';
+@import 'background-image';
+@import 'background-position';
+@import 'background-size';
+@import 'background-repeat';
+@import 'background-origin-clip';
+@import 'background-attachment';
 
 /// Background mixin
 ///
@@ -275,7 +131,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
         $background: append($background, $background-color);
       }
       @else {
-        background-color: $background-color important($important);
+        @include background-color($background-color, $important);
       }
     }
     @else {
@@ -293,7 +149,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
         $background: append($background, $background-image);
       }
       @else {
-        background-image: $background-image important($important);
+        @include background-image($background-image, $important);
       }
     }
     @else {
@@ -308,8 +164,8 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
         $background: append($background, $background-position + '/' + $background-size);
       }
       @else {
-        background-position: $background-position important($important);
-        background-size: $background-size important($important);
+        @include background-position($background-position, $important);
+        @include background-size($background-size, $important);
       }
     }
     @else {
@@ -324,7 +180,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
         $background: append($background, $background-repeat);
       }
       @else {
-        background-repeat: $background-repeat important($important);
+        @include background-repeat($background-repeat, $important);
       }
     }
     @else {
@@ -338,7 +194,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
         $background: append($background, $background-origin);
       }
       @else {
-        background-origin: $background-origin important($important);
+        @include background-origin($background-origin, $important);
       }
     }
     @else {
@@ -352,7 +208,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
         $background: append($background, $background-clip);
       }
       @else {
-        background-clip: $background-clip important($important);
+        @include background-clip($background-clip, $important);
       }
     }
     @else {
@@ -366,7 +222,7 @@ $background-attachment-modes: array-concat((scroll, fixed, local), $css-default-
         $background: append($background, $background-attachment);
       }
       @else {
-        background-attachment: $background-attachment important($important);
+        @include background-attachment($background-attachment, $important);
       }
     }
     @else {

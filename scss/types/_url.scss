@@ -46,7 +46,7 @@
       $url: string-slice($u, 6, string-length($u) - 2);
     }
 
-    @if string-starts-with($url, '../') or string-starts-with($url, '/') or string-starts-with($url, 'http') {
+    @if string-starts-with($url, '../') or string-starts-with($url, '/') or string-starts-with($url, 'http') or string-starts-with($url, 'data:') {
       @return true;
     }
   }

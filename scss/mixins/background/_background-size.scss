@@ -1,0 +1,66 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Background
+/// @group mixins-background
+/// @author blackmirror1980
+////
+
+/// Background size modes
+///
+/// @access private
+/// @type list
+$background-size-modes: array-concat((auto, cover, contain), $css-default-modes);
+
+/// Checks if something is a background size value
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_background-size.asp W3Schools background-size docs
+/// @requires {function} array-contains
+/// @requires {function} is-array
+/// @requires {function} is-defined
+/// @requires {function} is-size
+/// @requires {function} is-percentage
+/// @requires {function} nth-value
+/// @requires {variable} background-size-modes
+/// @access public
+/// @param {string | array} $bs - the background-size value/values
+/// @return {boolean} - true if is background-size value/values
+@function is-background-size($bs) {
+  @if is-defined($bs) {
+    @if is-array($bs) {
+      $w: nth-value($bs, 1);
+      $h: nth-value($bs, 2);
+
+      @if (is-size($w) or is-percentage($w)) and (is-size($h) and is-percentage($h)) {
+        @return true;
+      }
+    }
+
+    @return is-size($bs) or is-percentage($bs) or array-contains($background-size-modes, $bs);
+  }
+
+  @return false;
+}
+
+/// Background size mixin
+///
+/// @example scss - Usage
+///   .background-size-element {
+///     @include background-size(100% 20px);
+///   }
+///
+/// @example css - Output
+///   .background-size-element {
+///     background-size: 100% 20px;
+///   }
+/// @access public
+/// @param {string} $bs - the background-size value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin background-size($bs, $important: false) {
+  @if(is-background-size($bs)) {
+    background-size: $bs important($important);
+  }
+  @else {
+    @warn '`background-size: #{$bs}` is not a valid background-size value';
+  }
+}

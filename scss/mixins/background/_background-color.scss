@@ -1,0 +1,30 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Background
+/// @group mixins-background
+/// @author blackmirror1980
+////
+
+/// Background color mixin
+///
+/// @example scss - Usage
+///   .background-color-element {
+///     @include background-color(#ffddee);
+///   }
+///
+/// @example css - Output
+///   .background-color-element {
+///     background-color: #ffddee;
+///   }
+/// @access public
+/// @param {string} $bc - the background-color value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin background-color($bc, $important: false) {
+  @if(is-css-color($bc)) {
+    background-color: $bc important($important);
+  }
+  @else {
+    @warn '`background-color: #{$bc}` is not a valid background-color value';
+  }
+}

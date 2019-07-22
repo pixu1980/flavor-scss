@@ -1,0 +1,70 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Background
+/// @group mixins-background
+/// @author blackmirror1980
+////
+
+/// Background origin and background clip modes
+///
+/// @access private
+/// @type list
+$background-origin-clip-modes: array-concat((border-box, padding-box, content-box), $css-default-modes);
+
+/// Checks if something is a background origin/clip mode
+///
+/// @link https://www.w3schools.com/cssref/css3_pr_background-clip.asp W3Schools background-clip docs
+/// @link https://www.w3schools.com/cssref/css3_pr_background-origin.asp W3Schools background-origin docs
+/// @access public
+/// @param {string} $boc - the background-origin or background-clip value
+/// @return {boolean} - true if is background-origin or background-clip value
+@function is-background-origin-clip($boc) {
+  @return is-defined($boc) and array-contains($background-origin-clip-modes, $boc);
+}
+
+/// Background origin mixin
+///
+/// @example scss - Usage
+///   .background-origin-element {
+///     @include background-origin(border-box);
+///   }
+///
+/// @example css - Output
+///   .background-origin-element {
+///     background-origin: border-box;
+///   }
+/// @access public
+/// @param {string} $bo - the background-origin value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin background-origin($bo, $important: false) {
+  @if(is-background-origin-clip($bo)) {
+    background-origin: $bo important($important);
+  }
+  @else {
+    @warn '`background-origin: #{$bo}` is not a valid background-origin value';
+  }
+}
+
+/// Background clip mixin
+///
+/// @example scss - Usage
+///   .background-clip-element {
+///     @include background-clip(border-box);
+///   }
+///
+/// @example css - Output
+///   .background-clip-element {
+///     background-clip: border-box;
+///   }
+/// @access public
+/// @param {string} $bc - the background-clip value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin background-clip($bc, $important: false) {
+  @if(is-background-origin-clip($bc)) {
+    background-clip: $bc important($important);
+  }
+  @else {
+    @warn '`background-clip: #{$bc}` is not a valid background-clip value';
+  }
+}

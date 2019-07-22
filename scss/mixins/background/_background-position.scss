@@ -1,0 +1,72 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Background
+/// @group mixins-background
+/// @author blackmirror1980
+////
+
+/// Background position horizontal modes
+///
+/// @access private
+/// @type list
+$background-position-horizontal-modes: array-concat((left, center, right), $css-default-modes);
+
+/// Background position vertical modes
+///
+/// @access private
+/// @type list
+$background-position-vertical-modes: array-concat((top, center, bottom), $css-default-modes);
+
+/// Checks if something is a background position value
+///
+/// @link https://www.w3schools.com/cssref/pr_background-position.asp W3Schools background-position docs
+/// @requires {function} nth-value
+/// @requires {function} is-size
+/// @requires {function} is-percentage
+/// @requires {function} array-contains
+/// @requires {variable} background-position-horizontal-modes
+/// @requires {variable} background-position-vertical-modes
+/// @access public
+/// @param {string | array} $bp - the background-position value/values
+/// @return {boolean} - true if is background-position value/values
+@function is-background-position($bp) {
+  @if is-defined($bp) {
+    @if is-array($bp) {
+      $h: nth-value($bp, 1);
+      $h-valid: is-size($h) or is-percentage($h) or array-contains($background-position-horizontal-modes, $h);
+
+      $v: if(length($bp) > 1, nth-value($bp, 2), center);
+      $v-valid: is-size($v) or is-percentage($v) or array-contains($background-position-vertical-modes, $v);
+
+      @return $h-valid and $v-valid;
+    }
+
+    @return is-size($bp) or is-percentage($bp) or array-contains($background-position-horizontal-modes, $bp) or array-contains($background-position-vertical-modes, $bp);
+  }
+
+  @return false;
+}
+
+/// Background position mixin
+///
+/// @example scss - Usage
+///   .background-position-element {
+///     @include background-position(top center);
+///   }
+///
+/// @example css - Output
+///   .background-position-element {
+///     background-position: top center;
+///   }
+/// @access public
+/// @param {string} $bp - the background-position value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin background-position($bp, $important: false) {
+  @if(is-background-position($bp)) {
+    background-position: $bp important($important);
+  }
+  @else {
+    @warn '`background-position: #{$bp}` is not a valid background-position value';
+  }
+}

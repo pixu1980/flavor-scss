@@ -1,0 +1,46 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Background
+/// @group mixins-background
+/// @author blackmirror1980
+////
+
+/// Background repeat modes
+///
+/// @access private
+/// @type list
+$background-repeat-modes: array-concat((repeat, repeat-x, repeat-y, no-repeat), $css-default-modes);
+
+/// Checks if something is a background repeat value
+///
+/// @link https://www.w3schools.com/cssref/pr_background-repeat.asp W3Schools background-repeat docs
+/// @access public
+/// @param {string} $br - the background-repeat value
+/// @return {boolean} - true if is background-repeat value
+@function is-background-repeat($br) {
+  @return is-defined($br) and array-contains($background-repeat-modes, $br);
+}
+
+/// Background repeat mixin
+///
+/// @example scss - Usage
+///   .background-repeat-element {
+///     @include background-repeat(no-repeat);
+///   }
+///
+/// @example css - Output
+///   .background-repeat-element {
+///     background-repeat: no-repeat;
+///   }
+/// @access public
+/// @param {string} $br - the background-repeat value
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin background-repeat($br, $important: false) {
+  @if(is-background-repeat($br)) {
+    background-repeat: $br important($important);
+  }
+  @else {
+    @warn '`background-repeat: #{$br}` is not a valid background-repeat value';
+  }
+}
