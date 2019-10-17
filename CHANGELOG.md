@@ -1,3 +1,11 @@
+## [Version 1.9.6](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.9.6) (2019-10-17)
+
+### Bug fixes
+
+- bumped dependencies: [`83155a2`](https://github.com/:blackmirror1980/flavor-scss/commit/83155a2)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.9.5...v1.9.6)
+
 ## [Version 1.9.5](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.9.5) (2019-7-22)
 
 ### Bug fixes
