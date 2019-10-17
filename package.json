@@ -35,8 +35,8 @@
     "merge": "^1.2.1",
     "minimatch": "^3.0.4",
     "pkg-2-readme": "0.0.6",
-    "sass-lint": "^1.12.1",
-    "sassdoc": "^2.5.1"
+    "sass-lint": "^1.13.1",
+    "sassdoc": "^2.7.1"
   },
   "dependencies": {}
 }
