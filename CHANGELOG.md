@@ -1,3 +1,11 @@
+## [Version 1.9.7](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.9.7) (2019-10-24)
+
+### Bug fixes
+
+- - bumped dependencies - added docs:serve command - fixed row white space in grid system: [`5c6f088`](https://github.com/:blackmirror1980/flavor-scss/commit/5c6f088)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.9.6...v1.9.7)
+
 ## [Version 1.9.6](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.9.6) (2019-10-17)
 
 ### Bug fixes
