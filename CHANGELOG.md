@@ -1,3 +1,11 @@
+## [Version 1.9.8](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.9.8) (2019-10-24)
+
+### Bug fixes
+
+- rollback rows fix: [`d456a50`](https://github.com/:blackmirror1980/flavor-scss/commit/d456a50)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.9.7...v1.9.8)
+
 ## [Version 1.9.7](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.9.7) (2019-10-24)
 
 ### Bug fixes
