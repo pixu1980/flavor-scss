@@ -18,11 +18,6 @@
     @include display(block);
     @include margin(0 $margin);
     @include reset-inline-block;
-    @include white-space(nowrap);
-
-    > * {
-      @include white-space(initial);
-    }
 
     + .row {
       @include margin-top($gutter);
