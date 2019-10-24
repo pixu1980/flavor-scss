@@ -4,7 +4,7 @@
 Black Mirror
 
 ## Version
-v1.9.6
+v1.9.7
 
 ## Badges
 
@@ -58,6 +58,7 @@ None
 - [pkg-2-readme](https://ghub.io/pkg-2-readme): Generate a README.md from package.json contents
 - [sass-lint](https://ghub.io/sass-lint): All Node Sass linter!
 - [sassdoc](https://ghub.io/sassdoc): Release the docs!
+- [node-sass](https://ghub.io/node-sass): Wrapper around libsass
 
 ## Tests
 
