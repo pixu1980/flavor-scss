@@ -1,0 +1,47 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Clear
+/// @group mixins-float
+/// @author blackmirror1980
+////
+
+/// Clear modes supported
+///
+/// @access private
+/// @type list
+$clear-modes: array-concat((none, left, right, both), $css-default-modes);
+
+/// Checks if clear mode is valid (none, left, right, both, inherit, initial)
+///
+/// @link https://www.w3schools.com/cssref/pr_class_clear.asp W3Schools clear docs
+/// @access public
+/// @param {string} $f - the clear value
+/// @return {boolean} - true if is clear value
+@function is-clear($f) {
+  @return is-defined($f) and array-contains($clear-modes, $f);
+}
+
+/// Clear mixin
+///
+/// @example scss - Usage
+///   .clear-element {
+///     @include clear(left);
+///   }
+///
+/// @example css - Output
+///   .clear-element {
+///     clear: left;
+///   }
+/// @access public
+/// @param {string} $clear - the clear value (e.g. `left` or `none`)
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin clear($clear, $important: false) {
+  @if is-clear($clear) {
+    clear: $clear important($important);
+  }
+  @else {
+    @warn '`clear: #{$clear}` is not a valid clear value';
+  }
+}
+

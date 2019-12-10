@@ -300,7 +300,7 @@
 ///     content: attr(title);
 ///   }
 /// @access public
-/// @param {string} $content ["''"]
-@mixin content($content: "''") {
+/// @param {string} $content ['']
+@mixin content($content: '') {
   content: $content;
 }

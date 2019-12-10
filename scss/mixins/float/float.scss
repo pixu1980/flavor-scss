@@ -1,0 +1,48 @@
+@charset 'UTF-8';
+
+////
+/// Flavor SCSS Mixins Float
+/// @group mixins-float
+/// @author blackmirror1980
+////
+
+/// Float modes supported
+///
+/// @access private
+/// @type list
+$float-modes: array-concat((none, left, right), $css-default-modes);
+
+/// Checks if float mode is valid (none, left, right, inherit, initial)
+///
+/// @link https://www.w3schools.com/cssref/pr_class_float.asp W3Schools float docs
+/// @access public
+/// @param {string} $f - the float value
+/// @return {boolean} - true if is float value
+@function is-float($f) {
+  @return is-defined($f) and array-contains($float-modes, $f);
+}
+
+/// Float mixin
+///
+/// @example scss - Usage
+///   .float-element {
+///     @include float(left);
+///   }
+///
+/// @example css - Output
+///   .float-element {
+///     float: left;
+///   }
+/// @access public
+/// @param {string} $float - the float value (e.g. `left` or `none`)
+/// @param {boolean} $important [false] - if true, will render the important rule
+@mixin float($float, $important: false) {
+  @if is-float($float) {
+    float: $float important($important);
+  }
+  @else {
+    @warn '`float: #{$float}` is not a valid float value';
+  }
+}
+
+@import 'clear';
