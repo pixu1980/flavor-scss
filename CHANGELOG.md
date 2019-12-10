@@ -1,3 +1,11 @@
+## [Version 1.9.9](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.9.9) (2019-12-10)
+
+### Bug fixes
+
+- - added float and clear support - fixed content mixin default value: [`5553472`](https://github.com/:blackmirror1980/flavor-scss/commit/5553472)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.9.8...v1.9.9)
+
 ## [Version 1.9.8](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.9.8) (2019-10-24)
 
 ### Bug fixes
