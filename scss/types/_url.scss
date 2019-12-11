@@ -16,12 +16,7 @@
 /// @return {boolean} - true if the url value has the url function inside
 @function has-url-function($u) {
   @if is-string($u) {
-    $url: $u;
-
-    $url-function-starts-with: string-starts-with($url, 'url("') or string-starts-with($url, 'url(\'');
-    $url-function-ends-with: string-ends-with($url, '")') or string-ends-with($url, '\')');
-
-    @return $url-function-starts-with and $url-function-ends-with;
+    @return string-starts-with($u, 'url("') and string-ends-with($u, '")');
   }
 
   @warn '`url: #{$u}` is not a valid string';

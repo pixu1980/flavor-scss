@@ -15,10 +15,32 @@ $cursor-modes: array-concat((alias, all-scroll, auto, cell, context-menu, col-re
 /// Checks if something is a correct cursor mode
 ///
 /// @access public
-/// @param {string} $c - the cursor mode
-/// @return {boolean} - true if is cursor mode
+/// @param {string} $c - the cursor mode or url
+/// @return {boolean} - true if is cursor mode or url
 @function is-cursor($c) {
-  @return is-defined($c) and (array-contains($cursor-modes, $c) or is-url($c));
+  @if is-defined($c) {
+    @if array-contains($cursor-modes, $c) {
+      @return true;
+    }
+
+    $curl: $c;
+
+    @if is-array($curl) {
+      // in this case the cursor url contains the fallback part
+      @if is-array-comma($curl) {
+        $curl: array-head($curl);
+      }
+
+      // in this case the cursor url contains also the cursor icon position numbers
+      @if is-array-space($curl) {
+        $curl: array-head($curl);
+      }
+    }
+
+    @return is-url($curl);
+  }
+
+  @return false;
 }
 
 /// Cursor mixin

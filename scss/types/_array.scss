@@ -15,6 +15,14 @@
   @return is-defined($a) and type-of($a)==list;
 }
 
+@function is-array-comma($a) {
+  @return is-array($a) and array-separator($a)==comma;
+}
+
+@function is-array-space($a) {
+  @return is-array($a) and array-separator($a)==space;
+}
+
 /// Checks if an array/list contains specified item
 ///
 /// @access public
@@ -106,6 +114,10 @@
 
 @function array-tail($list) {
   @return array-remove-nth($list, 1);
+}
+
+@function array-separator($list) {
+  @return list-separator($list);
 }
 
 @function array-reverse($list) {
