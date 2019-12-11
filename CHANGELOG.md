@@ -1,3 +1,11 @@
+## [Version 1.10.0](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.10.0) (2019-12-11)
+
+### New features
+
+- added suppor for cursor urls - with position and fallback: [`149f5ad`](https://github.com/:blackmirror1980/flavor-scss/commit/149f5ad)
+
+[...full changes](https://github.com/:blackmirror1980/flavor-scss/compare/v1.9.9...v1.10.0)
+
 ## [Version 1.9.9](https://github.com/:blackmirror1980/flavor-scss/releases/tag/v1.9.9) (2019-12-10)
 
 ### Bug fixes
